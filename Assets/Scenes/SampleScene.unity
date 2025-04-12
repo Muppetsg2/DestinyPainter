@@ -830,6 +830,31 @@ MonoBehaviour:
   snapDistance: 2
   returnDelay: 2
   radius: 0.58
+  launchAction:
+    m_Name: Launch
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 6b1efbd0-9b84-4faa-9cfa-7afd8598530f
+    m_Processors: 
+    m_Interactions: Press
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 00b3bc72-be52-476d-8c67-5e954c02be37
+      m_Path: <Mouse>/press
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Launch
+      m_Flags: 0
+    - m_Name: 
+      m_Id: be93262b-af48-4119-8e4b-a98fca71c439
+      m_Path: <Touchscreen>/Press
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Launch
+      m_Flags: 0
+    m_Flags: 0
 --- !u!50 &1549350861
 Rigidbody2D:
   serializedVersion: 5

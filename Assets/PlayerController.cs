@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
@@ -15,6 +16,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float launchTime;
 
+    public InputAction launchAction;
+
+    void OnEnable()
+    {
+        launchAction.Enable();
+    }
+
+    void OnDisable()
+    {
+        launchAction.Disable();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isAttached && Input.GetMouseButtonDown(0))
+        if (isAttached && launchAction.triggered)
         {
             Launch();
         }
