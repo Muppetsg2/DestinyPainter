@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public Transform currentPlanet;
+
+    private bool rotateClockwise;
+
     public float launchForce = 5f;
     public float snapDistance = 0.5f;
     public float returnDelay = 3f;
@@ -15,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private bool isLaunched = false;
     private Rigidbody2D rb;
     private float launchTime;
+
+    public bool useAction = true;
 
     public InputAction launchAction;
 
@@ -37,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isAttached && launchAction.triggered)
+        if (isAttached && launchAction.triggered && useAction)
         {
             Launch();
         }
@@ -53,18 +58,35 @@ public class PlayerController : MonoBehaviour
         if (isAttached)
         {
             transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * radius;
-            transform.RotateAround(currentPlanet.position, Vector3.forward, currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (currentPlanet.GetComponent<PlanetRotation>().rotateClockwise ? -1 : 1));
+            transform.RotateAround(currentPlanet.position, Vector3.forward, 
+                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
         }
     }
 
-    void Launch()
+    public void Launch()
     {
+        if (!isAttached) return;
+
         isAttached = false;
         isLaunched = true;
         launchTime = Time.time;
 
         Vector2 direction = (transform.position - currentPlanet.position).normalized;
         rb.linearVelocity = direction * launchForce;
+    }
+
+    public void RotateClockwise()
+    {
+        if (!isAttached) return;
+
+        rotateClockwise = true;
+    }
+
+    public void RotateCounterClockwise()
+    {
+        if (!isAttached) return;
+
+        rotateClockwise = false;
     }
 
     void ReturnToPlanet()
@@ -80,6 +102,8 @@ public class PlayerController : MonoBehaviour
         currentPlanet = planet;
         isAttached = true;
         isLaunched = false;
+
+        rotateClockwise = planet.GetComponent<PlanetRotation>().rotateClockwise;
 
         // Ustawienie rotacji przy przyczepieniu
         Vector3 directionToPlanet = (transform.position - currentPlanet.position).normalized;
