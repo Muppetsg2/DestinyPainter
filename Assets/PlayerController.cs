@@ -5,14 +5,16 @@ using UnityEngine.InputSystem;
 [RequireComponent (typeof(Collider2D))]
 public class PlayerController : MonoBehaviour
 {
+    public CameraPlanetSnap planetSnap;
     public Transform currentPlanet;
+
+    public GameObject linePrefab;
 
     private bool rotateClockwise;
 
     public float launchForce = 5f;
     public float snapDistance = 0.5f;
     public float returnDelay = 3f;
-    public float radius = 1.0f;
 
     private bool isAttached = true;
     private bool isLaunched = false;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isAttached)
         {
-            transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * radius;
+            transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
                 currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
         }
@@ -92,12 +94,38 @@ public class PlayerController : MonoBehaviour
     void ReturnToPlanet()
     {
         rb.linearVelocity = Vector2.zero;
-        transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * radius;
+        transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
         AttachToPlanet(currentPlanet);
     }
 
     void AttachToPlanet(Transform planet)
     {
+        if (planet != currentPlanet)
+        {
+            // Create line
+            GameObject line = Instantiate(linePrefab, null, true);
+            line.name = currentPlanet.name + " -> " + planet.name;
+
+            Vector3 currPlanetPlayerPos = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
+
+            // aktualna pozycja to hit point
+
+            // pozycja aktualna i pozycja poprzedniej planety to direction
+
+            line.transform.localScale = new Vector3(Vector3.Distance(transform.position, currPlanetPlayerPos) + 1f, line.transform.localScale.y, 1f);
+            line.transform.localPosition = (transform.position + currPlanetPlayerPos) * 0.5f;
+
+            Vector3 direction = (transform.position - currPlanetPlayerPos).normalized;
+
+            float lineAngle = Vector3.Angle(Vector3.right, direction);
+            if (lineAngle >= 90f && lineAngle < 180f)
+            {
+                lineAngle = -lineAngle;
+            }
+
+            line.transform.localEulerAngles = new Vector3(0f, 0f, lineAngle);
+        }
+
         rb.linearVelocity = Vector2.zero;
         currentPlanet = planet;
         isAttached = true;
@@ -115,6 +143,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isLaunched && collision.CompareTag("Planet"))
         {
+            if (collision.GetComponent<Planet>().isEnd) planetSnap.end = true;
             if (collision.GetComponent<Planet>().isDeadly) ReturnToPlanet();
             else AttachToPlanet(collision.transform);
         }

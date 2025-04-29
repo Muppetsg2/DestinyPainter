@@ -7,7 +7,7 @@ public class PlanetRotation : MonoBehaviour
 
     void Update()
     {
-        float direction = rotateClockwise ? -1 : 1;
-        transform.Rotate(0f, 0f, direction * rotationSpeed * Time.deltaTime);
+        //float direction = rotateClockwise ? -1 : 1;
+        //transform.Rotate(0f, 0f, direction * rotationSpeed * Time.deltaTime);
     }
 }
