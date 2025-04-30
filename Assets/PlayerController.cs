@@ -106,24 +106,15 @@ public class PlayerController : MonoBehaviour
             GameObject line = Instantiate(linePrefab, null, true);
             line.name = currentPlanet.name + " -> " + planet.name;
 
-            Vector3 currPlanetPlayerPos = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
+            line.transform.localScale = new Vector3(Vector3.Distance(planet.position, currentPlanet.position), line.transform.localScale.y, 1f);
+            line.transform.localPosition = (planet.position + currentPlanet.position) * 0.5f;
 
-            // aktualna pozycja to hit point
-
-            // pozycja aktualna i pozycja poprzedniej planety to direction
-
-            line.transform.localScale = new Vector3(Vector3.Distance(transform.position, currPlanetPlayerPos) + 1f, line.transform.localScale.y, 1f);
-            line.transform.localPosition = (transform.position + currPlanetPlayerPos) * 0.5f;
-
-            Vector3 direction = (transform.position - currPlanetPlayerPos).normalized;
+            Vector3 direction = (planet.position - currentPlanet.position).normalized;
 
             float lineAngle = Vector3.Angle(Vector3.right, direction);
-            if (lineAngle >= 90f && lineAngle < 180f)
-            {
-                lineAngle = -lineAngle;
-            }
+            float lineAngleSign = Mathf.Sign(Vector3.Dot(Vector3.forward, Vector3.Cross(Vector3.right, direction)));
 
-            line.transform.localEulerAngles = new Vector3(0f, 0f, lineAngle);
+            line.transform.localEulerAngles = new Vector3(0f, 0f, lineAngleSign * lineAngle);
         }
 
         rb.linearVelocity = Vector2.zero;
