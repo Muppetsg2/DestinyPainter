@@ -528,11 +528,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7006506782064937555, guid: d7830be9f3ce79a499d341cdc71ffdd7, type: 3}
       propertyPath: rotationSpeed
-      value: 15
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7156583158259223483, guid: d7830be9f3ce79a499d341cdc71ffdd7, type: 3}
       propertyPath: m_Name
       value: MulticolorPlanet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156583158259223483, guid: d7830be9f3ce79a499d341cdc71ffdd7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -881,11 +885,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382460752}
   m_CullTransparentMesh: 1
---- !u!1 &401591942 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7156583158259223483, guid: 387d26609cac61047b726bedadfeca39, type: 3}
-  m_PrefabInstance: {fileID: 7671327548385607661}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &402486976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,9 +1078,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7006506782064937555, guid: d7830be9f3ce79a499d341cdc71ffdd7, type: 3}
+      propertyPath: rotationSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7156583158259223483, guid: d7830be9f3ce79a499d341cdc71ffdd7, type: 3}
       propertyPath: m_Name
       value: MulticolorPlanet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156583158259223483, guid: d7830be9f3ce79a499d341cdc71ffdd7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2664,22 +2671,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4830065917922989702, guid: 387d26609cac61047b726bedadfeca39, type: 3}
   m_PrefabInstance: {fileID: 7671327548385607661}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1730969569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401591942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38e32f607fec2674096079c892092631, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  baseSegments: []
-  segments: []
-  segmentColors: 010000000200000001000000
 --- !u!4 &1766397761 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4830065917922989702, guid: 387d26609cac61047b726bedadfeca39, type: 3}
@@ -3175,10 +3166,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7156583158259223483, guid: 387d26609cac61047b726bedadfeca39, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1730969569}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 387d26609cac61047b726bedadfeca39, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

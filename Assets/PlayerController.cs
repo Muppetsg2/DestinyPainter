@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
         AttachToPlanet(currentPlanet);
+        ChangePlayerColor(color);
     }
 
     void Update()
@@ -156,5 +157,11 @@ public class PlayerController : MonoBehaviour
             if (collision.GetComponent<Planet>().isDeadly) ReturnToPlanet();
             else AttachToPlanet(collision.transform);
         }
+    }
+
+    public void ChangePlayerColor(ColorType newColor)
+    {
+        color = newColor;
+        GetComponent<SpriteRenderer>().color = new Color(colorsDict[color].x, colorsDict[color].y, colorsDict[color].z);
     }
 }

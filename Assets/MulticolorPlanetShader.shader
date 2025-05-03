@@ -2,7 +2,6 @@ Shader "Custom/MulticolorPlanetShader"
 {
     Properties
     {
-        // Mo¿esz ca³kiem usun¹æ, ale zostawmy jedn¹ dla widocznoœci
         _SegmentCount ("Segment Count", Int) = 1
     }
 
@@ -41,14 +40,14 @@ Shader "Custom/MulticolorPlanetShader"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv * 2.0 - 1.0; // UV to [-1, 1] range
+                o.uv = v.uv * 2.0 - 1.0;
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 pos = i.uv;
-                float angle = atan2(pos.y, pos.x); // radians
+                float angle = atan2(pos.y, pos.x);
                 angle = degrees(angle);
                 if (angle < 0) angle += 360;
 
@@ -60,7 +59,7 @@ Shader "Custom/MulticolorPlanetShader"
                     }
                 }
 
-                return float4(0,0,0,1); // fallback
+                return float4(0,0,0,1);
             }
             ENDCG
         }
