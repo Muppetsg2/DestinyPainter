@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Colors;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public CameraPlanetSnap planetSnap;
     public Transform currentPlanet;
+    public Transform previousPlanet;
 
     public GameObject linePrefab;
 
@@ -24,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public bool useAction = true;
 
     public InputAction launchAction;
+
+    public ColorType color = ColorType.Red;
 
     void OnEnable()
     {
@@ -62,6 +66,16 @@ public class PlayerController : MonoBehaviour
             transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
                 currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
+
+            if (currentPlanet.GetComponent<Planet>().isMulticolored)
+            {
+                if (!currentPlanet.GetComponent<MulticolorPlanet>().CheckIsCorrectColor(transform.rotation.eulerAngles.z, color) && previousPlanet != null)
+                {
+                    currentPlanet = previousPlanet;
+                    ReturnToPlanet();
+                    //Debug.Log("Wrong color");
+                }
+            }
         }
     }
 
@@ -118,6 +132,10 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.linearVelocity = Vector2.zero;
+        if (!currentPlanet.gameObject.GetComponent<Planet>().isMulticolored)
+        {
+            previousPlanet = currentPlanet;
+        }
         currentPlanet = planet;
         isAttached = true;
         isLaunched = false;
