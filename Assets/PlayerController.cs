@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     public ColorType color = ColorType.Red;
 
+    public uint planetJumpsCounter = 0;
+
     void OnEnable()
     {
         launchAction.Enable();
@@ -155,7 +157,11 @@ public class PlayerController : MonoBehaviour
         {
             if (collision.GetComponent<Planet>().isEnd) planetSnap.end = true;
             if (collision.GetComponent<Planet>().isDeadly) ReturnToPlanet();
-            else AttachToPlanet(collision.transform);
+            else
+            {
+                AttachToPlanet(collision.transform);
+                ++planetJumpsCounter;
+            }
         }
     }
 
