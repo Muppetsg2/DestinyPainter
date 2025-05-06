@@ -70,14 +70,10 @@ public class PlayerController : MonoBehaviour
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
                 currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
 
-            if (currentPlanet.GetComponent<Planet>().isMulticolored)
+            if (!currentPlanet.GetComponent<Planet>().CheckIsCorrectColor(transform.rotation.eulerAngles.z, color))
             {
-                if (!currentPlanet.GetComponent<MulticolorPlanet>().CheckIsCorrectColor(transform.rotation.eulerAngles.z, color) && previousPlanet != null)
-                {
-                    currentPlanet = previousPlanet;
-                    ReturnToPlanet();
-                    //Debug.Log("Wrong color");
-                }
+                currentPlanet = previousPlanet;
+                ReturnToPlanet();
             }
         }
     }
@@ -135,7 +131,7 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.linearVelocity = Vector2.zero;
-        if (!currentPlanet.gameObject.GetComponent<Planet>().isMulticolored)
+        if (currentPlanet.gameObject.GetComponent<Planet>().multicolorPlanet == null && currentPlanet.gameObject.GetComponent<Planet>().colorChangingPlanet == null)
         {
             previousPlanet = currentPlanet;
         }
