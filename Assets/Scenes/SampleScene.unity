@@ -1182,7 +1182,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.26010147, g: 0.276351, b: 0.3301887, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3487,10 +3487,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1957863015825773193, guid: d8884679d0a2c7b4d8357a33633b02e8, type: 3}
-      propertyPath: color
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1957863015825773193, guid: d8884679d0a2c7b4d8357a33633b02e8, type: 3}
       propertyPath: planetSnap
       value: 
       objectReference: {fileID: 519420033}
@@ -3536,6 +3532,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3263723330783948677, guid: d8884679d0a2c7b4d8357a33633b02e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5189415999569897040, guid: d8884679d0a2c7b4d8357a33633b02e8, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7086490188993741133, guid: d8884679d0a2c7b4d8357a33633b02e8, type: 3}

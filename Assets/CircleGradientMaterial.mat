@@ -41,10 +41,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _mult: 3
+    - _mult: 2.2
     m_Colors:
-    - _Center: {r: 1, g: 0.6738253, b: 0, a: 1}
-    - _Outer: {r: 1, g: 0.09411766, b: 0, a: 1}
+    - _Center: {r: 0.4528302, g: 0.1473834, b: 0.21975842, a: 1}
+    - _Outer: {r: 1, g: 0.02745098, b: 0.25882354, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4401631771053251572
