@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
-using static Colors;
+using static ColorsManager;
 
 public class MulticolorPlanet : MonoBehaviour
 {

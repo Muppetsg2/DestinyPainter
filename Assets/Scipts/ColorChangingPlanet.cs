@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-using static Colors;
+using static ColorsManager;
 using static UnityEngine.Rendering.HableCurve;
 
 public class ColorChangingPlanet : MonoBehaviour

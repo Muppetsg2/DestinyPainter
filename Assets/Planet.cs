@@ -1,5 +1,5 @@
 using UnityEngine;
-using static Colors;
+using static ColorsManager;
 
 [RequireComponent(typeof(Collider2D))]
 public class Planet : MonoBehaviour
