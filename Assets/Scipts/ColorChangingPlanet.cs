@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using static ColorsManager;
-using static UnityEngine.Rendering.HableCurve;
 
 public class ColorChangingPlanet : MonoBehaviour
 {
@@ -44,9 +41,9 @@ public class ColorChangingPlanet : MonoBehaviour
     {
         spriteRenderer.GetPropertyBlock(mPB);
 
-        mPB.SetVector("_OuterColor", colorsDict[outerColor]);
+        mPB.SetVector("_OuterColor", ColorsManager.Instance.GetPrimaryColor(outerColor));
 
-        mPB.SetVector("_InnerColor", colorsDict[innerColor]);
+        mPB.SetVector("_InnerColor", ColorsManager.Instance.GetPrimaryColor(innerColor));
 
         mPB.SetFloat("_BlendPoint", transition);
 
@@ -69,9 +66,9 @@ public class ColorChangingPlanet : MonoBehaviour
             
             transition %= 1;
 
-            mPB.SetVector("_OuterColor", colorsDict[outerColor]);
+            mPB.SetVector("_OuterColor", ColorsManager.Instance.GetPrimaryColor(outerColor));
 
-            mPB.SetVector("_InnerColor", colorsDict[innerColor]);
+            mPB.SetVector("_InnerColor", ColorsManager.Instance.GetPrimaryColor(innerColor));
         }
 
         mPB.SetFloat("_BlendPoint", transition);

@@ -4,6 +4,7 @@ using static ColorsManager;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
+[RequireComponent (typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
     public CameraPlanetSnap planetSnap;
@@ -164,6 +165,8 @@ public class PlayerController : MonoBehaviour
     public void ChangePlayerColor(ColorType newColor)
     {
         color = newColor;
-        GetComponent<SpriteRenderer>().color = new Color(colorsDict[color].x, colorsDict[color].y, colorsDict[color].z);
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = ColorsManager.Instance.GetPrimaryColor(color);
+        sr.material.SetColor("_Color", ColorsManager.Instance.GetSeconderyColor(color) * 0.5f);
     }
 }

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CircleGradientMaterial 1
-  m_Shader: {fileID: -6465566751694194690, guid: 77cbad602d289444d8854786c4cebef7, type: 3}
+  m_Name: Player
+  m_Shader: {fileID: -6465566751694194690, guid: 73975f2f0eb04a64caffa3af468117d3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,13 +41,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _mult: 2.2
+    - _Thickness: 0.056
     m_Colors:
-    - _Center: {r: 0.4392157, g: 0, b: 1, a: 0}
-    - _Outer: {r: 0.62352943, g: 0, b: 1, a: 0}
+    - _Color: {r: 0.0047169924, g: 0.95103437, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &4401631771053251572
+--- !u!114 &4498384844058061267
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

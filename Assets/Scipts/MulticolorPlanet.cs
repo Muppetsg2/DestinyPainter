@@ -51,7 +51,7 @@ public class MulticolorPlanet : MonoBehaviour
         var colorVecs = new List<Vector4>();
         foreach (ColorType c in segmentColors)
         {
-            colorVecs.Add(colorsDict[c]);
+            colorVecs.Add(ColorsManager.Instance.GetPrimaryColor(c));
         }
 
         mPB.SetVectorArray("_Colors", colorVecs);

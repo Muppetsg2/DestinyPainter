@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CircleGradientMaterial 2
+  m_Name: CircleGradientMaterialBlue
   m_Shader: {fileID: -6465566751694194690, guid: 77cbad602d289444d8854786c4cebef7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -43,8 +43,8 @@ Material:
     m_Floats:
     - _mult: 2.2
     m_Colors:
-    - _Center: {r: 0.033018887, g: 0.14741917, b: 1, a: 1}
-    - _Outer: {r: 0.027450979, g: 0.554494, b: 1, a: 1}
+    - _Center: {r: 0.02745098, g: 0.5529412, b: 1, a: 1}
+    - _Outer: {r: 0.03137255, g: 0.14901961, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4401631771053251572
