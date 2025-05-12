@@ -33,9 +33,9 @@ public class ColorsManager : MonoBehaviour
     public Material material2;
     public Material material3;
 
-    public Dictionary<ColorType, Color> colorsDict = new Dictionary<ColorType, Color>();
+    private Dictionary<ColorType, Color> colorsDict = new Dictionary<ColorType, Color>();
 
-    public Dictionary<ColorType, Color> secondaryColorsDict = new Dictionary<ColorType, Color>();
+    private Dictionary<ColorType, Color> secondaryColorsDict = new Dictionary<ColorType, Color>();
 
     private void Awake()
     {
@@ -51,10 +51,14 @@ public class ColorsManager : MonoBehaviour
 
     private void InitializeColors()
     {
+        colorsDict.Clear();
+        colorsDict.Add(ColorType.None, Color.black);
         colorsDict.Add(color1.colorName, color1.color);
         colorsDict.Add(color2.colorName, color2.color);
         colorsDict.Add(color3.colorName, color3.color);
 
+        secondaryColorsDict.Clear();
+        secondaryColorsDict.Add(ColorType.None, Color.black);
         secondaryColorsDict.Add(color1.colorName, color1.secondaryColor);
         secondaryColorsDict.Add(color2.colorName, color2.secondaryColor);
         secondaryColorsDict.Add(color3.colorName, color3.secondaryColor);

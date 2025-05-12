@@ -6,8 +6,8 @@ using UnityEditor;
 
 public class SplashSpawner : MonoBehaviour
 {
-    private SplashSpawner instance;
-    public SplashSpawner Instance { get { return instance; } }
+    private static SplashSpawner instance;
+    public static SplashSpawner Instance { get { return instance; } }
 
     [Header("Main Settings")]
     public Sprite sprite;

@@ -71,12 +71,21 @@ public class PlayerController : MonoBehaviour
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
                 currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
 
-            if (!currentPlanet.GetComponent<Planet>().CheckIsCorrectColor(transform.rotation.eulerAngles.z, color))
-            {
-                currentPlanet = previousPlanet;
-                ReturnToPlanet();
-            }
+            ValidatePlanetColor(currentPlanet.GetComponent<Planet>(), previousPlanet);
         }
+    }
+
+    private bool ValidatePlanetColor(Planet planet, Transform previousPlanetTransform)
+    {
+        // TODO: Zle dziala dla multicolor planet
+        if (!planet.CheckIsCorrectColor(transform.rotation.eulerAngles.z, color))
+        {
+            currentPlanet = previousPlanetTransform;
+            ReturnToPlanet();
+            return false;
+        }
+
+        return true;
     }
 
     public void Launch()
@@ -152,10 +161,37 @@ public class PlayerController : MonoBehaviour
     {
         if (isLaunched && collision.CompareTag("Planet"))
         {
-            if (collision.GetComponent<Planet>().isEnd) planetSnap.end = true;
-            if (collision.GetComponent<Planet>().isDeadly) ReturnToPlanet();
+            Planet planet = collision.GetComponent<Planet>();
+            if (planet.isEnd)
+            {
+                SplashSpawner.Instance.PlanetSplash(
+                    collision.transform.position,
+                    ColorsManager.Instance.GetPrimaryColor(collision.gameObject.GetComponent<Planet>().color),
+                    collision.transform.localScale * 2.0f,
+                    collision.transform.localScale * 3.0f,
+                    0.75f,
+                    0.25f,
+                    0.5f
+                );
+                planetSnap.end = true;
+                AttachToPlanet(collision.transform);
+                ++planetJumpsCounter;
+            }
+
+
+            if (planet.isDeadly) ReturnToPlanet();
+            else if (!ValidatePlanetColor(planet, currentPlanet)) return;
             else
             {
+                SplashSpawner.Instance.PlanetSplash(
+                    collision.transform.position,
+                    ColorsManager.Instance.GetPrimaryColor(collision.gameObject.GetComponent<Planet>().color),
+                    collision.transform.localScale * 2.0f,
+                    collision.transform.localScale * 3.0f,
+                    0.75f,
+                    0.25f,
+                    0.5f
+                );
                 AttachToPlanet(collision.transform);
                 ++planetJumpsCounter;
             }
