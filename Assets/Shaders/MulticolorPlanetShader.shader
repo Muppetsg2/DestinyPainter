@@ -2,6 +2,7 @@ Shader "Custom/MulticolorPlanetShader"
 {
     Properties
     {
+        [NoScaleOffset]_MainTex ("Main Texture", 2D) = "white" {}
         _SegmentCount ("Segment Count", Int) = 1
     }
 

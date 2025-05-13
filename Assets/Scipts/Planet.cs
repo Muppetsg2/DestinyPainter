@@ -2,6 +2,7 @@ using UnityEngine;
 using static ColorsManager;
 
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Planet : MonoBehaviour
 {
     public bool isEnd;
@@ -11,11 +12,17 @@ public class Planet : MonoBehaviour
     public ColorChangingPlanet colorChangingPlanet;
     public ColorType color;
 
+    public bool changeMaterial = true;
+
     void Start()
     {
         gameObject.tag = "Planet";
         multicolorPlanet = GetComponent<MulticolorPlanet>();
         colorChangingPlanet = GetComponent<ColorChangingPlanet>();
+        if (multicolorPlanet == null && colorChangingPlanet == null && changeMaterial)
+        {
+            GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetMaterial(color);
+        }
     }
 
     public bool CheckIsCorrectColor(float playerAngle, ColorType playerColor)
@@ -34,5 +41,36 @@ public class Planet : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool IsMulticolor()
+    {
+        return multicolorPlanet != null;
+    }
+
+    public bool IsColorChanging()
+    {
+        return colorChangingPlanet != null;
+    }
+
+    public Color GetColor(float playerAngle, bool secondary)
+    {
+        if (colorChangingPlanet != null)
+        {
+            return colorChangingPlanet.GetColor(playerAngle, secondary);
+        }
+        else if (multicolorPlanet != null)
+        {
+            return multicolorPlanet.GetColor(playerAngle, secondary);
+        }
+
+        if (secondary)
+        {
+            return ColorsManager.Instance.GetSecondaryColor(color);
+        }
+        else
+        {
+            return ColorsManager.Instance.GetPrimaryColor(color);
+        }
     }
 }

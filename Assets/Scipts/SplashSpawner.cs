@@ -82,12 +82,12 @@ public class SplashSpawner : MonoBehaviour
             SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
             sr.sprite = sprite;
             //sr.color = Color.Lerp(colorFrom, colorTo, (float)rng.NextDouble());
-            sr.color = Color.Lerp(colorFrom, colorTo, MonteCarloRandom(1.5f));
+            sr.color = Color.white;
             sr.sortingLayerName = sortingLayerName;
             sr.sortingOrder = sortingOrder;
 
             Material mat = new Material(baseMaterial);
-            mat.SetColor("_Color", Color.white);
+            mat.SetColor("_Color", Color.Lerp(colorFrom, colorTo, MonteCarloRandom(1.5f)));
             //mat.SetVector("_Magnitude", new Vector2(((float)rng.NextDouble() - 0.5f) * 0.25f, ((float)rng.NextDouble() - 0.5f) * 0.25f));
             mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
             sr.material = mat;
@@ -113,7 +113,7 @@ public class SplashSpawner : MonoBehaviour
         }
     }
 
-    public void PlayerDeathSplashes(Vector3 c, Color primary, Color secondary)
+    public void PlayerDeathSplashes(Vector3 c, Color primary, Color secondary, float alpha = 1.0f)
     {
         for (int i = 0; i < count; ++i)
         {
@@ -124,12 +124,14 @@ public class SplashSpawner : MonoBehaviour
             // Dodaj sprite i kolor
             SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
             sr.sprite = sprite;
-            sr.color = Color.Lerp(primary, secondary, MonteCarloRandom(1.5f));
+            sr.color = Color.white;
             sr.sortingLayerName = sortingLayerName;
             sr.sortingOrder = sortingOrder;
 
             Material mat = new Material(baseMaterial);
-            mat.SetColor("_Color", Color.white);
+            primary.a = 0.7058824f;
+            secondary.a = 0.7058824f;
+            mat.SetColor("_Color", Color.Lerp(primary, secondary, MonteCarloRandom(1.5f)));
             //mat.SetVector("_Magnitude", new Vector2(((float)rng.NextDouble() - 0.5f) * 0.25f, ((float)rng.NextDouble() - 0.5f) * 0.25f));
             mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
             sr.material = mat;
@@ -143,7 +145,7 @@ public class SplashSpawner : MonoBehaviour
             //float radius = Mathf.Lerp(0.1f, spawnRadius, Mathf.Sqrt((float)i / count));
             float radius = Mathf.Lerp(0.1f, spawnRadius, MonteCarloRandom(2.0f));
             Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-            Vector3 targetPos = center + new Vector3(offset.x, offset.y, 0f);
+            Vector3 targetPos = c + new Vector3(offset.x, offset.y, 0f);
             obj.transform.DOMove(targetPos, 0.4f).SetEase(Ease.OutQuad);
 
             // Skalowanie z AnimationCurve
@@ -163,12 +165,12 @@ public class SplashSpawner : MonoBehaviour
         // Dodaj sprite i kolor
         SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
         sr.sprite = sprite;
-        sr.color = secondary;
+        sr.color = Color.white;
         sr.sortingLayerName = sortingLayerName;
         sr.sortingOrder = sortingOrder;
 
         Material mat = new Material(baseMaterial);
-        mat.SetColor("_Color", Color.white);
+        mat.SetColor("_Color", secondary);
         mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
         sr.material = mat;
 

@@ -19,17 +19,10 @@ public class ColorChangingPlanet : MonoBehaviour
         mPB = new MaterialPropertyBlock();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         InitializeMaterial();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -81,5 +74,17 @@ public class ColorChangingPlanet : MonoBehaviour
         if (playerColor == outerColor) return true;
 
         return false;
+    }
+
+    public Color GetColor(float playerAngle, bool secondary)
+    {
+        if (secondary)
+        {
+            return ColorsManager.Instance.GetSecondaryColor(outerColor);
+        }
+        else
+        {
+            return ColorsManager.Instance.GetPrimaryColor(outerColor);
+        }
     }
 }

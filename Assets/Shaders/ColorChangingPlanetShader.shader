@@ -2,6 +2,7 @@ Shader "Custom/ColorChangingPlanetShader"
 {
     Properties
     {
+        [NoScaleOffset]_MainTex ("Main Texture", 2D) = "white" {}
         _InnerColor ("Inner Color", Color) = (1, 1, 1, 1)
         _OuterColor ("Outer Color", Color) = (0, 0, 0, 1)
         _BlendPoint ("Blend Point (0-1)", Range(0,1)) = 0.5

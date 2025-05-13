@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ColorsManager : MonoBehaviour
 {
-
     private static ColorsManager instance;
 
     public static ColorsManager Instance {  get { return instance; } }
@@ -18,20 +17,20 @@ public class ColorsManager : MonoBehaviour
     }
 
     [System.Serializable]
-    public struct ColorStruct
+    private struct ColorStruct
     {
         public ColorType colorName;
         public Color color;
         public Color secondaryColor;
     }
 
-    public ColorStruct color1;
-    public ColorStruct color2;
-    public ColorStruct color3;
+    [Header("Colors")]
+    [SerializeField] private ColorStruct color1;
+    [SerializeField] private ColorStruct color2;
+    [SerializeField] private ColorStruct color3;
 
-    public Material material1;
-    public Material material2;
-    public Material material3;
+    [Header("Material")]
+    [SerializeField] private Material baseMaterial;
 
     private Dictionary<ColorType, Color> colorsDict = new Dictionary<ColorType, Color>();
 
@@ -49,6 +48,11 @@ public class ColorsManager : MonoBehaviour
         InitializeColors();
     }
 
+    private void OnValidate()
+    {
+        InitializeColors();
+    }
+
     private void InitializeColors()
     {
         colorsDict.Clear();
@@ -62,15 +66,6 @@ public class ColorsManager : MonoBehaviour
         secondaryColorsDict.Add(color1.colorName, color1.secondaryColor);
         secondaryColorsDict.Add(color2.colorName, color2.secondaryColor);
         secondaryColorsDict.Add(color3.colorName, color3.secondaryColor);
-
-        material1.SetColor("_Center", color1.secondaryColor);
-        material1.SetColor("_Outer", color1.color);
-
-        material2.SetColor("_Center", color2.secondaryColor);
-        material2.SetColor("_Outer", color2.color);
-
-        material3.SetColor("_Center", color3.secondaryColor);
-        material3.SetColor("_Outer", color3.color);
     }
 
     public Color GetPrimaryColor(ColorType type)
@@ -78,8 +73,17 @@ public class ColorsManager : MonoBehaviour
         return colorsDict[type];
     }
 
-    public Color GetSeconderyColor(ColorType type)
+    public Color GetSecondaryColor(ColorType type)
     {
         return secondaryColorsDict[type];
+    }
+
+    public Material GetMaterial(ColorType type)
+    {
+        Material mat = new Material(baseMaterial);
+        mat.SetColor("_Outer", GetPrimaryColor(type));
+        mat.SetColor("_Center", GetSecondaryColor(type));
+
+        return mat;
     }
 }
