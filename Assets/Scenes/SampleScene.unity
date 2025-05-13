@@ -3852,30 +3852,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6081441869308000485, guid: 6b485fa160161f540adfc73af382f3f1, type: 3}
-      propertyPath: count
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6081441869308000485, guid: 6b485fa160161f540adfc73af382f3f1, type: 3}
-      propertyPath: spawnRadius
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6081441869308000485, guid: 6b485fa160161f540adfc73af382f3f1, type: 3}
-      propertyPath: startScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6081441869308000485, guid: 6b485fa160161f540adfc73af382f3f1, type: 3}
-      propertyPath: startScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6081441869308000485, guid: 6b485fa160161f540adfc73af382f3f1, type: 3}
-      propertyPath: targetScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6081441869308000485, guid: 6b485fa160161f540adfc73af382f3f1, type: 3}
-      propertyPath: targetScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

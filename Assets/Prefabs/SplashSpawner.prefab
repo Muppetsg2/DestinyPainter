@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 5c0df5467983c3244b21df12328f8d59, type: 3}
-  count: 6
+  count: 8
   center: {x: 0, y: 0, z: 0}
-  spawnRadius: 0.2
+  spawnRadius: 0.4
   sortingLayerName: Default
   sortingOrder: -2
   scaleCurve:
@@ -75,8 +75,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   scaleDuration: 0.4
-  startScale: {x: 0.7, y: 0.7, z: 1}
-  targetScale: {x: 0.5, y: 0.5, z: 1}
+  startScale: {x: 1, y: 1, z: 1}
+  targetScale: {x: 0.7, y: 0.7, z: 1}
   colorFrom: {r: 0.49803925, g: 0.13725491, b: 0.22352943, a: 0.7058824}
   colorTo: {r: 1, g: 0, b: 0.18441486, a: 0.7058824}
   baseMaterial: {fileID: 2100000, guid: 46308b7eb14108d40af007f7aec29210, type: 2}
