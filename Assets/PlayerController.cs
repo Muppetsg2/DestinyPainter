@@ -77,8 +77,12 @@ public class PlayerController : MonoBehaviour
 
     private bool ValidatePlanetColor(Planet planet, Transform previousPlanetTransform)
     {
-        // TODO: Zle dziala dla multicolor planet
-        if (!planet.CheckIsCorrectColor(transform.rotation.eulerAngles.z, color))
+        Vector3 directionToPlanet = (transform.position - planet.GetComponent<Transform>().position).normalized;
+        float angle = Mathf.Atan2(directionToPlanet.y, directionToPlanet.x) * Mathf.Rad2Deg - 90f;
+        Quaternion q = Quaternion.Euler(0f, 0f, angle);
+        angle = q.eulerAngles.z;
+
+        if (!planet.CheckIsCorrectColor(angle + 90, color)) // +90 for base base rotation (player sprite is facing upwards)
         {
             currentPlanet = previousPlanetTransform;
             ReturnToPlanet();

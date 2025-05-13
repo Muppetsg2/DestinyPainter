@@ -49,12 +49,15 @@ public class MulticolorPlanet : MonoBehaviour
         mPB.SetFloatArray("_Angles", baseSegments);
 
         var colorVecs = new List<Vector4>();
+        var secondaryColorVecs = new List<Vector4>();
         foreach (ColorType c in segmentColors)
         {
             colorVecs.Add(ColorsManager.Instance.GetPrimaryColor(c));
+            secondaryColorVecs.Add(ColorsManager.Instance.GetSeconderyColor(c));
         }
 
         mPB.SetVectorArray("_Colors", colorVecs);
+        mPB.SetVectorArray("_SecondaryColors", secondaryColorVecs);
 
         spriteRenderer.SetPropertyBlock(mPB);
     }
@@ -71,10 +74,8 @@ public class MulticolorPlanet : MonoBehaviour
         }
     }
 
-    public bool CheckIsCorrectColor(float rotation, ColorType color)
+    public bool CheckIsCorrectColor(float playerRotation, ColorType color)
     {
-        float playerRotation = rotation + 90;
-
         if (playerRotation > 360)
         {
             playerRotation -= 360;

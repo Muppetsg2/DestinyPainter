@@ -18,7 +18,7 @@ public class Planet : MonoBehaviour
         colorChangingPlanet = GetComponent<ColorChangingPlanet>();
     }
 
-    public bool CheckIsCorrectColor(float playerRotation, ColorType playerColor)
+    public bool CheckIsCorrectColor(float playerAngle, ColorType playerColor)
     {
         if (colorChangingPlanet != null)
         {
@@ -26,7 +26,7 @@ public class Planet : MonoBehaviour
         }
         else if (multicolorPlanet != null)
         {
-            return multicolorPlanet.CheckIsCorrectColor(playerRotation, playerColor);
+            return multicolorPlanet.CheckIsCorrectColor(playerAngle, playerColor);
         }
         else
         {
