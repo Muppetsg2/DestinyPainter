@@ -1,8 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+using SaintsField;
+using SaintsField.Playa;
 
 public class SplashSpawner : MonoBehaviour
 {
@@ -10,7 +9,14 @@ public class SplashSpawner : MonoBehaviour
     public static SplashSpawner Instance { get { return instance; } }
 
     [Header("Main Settings")]
-    public Sprite sprite;
+    public bool useNewSplash = false;
+
+    [HideIf(nameof(useNewSplash))]
+    public Sprite spriteOld;
+
+    [ShowIf(nameof(useNewSplash))]
+    public Sprite spriteNew;
+
     public int count = 5;
     public Vector3 center = Vector3.zero;
     public float spawnRadius = 0.5f;
@@ -51,6 +57,7 @@ public class SplashSpawner : MonoBehaviour
         return Mathf.Pow(r, bias);
     }
 
+    [Button]
     [ContextMenu("Delete Splashes")]
     public void DeleteSplashes()
     {
@@ -67,6 +74,7 @@ public class SplashSpawner : MonoBehaviour
         }
     }
 
+    [Button]
     [ContextMenu("Spawn Splashes")]
     public void SpawnSplashes()
     {
@@ -80,7 +88,7 @@ public class SplashSpawner : MonoBehaviour
 
             // Dodaj sprite i kolor
             SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-            sr.sprite = sprite;
+            sr.sprite = spriteOld;
             //sr.color = Color.Lerp(colorFrom, colorTo, (float)rng.NextDouble());
             sr.color = Color.white;
             sr.sortingLayerName = sortingLayerName;
@@ -123,7 +131,7 @@ public class SplashSpawner : MonoBehaviour
 
             // Dodaj sprite i kolor
             SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-            sr.sprite = sprite;
+            sr.sprite = spriteOld;
             sr.color = Color.white;
             sr.sortingLayerName = sortingLayerName;
             sr.sortingOrder = sortingOrder;
@@ -164,7 +172,7 @@ public class SplashSpawner : MonoBehaviour
 
         // Dodaj sprite i kolor
         SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-        sr.sprite = sprite;
+        sr.sprite = spriteOld;
         sr.color = Color.white;
         sr.sortingLayerName = sortingLayerName;
         sr.sortingOrder = sortingOrder;

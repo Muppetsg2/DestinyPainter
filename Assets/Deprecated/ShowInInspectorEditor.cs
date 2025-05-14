@@ -1,3 +1,4 @@
+/*
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -82,3 +83,4 @@ public class ShowInInspectorEditor : Editor
         }
     }
 }
+*/
