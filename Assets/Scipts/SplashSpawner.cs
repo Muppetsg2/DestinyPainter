@@ -1,8 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+using SaintsField;
+using SaintsField.Playa;
 
 public class SplashSpawner : MonoBehaviour
 {
@@ -10,7 +9,14 @@ public class SplashSpawner : MonoBehaviour
     public static SplashSpawner Instance { get { return instance; } }
 
     [Header("Main Settings")]
-    public Sprite sprite;
+    public bool useNewSplash = false;
+
+    [HideIf(nameof(useNewSplash))]
+    public Sprite spriteOld;
+
+    [ShowIf(nameof(useNewSplash))]
+    public Sprite spriteNew;
+
     public int count = 5;
     public Vector3 center = Vector3.zero;
     public float spawnRadius = 0.5f;
@@ -28,7 +34,10 @@ public class SplashSpawner : MonoBehaviour
     [Header("Colors")]
     public Color colorFrom = Color.white;
     public Color colorTo = Color.red;
-    public Material baseMaterial;
+    [HideIf(nameof(useNewSplash))]
+    public Material baseMaterialOld;
+    [ShowIf(nameof(useNewSplash))]
+    public Material baseMaterialNew;
 
     private Transform spawnContainer;
     private float goldenAngle = 137.508f;
@@ -51,6 +60,22 @@ public class SplashSpawner : MonoBehaviour
         return Mathf.Pow(r, bias);
     }
 
+    private Material CreateMaterial(Color from, Color to)
+    {
+        Material mat = new Material(useNewSplash ? baseMaterialNew : baseMaterialOld);
+        mat.SetColor("_Color", Color.Lerp(from, to, MonteCarloRandom(1.5f)));
+        if(useNewSplash)
+        {
+            mat.SetVector("_NoiseOffset", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 6.0f, (MonteCarloRandom(1.0f) - 0.5f) * 6.0f));
+        }
+        else
+        {
+            mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
+        }
+        return mat;
+    }
+
+    [Button]
     [ContextMenu("Delete Splashes")]
     public void DeleteSplashes()
     {
@@ -65,8 +90,11 @@ public class SplashSpawner : MonoBehaviour
         {
             DestroyImmediate(spawnContainer.GetChild(i).gameObject);
         }
+
+        DestroyImmediate(spawnContainer);
     }
 
+    [Button]
     [ContextMenu("Spawn Splashes")]
     public void SpawnSplashes()
     {
@@ -80,17 +108,12 @@ public class SplashSpawner : MonoBehaviour
 
             // Dodaj sprite i kolor
             SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-            sr.sprite = sprite;
+            sr.sprite = useNewSplash ? spriteNew : spriteOld;
             //sr.color = Color.Lerp(colorFrom, colorTo, (float)rng.NextDouble());
-            sr.color = Color.Lerp(colorFrom, colorTo, MonteCarloRandom(1.5f));
+            sr.color = Color.white;
             sr.sortingLayerName = sortingLayerName;
             sr.sortingOrder = sortingOrder;
-
-            Material mat = new Material(baseMaterial);
-            mat.SetColor("_Color", Color.white);
-            //mat.SetVector("_Magnitude", new Vector2(((float)rng.NextDouble() - 0.5f) * 0.25f, ((float)rng.NextDouble() - 0.5f) * 0.25f));
-            mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
-            sr.material = mat;
+            sr.material = CreateMaterial(colorFrom, colorTo);
 
             // Losowa rotacja Z
             float randomRotation = (float)rng.NextDouble() * 180f;
@@ -113,7 +136,7 @@ public class SplashSpawner : MonoBehaviour
         }
     }
 
-    public void PlayerDeathSplashes(Vector3 c, Color primary, Color secondary)
+    public void PlayerDeathSplashes(Vector3 c, Color primary, Color secondary, float alpha = 1.0f)
     {
         for (int i = 0; i < count; ++i)
         {
@@ -123,16 +146,15 @@ public class SplashSpawner : MonoBehaviour
 
             // Dodaj sprite i kolor
             SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-            sr.sprite = sprite;
-            sr.color = Color.Lerp(primary, secondary, MonteCarloRandom(1.5f));
+            sr.sprite = useNewSplash ? spriteNew : spriteOld;
+            sr.color = Color.white;
             sr.sortingLayerName = sortingLayerName;
             sr.sortingOrder = sortingOrder;
 
-            Material mat = new Material(baseMaterial);
-            mat.SetColor("_Color", Color.white);
-            //mat.SetVector("_Magnitude", new Vector2(((float)rng.NextDouble() - 0.5f) * 0.25f, ((float)rng.NextDouble() - 0.5f) * 0.25f));
-            mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
-            sr.material = mat;
+            Material mat = new Material(baseMaterialOld);
+            primary.a = 0.7058824f;
+            secondary.a = 0.7058824f;
+            sr.material = CreateMaterial(primary, secondary);
 
             // Losowa rotacja Z
             float randomRotation = (float)rng.NextDouble() * 180f;
@@ -143,7 +165,7 @@ public class SplashSpawner : MonoBehaviour
             //float radius = Mathf.Lerp(0.1f, spawnRadius, Mathf.Sqrt((float)i / count));
             float radius = Mathf.Lerp(0.1f, spawnRadius, MonteCarloRandom(2.0f));
             Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-            Vector3 targetPos = center + new Vector3(offset.x, offset.y, 0f);
+            Vector3 targetPos = c + new Vector3(offset.x, offset.y, 0f);
             obj.transform.DOMove(targetPos, 0.4f).SetEase(Ease.OutQuad);
 
             // Skalowanie z AnimationCurve
@@ -162,15 +184,11 @@ public class SplashSpawner : MonoBehaviour
 
         // Dodaj sprite i kolor
         SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-        sr.sprite = sprite;
-        sr.color = secondary;
+        sr.sprite = useNewSplash ? spriteNew : spriteOld;
+        sr.color = Color.white;
         sr.sortingLayerName = sortingLayerName;
         sr.sortingOrder = sortingOrder;
-
-        Material mat = new Material(baseMaterial);
-        mat.SetColor("_Color", Color.white);
-        mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
-        sr.material = mat;
+        sr.material = CreateMaterial(secondary, secondary);
 
         // Losowa rotacja Z
         float randomRotation = (float)rng.NextDouble() * 180f;

@@ -44,13 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1eed5d0c9962624cae70f559bc69cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color1:
-    colorName: 1
-    color: {r: 1, g: 0.02745098, b: 0.25882354, a: 0}
-    secondaryColor: {r: 0.4509804, g: 0.14901961, b: 0.21960786, a: 0}
-  color2:
-    colorName: 2
-    color: {r: 0.62352943, g: 0, b: 1, a: 0}
-    secondaryColor: {r: 0.4392157, g: 0, b: 1, a: 0}
-  material1: {fileID: 2100000, guid: 26cd07a022ab8d04a9bf99fa18b9cd68, type: 2}
-  material2: {fileID: 2100000, guid: 6b5493d5778565f4283fa8ede1779cda, type: 2}
+  palette: {fileID: 11400000, guid: 52843fff81b0cc54585e9ec9c9ffeeb1, type: 2}
+  baseMaterial: {fileID: 2100000, guid: 9997863985a1459479a04b8ab9a6e135, type: 2}

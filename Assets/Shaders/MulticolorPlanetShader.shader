@@ -2,6 +2,7 @@ Shader "Custom/MulticolorPlanetShader"
 {
     Properties
     {
+        [HideInInspector][NoScaleOffset]_MainTex ("Main Texture", 2D) = "white" {}
         _SegmentCount ("Segment Count", Int) = 1
     }
 
@@ -21,6 +22,7 @@ Shader "Custom/MulticolorPlanetShader"
             #define MAX_SEGMENTS 10
 
             float4 _Colors[MAX_SEGMENTS];
+            float4 _SecondaryColors[MAX_SEGMENTS];
             float _Angles[MAX_SEGMENTS + 1];
             int _SegmentCount;
 
@@ -47,6 +49,7 @@ Shader "Custom/MulticolorPlanetShader"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 pos = i.uv;
+                float r = length(pos);
                 float angle = atan2(pos.y, pos.x);
                 angle = degrees(angle);
                 if (angle < 0) angle += 360;
@@ -55,7 +58,8 @@ Shader "Custom/MulticolorPlanetShader"
                 {
                     if (angle >= _Angles[idx] && angle < _Angles[idx + 1])
                     {
-                        return _Colors[idx];
+                        float t = smoothstep(0.0, 1.0, r);
+                        return lerp(_SecondaryColors[idx], _Colors[idx], t);
                     }
                 }
 

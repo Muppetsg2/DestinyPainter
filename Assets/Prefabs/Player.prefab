@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3263723330783948677}
   - component: {fileID: 8131876596597015761}
   - component: {fileID: 7808150379001672047}
-  - component: {fileID: 6635978376148426931}
+  - component: {fileID: 8506099823441916559}
   - component: {fileID: 1957863015825773193}
   m_Layer: 0
   m_Name: Player
@@ -146,7 +146,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: f55ebf9dddc709348ab6d8843837a9fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 02d3c5c58367628409ea0e013ed01ba8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -205,7 +205,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &6635978376148426931
+--- !u!60 &8506099823441916559
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,9 +251,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0, y: 0.523675}
+      - {x: -0.42666668, y: -0.21533333}
+      - {x: 0.42666668, y: -0.21533333}
   m_UseDelaunayMesh: 0
 --- !u!114 &1957863015825773193
 MonoBehaviour:

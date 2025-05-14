@@ -14,17 +14,8 @@ using TMPro;
 public class CircularTextMeshPro : MonoBehaviour {
     private TextMeshProUGUI m_TextComponent;
 
-    [SerializeField, HideInInspector] private float m_radius = 10.0f;
-
     [Tooltip("The radius of the text circle arc")]
-    [ShowInInspector]
-    public float Radius {
-        get => m_radius;
-        set {
-            m_radius = value;
-            OnCurvePropertyChanged();
-        }
-    }
+    [SerializeField] private float m_radius = 10.0f;
 
     private void Awake() {
         m_TextComponent = gameObject.GetComponent<TextMeshProUGUI>();
@@ -37,6 +28,14 @@ public class CircularTextMeshPro : MonoBehaviour {
 
     private void OnDisable() {
         m_TextComponent.OnPreRenderText -= UpdateTextCurve;
+    }
+
+    private void OnValidate()
+    {
+        if (m_TextComponent != null)
+        {
+            OnCurvePropertyChanged();
+        }
     }
 
     protected void OnCurvePropertyChanged() {

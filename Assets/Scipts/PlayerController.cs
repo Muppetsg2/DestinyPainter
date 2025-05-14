@@ -65,20 +65,29 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isAttached)
+        Planet curr = currentPlanet.GetComponent<Planet>();
+        if (isAttached && !curr.isEnd)
         {
-            transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
+            transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * curr.playerRadius;
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
                 currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
 
-            ValidatePlanetColor(currentPlanet.GetComponent<Planet>(), previousPlanet);
+            ValidatePlanetColor(curr, previousPlanet);
         }
+    }
+
+    private float CalculatePlayerPlanetAngle(Transform planet)
+    {
+        Vector3 directionToPlanet = (transform.position - planet.position).normalized;
+        float angle = Mathf.Atan2(directionToPlanet.y, directionToPlanet.x) * Mathf.Rad2Deg - 90f;
+        Quaternion q = Quaternion.Euler(0f, 0f, angle);
+        angle = q.eulerAngles.z;
+        return angle + 90.0f; // +90 for base base rotation (player sprite is facing upwards)
     }
 
     private bool ValidatePlanetColor(Planet planet, Transform previousPlanetTransform)
     {
-        // TODO: Zle dziala dla multicolor planet
-        if (!planet.CheckIsCorrectColor(transform.rotation.eulerAngles.z, color))
+        if (!planet.CheckIsCorrectColor(CalculatePlayerPlanetAngle(planet.GetComponent<Transform>()), color))
         {
             currentPlanet = previousPlanetTransform;
             ReturnToPlanet();
@@ -98,6 +107,8 @@ public class PlayerController : MonoBehaviour
 
         Vector2 direction = (transform.position - currentPlanet.position).normalized;
         rb.linearVelocity = direction * launchForce;
+
+        ++planetJumpsCounter;
     }
 
     public void RotateClockwise()
@@ -117,8 +128,27 @@ public class PlayerController : MonoBehaviour
     void ReturnToPlanet()
     {
         rb.linearVelocity = Vector2.zero;
+        SplashSpawner.Instance.PlayerDeathSplashes(
+            transform.position, 
+            ColorsManager.Instance.GetPrimaryColor(color), 
+            ColorsManager.Instance.GetSecondaryColor(color)
+        );
         transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
         AttachToPlanet(currentPlanet);
+    }
+
+    void ChangePlanet(Transform planet)
+    {
+        SplashSpawner.Instance.PlanetSplash(
+            planet.transform.position,
+            planet.gameObject.GetComponent<Planet>().GetColor(CalculatePlayerPlanetAngle(planet), true),
+            planet.transform.localScale * 2.0f,
+            planet.transform.localScale * 3.0f,
+            0.3f,
+            0.55f,
+            0.4f
+        );
+        AttachToPlanet(planet);
     }
 
     void AttachToPlanet(Transform planet)
@@ -141,7 +171,8 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.linearVelocity = Vector2.zero;
-        if (currentPlanet.gameObject.GetComponent<Planet>().multicolorPlanet == null && currentPlanet.gameObject.GetComponent<Planet>().colorChangingPlanet == null)
+        Planet oldCurrPlanetComp = currentPlanet.GetComponent<Planet>();
+        if (!oldCurrPlanetComp.IsMulticolor() && !oldCurrPlanetComp.IsColorChanging())
         {
             previousPlanet = currentPlanet;
         }
@@ -155,6 +186,7 @@ public class PlayerController : MonoBehaviour
         Vector3 directionToPlanet = (transform.position - currentPlanet.position).normalized;
         float angle = Mathf.Atan2(directionToPlanet.y, directionToPlanet.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -164,36 +196,17 @@ public class PlayerController : MonoBehaviour
             Planet planet = collision.GetComponent<Planet>();
             if (planet.isEnd)
             {
-                SplashSpawner.Instance.PlanetSplash(
-                    collision.transform.position,
-                    ColorsManager.Instance.GetPrimaryColor(collision.gameObject.GetComponent<Planet>().color),
-                    collision.transform.localScale * 2.0f,
-                    collision.transform.localScale * 3.0f,
-                    0.75f,
-                    0.25f,
-                    0.5f
-                );
                 planetSnap.end = true;
-                AttachToPlanet(collision.transform);
-                ++planetJumpsCounter;
+                ChangePlanet(collision.transform);
             }
-
-
-            if (planet.isDeadly) ReturnToPlanet();
-            else if (!ValidatePlanetColor(planet, currentPlanet)) return;
             else
             {
-                SplashSpawner.Instance.PlanetSplash(
-                    collision.transform.position,
-                    ColorsManager.Instance.GetPrimaryColor(collision.gameObject.GetComponent<Planet>().color),
-                    collision.transform.localScale * 2.0f,
-                    collision.transform.localScale * 3.0f,
-                    0.75f,
-                    0.25f,
-                    0.5f
-                );
-                AttachToPlanet(collision.transform);
-                ++planetJumpsCounter;
+                if (planet.isDeadly) ReturnToPlanet();
+                else if (!ValidatePlanetColor(planet, currentPlanet)) return;
+                else
+                {
+                    ChangePlanet(collision.transform);
+                }
             }
         }
     }
@@ -203,6 +216,6 @@ public class PlayerController : MonoBehaviour
         color = newColor;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = ColorsManager.Instance.GetPrimaryColor(color);
-        sr.material.SetColor("_Color", ColorsManager.Instance.GetSeconderyColor(color) * 0.5f);
+        sr.material.SetColor("_Color", ColorsManager.Instance.GetSecondaryColor(color) * 0.5f);
     }
 }
