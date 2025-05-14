@@ -12,8 +12,17 @@ Shader "Custom/ColorChangingPlanetShader"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags {
+            "RenderPipeline"="UniversalPipeline"
+            "RenderType"="Transparent"
+            "UniversalMaterialType" = "Lit"
+            "Queue"="Transparent"
+        }
         LOD 100
+        Cull Off
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
+        ZTest LEqual
+        ZWrite Off
 
         Pass
         {
@@ -22,6 +31,7 @@ Shader "Custom/ColorChangingPlanetShader"
             #pragma fragment frag
             #include "UnityCG.cginc"
 
+            sampler2D _MainTex;
             float4 _InnerColor;
             float4 _OuterColor;
             float _BlendPoint;
@@ -37,6 +47,7 @@ Shader "Custom/ColorChangingPlanetShader"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
+                float2 pos : TEXCOORD1;
                 float4 vertex : SV_POSITION;
             };
 
@@ -44,18 +55,23 @@ Shader "Custom/ColorChangingPlanetShader"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv * 2.0 - 1.0;
+                o.uv = v.uv;
+                o.pos = v.uv * 2.0 - 1.0;
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 pos = i.uv;
+                float2 pos = i.pos;
                 float r = length(pos);
+
+                float2 texUV = i.uv;
+                float4 texColor = tex2D(_MainTex, texUV).rgba;
 
                 if (r > 1.0 - _BorderWidth)
                 {
-                    return _UseInnerColorForBorder > 0.5 ? _InnerColor : _OuterColor;
+                    float3 color = _UseInnerColorForBorder > 0.5 ? _InnerColor : _OuterColor;
+                    return float4(color * texColor.rgb * texColor.a, texColor.a);
                 }
 
                 float t;
@@ -67,7 +83,8 @@ Shader "Custom/ColorChangingPlanetShader"
                 {
                     t = smoothstep(0.0, _BlendPoint * 2, r);
                 }
-                return lerp(_InnerColor, _OuterColor, t);
+                float3 color = lerp(_InnerColor, _OuterColor, t);
+                return float4(color * texColor.rgb * texColor.a, texColor.a);
             }
             ENDCG
         }

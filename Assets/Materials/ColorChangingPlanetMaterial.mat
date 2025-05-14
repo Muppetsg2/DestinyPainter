@@ -42,11 +42,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _BlendPoint: 0.5
-    - _BorderWidth: 0.05
+    - _BorderWidth: 0.01
     - _EnableExternalAlpha: 0
     - _Glossiness: 0.5
     - _Metallic: 0
-    - _UseInnerColorForBorder: 1
+    - _UseInnerColorForBorder: 0
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
