@@ -129,8 +129,8 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = Vector2.zero;
         SplashSpawner.Instance.PlayerDeathSplashes(
-            transform.position, 
-            ColorsManager.Instance.GetPrimaryColor(color), 
+            transform.position,
+            ColorsManager.Instance.GetPrimaryColor(color),
             ColorsManager.Instance.GetSecondaryColor(color)
         );
         transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
@@ -208,6 +208,14 @@ public class PlayerController : MonoBehaviour
                     ChangePlanet(collision.transform);
                 }
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isLaunched && collision.CompareTag("Boundries"))
+        {
+            ReturnToPlanet();
         }
     }
 

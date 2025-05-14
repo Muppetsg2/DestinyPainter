@@ -23,6 +23,8 @@ public class ColorPalette : ScriptableObject
     [SerializeField]
     private List<ColorEntry> colors = new List<ColorEntry>();
 
+    public Color backgroundColor = Color.black;
+
     private Dictionary<ColorType, ColorEntry> colorDict = new Dictionary<ColorType, ColorEntry>();
 
     public void Initialize()
