@@ -34,6 +34,11 @@ public class ColorsManager : MonoBehaviour
         return palette.GetSecondaryColor(type);
     }
 
+    public Color GetBackgroundColor()
+    {
+        return palette.backgroundColor;
+    }
+
     public Material GetMaterial(ColorType type)
     {
         Material mat = new Material(baseMaterial);
