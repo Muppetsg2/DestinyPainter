@@ -81,4 +81,5 @@ MonoBehaviour:
   targetScale: {x: 0.7, y: 0.7, z: 1}
   colorFrom: {r: 0.49803925, g: 0.13725491, b: 0.22352943, a: 0.7058824}
   colorTo: {r: 1, g: 0, b: 0.18441486, a: 0.7058824}
-  baseMaterial: {fileID: 2100000, guid: 46308b7eb14108d40af007f7aec29210, type: 2}
+  baseMaterialOld: {fileID: 2100000, guid: 46308b7eb14108d40af007f7aec29210, type: 2}
+  baseMaterialNew: {fileID: 2100000, guid: b160be6ad550abf42ba82e9a0dcde64c, type: 2}
