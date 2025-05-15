@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc6ace10c92ee045b52af5c472ee915, type: 3}
   m_Name: Level1Data
   m_EditorClassIdentifier: 
-  scene:
-    m_Handle: 0
-  secondStarMaxJumps: 1
-  thirdStarMaxJumps: 0
+  sceneName: SampleScene
+  secondStarMaxJumps: 9
+  thirdStarMaxJumps: 5

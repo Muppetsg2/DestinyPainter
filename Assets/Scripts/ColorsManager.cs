@@ -39,6 +39,16 @@ public class ColorsManager : MonoBehaviour
         return palette.backgroundColor;
     }
 
+    public Color GetStarGetColor()
+    {
+        return palette.starGetColor;
+    }
+
+    public Color GetStarDefaultColor()
+    {
+        return palette.starDefaultColor;
+    }
+
     public Material GetMaterial(ColorType type)
     {
         Material mat = new Material(baseMaterial);

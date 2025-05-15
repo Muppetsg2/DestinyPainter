@@ -21,11 +21,21 @@ public class LevelData : ScriptableObject
         if (stars < 0) stars = 0;
         if (stars > 3) stars = 3;
 
-        PlayerPrefs.SetInt(sceneName, stars);
+        string key = sceneName + "_stars";
+        if (PlayerPrefs.HasKey(key))
+        {
+            if (stars <= PlayerPrefs.GetInt(key)) return;
+        }
+        PlayerPrefs.SetInt(key, stars);
     }
 
     public int GetLevelStars()
     {
-        return PlayerPrefs.GetInt(sceneName, 0);
+        return PlayerPrefs.GetInt(sceneName + "_stars", 0);
+    }
+
+    public bool GetLevelFinished()
+    {
+        return PlayerPrefs.HasKey(sceneName + "_stars");
     }
 }

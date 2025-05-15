@@ -198,6 +198,7 @@ public class PlayerController : MonoBehaviour
             {
                 planetSnap.end = true;
                 ChangePlanet(collision.transform);
+                LevelManager.instance.FinishLevel();
             }
             else
             {

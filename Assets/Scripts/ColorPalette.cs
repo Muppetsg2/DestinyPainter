@@ -24,6 +24,8 @@ public class ColorPalette : ScriptableObject
     private List<ColorEntry> colors = new List<ColorEntry>();
 
     public Color backgroundColor = Color.black;
+    public Color starGetColor = Color.yellow;
+    public Color starDefaultColor = Color.gray;
 
     private Dictionary<ColorType, ColorEntry> colorDict = new Dictionary<ColorType, ColorEntry>();
 
