@@ -73,4 +73,13 @@ public class Planet : MonoBehaviour
             return ColorsManager.Instance.GetPrimaryColor(color);
         }
     }
+
+    public void ChangePlanetColor(ColorType newColor)
+    {
+        if (multicolorPlanet == null && colorChangingPlanet == null && changeMaterial)
+        {
+            GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetMaterial(newColor);
+            color = newColor;
+        }
+    }
 }

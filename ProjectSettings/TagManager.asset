@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planet
   - Boundries
+  - ColorChange
   layers:
   - Default
   - TransparentFX

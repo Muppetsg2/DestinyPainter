@@ -210,6 +210,26 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        else if (collision.CompareTag("ColorChange"))
+        {
+            ColorChangePickup pickup = collision.GetComponent<ColorChangePickup>();
+            if (pickup.color != color)
+            {
+                ChangePlayerColor(pickup.color);
+                pickup.Pickup();
+
+                if (!currentPlanet.GetComponent<Planet>().IsMulticolor() && !currentPlanet.GetComponent<Planet>().IsColorChanging())
+                {
+                    currentPlanet.GetComponent<Planet>().ChangePlanetColor(pickup.color);
+                }
+                else
+                {
+                    previousPlanet.GetComponent<Planet>().ChangePlanetColor(pickup.color);
+                    currentPlanet = previousPlanet;
+                    previousPlanet = null;
+                }
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
