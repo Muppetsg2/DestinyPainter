@@ -87,8 +87,7 @@ public class ButtonAnimation : MonoBehaviour
         AnimType = AnimationType.Show;
 
         CalculateLine();
-        var core = selfRect.DOAnchorPos3D(position, showTime);
-        currentTween = core.OnUpdate(CalculateLine).OnComplete(() =>
+        currentTween = selfRect.DOAnchorPos3D(position, showTime).OnUpdate(CalculateLine).OnComplete(() =>
         {
             AnimType = AnimationType.None;
             PlayIdle();
