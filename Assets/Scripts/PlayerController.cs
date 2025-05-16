@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     public Transform currentPlanet;
     public Transform previousPlanet;
 
-    public GameObject linePrefab;
-
     private bool rotateClockwise;
 
     public float launchForce = 5f;
@@ -156,18 +154,7 @@ public class PlayerController : MonoBehaviour
         if (planet != currentPlanet)
         {
             // Create line
-            GameObject line = Instantiate(linePrefab, null, true);
-            line.name = currentPlanet.name + " -> " + planet.name;
-
-            line.transform.localScale = new Vector3(Vector3.Distance(planet.position, currentPlanet.position), line.transform.localScale.y, 1f);
-            line.transform.localPosition = (planet.position + currentPlanet.position) * 0.5f;
-
-            Vector3 direction = (planet.position - currentPlanet.position).normalized;
-
-            float lineAngle = Vector3.Angle(Vector3.right, direction);
-            float lineAngleSign = Mathf.Sign(Vector3.Dot(Vector3.forward, Vector3.Cross(Vector3.right, direction)));
-
-            line.transform.localEulerAngles = new Vector3(0f, 0f, lineAngleSign * lineAngle);
+            LinesManager.Instance.AddLine(currentPlanet, planet);
         }
 
         rb.linearVelocity = Vector2.zero;
@@ -198,7 +185,7 @@ public class PlayerController : MonoBehaviour
             {
                 planetSnap.end = true;
                 ChangePlanet(collision.transform);
-                LevelManager.instance.FinishLevel();
+                LevelManager.Instance.FinishLevel();
             }
             else
             {

@@ -19,9 +19,11 @@ public class ButtonAnimation : MonoBehaviour
 
     [Header("Hide Animation")]
     public float hideTime = 2f;
+    public AnimationCurve hideCurve;
 
     [Header("Show Animation")]
     public float showTime = 2f;
+    public AnimationCurve showCurve;
 
     private RectTransform selfRect;
 
@@ -58,7 +60,7 @@ public class ButtonAnimation : MonoBehaviour
         if (AnimType != AnimationType.None) return;
         AnimType = AnimationType.Hide;
 
-        var core = selfRect.DOMove(parentPlanet.position, hideTime);
+        var core = selfRect.DOMove(parentPlanet.position, hideTime).SetEase(hideCurve);
         currentTween = core.OnUpdate(() =>
         {
             if (Mathf.Abs(Vector3.Distance(core.endValue, parentPlanet.position)) > 1f)
@@ -87,8 +89,7 @@ public class ButtonAnimation : MonoBehaviour
         AnimType = AnimationType.Show;
 
         CalculateLine();
-        var core = selfRect.DOAnchorPos3D(position, showTime);
-        currentTween = core.OnUpdate(CalculateLine).OnComplete(() =>
+        currentTween = selfRect.DOAnchorPos3D(position, showTime).SetEase(showCurve).OnUpdate(CalculateLine).OnComplete(() =>
         {
             AnimType = AnimationType.None;
             PlayIdle();

@@ -73,7 +73,7 @@ public class MenuManager : MonoBehaviour
                         }
                     }
                     ViewType = endViewType;
-                    foreach (var button in menuButtons)
+                    foreach (var button in buttons)
                     {
                         button.GetComponent<Button>().enabled = true;
                     }
