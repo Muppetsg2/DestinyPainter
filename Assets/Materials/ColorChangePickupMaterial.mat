@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CenterIntensity: 30
+    - _CenterIntensity: 15
     - _OuterIntensity: 1
     - _mult: 1.5
     m_Colors:
