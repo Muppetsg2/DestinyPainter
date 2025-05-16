@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager instance;
+    public static LevelManager Instance { get; private set; }
 
     public PlayerController player;
     public LevelData data;
@@ -11,10 +11,10 @@ public class LevelManager : MonoBehaviour
     
     public string menuName;
 
-    private void Start()
+    private void Awake()
     {
-        if (instance != null) Destroy(this);
-        instance = this;
+        if (Instance != null) Destroy(this);
+        Instance = this;
     }
 
     private void Update()
