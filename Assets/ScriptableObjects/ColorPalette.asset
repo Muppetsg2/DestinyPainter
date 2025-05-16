@@ -16,15 +16,24 @@ MonoBehaviour:
   - colorType: 0
     primaryColor: {r: 0, g: 0, b: 0, a: 1}
     secondaryColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    primaryHDRColor: {r: 0, g: 0, b: 0, a: 1}
+    secondaryHDRColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
   - colorType: 1
     primaryColor: {r: 1, g: 0.02745098, b: 0.25882354, a: 1}
     secondaryColor: {r: 0.4509804, g: 0.14901961, b: 0.21960784, a: 1}
+    primaryHDRColor: {r: 1, g: 0, b: 0, a: 1}
+    secondaryHDRColor: {r: 0.45098042, g: 0.14901961, b: 0.21960786, a: 0}
   - colorType: 2
     primaryColor: {r: 0.62352943, g: 0, b: 1, a: 1}
     secondaryColor: {r: 0.4392157, g: 0, b: 1, a: 1}
+    primaryHDRColor: {r: 0.62352943, g: 0, b: 1, a: 1}
+    secondaryHDRColor: {r: 0.43921572, g: 0, b: 1, a: 1}
   - colorType: 3
     primaryColor: {r: 0.03137255, g: 0.14901961, b: 1, a: 1}
     secondaryColor: {r: 0.02745098, g: 0.5529412, b: 1, a: 1}
+    primaryHDRColor: {r: 0, g: 0, b: 1, a: 1}
+    secondaryHDRColor: {r: 0.027450982, g: 0.5529412, b: 1, a: 1}
   backgroundColor: {r: 0.25882354, g: 0.27450982, b: 0.32941177, a: 1}
   starGetColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   starDefaultColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+  testHDRColor: {r: 0, g: 0, b: 0, a: 0}

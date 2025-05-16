@@ -10,7 +10,7 @@ public class ColorChangePickup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetMaterial(color);
+        GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetPickupMaterial(color);
         StartAnimation();
     }
 

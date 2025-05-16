@@ -18,6 +18,8 @@ public class ColorPalette : ScriptableObject
         public ColorType colorType;
         public Color primaryColor;
         public Color secondaryColor;
+        public Color primaryHDRColor;
+        public Color secondaryHDRColor;
     }
 
     [SerializeField]
@@ -50,5 +52,17 @@ public class ColorPalette : ScriptableObject
     {
         if (colorDict == null) Initialize();
         return colorDict.TryGetValue(type, out var entry) ? entry.secondaryColor : Color.black;
+    }
+
+    public Color GetPrimaryHDRColor(ColorType type)
+    {
+        if (colorDict == null) Initialize();
+        return colorDict.TryGetValue(type, out var entry) ? entry.primaryHDRColor : Color.black;
+    }
+
+    public Color GetSecondaryHDRColor(ColorType type)
+    {
+        if (colorDict == null) Initialize();
+        return colorDict.TryGetValue(type, out var entry) ? entry.secondaryHDRColor : Color.black;
     }
 }

@@ -10,6 +10,7 @@ public class ColorsManager : MonoBehaviour
 
     [Header("Material")]
     [SerializeField] private Material baseMaterial;
+    [SerializeField] private Material pickupMaterial;
 
     private void Awake()
     {
@@ -34,6 +35,16 @@ public class ColorsManager : MonoBehaviour
         return palette.GetSecondaryColor(type);
     }
 
+    public Color GetPrimaryHDRColor(ColorType type)
+    {
+        return palette.GetPrimaryHDRColor(type);
+    }
+
+    public Color GetSecondaryHDRColor(ColorType type)
+    {
+        return palette.GetSecondaryHDRColor(type);
+    }
+
     public Color GetBackgroundColor()
     {
         return palette.backgroundColor;
@@ -54,6 +65,15 @@ public class ColorsManager : MonoBehaviour
         Material mat = new Material(baseMaterial);
         mat.SetColor("_Outer", GetPrimaryColor(type));
         mat.SetColor("_Center", GetSecondaryColor(type));
+        return mat;
+    }
+
+    public Material GetPickupMaterial(ColorType type)
+    {
+        Material mat = new Material(pickupMaterial);
+
+        mat.SetColor("_Center", GetPrimaryHDRColor(type));
+        mat.SetColor("_Outer", GetSecondaryHDRColor(type));
         return mat;
     }
 }
