@@ -120,10 +120,10 @@ public class ButtonAnimation : MonoBehaviour
     {
         float sizeY = 0;
         if (transform.position != parentPlanet.position) sizeY = Vector2.Distance(transform.position, parentPlanet.position);
-        line.sizeDelta = new Vector2(line.sizeDelta.x, sizeY);
-        line.position = (selfRect.position + parentPlanet.position) / 2f;
+        line.sizeDelta = new Vector2(line.sizeDelta.x, sizeY / line.lossyScale.y);
+        line.position = (transform.position + parentPlanet.position) / 2f;
 
-        Vector3 direction = (selfRect.position - parentPlanet.position).normalized;
+        Vector3 direction = (transform.position - parentPlanet.position).normalized;
 
         float lineAngle = Vector3.Angle(Vector3.up, direction);
         float lineAngleSign = Mathf.Sign(Vector3.Dot(Vector3.forward, Vector3.Cross(Vector3.up, direction)));

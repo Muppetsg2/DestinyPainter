@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LevelButton : MonoBehaviour
 {
     public ColorsManager colors;
+    public MenuManager menu;
     public LevelData data;
 
     [Header("Lock")]
@@ -20,8 +21,7 @@ public class LevelButton : MonoBehaviour
 
     private void Start()
     {
-        bool unlocked = previousLevel == null || previousLevel.GetLevelFinished();
-        if (!unlocked)
+        if (!IsUnlocked())
         {
             GetComponent<Button>().enabled = false;
             lockImage.SetActive(true);
@@ -61,6 +61,11 @@ public class LevelButton : MonoBehaviour
                 star1.color = colors.GetStarDefaultColor();
             }
         }
+    }
+
+    public bool IsUnlocked()
+    {
+        return previousLevel == null || previousLevel.GetLevelFinished();
     }
 
     public void OpenLevel()

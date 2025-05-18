@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
 
     [Header("Menu")]
     public List<ButtonAnimation> menuButtons;
+    public Transform continueBtnTransform;
     public GameObject menuLines;
     public Vector3 mainImageMenuPos;
 
@@ -22,6 +23,7 @@ public class MenuManager : MonoBehaviour
     public ScrollRect levelSelectScroll;
     public Image levelSelectViewport;
     public float levelSelectScrollAnimationTime = 1f;
+    public float levelSelectScrollOffset = 20f;
 
     public enum CurrentView
     {
@@ -136,7 +138,23 @@ public class MenuManager : MonoBehaviour
         ShowAnimation(levelSelectButtons, levelSelectLines, CurrentView.LevelSelect, mainImageLevelSelectPos, () => 
         {
             levelSelectScroll.enabled = true;
-            levelSelectScroll.DOVerticalNormalizedPos(0f, levelSelectScrollAnimationTime * levelSelectScroll.verticalNormalizedPosition).OnComplete(() => 
+
+            float buttonTransformY = levelSelectButtons[0].transform.localPosition.y;
+            foreach (var button in levelSelectButtons)
+            {
+                if (button.GetComponent<LevelButton>().IsUnlocked())
+                {
+                    buttonTransformY = button.transform.localPosition.y;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            float percentage = Mathf.Clamp01((buttonTransformY + levelSelectScrollOffset) / levelSelectScroll.content.sizeDelta.y);
+            float time = levelSelectScrollAnimationTime * Mathf.Abs(percentage - levelSelectScroll.verticalNormalizedPosition);
+            levelSelectScroll.DOVerticalNormalizedPos(percentage, time).OnComplete(() => 
             {
                 levelSelectViewport.raycastTarget = true;
                 levelSelectBackButton.SetActive(true);
@@ -150,7 +168,9 @@ public class MenuManager : MonoBehaviour
         if (ViewType != CurrentView.LevelSelect) return;
         levelSelectBackButton.SetActive(false);
         levelSelectViewport.raycastTarget = false;
-        levelSelectScroll.DOVerticalNormalizedPos(1f, levelSelectScrollAnimationTime * (1f - levelSelectScroll.verticalNormalizedPosition)).OnComplete(() =>
+
+        float time = levelSelectScrollAnimationTime * (1f - levelSelectScroll.verticalNormalizedPosition);
+        levelSelectScroll.DOVerticalNormalizedPos(1f, time).OnComplete(() =>
         {
             levelSelectScroll.enabled = false;
             HideAnimation(levelSelectButtons, levelSelectLines, onComplete);
@@ -181,5 +201,30 @@ public class MenuManager : MonoBehaviour
     public void OpenLevelSelect()
     {
         HideCurrent(() => ShowLevelSelect());
+    }
+
+    public void Continue()
+    {
+        LevelData lastLevelData = levelSelectButtons[0].GetComponent<LevelButton>().data;
+        foreach (var button in levelSelectButtons)
+        {
+            var levelButton = button.GetComponent<LevelButton>();
+            if (levelButton.IsUnlocked())
+            {
+                lastLevelData = levelButton.data;
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (lastLevelData == null) return;
+        continueBtnTransform.GetComponent<ButtonAnimation>().StopIdle();
+        lastLevelData.LoadLevel();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

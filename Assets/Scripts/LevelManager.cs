@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,6 +41,6 @@ public class LevelManager : MonoBehaviour
 
     public void GotoMenu()
     {
-        SceneManager.LoadScene(menuName);
+        LevelLoader.Instance.LoadLevel(menuName);
     }
 }

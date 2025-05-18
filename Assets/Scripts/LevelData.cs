@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "LevelData", menuName = "Game/Create Level Data")]
 public class LevelData : ScriptableObject
@@ -13,7 +12,7 @@ public class LevelData : ScriptableObject
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene(sceneName);
+        LevelLoader.Instance.LoadLevel(sceneName);
     }
 
     public void SaveLevelStars(int stars)
