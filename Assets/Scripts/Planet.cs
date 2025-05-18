@@ -1,18 +1,24 @@
+using SaintsField;
 using UnityEngine;
-using static ColorsManager;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Planet : MonoBehaviour
 {
     public bool isEnd;
     public bool isDeadly;
-    public float playerRadius;
     public MulticolorPlanet multicolorPlanet;
     public ColorChangingPlanet colorChangingPlanet;
     public ColorType color;
 
     public bool changeMaterial = true;
+
+    [ReadOnly][SerializeField] public float playerRadius;
+
+    public void OnValidate()
+    {
+        playerRadius = GetComponent<CircleCollider2D>().radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
+    }
 
     void Start()
     {

@@ -166,7 +166,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 02d3c5c58367628409ea0e013ed01ba8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -267,13 +267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0d63fb1df02c54a87a185880485d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetSnap: {fileID: 0}
-  currentPlanet: {fileID: 0}
-  previousPlanet: {fileID: 0}
-  linePrefab: {fileID: 7975245518411525004, guid: e586eb761da102248bbab6ebf2ea78bc, type: 3}
-  launchForce: 5
-  snapDistance: 2
-  returnDelay: 2
   useAction: 0
   launchAction:
     m_Name: Launch
@@ -301,4 +294,15 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   color: 1
+  planetSnap: {fileID: 0}
+  currentPlanet: {fileID: 0}
+  previousPlanet: {fileID: 0}
+  launchForce: 5
+  snapDistance: 2
+  returnDelay: 2
+  startScaleMul: 2
+  endScaleMul: 4
+  planetSplashTime: 0.5
+  colorBurstOffset: 0.01
+  colorBurstAlpha: 0.4
   planetJumpsCounter: 0

@@ -1,34 +1,55 @@
+using SaintsField;
+using SaintsField.Playa;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static ColorsManager;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
 [RequireComponent (typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
+    private enum BurstAnimType
+    {
+        Planet = 0,
+        Edge = 1,
+        Time = 2
+    }
+
+
+    [Header("General Settings")]
+    public bool useAction = true;
+    public InputAction launchAction;
+    public ColorType color = ColorType.Red;
+
+    [Header("Planets")]
     public CameraPlanetSnap planetSnap;
     public Transform currentPlanet;
-    public Transform previousPlanet;
 
     private bool rotateClockwise;
 
+    [Header("Jump")]
     public float launchForce = 5f;
     public float snapDistance = 0.5f;
     public float returnDelay = 3f;
+
+    [Header("Planet Splash Animation")]
+    public float startScaleMul = 2f;
+    public float endScaleMul = 4f;
+    public float planetSplashTime = 0.5f;
+
+    [Header("Death")]
+    public float colorBurstOffset = 0.5f;
+    [Range(0, 1)] public float colorBurstAlpha = 1.0f;
+
+    [LayoutStart("Info", ELayout.FoldoutBox)]
+    [ReadOnly] public uint planetJumpsCounter = 0;
+    [ReadOnly] public Transform previousPlanet;
+    [LayoutEnd(".")]
 
     private bool isAttached = true;
     private bool isLaunched = false;
     private Rigidbody2D rb;
     private float launchTime;
-
-    public bool useAction = true;
-
-    public InputAction launchAction;
-
-    public ColorType color = ColorType.Red;
-
-    public uint planetJumpsCounter = 0;
 
     void OnEnable()
     {
@@ -57,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
         if (isLaunched && Time.time - launchTime >= returnDelay)
         {
-            ReturnToPlanet();
+            ReturnToPlanet(transform.position, Vector3.right, transform, BurstAnimType.Time);
         }
     }
 
@@ -83,12 +104,27 @@ public class PlayerController : MonoBehaviour
         return angle + 90.0f; // +90 for base base rotation (player sprite is facing upwards)
     }
 
+    private float CalculateTangentAngle(Vector3 point, Vector3 circleCenter, float radius)
+    {
+        Vector3 d = point - circleCenter;
+        if (d.sqrMagnitude <= radius * radius)
+        {
+            return 0;
+        }
+        Vector3 dir = (-d).normalized;
+        float beta = Mathf.Asin(radius / d.magnitude) * Mathf.Rad2Deg;
+        return 90 - beta;
+    }
+
     private bool ValidatePlanetColor(Planet planet, Transform previousPlanetTransform)
     {
-        if (!planet.CheckIsCorrectColor(CalculatePlayerPlanetAngle(planet.GetComponent<Transform>()), color))
+        Transform planetTrans = planet.GetComponent<Transform>();
+        if (!planet.CheckIsCorrectColor(CalculatePlayerPlanetAngle(planetTrans), color))
         {
             currentPlanet = previousPlanetTransform;
-            ReturnToPlanet();
+            Vector3 normal = (planetTrans.position - transform.position).normalized;
+            Vector3 pos = planetTrans.position + (planet.playerRadius + colorBurstOffset) * -normal;
+            ReturnToPlanet(pos, normal, planetTrans, BurstAnimType.Planet);
             return false;
         }
 
@@ -123,14 +159,49 @@ public class PlayerController : MonoBehaviour
         rotateClockwise = false;
     }
 
-    void ReturnToPlanet()
+    void ReturnToPlanet(Vector3 hitPos, Vector3 hitNormal, Transform previousPlanet, BurstAnimType anim = BurstAnimType.Planet)
     {
+        Vector2 vel = rb.linearVelocity;
         rb.linearVelocity = Vector2.zero;
-        SplashSpawner.Instance.PlayerDeathSplashes(
-            transform.position,
-            ColorsManager.Instance.GetPrimaryColor(color),
-            ColorsManager.Instance.GetSecondaryColor(color)
-        );
+
+        Color primary = ColorsManager.Instance.GetPrimaryColor(color);
+        primary.a = colorBurstAlpha;
+        Color secondary = ColorsManager.Instance.GetSecondaryColor(color);
+        secondary.a = colorBurstAlpha;
+
+        switch (anim)
+        {
+            case BurstAnimType.Planet:
+            {
+                SplashSpawner.Instance.ColorHitBurst(
+                    primary,
+                    secondary,
+                    hitPos,
+                    hitNormal,
+                    vel.normalized,
+                    CalculateTangentAngle(
+                        hitPos,
+                        previousPlanet.transform.position,
+                        Mathf.Max(previousPlanet.transform.lossyScale.x, previousPlanet.transform.lossyScale.x) * 0.5f
+                    ) - 2f // -2f to avoid lines generated on object
+                );
+                break;
+            }
+            case BurstAnimType.Edge:
+            case BurstAnimType.Time:
+            {
+                SplashSpawner.Instance.ColorHitBurst(
+                    primary,
+                    secondary,
+                    hitPos,
+                    vel.normalized,
+                    vel.normalized,
+                    90f,
+                    true
+                );
+                break;
+            }
+        }
         transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
         AttachToPlanet(currentPlanet);
     }
@@ -140,11 +211,11 @@ public class PlayerController : MonoBehaviour
         SplashSpawner.Instance.PlanetSplash(
             planet.transform.position,
             planet.gameObject.GetComponent<Planet>().GetColor(CalculatePlayerPlanetAngle(planet), true),
-            planet.transform.localScale * 2.0f,
-            planet.transform.localScale * 3.0f,
-            0.3f,
-            0.55f,
-            0.4f
+            planet.transform.localScale * startScaleMul,
+            planet.transform.localScale * endScaleMul,
+            planetSplashTime
+            //0.55f,
+            //0.4f
         );
         AttachToPlanet(planet);
     }
@@ -189,7 +260,9 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (planet.isDeadly) ReturnToPlanet();
+                Vector3 normal = (planet.transform.position - transform.position).normalized;
+                Vector3 pos = planet.transform.position + (planet.playerRadius + colorBurstOffset) * -normal;
+                if (planet.isDeadly) ReturnToPlanet(pos, normal, planet.transform, BurstAnimType.Planet);
                 else if (!ValidatePlanetColor(planet, currentPlanet)) return;
                 else
                 {
@@ -223,7 +296,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isLaunched && collision.CompareTag("Boundries"))
         {
-            ReturnToPlanet();
+            ReturnToPlanet(transform.position, Vector3.right, transform, BurstAnimType.Edge);
         }
     }
 

@@ -8,7 +8,11 @@ public class SplashSpawner : MonoBehaviour
     private static SplashSpawner instance;
     public static SplashSpawner Instance { get { return instance; } }
 
-    [Header("Main Settings")]
+    [Header("Sprite Renderer Settings")]
+    public string sortingLayerName = "Default";
+    public int sortingOrder = 0;
+
+    [Header("Splash Settings")]
     public bool useNewSplash = false;
 
     [HideIf(nameof(useNewSplash))]
@@ -17,13 +21,19 @@ public class SplashSpawner : MonoBehaviour
     [ShowIf(nameof(useNewSplash))]
     public Sprite spriteNew;
 
-    public int count = 5;
-    public Vector3 center = Vector3.zero;
+    public int splashesCount = 8;
     public float spawnRadius = 0.5f;
 
-    [Header("Sprite Renderer Settings")]
-    public string sortingLayerName = "Default";
-    public int sortingOrder = 0;
+    [Header("Splash Test Settings")]
+    public Vector3 splashTestCenter = Vector3.zero;
+
+    [Header("Splash Colors")]
+    public Color colorFrom = Color.white;
+    public Color colorTo = Color.red;
+    [HideIf(nameof(useNewSplash))]
+    public Material baseMaterialOld;
+    [ShowIf(nameof(useNewSplash))]
+    public Material baseMaterialNew;
 
     [Header("Splash Scale Animation")]
     public AnimationCurve scaleCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -31,13 +41,19 @@ public class SplashSpawner : MonoBehaviour
     public Vector3 startScale = Vector3.one * 0.5f;
     public Vector3 targetScale = Vector3.one;
 
-    [Header("Colors")]
-    public Color colorFrom = Color.white;
-    public Color colorTo = Color.red;
-    [HideIf(nameof(useNewSplash))]
-    public Material baseMaterialOld;
-    [ShowIf(nameof(useNewSplash))]
-    public Material baseMaterialNew;
+    [Header("Planet Splash Animation")]
+    public AnimationCurve planetSplashCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    public float planetSplashAlpha = 0.4f;
+
+    [Header("Color Burst Settings")]
+    public GameObject colorLinePrefab;
+    public int linesCount = 20;
+    [Range(0.0f, 180.0f)] public float excludeBackwardAngle = 90.0f;
+    [Range(0f, 1f)] public float asymmetryFactor = 0.5f;
+    public float pointOffset = 0f;
+    public float minMoveDistance = 1f;
+    public float maxMoveDistance = 2f;
+    public float duration = 0.5f;
 
     private Transform spawnContainer;
     private float goldenAngle = 137.508f;
@@ -88,10 +104,10 @@ public class SplashSpawner : MonoBehaviour
 
         for (int i = spawnContainer.childCount - 1; i >= 0; --i)
         {
-            DestroyImmediate(spawnContainer.GetChild(i).gameObject);
+            Destroy(spawnContainer.GetChild(i).gameObject);
         }
 
-        DestroyImmediate(spawnContainer);
+        Destroy(spawnContainer);
     }
 
     [Button]
@@ -100,11 +116,11 @@ public class SplashSpawner : MonoBehaviour
     {
         DeleteSplashes();
 
-        for (int i = 0; i < count; ++i)
+        for (int i = 0; i < splashesCount; ++i)
         {
             GameObject obj = new GameObject("Splash_" + i);
             obj.transform.SetParent(spawnContainer);
-            obj.transform.position = center;
+            obj.transform.position = splashTestCenter;
 
             // Dodaj sprite i kolor
             SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
@@ -124,7 +140,7 @@ public class SplashSpawner : MonoBehaviour
             //float radius = Mathf.Lerp(0.1f, spawnRadius, Mathf.Sqrt((float)i / count));
             float radius = Mathf.Lerp(0.1f, spawnRadius, MonteCarloRandom(2.0f));
             Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-            Vector3 targetPos = center + new Vector3(offset.x, offset.y, 0f);
+            Vector3 targetPos = splashTestCenter + new Vector3(offset.x, offset.y, 0f);
             obj.transform.DOMove(targetPos, 0.4f).SetEase(Ease.OutQuad);
 
             // Skalowanie z AnimationCurve
@@ -136,9 +152,60 @@ public class SplashSpawner : MonoBehaviour
         }
     }
 
+    public void ColorHitBurst(Color primary, Color secondary, Vector3 impactPoint, Vector3 impactNormal, Vector3 impactDirection, float includeAngle = 0f, bool withoutExclusion = false)
+    {
+        impactNormal.z = 0f;
+        impactNormal.Normalize();
+        impactNormal = -impactNormal;
+
+        Vector3 ortho = new Vector3(-impactNormal.y, impactNormal.x, 0f);
+
+        impactDirection.z = 0f;
+        impactDirection.Normalize();
+
+        float dot = Vector3.Dot(impactDirection, -impactNormal);
+        float angleBetween = Mathf.Acos(Mathf.Clamp(dot, -1f, 1f)) * Mathf.Rad2Deg;
+        float halfAngleBetween = angleBetween * 0.5f;
+
+        float side = Vector3.Dot(impactDirection, ortho);
+        float angleOffset = (side >= 0f) ? halfAngleBetween : -halfAngleBetween;
+
+        int attempts = 0;
+        int maxAttempts = linesCount * 5;
+        int placed = 0;
+
+        float halfIncludedAngles = 90f + Mathf.Clamp(includeAngle, 0f, 90f);
+        float halfExcludedAngles = withoutExclusion ? 0f : excludeBackwardAngle * 0.5f;
+
+        while (placed < linesCount && attempts < maxAttempts)
+        {
+            attempts++;
+
+            float angle = (MonteCarloRandom(1.0f) * halfIncludedAngles * 2f) - halfIncludedAngles;
+
+            if (angle >= 0f && Mathf.Abs(angle) < halfExcludedAngles - angleOffset * (side >= 0f ? asymmetryFactor : 1f))
+                continue;
+            if (angle < 0f && Mathf.Abs(angle) < halfExcludedAngles + angleOffset * (side >= 0f ? 1f : asymmetryFactor))
+                continue;
+
+            float rad = angle * Mathf.Deg2Rad;
+            Vector3 dir = Mathf.Cos(rad) * impactNormal + Mathf.Sin(rad) * ortho;
+
+            Vector3 startPos = impactPoint + dir * pointOffset;
+            float moveDistance = minMoveDistance + MonteCarloRandom(1.5f) * (maxMoveDistance - minMoveDistance);
+            Vector3 endPos = impactPoint + dir * (pointOffset + moveDistance);
+
+            GameObject lineObj = Instantiate(colorLinePrefab);
+            ColorBurstLine line = lineObj.GetComponent<ColorBurstLine>();
+            line.PlayAnimation(startPos, endPos, secondary, primary, duration);
+
+            placed++;
+        }
+    }
+
     public void PlayerDeathSplashes(Vector3 c, Color primary, Color secondary, float alpha = 1.0f)
     {
-        for (int i = 0; i < count; ++i)
+        for (int i = 0; i < splashesCount; ++i)
         {
             GameObject obj = new GameObject("SplashPlayerDeath_" + i);
             obj.transform.SetParent(spawnContainer);
@@ -177,7 +244,7 @@ public class SplashSpawner : MonoBehaviour
         }
     }
 
-    public void PlanetSplash(Vector3 c, Color secondary, Vector3 scaleStart, Vector3 scaleEnd, float scaleDur, float fadeDelay, float fadeDuration)
+    public void PlanetSplash(Vector3 c, Color secondary, Vector3 scaleStart, Vector3 scaleEnd, float scaleDur)
     {
         GameObject obj = new GameObject("PlanetSplash");
         obj.transform.position = c;
@@ -185,7 +252,9 @@ public class SplashSpawner : MonoBehaviour
         // Dodaj sprite i kolor
         SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
         sr.sprite = useNewSplash ? spriteNew : spriteOld;
-        sr.color = Color.white;
+        Color col = Color.white;
+        col.a = planetSplashAlpha;
+        sr.color = col;
         sr.sortingLayerName = sortingLayerName;
         sr.sortingOrder = sortingOrder;
         sr.material = CreateMaterial(secondary, secondary);
@@ -197,17 +266,8 @@ public class SplashSpawner : MonoBehaviour
         // Skalowanie z AnimationCurve
         obj.transform.localScale = scaleStart;
         DOTween.To(() => 0f, t => {
-            float curveVal = scaleCurve.Evaluate(t);
+            float curveVal = planetSplashCurve.Evaluate(t);
             obj.transform.localScale = Vector3.Lerp(scaleStart, scaleEnd, curveVal);
         }, 1f, scaleDur);
-
-        Color initialColor = sr.color;
-        DOVirtual.DelayedCall(fadeDelay, () =>
-        {
-            sr.DOFade(0f, fadeDuration).OnComplete(() =>
-            {
-                DestroyImmediate(obj);
-            });
-        });
     }
 }
