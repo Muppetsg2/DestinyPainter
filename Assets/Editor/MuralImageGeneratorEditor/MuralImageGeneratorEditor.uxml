@@ -1,0 +1,61 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Editor/MuralImageGeneratorEditor/MuralImageGeneratorEditor.uss?fileID=7433441132597879392&amp;guid=95fddfeb2247ca243bc44acc68c3820f&amp;type=3#MuralImageGeneratorEditor" />
+    <engine:VisualElement name="Container" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" style="flex-grow: 1; background-color: rgb(56, 56, 56); transition-property: all; transition-duration: 0s; transition-timing-function: ease; transition-delay: 0s;">
+        <engine:GroupBox style="right: 0; top: 0; align-self: flex-end;">
+            <engine:Button text="Load Settings" name="LoadSettings" />
+            <engine:Button text="Save Settings" name="SaveSettings" />
+        </engine:GroupBox>
+        <engine:VisualElement name="Output" style="flex-grow: 0; width: 256px; height: 256px; align-self: center; top: 0;">
+            <Bindings>
+                <engine:DataBinding property="style.backgroundImage" data-source-path="m_previewTexture" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" binding-mode="ToTarget" />
+            </Bindings>
+        </engine:VisualElement>
+        <engine:TextField label="Text" placeholder-text="Type Text" name="Text" value="Destiny" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_text" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" binding-mode="TwoWay" />
+            </Bindings>
+        </engine:TextField>
+        <editor:ObjectField label="Font Asset" name="Font" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="TMPro.TMP_FontAsset, Unity.TextMeshPro" value="project://database/Assets/Fonts/Destiny%20Font/DESTINY-Regular%20SDF.asset?fileID=11400000&amp;guid=57581ebf6c70ebf45836fa288c54b81e&amp;type=2#DESTINY-Regular SDF">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_font" binding-mode="TwoWay" />
+            </Bindings>
+        </editor:ObjectField>
+        <engine:IntegerField label="Number Of Splashes" value="40" name="Number" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_numberOfSplashes" binding-mode="TwoWay" />
+            </Bindings>
+        </engine:IntegerField>
+        <editor:ObjectField label="Circle Sprite" name="CircleSprite" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="UnityEngine.Sprite, UnityEngine.CoreModule" value="project://database/Assets/Editor/MuralImageGeneratorEditor/Images/Circle.png?fileID=-2413806693520163455&amp;guid=c37326a929ce5214a9de47973f03791f&amp;type=3#Circle">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_circleSprite" binding-mode="TwoWay" />
+            </Bindings>
+        </editor:ObjectField>
+        <editor:ObjectField label="Splash Sprite" name="SplashSprite" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="UnityEngine.Sprite, UnityEngine.CoreModule" value="project://database/Assets/Editor/MuralImageGeneratorEditor/Images/Square.png?fileID=7482667652216324306&amp;guid=32de112c22913ad47979e347413b76a1&amp;type=3#Square">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_splashSprite" binding-mode="TwoWay" />
+            </Bindings>
+        </editor:ObjectField>
+        <editor:ObjectField label="Material" name="Material" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" value="project://database/Resources/unity_builtin_extra?fileID=10754&amp;guid=0000000000000000f000000000000000&amp;type=0#Sprites-Default" type="UnityEngine.Material, UnityEngine.CoreModule">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_splashMaterial" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" binding-mode="TwoWay" />
+            </Bindings>
+        </editor:ObjectField>
+        <editor:ColorField label="Color 1" name="Color1">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_color_1" binding-mode="TwoWay" />
+            </Bindings>
+        </editor:ColorField>
+        <editor:ColorField label="Color 2" name="Color2">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_color_2" binding-mode="TwoWay" />
+            </Bindings>
+        </editor:ColorField>
+        <editor:ColorField label="Color 3" name="Color3">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="m_color_3" binding-mode="TwoWay" />
+            </Bindings>
+        </editor:ColorField>
+        <engine:Button text="Generate" name="Generate" />
+        <engine:Button text="Save Image" name="SaveImage" />
+    </engine:VisualElement>
+</engine:UXML>
