@@ -2255,7 +2255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7220981e4546e5e4d9c5af09934d1876, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9eee16ccf8517834e9bebefcaf7c7c42, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4170,7 +4170,6 @@ MonoBehaviour:
   levelSelectViewport: {fileID: 319951196}
   levelSelectScrollAnimationTime: 1
   levelSelectScrollOffset: 0
-  closeUpAnimTime: 2
 --- !u!4 &1920771648
 Transform:
   m_ObjectHideFlags: 0

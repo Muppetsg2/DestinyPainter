@@ -38,7 +38,7 @@ public class LevelButton : MonoBehaviour
             int starsNum = data == null ? 0 : data.GetLevelStars();
             if (starsNum > 2)
             {
-                star3.color = colors.GetStarGetColor();
+                star3.color = colors.GetStarColor();
             }
             else
             {
@@ -46,7 +46,7 @@ public class LevelButton : MonoBehaviour
             }
             if (starsNum > 1)
             {
-                star2.color = colors.GetStarGetColor();
+                star2.color = colors.GetStarColor();
             }
             else
             {
@@ -54,7 +54,7 @@ public class LevelButton : MonoBehaviour
             }
             if (starsNum > 0)
             {
-                star1.color = colors.GetStarGetColor();
+                star1.color = colors.GetStarColor();
             }
             else
             {

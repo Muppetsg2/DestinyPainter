@@ -228,7 +228,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.62
+  m_Radius: 0.61
 --- !u!114 &4267491798349248500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f2982a13511964481b1d2d1e284c85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnd: 0
   isDeadly: 1
+  multicolorPlanet: {fileID: 0}
+  colorChangingPlanet: {fileID: 0}
+  color: 0
+  changeMaterial: 1
+  playerRadius: 0.61
 --- !u!114 &327482335248854113
 MonoBehaviour:
   m_ObjectHideFlags: 0

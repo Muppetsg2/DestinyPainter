@@ -20,17 +20,17 @@ public class StarsUI : MonoBehaviour
     {
         if (manager.currentStars == 3)
         {
-            star3.color = colors.GetStarGetColor();
-            star2.color = colors.GetStarGetColor();
-            star1.color = colors.GetStarGetColor();
+            star3.color = colors.GetStarColor();
+            star2.color = colors.GetStarColor();
+            star1.color = colors.GetStarColor();
 
             starMsgText.text = maxJumpsMsg[..maxJumpsMsg.IndexOf('{')] + manager.data.thirdStarMaxJumps + maxJumpsMsg.Substring(maxJumpsMsg.IndexOf('}') + 1, maxJumpsMsg.Length - maxJumpsMsg.IndexOf('}') - 1);
         }
         else if (manager.currentStars == 2)
         {
             star3.color = colors.GetStarDefaultColor();
-            star2.color = colors.GetStarGetColor();
-            star1.color = colors.GetStarGetColor();
+            star2.color = colors.GetStarColor();
+            star1.color = colors.GetStarColor();
 
             starMsgText.text = maxJumpsMsg[..maxJumpsMsg.IndexOf('{')] + manager.data.secondStarMaxJumps + maxJumpsMsg.Substring(maxJumpsMsg.IndexOf('}') + 1, maxJumpsMsg.Length - maxJumpsMsg.IndexOf('}') - 1);
         }
@@ -38,7 +38,7 @@ public class StarsUI : MonoBehaviour
         {
             star3.color = colors.GetStarDefaultColor();
             star2.color = colors.GetStarDefaultColor();
-            star1.color = colors.GetStarGetColor();
+            star1.color = colors.GetStarColor();
 
             starMsgText.text = finishLevelMsg;
         }

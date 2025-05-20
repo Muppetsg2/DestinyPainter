@@ -50,9 +50,9 @@ public class ColorsManager : MonoBehaviour
         return palette.backgroundColor;
     }
 
-    public Color GetStarGetColor()
+    public Color GetStarColor()
     {
-        return palette.starGetColor;
+        return palette.starColor;
     }
 
     public Color GetStarDefaultColor()
