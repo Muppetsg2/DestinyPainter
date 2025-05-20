@@ -15,8 +15,12 @@ public class LevelLoader : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) Destroy(gameObject);
-        else Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -37,6 +41,9 @@ public class LevelLoader : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        circleMask.gameObject.SetActive(true);
+        panel.SetActive(true);
+
         float width = 2f * canvas.sizeDelta.magnitude;
         circleMask.sizeDelta = Vector2.zero;
         circleMask.DOSizeDelta(new Vector2(width, width), animTime).OnComplete(() =>
