@@ -7,11 +7,12 @@ TagManager:
   - Planet
   - Boundries
   - ColorChange
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - SplashRender
   - Water
   - UI
   - 
