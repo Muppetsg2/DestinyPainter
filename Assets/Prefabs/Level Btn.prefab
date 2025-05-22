@@ -286,12 +286,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colors: {fileID: 0}
+  menu: {fileID: 0}
   data: {fileID: 11400000, guid: 06c16c49b24789749b11ae30a6f0123c, type: 2}
   previousLevel: {fileID: 0}
   lockImage: {fileID: 7097899199842834036}
   levelNameText: {fileID: 429674095603245473}
   starsHandler: {fileID: 4508459367128311705}
-  starNotObtainedColor: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 1}
   star1: {fileID: 8400165768089198820}
   star2: {fileID: 6929983298155549292}
   star3: {fileID: 6225668701892488909}
@@ -339,7 +339,19 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   hideTime: 1
+  hideCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   showTime: 2
+  showCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2610148981364300046
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +417,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 721cd9d4c2fcc6847ac27ff0dcb24977, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -543,7 +555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 721cd9d4c2fcc6847ac27ff0dcb24977, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -693,7 +705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 721cd9d4c2fcc6847ac27ff0dcb24977, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -209,13 +209,13 @@ public class PlayerController : MonoBehaviour
     void ChangePlanet(Transform planet)
     {
         SplashSpawner.Instance.PlanetSplash(
-            planet.transform.position,
-            planet.gameObject.GetComponent<Planet>().GetColor(CalculatePlayerPlanetAngle(planet), true),
-            planet.transform.localScale * startScaleMul,
-            planet.transform.localScale * endScaleMul,
-            planetSplashTime
-            //0.55f,
-            //0.4f
+           planet.transform.position,
+           planet.GetComponent<Planet>().isEnd ? ColorsManager.Instance.GetSecondaryColor(color) : planet.gameObject.GetComponent<Planet>().GetColor(CalculatePlayerPlanetAngle(planet), true),
+           planet.transform.localScale * startScaleMul,
+           planet.transform.localScale * endScaleMul,
+           planetSplashTime
+           //0.55f,
+           //0.4f
         );
         AttachToPlanet(planet);
     }

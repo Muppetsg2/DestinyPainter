@@ -17,7 +17,7 @@ public class Planet : MonoBehaviour
 
     public void OnValidate()
     {
-        playerRadius = GetComponent<CircleCollider2D>().radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
+        playerRadius = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y) * 0.5f + 0.11f;
     }
 
     void Start()
