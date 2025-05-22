@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using SaintsField;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 // TODO: Create Mask based on sprite wchich will affect lines (only visible outside mask)
 
@@ -13,6 +15,7 @@ public class SplashLinesGenerator : MonoBehaviour
 
     public Camera renderCamera;
     public SpriteRenderer spriteRenderer;
+    public SpriteMask mask;
     public GameObject linePrefab;
 
     public int linesPointsSpacingBoxSize = 5;
@@ -52,8 +55,13 @@ public class SplashLinesGenerator : MonoBehaviour
         RenderTexture renderTexture = new(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);
         Texture2D texture = new(sprite.texture.width, sprite.texture.height, TextureFormat.RGBA32, false);
 
+        // Change spriteColor
+        Color spriteColor = spriteRenderer.color;
+        spriteRenderer.color = Color.white;
+
         // Render Camera view
         renderCamera.gameObject.SetActive(true);
+        renderCamera.orthographicSize = transform.TransformVector(0.5f * Vector3.one).x;
         renderCamera.targetTexture = renderTexture;
         renderCamera.Render();
 
@@ -64,6 +72,9 @@ public class SplashLinesGenerator : MonoBehaviour
         //Destroy(renderCamera.gameObject);
         renderCamera.gameObject.SetActive(false);
 
+        // reset spriteColor
+        spriteRenderer.color = spriteColor;
+
         // Copy to texure
         RenderTexture last = RenderTexture.active;
         RenderTexture.active = renderTexture;
@@ -71,8 +82,12 @@ public class SplashLinesGenerator : MonoBehaviour
         texture.Apply();
         RenderTexture.active = last;
 
+        // Set Mask Sprite
+        Sprite maskSprite = Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), 0.5f * Vector2.one);
+        mask.sprite = maskSprite;
+
         // Analize texture
-        List<Vector3> avilablePositions = new();
+        Dictionary<float, float> avilablePositions = new();
         float unitPerPixel = 1f / sprite.pixelsPerUnit;
         for (int x = 0; x < texture.width; x += linesPointsSpacingBoxSize)
         {
@@ -91,54 +106,66 @@ public class SplashLinesGenerator : MonoBehaviour
 
                     float posX = (cx - texture.width * 0.5f) * unitPerPixel;
                     float posY = (cy - texture.height * 0.5f) * unitPerPixel;
-                    avilablePositions.Add(new Vector3(posX, posY, 0f));
+
+                    Vector3 pos = transform.TransformVector(new Vector3(posX, posY, 0f));
+
+                    if (avilablePositions.ContainsKey(pos.x))
+                    {
+                        if (avilablePositions[pos.x] <= pos.y)
+                        {
+                            continue;
+                        }
+                    }
+
+                    avilablePositions[pos.x] = pos.y;
                 }
             }
         }
 
         int pointsToChoose = Random.Range(linesNum.Min, linesNum.Max + 1);
 
-        for (int i = 0; i < pointsToChoose && avilablePositions.Count > 0; ++i)
+        for (int i = 0; i < pointsToChoose && avilablePositions.Count > 0;)
         {
-            int idx = Random.Range(0, avilablePositions.Count);
-            Vector3 pos = avilablePositions[idx];
-            avilablePositions.RemoveAt(idx);
+            float posX = avilablePositions.Keys.ElementAt(Random.Range(0, avilablePositions.Count));
+            float posY = avilablePositions[posX];
+            avilablePositions.Remove(posX);
 
             for (int j = 0; j < avilablePositions.Count; ++j)
             {
-                Vector3 otherPos = avilablePositions[j];
-                if (Mathf.Abs(otherPos.x - pos.x) <= minLinesXDistance)
+                float otherPosX = avilablePositions.Keys.ElementAt(j);
+                if (Mathf.Abs(otherPosX - posX) <= minLinesXDistance)
                 {
-                    avilablePositions.RemoveAt(j);
+                    avilablePositions.Remove(otherPosX);
                     --j;
                 }
             }
 
             GameObject line = Instantiate(linePrefab, transform.position, Quaternion.identity, transform);
-            line.transform.position = transform.position + pos;
+            lines.Add(line);
+            line.transform.position += new Vector3(posX, posY, 0f);
             var splashLineAnim = line.GetComponent<SplashLineAnimation>();
             splashLineAnim.SetColor(colorType);
-            lines.Add(line);
         }
 
-        //for (int i = 0; i < avilablePositions.Count; ++i)
+        //for (int i = 0; i < avilablePositions.Count;)
         //{
-        //    Vector3 pos = avilablePositions[i];
-        //    avilablePositions.RemoveAt(i);
+        //    float posX = avilablePositions.Keys.ElementAt(i);
+        //    float posY = avilablePositions[posX];
+        //    avilablePositions.Remove(posX);
 
         //    for (int j = 0; j < avilablePositions.Count; ++j)
         //    {
-        //        Vector3 otherPos = avilablePositions[j];
-        //        if (Mathf.Abs(otherPos.x - pos.x) <= minLinesXDistance)
+        //        float otherPosX = avilablePositions.Keys.ElementAt(j);
+        //        if (Mathf.Abs(otherPosX - posX) <= minLinesXDistance)
         //        {
-        //            avilablePositions.RemoveAt(j);
+        //            avilablePositions.Remove(otherPosX);
         //            --j;
         //        }
         //    }
 
         //    GameObject line = Instantiate(linePrefab, transform.position, Quaternion.identity, transform);
-        //    line.transform.localPosition = pos;
         //    lines.Add(line);
+        //    line.transform.position += new Vector3(posX, posY, 0f);
         //}
     }
 
@@ -147,7 +174,8 @@ public class SplashLinesGenerator : MonoBehaviour
     {
         foreach (var line in lines)
         {
-            Destroy(line);
+            //Destroy(line);
+            DestroyImmediate(line);
         }
         lines.Clear();
     }

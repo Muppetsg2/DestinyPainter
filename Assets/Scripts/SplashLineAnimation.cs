@@ -12,7 +12,6 @@ public class SplashLineAnimation : MonoBehaviour
     public LineRenderer lineRenderer;
 
     private float currentLineLength;
-    private ColorType colorType;
     private readonly List<float> positionPercent = new();
 
     void Start()
@@ -33,7 +32,6 @@ public class SplashLineAnimation : MonoBehaviour
 
     public void SetColor(ColorType color)
     {
-        colorType = color;
         Color primary = ColorsManager.Instance.GetSecondaryColor(color);
 
         GradientColorKey[] keys = lineRenderer.colorGradient.colorKeys;
