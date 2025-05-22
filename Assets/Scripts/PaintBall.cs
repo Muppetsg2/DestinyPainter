@@ -21,13 +21,15 @@ public class PaintBall : MonoBehaviour
             GameObject splash = Instantiate(splashPrefab, transform.position, Quaternion.identity);
 
             var spriteRenderer = splash.GetComponent<SpriteRenderer>();
-            spriteRenderer.material.SetColor("_Color", ColorsManager.Instance.GetSecondaryColor(colorType));
+            Color color = ColorsManager.Instance.GetSecondaryColor(colorType);
+            color.a = 150f / 255f;
+            spriteRenderer.material.SetColor("_Color", color);
             Vector2 noiseOffset = new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
             spriteRenderer.material.SetVector("_NoiseOffset", noiseOffset);
 
             var lineGenerator = splash.GetComponent<SplashLinesGenerator>();
             lineGenerator.SetColor(colorType);
-            lineGenerator.GenerateLines();
+            lineGenerator.GenerateLines(150f / 255f);
             Destroy(gameObject);
         }
     }

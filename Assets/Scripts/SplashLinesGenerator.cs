@@ -43,7 +43,7 @@ public class SplashLinesGenerator : MonoBehaviour
     }
 
     [ContextMenu("Generate Lines")]
-    public void GenerateLines()
+    public void GenerateLines(float alpha)
     {
         ClearLines();
 
@@ -85,6 +85,7 @@ public class SplashLinesGenerator : MonoBehaviour
         // Set Mask Sprite
         Sprite maskSprite = Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), 0.5f * Vector2.one);
         mask.sprite = maskSprite;
+        mask.alphaCutoff = alpha;
 
         // Analize texture
         Dictionary<float, float> avilablePositions = new();
@@ -99,7 +100,7 @@ public class SplashLinesGenerator : MonoBehaviour
                 int sy = y + (linesPointsSpacingBoxSize - linePointCheckBoxSize) / 2;
                 if (sy >= texture.height) sy = texture.height - 1;
 
-                if (CheckPixelsBox(sx, sy, texture))
+                if (CheckPixelsBox(sx, sy, texture, alpha))
                 {
                     int cx = x + linesPointsSpacingBoxSize / 2;
                     int cy = y + linesPointsSpacingBoxSize / 2;
@@ -180,13 +181,13 @@ public class SplashLinesGenerator : MonoBehaviour
         lines.Clear();
     }
 
-    bool CheckPixelsBox(int startX, int startY, Texture2D texture)
+    bool CheckPixelsBox(int startX, int startY, Texture2D texture, float alpha)
     {
         for (int x = startX; x < texture.width && x - startX < linePointCheckBoxSize; ++x)
         {
             for (int y = startY; y < texture.height && y - startY < linePointCheckBoxSize; ++y)
             {
-                if (texture.GetPixel(x, y).a != 1f)
+                if (texture.GetPixel(x, y).a < alpha)
                 {
                     return false;
                 }
