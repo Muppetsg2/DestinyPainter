@@ -1,0 +1,54 @@
+Menu:
+    ☐ Zamienić napisy w menu na ikony @low
+    ☐ Splash jak w poziomach do planet w menu po naciśnięciu @low
+    ☐ Zrobić creditsy tak że są połączone planety w różnych kolorach i z różnymi informacjami (informacja o twórcach, muzyce, grafice, muralu, itd.) @high
+    ☐ Dodac informację gdzieś w menu o poruszaniu się @low
+    ☐ Przyśpieszyc animację w menu @high
+
+Poziomy:
+    ☐ Zaprojektować na chwilę obecną 8 poziomów. Każdy poziom wprowadza nową mechanikę. @critical
+        ☐ Pierwszy poziom to przeskakiwanie między planetami i poruszanie się po nich. Każda planeta jest tego samego koloru co gracz. @critical
+        ☐ Drugi poziom to przeszkody @critical
+        ☐ Trzeci poziom to planety o wielu kolorach @critical
+        ☐ Czarty poziom to planety o zmieniających się kolorach @critical
+        ☐ Piąty poziom to obracające sie planety @critical
+        ☐ Szósty poziom to połączenie dotychczasowych mechanik ale by poziom znowu nie był zbyt trudny @critical
+        ☐ Siódmy poziom to poziom dość prosty gdzie uczymy gracza o pickupie zmiany koloru @critical
+        ☐ Ósmy poziom to poziom gdzie mamy wszystkie dotychczasowe mechaniki. @critical
+    ☐ Zaprojektować bonusowe 4 poziomy za odpowiednią liczbę zdobytych gwiazdek (Mogą być trudniejsze niż poziomy zwykłe). @low
+    ☐ W pierwszym poziomie zrobić by były widoczne przez całą rozgrywkę przyciski lub przez jakiś czas przyciski poruszania się oraz wskazany na chwilę obszar ich działania @high
+
+GameUI:
+    ☐ Zmienić UI tak by był bardziej minimalistyczny i nie przeszkadzał w grze @high @Muppetsg2
+    ☐ Usunąć napis przy gwiazdkach @low
+    ☐ Dodać ikonę pauzy @critical @Muppetsg2
+    ☐ Usunąć strzałki i napis Jump lub zamienić to na coś mniej przeszkadzającego @critical @Muppetsg2
+    ☐ Zrobić licznik skoków czytelniej @critical @Muppetsg2
+
+PauseMenu:
+    ☐ Dodać pause menu złożone z 3 przycisków w kształcie kółek z ikonami w środku @critical
+        ☐ Strzałka w prawo - kontynuuj @critical
+        ☐ Strzałka sugerująca obrót - restart poziomu @critical
+        ☐ Domek - wyjście do menu lub wyboru poziomów @critical
+    ☐ Informacja w menu pauzy o aktualnych gwiazdkach i dopieru tutaj dopisek ile potrzebujesz skoków do której gwiazdki (przykład: https://dizzyjellyfishstudios.itch.io/thin-led-line) @critical
+
+EndScreen:
+    ☐ Dodać end screen @critical
+    ☐ Dodać przyciski w kształcie kółek z ikonami w środku @critical
+        ☐ Strzałka w prawo - przejście do następnego poziomu @critical
+        ☐ Strzałka sugerująca obrót - restart poziomu @critical
+        ☐ Domek - wyjście do menu lub wyboru poziomów @critical
+        ☐ Kamera - zdjęcie poziomu (coś takiego jak jest w grach: egg.inc, crossy road oraz rodeo stampede) @critical
+    ☐ Dodać informację o tym ile gwiazdek zostało zdobytych w poziomie @critical
+    ☐ Dodać informację o tym ile skoków zostało wykonanych w poziomie oraz ile skoków było potrzebnych do zdobycia każdej gwiazdki @critical
+    ☐ Dodac informację o tym w jakim czasie poziom został ukończony @low
+
+Miodzik:
+    ☐ Dodać skapywanie plam na branch `main` i do planet w poziomach oraz do generatora loga @high
+    ☐ Zrobić by linie po śmierci gracza były losowych długości i grubości @high @Muppetsg2
+
+Mechanika:
+    ☐ Dodać mechanikę że są planety które się obracają i są takie które nie. I te które się obracają mają strzałkę w którą stronę się obracają. Na planetach obracających się mamy współczynnik prędkości poruszania się w przeciwną stronę równy 0.5, a w dobrą stronę 1.5. Stojące nie mają strzałki i w obie strony współczynnik poruszania się jest równy 1.0. @critical @Muppetsg2
+    ☐ Dodać zapisanie pozycji gracza na planecie @high @Muppetsg2
+    ☐ Gracz zawsze porusza sie na planecie w kierunku obrotu planety. Jeśli jednak planeta się nie obraca to kierunek jest skierowany w prawo. @critical @Muppetsg2
+    ☐ Zmiana koloru oraz niszczenie pickupa jest wykonywane dopiero po odpowiednim wylądowaniu na planecie. Jeśli gracz zebrał pickup i nadal leci to pickup jest wyszarzany na czas lotu. @critical
