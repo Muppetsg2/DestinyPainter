@@ -19,11 +19,11 @@ Poziomy:
     ☐ W pierwszym poziomie zrobić by były widoczne przez całą rozgrywkę przyciski lub przez jakiś czas przyciski poruszania się oraz wskazany na chwilę obszar ich działania @high
 
 GameUI:
-    ☐ Zmienić UI tak by był bardziej minimalistyczny i nie przeszkadzał w grze @high @Muppetsg2
+    ✔ Zmienić UI tak by był bardziej minimalistyczny i nie przeszkadzał w grze @high @Muppetsg2 @done(25-05-26 00:15)
     ☐ Usunąć napis przy gwiazdkach @low
-    ☐ Dodać ikonę pauzy @critical @Muppetsg2
-    ☐ Usunąć strzałki i napis Jump lub zamienić to na coś mniej przeszkadzającego @critical @Muppetsg2
-    ☐ Zrobić licznik skoków czytelniej @critical @Muppetsg2
+    ✔ Dodać ikonę pauzy @critical @Muppetsg2 @done(25-05-25 12:54)
+    ✔ Usunąć strzałki i napis Jump lub zamienić to na coś mniej przeszkadzającego @critical @Muppetsg2 @done(25-05-26 00:15)
+    ✔ Zrobić licznik skoków czytelniej @critical @Muppetsg2 @done(25-05-26 00:15)
 
 PauseMenu:
     ☐ Dodać pause menu złożone z 3 przycisków w kształcie kółek z ikonami w środku @critical
