@@ -1,6 +1,4 @@
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,7 +7,9 @@ public class LevelManager : MonoBehaviour
     public PlayerController player;
     public LevelData data;
     public int currentStars;
-    
+
+    public LevelData nextLevel;
+
     public string menuName;
 
     private void Awake()
@@ -43,7 +43,12 @@ public class LevelManager : MonoBehaviour
         data.SaveLevelStars(currentStars);
     }
 
-    public void GotoMenu()
+    public void GoToNextLevel()
+    {
+        nextLevel.LoadLevel();
+    }
+
+    public void GoToMenu()
     {
         LevelLoader.Instance.LoadLevel(menuName);
     }

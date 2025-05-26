@@ -3,7 +3,7 @@ Menu:
     ☐ Splash jak w poziomach do planet w menu po naciśnięciu @low
     ☐ Zrobić creditsy tak że są połączone planety w różnych kolorach i z różnymi informacjami (informacja o twórcach, muzyce, grafice, muralu, itd.) @high
     ☐ Dodac informację gdzieś w menu o poruszaniu się @low
-    ☐ Przyśpieszyc animację w menu @high
+    ✔ Przyśpieszyc animację w menu @high @MAIPA01 @done(25-05-26 22:13)
 
 Poziomy:
     ☐ Zaprojektować na chwilę obecną 8 poziomów. Każdy poziom wprowadza nową mechanikę. @critical
