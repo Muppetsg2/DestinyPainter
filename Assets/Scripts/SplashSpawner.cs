@@ -8,6 +8,8 @@ public class SplashSpawner : MonoBehaviour
     private static SplashSpawner instance;
     public static SplashSpawner Instance { get { return instance; } }
 
+    public GameObject planetSplashPrefab;
+
     [Header("Sprite Renderer Settings")]
     public string sortingLayerName = "Default";
     public int sortingOrder = 0;
@@ -57,7 +59,7 @@ public class SplashSpawner : MonoBehaviour
 
     private Transform spawnContainer;
     private float goldenAngle = 137.508f;
-    private System.Random rng = new System.Random();
+    private readonly System.Random rng = new();
 
     private void Awake()
     {
@@ -246,28 +248,37 @@ public class SplashSpawner : MonoBehaviour
 
     public void PlanetSplash(Vector3 c, Color secondary, Vector3 scaleStart, Vector3 scaleEnd, float scaleDur)
     {
-        GameObject obj = new GameObject("PlanetSplash");
-        obj.transform.position = c;
+        GameObject obj = Instantiate(planetSplashPrefab, c, Quaternion.identity);
+        obj.name = "PlanetSplash";
 
         // Dodaj sprite i kolor
-        SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
+        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
         sr.sprite = useNewSplash ? spriteNew : spriteOld;
         Color col = Color.white;
         col.a = planetSplashAlpha;
         sr.color = col;
         sr.sortingLayerName = sortingLayerName;
         sr.sortingOrder = sortingOrder;
-        sr.material = CreateMaterial(secondary, secondary);
+        col = Color.Lerp(secondary, secondary, MonteCarloRandom(1.5f));
+        sr.material.SetColor("_Color", col);
+        sr.material.SetVector("_NoiseOffset", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 6.0f, (MonteCarloRandom(1.0f) - 0.5f) * 6.0f));
+        //sr.material = CreateMaterial(secondary, secondary);
 
         // Losowa rotacja Z
-        float randomRotation = (float)rng.NextDouble() * 180f;
-        obj.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
+        // TODO: na razie linie nie uwzglêdniaj¹ obrotów
+        //float randomRotation = (float)rng.NextDouble() * 180f;
+        //obj.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
 
         // Skalowanie z AnimationCurve
         obj.transform.localScale = scaleStart;
         DOTween.To(() => 0f, t => {
             float curveVal = planetSplashCurve.Evaluate(t);
             obj.transform.localScale = Vector3.Lerp(scaleStart, scaleEnd, curveVal);
-        }, 1f, scaleDur);
+        }, 1f, scaleDur).OnComplete(() =>
+        {
+            SplashLinesGenerator slg = obj.GetComponent<SplashLinesGenerator>();
+            slg.SetColor(col);
+            obj.GetComponent<SplashLinesGenerator>().GenerateLines(col.a);
+        });
     }
 }

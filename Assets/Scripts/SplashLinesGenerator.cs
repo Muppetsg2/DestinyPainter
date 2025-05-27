@@ -23,7 +23,7 @@ public class SplashLinesGenerator : MonoBehaviour
     public float minLinesXDistance = 0.5f;
     public MinMaxValue<int> linesNum = new() { Min = 3, Max = 5 };
 
-    private ColorType colorType;
+    private Color col;
 
     private readonly List<GameObject> lines = new();
 
@@ -37,9 +37,9 @@ public class SplashLinesGenerator : MonoBehaviour
         //GenerateLines();
     }
 
-    public void SetColor(ColorType color)
+    public void SetColor(Color col)
     {
-        colorType = color;
+        this.col = col;
     }
 
     [ContextMenu("Generate Lines")]
@@ -124,8 +124,7 @@ public class SplashLinesGenerator : MonoBehaviour
         }
 
         int pointsToChoose = Random.Range(linesNum.Min, linesNum.Max + 1);
-
-        for (int i = 0; i < pointsToChoose && avilablePositions.Count > 0;)
+        for (int i = 0; i < pointsToChoose && avilablePositions.Count > 0; ++i)
         {
             float posX = avilablePositions.Keys.ElementAt(Random.Range(0, avilablePositions.Count));
             float posY = avilablePositions[posX];
@@ -145,7 +144,7 @@ public class SplashLinesGenerator : MonoBehaviour
             lines.Add(line);
             line.transform.position += new Vector3(posX, posY, 0f);
             var splashLineAnim = line.GetComponent<SplashLineAnimation>();
-            splashLineAnim.SetColor(colorType);
+            splashLineAnim.SetColor(col);
         }
 
         //for (int i = 0; i < avilablePositions.Count;)

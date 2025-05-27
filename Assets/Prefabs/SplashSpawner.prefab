@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2174ecb6ace71344a5c545cb7eedbd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetSplashPrefab: {fileID: 8956329137880412379, guid: f254caf4d42e3174585ab42b65db9f16, type: 3}
   sortingLayerName: Default
   sortingOrder: -2
   useNewSplash: 1
@@ -122,6 +123,6 @@ MonoBehaviour:
   excludeBackwardAngle: 45
   asymmetryFactor: 0.1
   pointOffset: 0.4
-  minMoveDistance: 0.6
+  minMoveDistance: 0.5
   maxMoveDistance: 1
   duration: 0.5

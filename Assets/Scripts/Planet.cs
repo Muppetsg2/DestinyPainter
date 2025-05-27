@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour
 
     public bool changeMaterial = true;
 
-    [ReadOnly][SerializeField] public float playerRadius;
+    [ReadOnly] public float playerRadius;
 
     public void OnValidate()
     {

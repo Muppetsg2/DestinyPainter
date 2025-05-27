@@ -28,7 +28,7 @@ public class PaintBall : MonoBehaviour
             spriteRenderer.material.SetVector("_NoiseOffset", noiseOffset);
 
             var lineGenerator = splash.GetComponent<SplashLinesGenerator>();
-            lineGenerator.SetColor(colorType);
+            lineGenerator.SetColor(color);
             lineGenerator.GenerateLines(150f / 255f);
             Destroy(gameObject);
         }

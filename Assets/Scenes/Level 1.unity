@@ -1171,7 +1171,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 10, y: 30}
+  m_Size: {x: 8.421478, y: 30}
   m_EdgeRadius: 0
 --- !u!4 &570251945 stripped
 Transform:
@@ -1473,6 +1473,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 926851981}
     m_Modifications:
+    - target: {fileID: 1730804276866489111, guid: 6523aca08fd4ee54c993f7e7f7970dad, type: 3}
+      propertyPath: color
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1730804276866489111, guid: 6523aca08fd4ee54c993f7e7f7970dad, type: 3}
       propertyPath: playerRadius
       value: 0.61
@@ -2197,7 +2201,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1730804276866489111, guid: 387d26609cac61047b726bedadfeca39, type: 3}
       propertyPath: playerRadius
-      value: 0.42700002
+      value: 0.45999998
       objectReference: {fileID: 0}
     - target: {fileID: 3338206222980997877, guid: 387d26609cac61047b726bedadfeca39, type: 3}
       propertyPath: m_Radius
@@ -3388,8 +3392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e765c65f5bf04438d1a183678fac4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  text: {fileID: 0}
+  player: {fileID: 1549350860}
+  text: {fileID: 1906029324}
 --- !u!1 &2014938924
 GameObject:
   m_ObjectHideFlags: 0

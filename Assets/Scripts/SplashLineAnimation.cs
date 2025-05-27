@@ -30,17 +30,15 @@ public class SplashLineAnimation : MonoBehaviour
         PlayAnim();
     }
 
-    public void SetColor(ColorType color)
+    public void SetColor(Color col)
     {
-        Color primary = ColorsManager.Instance.GetSecondaryColor(color);
-
         GradientColorKey[] keys = lineRenderer.colorGradient.colorKeys;
         for (int i = 0; i < lineRenderer.colorGradient.colorKeys.Length; ++i)
         {
             GradientColorKey key = keys[i];
-            key.color.r = primary.r;
-            key.color.g = primary.g;
-            key.color.b = primary.b;
+            key.color.r = col.r;
+            key.color.g = col.g;
+            key.color.b = col.b;
             keys[i] = key;
         }
         Gradient gradient = new Gradient();
