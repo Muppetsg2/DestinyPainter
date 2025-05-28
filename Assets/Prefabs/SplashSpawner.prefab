@@ -122,7 +122,10 @@ MonoBehaviour:
   linesCount: 20
   excludeBackwardAngle: 45
   asymmetryFactor: 0.1
-  pointOffset: 0.4
-  minMoveDistance: 0.3
-  maxMoveDistance: 1
+  pointOffset:
+    Min: 0.2
+    Max: 0.5
+  moveDistance:
+    Min: 0.3
+    Max: 0.6
   duration: 0.5

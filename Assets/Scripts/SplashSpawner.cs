@@ -52,9 +52,16 @@ public class SplashSpawner : MonoBehaviour
     public int linesCount = 20;
     [Range(0.0f, 180.0f)] public float excludeBackwardAngle = 90.0f;
     [Range(0f, 1f)] public float asymmetryFactor = 0.5f;
-    public float pointOffset = 0f;
-    public float minMoveDistance = 1f;
-    public float maxMoveDistance = 2f;
+    public MinMaxValue<float> pointOffset = new() 
+    {
+        Min = 0.3f,
+        Max = 0.7f
+    };
+    public MinMaxValue<float> moveDistance = new()
+    {
+        Min = 1.0f,
+        Max = 2.0f
+    };
     public float duration = 0.5f;
 
     private Transform spawnContainer;
@@ -106,10 +113,10 @@ public class SplashSpawner : MonoBehaviour
 
         for (int i = spawnContainer.childCount - 1; i >= 0; --i)
         {
-            Destroy(spawnContainer.GetChild(i).gameObject);
+            DestroyImmediate(spawnContainer.GetChild(i).gameObject);
         }
 
-        Destroy(spawnContainer);
+        DestroyImmediate(spawnContainer);
     }
 
     [Button]
@@ -193,10 +200,11 @@ public class SplashSpawner : MonoBehaviour
             float rad = angle * Mathf.Deg2Rad;
             Vector3 dir = Mathf.Cos(rad) * impactNormal + Mathf.Sin(rad) * ortho;
 
-            Vector3 startPos = impactPoint + dir * pointOffset;
-            float moveDistance = minMoveDistance + MonteCarloRandom(1.5f) * (maxMoveDistance - minMoveDistance);
-            Vector3 endPos = impactPoint + dir * (pointOffset + moveDistance);
-            float widthMul = moveDistance.Remap(0.0f, maxMoveDistance, 0.0f, 1.0f);
+            float pointOffsetValue = pointOffset.Min + MonteCarloRandom(1.5f) * (pointOffset.Max - pointOffset.Min);
+            Vector3 startPos = impactPoint + dir * pointOffsetValue;
+            float moveDistanceValue = moveDistance.Min + MonteCarloRandom(1.5f) * (moveDistance.Max - moveDistance.Min);
+            Vector3 endPos = impactPoint + dir * (pointOffsetValue + moveDistanceValue);
+            float widthMul = moveDistanceValue.Remap(0.0f, moveDistance.Max, 0.0f, 1.0f);
 
             GameObject lineObj = Instantiate(colorLinePrefab);
             ColorBurstLine line = lineObj.GetComponent<ColorBurstLine>();
