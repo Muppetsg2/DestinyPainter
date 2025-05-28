@@ -1,7 +1,9 @@
 using SaintsField;
 using SaintsField.Playa;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.WSA;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
@@ -28,9 +30,11 @@ public class PlayerController : MonoBehaviour
     private bool rotateClockwise;
 
     [Header("Jump")]
+    public AnimationCurve launchSpeedCurve;
     public float launchForce = 5f;
     public float snapDistance = 0.5f;
-    public float returnDelay = 3f;
+    public float returnDelay = 2f;
+    public TrailRenderer trail;
 
     [Header("Planet Splash Animation")]
     public float startScaleMul = 2f;
@@ -50,6 +54,7 @@ public class PlayerController : MonoBehaviour
     private bool isLaunched = false;
     private Rigidbody2D rb;
     private float launchTime;
+    private Vector2 launchVel;
 
     void OnEnable()
     {
@@ -67,6 +72,7 @@ public class PlayerController : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
         AttachToPlanet(currentPlanet);
         ChangePlayerColor(color);
+        trail.gameObject.SetActive(false);
     }
 
     void Update()
@@ -76,9 +82,14 @@ public class PlayerController : MonoBehaviour
             Launch();
         }
 
-        if (isLaunched && Time.time - launchTime >= returnDelay)
+        if (isLaunched)
         {
-            ReturnToPlanet(transform.position, Vector3.right, transform, BurstAnimType.Time);
+            float time = Time.time - launchTime;
+            rb.linearVelocity = Vector2.Lerp(launchVel, Vector2.zero, launchSpeedCurve.Evaluate(time.Remap(0.0f, returnDelay, 0.0f, 1.0f)));
+
+            if (time >= returnDelay) {
+                ReturnToPlanet(transform.position, Vector3.right, transform, BurstAnimType.Time);
+            }
         }
     }
 
@@ -140,7 +151,10 @@ public class PlayerController : MonoBehaviour
         launchTime = Time.time;
 
         Vector2 direction = (transform.position - currentPlanet.position).normalized;
-        rb.linearVelocity = direction * launchForce;
+        launchVel = direction * launchForce;
+        rb.linearVelocity = launchVel;
+
+        trail.gameObject.SetActive(true);
 
         ++planetJumpsCounter;
     }
@@ -161,7 +175,7 @@ public class PlayerController : MonoBehaviour
 
     void ReturnToPlanet(Vector3 hitPos, Vector3 hitNormal, Transform previousPlanet, BurstAnimType anim = BurstAnimType.Planet)
     {
-        Vector2 vel = rb.linearVelocity;
+        Vector2 vel = launchVel;
         rb.linearVelocity = Vector2.zero;
 
         Color primary = ColorsManager.Instance.GetColor(color, ColorCategory.Primary);
@@ -237,6 +251,7 @@ public class PlayerController : MonoBehaviour
         currentPlanet = planet;
         isAttached = true;
         isLaunched = false;
+        trail.gameObject.SetActive(false);
 
         rotateClockwise = planet.GetComponent<PlanetRotation>().rotateClockwise;
 
@@ -292,19 +307,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (isLaunched && collision.CompareTag("Boundries"))
-        {
-            ReturnToPlanet(transform.position, Vector3.right, transform, BurstAnimType.Edge);
-        }
-    }
+    // Obsolete
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (isLaunched && collision.CompareTag("Boundries"))
+    //    {
+    //        ReturnToPlanet(transform.position, Vector3.right, transform, BurstAnimType.Edge);
+    //    }
+    //}
 
     public void ChangePlayerColor(ColorType newColor)
     {
         color = newColor;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = ColorsManager.Instance.GetColor(color, ColorCategory.Primary);
+        trail.startColor = ColorsManager.Instance.GetColor(color, ColorCategory.Secondary);
+        trail.endColor = ColorsManager.Instance.GetColor(color, ColorCategory.Primary);
         //sr.material.SetColor("_Color", ColorsManager.Instance.GetColor(color, ColorCategory.Secondary) * 0.5f);
     }
 }
