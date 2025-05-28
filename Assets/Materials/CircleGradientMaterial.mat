@@ -43,8 +43,8 @@ Material:
     m_Floats:
     - _mult: 2.2
     m_Colors:
-    - _Center: {r: 0.02745098, g: 0.5529412, b: 1, a: 1}
-    - _Outer: {r: 0.03137255, g: 0.14901961, b: 1, a: 1}
+    - _Center: {r: 0.03137255, g: 0.14901961, b: 1, a: 1}
+    - _Outer: {r: 0.02745098, g: 0.5529412, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4401631771053251572

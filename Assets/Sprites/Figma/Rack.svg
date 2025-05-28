@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="47"
+   height="47"
+   viewBox="0 0 47 47"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="Rack.svg"
+   inkscape:export-filename="Rack.png"
+   inkscape:export-xdpi="1045.7872"
+   inkscape:export-ydpi="1045.7872"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="17.340426"
+     inkscape:cx="23.5"
+     inkscape:cy="23.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M19.2036 3.66067C19.8956 -1.22022 26.9443 -1.22022 27.6363 3.66067C28.0914 6.86895 31.8213 8.41339 34.4116 6.46633C38.3522 3.50461 43.3363 8.48869 40.3745 12.4292C38.4275 15.0196 39.9719 18.7486 43.1802 19.2036C48.0611 19.8956 48.0611 26.9443 43.1802 27.6363C39.9718 28.0913 38.4274 31.8213 40.3745 34.4116C43.3361 38.3521 38.3521 43.3361 34.4116 40.3745C31.8213 38.4274 28.0913 39.9718 27.6363 43.1802C26.9443 48.0611 19.8956 48.0611 19.2036 43.1802C18.7486 39.9719 15.0196 38.4275 12.4292 40.3745C8.48869 43.3363 3.50461 38.3522 6.46633 34.4116C8.41339 31.8213 6.86895 28.0914 3.66067 27.6363C-1.22022 26.9443 -1.22022 19.8956 3.66067 19.2036C6.86888 18.7484 8.41337 15.0195 6.46633 12.4292C3.50437 8.48863 8.48863 3.50437 12.4292 6.46633C15.0195 8.41337 18.7484 6.86888 19.2036 3.66067ZM23.4204 12.9204C17.6214 12.9204 12.9204 17.6214 12.9204 23.4204C12.9205 29.2194 17.6215 33.9204 23.4204 33.9204C29.2193 33.9204 33.9204 29.2193 33.9204 23.4204C33.9204 17.6215 29.2194 12.9205 23.4204 12.9204Z"
+     fill="white"
+     id="path1" />
+</svg>

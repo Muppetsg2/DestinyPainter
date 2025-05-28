@@ -1,54 +1,59 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StarsUI : MonoBehaviour
 {
     public LevelManager manager;
-    public ColorsManager colors;
 
-    public Image star1;
-    public Image star2;
-    public Image star3;
+    public Image star1Image;
+    public Image star2Image;
+    public Image star3Image;
 
-    public TextMeshProUGUI starMsgText;
-
-    public string maxJumpsMsg;
-    public string finishLevelMsg;
+    public Shadow star1Shadow;
+    public Shadow star2Shadow;
+    public Shadow star3Shadow;
 
     void Update()
     {
         if (manager.currentStars == 3)
         {
-            star3.color = colors.GetStarColor();
-            star2.color = colors.GetStarColor();
-            star1.color = colors.GetStarColor();
+            star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
+            star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
+            star1Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
 
-            starMsgText.text = maxJumpsMsg[..maxJumpsMsg.IndexOf('{')] + manager.data.thirdStarMaxJumps + maxJumpsMsg.Substring(maxJumpsMsg.IndexOf('}') + 1, maxJumpsMsg.Length - maxJumpsMsg.IndexOf('}') - 1);
+            star3Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
+            star2Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
+            star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
         }
         else if (manager.currentStars == 2)
         {
-            star3.color = colors.GetStarDefaultColor();
-            star2.color = colors.GetStarColor();
-            star1.color = colors.GetStarColor();
+            star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
+            star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
+            star1Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
 
-            starMsgText.text = maxJumpsMsg[..maxJumpsMsg.IndexOf('{')] + manager.data.secondStarMaxJumps + maxJumpsMsg.Substring(maxJumpsMsg.IndexOf('}') + 1, maxJumpsMsg.Length - maxJumpsMsg.IndexOf('}') - 1);
+            star3Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, false);
+            star2Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
+            star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
         }
         else if (manager.currentStars == 1)
         {
-            star3.color = colors.GetStarDefaultColor();
-            star2.color = colors.GetStarDefaultColor();
-            star1.color = colors.GetStarColor();
+            star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
+            star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
+            star1Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
 
-            starMsgText.text = finishLevelMsg;
+            star3Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, false);
+            star2Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, false);
+            star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
         }
         else if (manager.currentStars == 0)
         {
-            star3.color = colors.GetStarDefaultColor();
-            star2.color = colors.GetStarDefaultColor();
-            star1.color = colors.GetStarDefaultColor();
+            star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
+            star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
+            star1Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
 
-            starMsgText.text = finishLevelMsg;
+            star3Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, false);
+            star2Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, false);
+            star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, false);
         }
     }
 }

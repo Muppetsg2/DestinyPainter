@@ -16,23 +16,29 @@ MonoBehaviour:
   - colorType: 0
     primaryColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
     secondaryColor: {r: 0, g: 0, b: 0, a: 1}
-    primaryHDRColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
+    primaryHDRColor: {r: 0.06124607, g: 0.06124607, b: 0.06124607, a: 1}
     secondaryHDRColor: {r: 0, g: 0, b: 0, a: 1}
   - colorType: 1
     primaryColor: {r: 1, g: 0.02745098, b: 0.25882354, a: 1}
     secondaryColor: {r: 0.4509804, g: 0.14901961, b: 0.21960784, a: 1}
-    primaryHDRColor: {r: 1, g: 0, b: 0, a: 1}
-    secondaryHDRColor: {r: 0.45098042, g: 0.14901961, b: 0.21960786, a: 1}
+    primaryHDRColor: {r: 1, g: 0.002124689, b: 0.05448028, a: 1}
+    secondaryHDRColor: {r: 0.17144115, g: 0.019382361, b: 0.039546248, a: 1}
   - colorType: 2
     primaryColor: {r: 0.62352943, g: 0, b: 1, a: 1}
     secondaryColor: {r: 0.4392157, g: 0, b: 1, a: 1}
-    primaryHDRColor: {r: 0.62352943, g: 0, b: 1, a: 1}
-    secondaryHDRColor: {r: 0.43921572, g: 0, b: 1, a: 1}
+    primaryHDRColor: {r: 0.3467041, g: 0, b: 1, a: 1}
+    secondaryHDRColor: {r: 0.16202943, g: 0, b: 1, a: 1}
   - colorType: 3
     primaryColor: {r: 0.02745098, g: 0.5529412, b: 1, a: 1}
     secondaryColor: {r: 0.03137255, g: 0.14901961, b: 1, a: 1}
-    primaryHDRColor: {r: 0.02745098, g: 0.5529412, b: 1, a: 1}
-    secondaryHDRColor: {r: 0.03137255, g: 0.14901961, b: 1, a: 1}
+    primaryHDRColor: {r: 0.002124689, g: 0.26635566, b: 1, a: 1}
+    secondaryHDRColor: {r: 0.002428216, g: 0.019382361, b: 1, a: 1}
+  primaryStarActiveColor: {r: 1, g: 0.98039216, b: 0.3647059, a: 1}
+  secondaryStarActiveColor: {r: 0.6509804, g: 0.63529414, b: 0.23529412, a: 1}
+  primaryStarActiveHDRColor: {r: 1, g: 0.9559735, b: 0.10946172, a: 1}
+  secondaryStarActiveHDRColor: {r: 0.3813261, g: 0.36130688, b: 0.045186214, a: 1}
+  primaryStarInactiveColor: {r: 0.9411765, g: 0.9411765, b: 0.9411765, a: 1}
+  secondaryStarInactiveColor: {r: 0.72156864, g: 0.72156864, b: 0.72156864, a: 1}
+  primaryStarInactiveHDRColor: {r: 0.87136734, g: 0.87136734, b: 0.87136734, a: 1}
+  secondaryStarInactiveHDRColor: {r: 0.47932023, g: 0.47932023, b: 0.47932023, a: 1}
   backgroundColor: {r: 0.25882354, g: 0.27450982, b: 0.32941177, a: 1}
-  starColor: {r: 1, g: 0.8509804, b: 0.1764706, a: 1}
-  starDefaultColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}

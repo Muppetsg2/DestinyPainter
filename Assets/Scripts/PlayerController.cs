@@ -164,9 +164,9 @@ public class PlayerController : MonoBehaviour
         Vector2 vel = rb.linearVelocity;
         rb.linearVelocity = Vector2.zero;
 
-        Color primary = ColorsManager.Instance.GetPrimaryColor(color);
+        Color primary = ColorsManager.Instance.GetColor(color, ColorCategory.Primary);
         primary.a = colorBurstAlpha;
-        Color secondary = ColorsManager.Instance.GetSecondaryColor(color);
+        Color secondary = ColorsManager.Instance.GetColor(color, ColorCategory.Secondary);
         secondary.a = colorBurstAlpha;
 
         switch (anim)
@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
     {
         SplashSpawner.Instance.PlanetSplash(
            planet.transform.position,
-           planet.GetComponent<Planet>().isEnd ? ColorsManager.Instance.GetSecondaryColor(color) : planet.gameObject.GetComponent<Planet>().GetColor(CalculatePlayerPlanetAngle(planet), true),
+           planet.GetComponent<Planet>().isEnd ? ColorsManager.Instance.GetColor(color, ColorCategory.Secondary) : planet.gameObject.GetComponent<Planet>().GetColor(CalculatePlayerPlanetAngle(planet), true),
            planet.transform.localScale * startScaleMul,
            planet.transform.localScale * endScaleMul,
            planetSplashTime
@@ -304,7 +304,7 @@ public class PlayerController : MonoBehaviour
     {
         color = newColor;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        sr.color = ColorsManager.Instance.GetPrimaryColor(color);
-        sr.material.SetColor("_Color", ColorsManager.Instance.GetSecondaryColor(color) * 0.5f);
+        sr.color = ColorsManager.Instance.GetColor(color, ColorCategory.Primary);
+        //sr.material.SetColor("_Color", ColorsManager.Instance.GetColor(color, ColorCategory.Secondary) * 0.5f);
     }
 }

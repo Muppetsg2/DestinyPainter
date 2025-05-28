@@ -123,6 +123,6 @@ MonoBehaviour:
   excludeBackwardAngle: 45
   asymmetryFactor: 0.1
   pointOffset: 0.4
-  minMoveDistance: 0.5
+  minMoveDistance: 0.3
   maxMoveDistance: 1
   duration: 0.5

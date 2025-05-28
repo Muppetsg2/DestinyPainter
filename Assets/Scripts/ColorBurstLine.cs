@@ -8,7 +8,7 @@ public class ColorBurstLine : MonoBehaviour
     public float minWidth = 0.044f;
     public float maxWidth = 0.205f;
 
-    public void PlayAnimation(Vector3 startPos, Vector3 endPos, Color start, Color end, float duration)
+    public void PlayAnimation(Vector3 startPos, Vector3 endPos, Color start, Color end, float duration, float widthMultiplier = 1.0f)
     {
         LineRenderer lr = GetComponent<LineRenderer>();
         lr.positionCount = 2;
@@ -18,10 +18,12 @@ public class ColorBurstLine : MonoBehaviour
         lr.startColor = start;
         lr.endColor = end;
 
+        float mw = maxWidth - (maxWidth - minWidth) * (1.0f - widthMultiplier);
+
         AnimationCurve scaledCurve = new AnimationCurve();
         foreach (Keyframe key in animationCurve.keys)
         {
-            float scaledValue = Mathf.Lerp(minWidth, maxWidth, key.value);
+            float scaledValue = Mathf.Lerp(minWidth, mw, key.value);
             Keyframe newKey = new Keyframe(key.time, scaledValue, key.inTangent, key.outTangent);
             scaledCurve.AddKey(newKey);
         }

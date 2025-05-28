@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static ColorsManager;
 
 public class MulticolorPlanet : MonoBehaviour
 {
@@ -43,8 +42,8 @@ public class MulticolorPlanet : MonoBehaviour
         var secondaryColorVecs = new List<Vector4>();
         foreach (ColorType c in segmentColors)
         {
-            colorVecs.Add(ColorsManager.Instance.GetPrimaryColor(c));
-            secondaryColorVecs.Add(ColorsManager.Instance.GetSecondaryColor(c));
+            colorVecs.Add(ColorsManager.Instance.GetColor(c, ColorCategory.Primary));
+            secondaryColorVecs.Add(ColorsManager.Instance.GetColor(c, ColorCategory.Secondary));
         }
 
         mPB.SetVectorArray("_Colors", colorVecs);
@@ -126,13 +125,6 @@ public class MulticolorPlanet : MonoBehaviour
 
     private Color GetColor(ColorType c, bool secondary)
     {
-        if (secondary)
-        {
-            return ColorsManager.Instance.GetSecondaryColor(c);
-        }
-        else
-        {
-            return ColorsManager.Instance.GetPrimaryColor(c);
-        }
+        return ColorsManager.Instance.GetColor(c, secondary ? ColorCategory.Secondary : ColorCategory.Primary);
     }
 }

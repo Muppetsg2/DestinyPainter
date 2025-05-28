@@ -7,17 +7,10 @@ public class ColorChangePickup : MonoBehaviour
     public float animationEndValue = 0.7f;
     public float animationDuration = 0.7f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetPickupMaterial(color);
         StartAnimation();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Pickup()

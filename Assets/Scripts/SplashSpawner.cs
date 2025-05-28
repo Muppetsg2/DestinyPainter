@@ -196,10 +196,11 @@ public class SplashSpawner : MonoBehaviour
             Vector3 startPos = impactPoint + dir * pointOffset;
             float moveDistance = minMoveDistance + MonteCarloRandom(1.5f) * (maxMoveDistance - minMoveDistance);
             Vector3 endPos = impactPoint + dir * (pointOffset + moveDistance);
+            float widthMul = moveDistance.Remap(0.0f, maxMoveDistance, 0.0f, 1.0f);
 
             GameObject lineObj = Instantiate(colorLinePrefab);
             ColorBurstLine line = lineObj.GetComponent<ColorBurstLine>();
-            line.PlayAnimation(startPos, endPos, secondary, primary, duration);
+            line.PlayAnimation(startPos, endPos, secondary, primary, duration, widthMul);
 
             placed++;
         }

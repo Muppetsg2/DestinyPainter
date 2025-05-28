@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class ColorsManager : MonoBehaviour
 {
@@ -25,24 +26,9 @@ public class ColorsManager : MonoBehaviour
         palette.Initialize();
     }
 
-    public Color GetPrimaryColor(ColorType type)
+    public Color GetColor(ColorType type, ColorCategory category)
     {
-        return palette.GetPrimaryColor(type);
-    }
-
-    public Color GetSecondaryColor(ColorType type)
-    {
-        return palette.GetSecondaryColor(type);
-    }
-
-    public Color GetPrimaryHDRColor(ColorType type)
-    {
-        return palette.GetPrimaryHDRColor(type);
-    }
-
-    public Color GetSecondaryHDRColor(ColorType type)
-    {
-        return palette.GetSecondaryHDRColor(type);
+        return palette.GetColor(type, category);
     }
 
     public Color GetBackgroundColor()
@@ -50,30 +36,31 @@ public class ColorsManager : MonoBehaviour
         return palette.backgroundColor;
     }
 
-    public Color GetStarColor()
+    public Color GetStarColor(ColorCategory category, bool active)
     {
-        return palette.starColor;
-    }
-
-    public Color GetStarDefaultColor()
-    {
-        return palette.starDefaultColor;
+        return category switch
+        {
+            ColorCategory.Primary => active ? palette.primaryStarActiveColor : palette.primaryStarInactiveColor,
+            ColorCategory.Secondary => active ? palette.secondaryStarActiveColor : palette.secondaryStarInactiveColor,
+            ColorCategory.PrimaryHDR => active ? palette.primaryStarActiveHDRColor : palette.primaryStarInactiveHDRColor,
+            ColorCategory.SecondaryHDR => active ? palette.secondaryStarActiveHDRColor : palette.secondaryStarInactiveHDRColor,
+            _ => Color.black
+        };
     }
 
     public Material GetMaterial(ColorType type)
     {
         Material mat = new Material(baseMaterial);
-        mat.SetColor("_Outer", GetPrimaryColor(type));
-        mat.SetColor("_Center", GetSecondaryColor(type));
+        mat.SetColor("_Outer", GetColor(type, ColorCategory.Primary));
+        mat.SetColor("_Center", GetColor(type, ColorCategory.Secondary));
         return mat;
     }
 
     public Material GetPickupMaterial(ColorType type)
     {
         Material mat = new Material(pickupMaterial);
-
-        mat.SetColor("_Center", GetPrimaryHDRColor(type));
-        mat.SetColor("_Outer", GetSecondaryHDRColor(type));
+        mat.SetColor("_Center", GetColor(type, ColorCategory.PrimaryHDR));
+        mat.SetColor("_Outer", GetColor(type, ColorCategory.SecondaryHDR));
         return mat;
     }
 }

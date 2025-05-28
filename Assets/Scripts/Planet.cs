@@ -70,14 +70,7 @@ public class Planet : MonoBehaviour
             return multicolorPlanet.GetColor(playerAngle, secondary);
         }
 
-        if (secondary)
-        {
-            return ColorsManager.Instance.GetSecondaryColor(color);
-        }
-        else
-        {
-            return ColorsManager.Instance.GetPrimaryColor(color);
-        }
+        return ColorsManager.Instance.GetColor(color, secondary ? ColorCategory.Secondary : ColorCategory.Primary);
     }
 
     public void ChangePlanetColor(ColorType newColor)

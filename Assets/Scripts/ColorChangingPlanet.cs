@@ -1,5 +1,4 @@
 using UnityEngine;
-using static ColorsManager;
 
 public class ColorChangingPlanet : MonoBehaviour
 {
@@ -34,9 +33,9 @@ public class ColorChangingPlanet : MonoBehaviour
     {
         spriteRenderer.GetPropertyBlock(mPB);
 
-        mPB.SetVector("_OuterColor", ColorsManager.Instance.GetPrimaryColor(outerColor));
+        mPB.SetVector("_OuterColor", ColorsManager.Instance.GetColor(outerColor, ColorCategory.Primary));
 
-        mPB.SetVector("_InnerColor", ColorsManager.Instance.GetPrimaryColor(innerColor));
+        mPB.SetVector("_InnerColor", ColorsManager.Instance.GetColor(innerColor, ColorCategory.Primary));
 
         mPB.SetFloat("_BlendPoint", transition);
 
@@ -59,9 +58,9 @@ public class ColorChangingPlanet : MonoBehaviour
             
             transition %= 1;
 
-            mPB.SetVector("_OuterColor", ColorsManager.Instance.GetPrimaryColor(outerColor));
+            mPB.SetVector("_OuterColor", ColorsManager.Instance.GetColor(outerColor, ColorCategory.Primary));
 
-            mPB.SetVector("_InnerColor", ColorsManager.Instance.GetPrimaryColor(innerColor));
+            mPB.SetVector("_InnerColor", ColorsManager.Instance.GetColor(innerColor, ColorCategory.Primary));
         }
 
         mPB.SetFloat("_BlendPoint", transition);
@@ -80,11 +79,11 @@ public class ColorChangingPlanet : MonoBehaviour
     {
         if (secondary)
         {
-            return ColorsManager.Instance.GetSecondaryColor(outerColor);
+            return ColorsManager.Instance.GetColor(outerColor, ColorCategory.Secondary);
         }
         else
         {
-            return ColorsManager.Instance.GetPrimaryColor(outerColor);
+            return ColorsManager.Instance.GetColor(outerColor, ColorCategory.Primary);
         }
     }
 }

@@ -8,6 +8,6 @@ public class JumpsCounterUI : MonoBehaviour
 
     void Update()
     {
-        text.text = "Jumps: " + player.planetJumpsCounter;
+        text.text = player.planetJumpsCounter.ToString();
     }
 }
