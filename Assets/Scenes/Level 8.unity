@@ -624,9 +624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa1b11c44527aa4188ffc727309b931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  boundries: {fileID: 0}
-  player: {fileID: 0}
+  mainCamera: {fileID: 519420031}
+  boundries: {fileID: 552277080}
+  player: {fileID: 1549350860}
   planetFocusHeightOffset: 0
   end: 0
 --- !u!114 &519420034

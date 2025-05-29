@@ -1,9 +1,8 @@
+using System.Collections.Generic;
 using SaintsField;
 using SaintsField.Playa;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.WSA;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     [LayoutStart("Info", ELayout.FoldoutBox)]
     [ReadOnly] public uint planetJumpsCounter = 0;
-    [ReadOnly] public Transform previousPlanet;
+    //[ReadOnly] public Transform previousPlanet;
     [LayoutEnd(".")]
 
     private bool isAttached = true;
@@ -55,6 +54,21 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float launchTime;
     private Vector2 launchVel;
+
+    [System.Serializable]
+    struct JumpData
+    {
+        // planet
+        public Transform planet;
+        public float planetAngle;
+
+        // pickups
+        public ColorType startColor;
+        public List<ColorChangePickup> pickups;
+    }
+
+    private JumpData? currentJump = null;
+    private readonly Stack<JumpData> jumpsHistory = new();
 
     void OnEnable()
     {
@@ -102,7 +116,7 @@ public class PlayerController : MonoBehaviour
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
                 currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
 
-            ValidatePlanetColor(curr, previousPlanet);
+            ValidatePlanetColor(curr);
         }
     }
 
@@ -127,12 +141,11 @@ public class PlayerController : MonoBehaviour
         return 90 - beta;
     }
 
-    private bool ValidatePlanetColor(Planet planet, Transform previousPlanetTransform)
+    private bool ValidatePlanetColor(Planet planet)
     {
         Transform planetTrans = planet.GetComponent<Transform>();
         if (!planet.CheckIsCorrectColor(CalculatePlayerPlanetAngle(planetTrans), color))
         {
-            currentPlanet = previousPlanetTransform;
             Vector3 normal = (planetTrans.position - transform.position).normalized;
             Vector3 pos = planetTrans.position + (planet.playerRadius + colorBurstOffset) * -normal;
             ReturnToPlanet(pos, normal, planetTrans, BurstAnimType.Planet);
@@ -154,6 +167,13 @@ public class PlayerController : MonoBehaviour
         launchVel = direction * launchForce;
         rb.linearVelocity = launchVel;
 
+        currentJump = new JumpData { 
+            planet = currentPlanet, 
+            planetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg - currentPlanet.transform.rotation.z,
+            startColor = color,
+            pickups = new()
+        };
+
         trail.gameObject.SetActive(true);
 
         ++planetJumpsCounter;
@@ -173,7 +193,37 @@ public class PlayerController : MonoBehaviour
         rotateClockwise = false;
     }
 
-    void ReturnToPlanet(Vector3 hitPos, Vector3 hitNormal, Transform previousPlanet, BurstAnimType anim = BurstAnimType.Planet)
+    private void RevertJumpData(JumpData data)
+    {
+        ChangePlayerColor(data.startColor);
+
+        foreach (var pickup in data.pickups)
+        {
+            pickup.gameObject.SetActive(true);
+            pickup.StartAnimation();
+        }
+
+        float angle = data.planetAngle + data.planet.rotation.z;
+        Vector3 dir = new(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
+        transform.position = data.planet.position + dir * data.planet.GetComponent<Planet>().playerRadius;
+        // TODO: obliczanie pozycji wzglêdem planety (k¹t)
+        AttachToPlanet(data.planet);
+    }
+
+    private void RevertJump()
+    {
+        isAttached = false;
+        if (currentJump != null)
+        {
+            RevertJumpData(currentJump ?? new JumpData());
+        }
+        else
+        {
+            RevertJumpData(jumpsHistory.Pop());
+        }
+    }
+
+    void ReturnToPlanet(Vector3 hitPos, Vector3 hitNormal, Transform deadlyPlanet, BurstAnimType anim = BurstAnimType.Planet)
     {
         Vector2 vel = launchVel;
         rb.linearVelocity = Vector2.zero;
@@ -195,8 +245,8 @@ public class PlayerController : MonoBehaviour
                     vel.normalized,
                     CalculateTangentAngle(
                         hitPos,
-                        previousPlanet.transform.position,
-                        Mathf.Max(previousPlanet.transform.lossyScale.x, previousPlanet.transform.lossyScale.x) * 0.5f
+                        deadlyPlanet.transform.position,
+                        Mathf.Max(deadlyPlanet.transform.lossyScale.x, deadlyPlanet.transform.lossyScale.x) * 0.5f
                     ) - 2f // -2f to avoid lines generated on object
                 );
                 break;
@@ -216,8 +266,7 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
-        transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
-        AttachToPlanet(currentPlanet);
+        RevertJump();
     }
 
     void ChangePlanet(Transform planet)
@@ -242,12 +291,13 @@ public class PlayerController : MonoBehaviour
             LinesManager.Instance.AddLine(currentPlanet, planet);
         }
 
-        rb.linearVelocity = Vector2.zero;
-        Planet oldCurrPlanetComp = currentPlanet.GetComponent<Planet>();
-        if (!oldCurrPlanetComp.IsMulticolor() && !oldCurrPlanetComp.IsColorChanging())
+        if (currentJump != null)
         {
-            previousPlanet = currentPlanet;
+            jumpsHistory.Push(currentJump ?? new JumpData());
+            currentJump = null;
         }
+
+        rb.linearVelocity = Vector2.zero;
         currentPlanet = planet;
         isAttached = true;
         isLaunched = false;
@@ -264,7 +314,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isLaunched && collision.CompareTag("Planet"))
+        if (!isLaunched) return;
+
+        if (collision.CompareTag("Planet"))
         {
             Planet planet = collision.GetComponent<Planet>();
             if (planet.isEnd)
@@ -278,7 +330,7 @@ public class PlayerController : MonoBehaviour
                 Vector3 normal = (planet.transform.position - transform.position).normalized;
                 Vector3 pos = planet.transform.position + (planet.playerRadius + colorBurstOffset) * -normal;
                 if (planet.isDeadly) ReturnToPlanet(pos, normal, planet.transform, BurstAnimType.Planet);
-                else if (!ValidatePlanetColor(planet, currentPlanet)) return;
+                else if (!ValidatePlanetColor(planet)) return;
                 else
                 {
                     ChangePlanet(collision.transform);
@@ -291,18 +343,10 @@ public class PlayerController : MonoBehaviour
             if (pickup.color != color)
             {
                 ChangePlayerColor(pickup.color);
-                pickup.Pickup();
-
-                if (!currentPlanet.GetComponent<Planet>().IsMulticolor() && !currentPlanet.GetComponent<Planet>().IsColorChanging())
-                {
-                    currentPlanet.GetComponent<Planet>().ChangePlanetColor(pickup.color);
-                }
-                else
-                {
-                    previousPlanet.GetComponent<Planet>().ChangePlanetColor(pickup.color);
-                    currentPlanet = previousPlanet;
-                    previousPlanet = null;
-                }
+                //pickup.Pickup();
+                pickup.StopAnimation();
+                pickup.gameObject.SetActive(false);
+                currentJump?.pickups.Add(pickup);
             }
         }
     }
