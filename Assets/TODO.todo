@@ -28,22 +28,22 @@ GameUI:
     ✔ Oddalić widok kamery @critical @done(25-05-28 22:27)
 
 PauseMenu:
-    ☐ Dodać pause menu złożone z 3 przycisków w kształcie kółek z ikonami w środku @critical @Muppetsg2
-        ☐ Strzałka w prawo - kontynuuj @critical @Muppetsg2
-        ☐ Strzałka sugerująca obrót - restart poziomu @critical @Muppetsg2
-        ☐ Domek - wyjście do menu lub wyboru poziomów @critical @Muppetsg2
-    ☐ Informacja w menu pauzy o aktualnych gwiazdkach i dopieru tutaj dopisek ile potrzebujesz skoków do której gwiazdki (przykład: https://dizzyjellyfishstudios.itch.io/thin-led-line) @critical @Muppetsg2
+    ✔ Dodać pause menu złożone z 3 przycisków w kształcie kółek z ikonami w środku @critical @Muppetsg2 @done(25-05-29 21:45)
+        ✔ Strzałka w prawo - kontynuuj @critical @Muppetsg2 @done(25-05-29 21:45)
+        ✔ Strzałka sugerująca obrót - restart poziomu @critical @Muppetsg2 @done(25-05-29 21:45)
+        ✔ Domek - wyjście do menu lub wyboru poziomów @critical @Muppetsg2 @done(25-05-29 21:45)
+    ✔ Informacja w menu pauzy o aktualnych gwiazdkach i dopieru tutaj dopisek ile potrzebujesz skoków do której gwiazdki (przykład: https://dizzyjellyfishstudios.itch.io/thin-led-line) @critical @Muppetsg2 @done(25-05-29 21:45)
+    ☐ Dodać skrypt definiujący zachowanie przycisków @critical
 
 EndScreen:
-    ☐ Dodać end screen @critical
-    ☐ Dodać przyciski w kształcie kółek z ikonami w środku @critical
-        ☐ Strzałka w prawo - przejście do następnego poziomu @critical
-        ☐ Strzałka sugerująca obrót - restart poziomu @critical
-        ☐ Domek - wyjście do menu lub wyboru poziomów @critical
-        ☐ Kamera - zdjęcie poziomu (coś takiego jak jest w grach: egg.inc, crossy road oraz rodeo stampede) @critical
-    ☐ Dodać informację o tym ile gwiazdek zostało zdobytych w poziomie @critical
-    ☐ Dodać informację o tym ile skoków zostało wykonanych w poziomie oraz ile skoków było potrzebnych do zdobycia każdej gwiazdki @critical
-    ☐ Dodac informację o tym w jakim czasie poziom został ukończony @low
+    ✔ Dodać end screen @critical @Muppetsg2 @done(25-05-29 22:09)
+    ✔ Dodać przyciski w kształcie kółek z ikonami w środku @critical @Muppetsg2 @done(25-05-29 22:09)
+        ✔ Strzałka w prawo - przejście do następnego poziomu @critical @Muppetsg2 @done(25-05-29 22:09)
+        ✔ Domek - wyjście do menu lub wyboru poziomów @critical @Muppetsg2 @done(25-05-29 22:10)
+        ✔ Opublikuj - zdjęcie poziomu (coś takiego jak jest w grach: egg.inc, crossy road oraz rodeo stampede) @critical @Muppetsg2 @done(25-05-29 22:10)
+    ✔ Dodać informację o tym ile gwiazdek zostało zdobytych w poziomie @critical @Muppetsg2 @done(25-05-29 22:10)
+    ✔ Dodać informację o tym ile skoków zostało wykonanych w poziomie oraz ile skoków było potrzebnych do zdobycia każdej gwiazdki @critical @Muppetsg2 @done(25-05-29 22:10)
+    ☐ Dodać skrypt definiujący zachowanie przycisków @critical
 
 Miodzik:
     ✔ Dodać skapywanie plam na branch `main` i do planet w poziomach @high @MaiPa01 @done(25-05-28 22:28)
