@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="45"
+   height="45"
+   viewBox="0 0 45 45"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="House.svg"
+   inkscape:export-filename="House.png"
+   inkscape:export-xdpi="1092.2667"
+   inkscape:export-ydpi="1092.2667"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="18.111111"
+     inkscape:cx="22.5"
+     inkscape:cy="22.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M18.8026 1.53307C20.7696 -0.51106 24.0407 -0.510985 26.0077 1.53307L42.4042 18.5721C45.4599 21.7487 43.2086 27.0388 38.8007 27.0389H37.9052V38.7889C37.9049 42.1023 35.2186 44.7888 31.9052 44.7889H30.9052V34.7889C30.9052 32.0275 28.6666 29.7889 25.9052 29.7889C23.1438 29.7889 20.9052 32.0275 20.9052 34.7889V44.7889H12.9052C9.59175 44.7888 6.90548 42.1023 6.90518 38.7889V27.0389H6.00967C1.60139 27.0389 -0.649411 21.7487 2.40714 18.5721L18.8026 1.53307Z"
+     fill="white"
+     id="path1" />
+</svg>
