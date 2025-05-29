@@ -44,7 +44,7 @@ public class LevelLoader : MonoBehaviour
         circleMask.gameObject.SetActive(true);
         panel.SetActive(true);
 
-        float width = 2f * canvas.sizeDelta.magnitude;
+        float width = canvas.sizeDelta.magnitude;
         circleMask.sizeDelta = Vector2.zero;
         circleMask.DOSizeDelta(new Vector2(width, width), animTime).OnComplete(() =>
         {

@@ -43,6 +43,11 @@ public class LevelManager : MonoBehaviour
         data.SaveLevelStars(currentStars);
     }
 
+    public bool HasNextLevel()
+    {
+        return nextLevel != null;
+    }
+
     public void GoToNextLevel()
     {
         nextLevel.LoadLevel();

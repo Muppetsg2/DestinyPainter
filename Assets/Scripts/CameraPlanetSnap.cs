@@ -44,6 +44,9 @@ public class CameraPlanetSnap : MonoBehaviour
 
     private void Start()
     {
+        player = FindFirstObjectByType<PlayerController>();
+        mainCamera = Camera.main;
+
         if (mainCamera.orthographic)
         {
             mainCamera.orthographicSize = boundries.bounds.size.x * 0.5f / mainCamera.aspect;

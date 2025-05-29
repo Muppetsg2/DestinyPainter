@@ -3,8 +3,6 @@ using UnityEngine.UI;
 
 public class StarsUI : MonoBehaviour
 {
-    public LevelManager manager;
-
     public Image star1Image;
     public Image star2Image;
     public Image star3Image;
@@ -15,7 +13,7 @@ public class StarsUI : MonoBehaviour
 
     void Update()
     {
-        if (manager.currentStars == 3)
+        if (LevelManager.Instance.currentStars == 3)
         {
             star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
             star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
@@ -25,7 +23,7 @@ public class StarsUI : MonoBehaviour
             star2Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
             star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
         }
-        else if (manager.currentStars == 2)
+        else if (LevelManager.Instance.currentStars == 2)
         {
             star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
             star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, true);
@@ -35,7 +33,7 @@ public class StarsUI : MonoBehaviour
             star2Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
             star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
         }
-        else if (manager.currentStars == 1)
+        else if (LevelManager.Instance.currentStars == 1)
         {
             star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
             star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
@@ -45,7 +43,7 @@ public class StarsUI : MonoBehaviour
             star2Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, false);
             star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, true);
         }
-        else if (manager.currentStars == 0)
+        else if (LevelManager.Instance.currentStars == 0)
         {
             star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
             star2Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, false);
