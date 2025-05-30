@@ -79,6 +79,7 @@ public class MenuManager : MonoBehaviour
                     {
                         button.GetComponent<Button>().enabled = true;
                     }
+                    mainImage.GetComponent<Button>().enabled = true;
                     onComplete?.Invoke();
                 });
             }
@@ -99,6 +100,7 @@ public class MenuManager : MonoBehaviour
 
     private void HideAnimation(List<ButtonAnimation> buttons, GameObject lines, Action onComplete = null)
     {
+        mainImage.GetComponent<Button>().enabled = false;
         foreach (var button in buttons)
         {
             button.GetComponent<Button>().enabled = false;
@@ -139,12 +141,12 @@ public class MenuManager : MonoBehaviour
         {
             levelSelectScroll.enabled = true;
 
-            float buttonTransformY = levelSelectButtons[0].transform.localPosition.y;
+            float buttonTransformY = levelSelectButtons[0].GetComponent<RectTransform>().anchoredPosition.y;
             foreach (var button in levelSelectButtons)
             {
                 if (button.GetComponent<LevelButton>().IsUnlocked())
                 {
-                    buttonTransformY = button.transform.localPosition.y;
+                    buttonTransformY = button.GetComponent<RectTransform>().anchoredPosition.y;
                 }
                 else
                 {
@@ -152,7 +154,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
 
-            float percentage = Mathf.Clamp01((buttonTransformY + levelSelectScrollOffset) / levelSelectScroll.content.sizeDelta.y);
+            float percentage = Mathf.Clamp01(-(buttonTransformY + levelSelectScrollOffset) / levelSelectScroll.content.sizeDelta.y);
             float time = levelSelectScrollAnimationTime * Mathf.Abs(percentage - levelSelectScroll.verticalNormalizedPosition);
             levelSelectScroll.DOVerticalNormalizedPos(percentage, time).OnComplete(() => 
             {
@@ -226,5 +228,10 @@ public class MenuManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void OpenPaintBalls()
+    {
+        LevelLoader.Instance.LoadLevel("Paint Balls");
     }
 }
