@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using SaintsField;
 using SaintsField.Playa;
 using UnityEngine;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 launchVel;
 
     [System.Serializable]
-    struct JumpData
+    public struct JumpData
     {
         // planet
         public Transform planet;
@@ -68,7 +69,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private JumpData? currentJump = null;
-    private readonly Stack<JumpData> jumpsHistory = new();
+    [SerializeField]
+    private List<JumpData> jumpsHistory = new();
 
     void OnEnable()
     {
@@ -136,7 +138,6 @@ public class PlayerController : MonoBehaviour
         {
             return 0;
         }
-        Vector3 dir = (-d).normalized;
         float beta = Mathf.Asin(radius / d.magnitude) * Mathf.Rad2Deg;
         return 90 - beta;
     }
@@ -167,9 +168,10 @@ public class PlayerController : MonoBehaviour
         launchVel = direction * launchForce;
         rb.linearVelocity = launchVel;
 
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - currentPlanet.transform.rotation.eulerAngles.z;
         currentJump = new JumpData { 
             planet = currentPlanet, 
-            planetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg - currentPlanet.transform.rotation.z,
+            planetAngle = angle,
             startColor = color,
             pickups = new()
         };
@@ -203,10 +205,9 @@ public class PlayerController : MonoBehaviour
             pickup.StartAnimation();
         }
 
-        float angle = data.planetAngle + data.planet.rotation.z;
+        float angle = (data.planetAngle + data.planet.rotation.eulerAngles.z) * Mathf.Deg2Rad;
         Vector3 dir = new(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
         transform.position = data.planet.position + dir * data.planet.GetComponent<Planet>().playerRadius;
-        // TODO: obliczanie pozycji wzglêdem planety (k¹t)
         AttachToPlanet(data.planet);
     }
 
@@ -215,11 +216,21 @@ public class PlayerController : MonoBehaviour
         isAttached = false;
         if (currentJump != null)
         {
-            RevertJumpData(currentJump ?? new JumpData());
+            JumpData data = currentJump ?? new JumpData();
+            currentJump = null;
+            RevertJumpData(data);
+        }
+        else if (jumpsHistory.Count > 0)
+        {
+            //RevertJumpData(jumpsHistory.Pop());
+            JumpData data = jumpsHistory.Last();
+            jumpsHistory.Remove(data);
+            RevertJumpData(data);
         }
         else
         {
-            RevertJumpData(jumpsHistory.Pop());
+            Debug.Log("NIE MA GDZIE WRÓCIÆ");
+            isAttached = true;
         }
     }
 
@@ -293,7 +304,7 @@ public class PlayerController : MonoBehaviour
 
         if (currentJump != null)
         {
-            jumpsHistory.Push(currentJump ?? new JumpData());
+            jumpsHistory.Add(currentJump ?? new JumpData());
             currentJump = null;
         }
 
