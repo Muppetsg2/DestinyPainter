@@ -7,10 +7,10 @@ Menu:
 
 Poziomy:
     ☐ Zaprojektować na chwilę obecną 8 poziomów. Każdy poziom wprowadza nową mechanikę. @critical
-        ☐ Pierwszy poziom to przeskakiwanie między planetami i poruszanie się po nich. Każda planeta jest tego samego koloru co gracz. @critical
-        ☐ Drugi poziom to przeszkody @critical
-        ☐ Trzeci poziom to planety o wielu kolorach @critical
-        ☐ Czarty poziom to planety o zmieniających się kolorach @critical
+        ✔ Pierwszy poziom to przeskakiwanie między planetami i poruszanie się po nich. Każda planeta jest tego samego koloru co gracz. @critical @MAIPA01 @done(25-05-30 12:16)
+        ✔ Drugi poziom to przeszkody @critical @MAIPA01 @done(25-05-30 12:16)
+        ✔ Trzeci poziom to planety o wielu kolorach @critical @MAIPA01 @done(25-05-30 12:16)
+        ✔ Czwarty poziom to planety o zmieniających się kolorach @critical @MAIPA01 @done(25-05-30 12:16)
         ☐ Piąty poziom to obracające sie planety @critical
         ☐ Szósty poziom to połączenie dotychczasowych mechanik ale by poziom znowu nie był zbyt trudny @critical
         ☐ Siódmy poziom to poziom dość prosty gdzie uczymy gracza o pickupie zmiany koloru @critical
@@ -34,6 +34,7 @@ PauseMenu:
         ✔ Domek - wyjście do menu lub wyboru poziomów @critical @Muppetsg2 @done(25-05-29 21:45)
     ✔ Informacja w menu pauzy o aktualnych gwiazdkach i dopieru tutaj dopisek ile potrzebujesz skoków do której gwiazdki (przykład: https://dizzyjellyfishstudios.itch.io/thin-led-line) @critical @Muppetsg2 @done(25-05-29 21:45)
     ☐ Dodać skrypt definiujący zachowanie przycisków @critical
+    ☐ Dodać animacje pause menu @critical
 
 EndScreen:
     ✔ Dodać end screen @critical @Muppetsg2 @done(25-05-29 22:09)
@@ -44,6 +45,9 @@ EndScreen:
     ✔ Dodać informację o tym ile gwiazdek zostało zdobytych w poziomie @critical @Muppetsg2 @done(25-05-29 22:10)
     ✔ Dodać informację o tym ile skoków zostało wykonanych w poziomie oraz ile skoków było potrzebnych do zdobycia każdej gwiazdki @critical @Muppetsg2 @done(25-05-29 22:10)
     ☐ Dodać skrypt definiujący zachowanie przycisków @critical
+    ☐ Dodać animacje end screen @critical
+    ☐ Dodać generowanie zdjęcia poziomu końcowego @critical
+    ☐ Dodać sharowanie wyniku @critical
 
 Miodzik:
     ✔ Dodać skapywanie plam na branch `main` i do planet w poziomach @high @MaiPa01 @done(25-05-28 22:28)
@@ -56,6 +60,8 @@ Miodzik:
 
 Mechanika:
     ☐ Dodać mechanikę że są planety które się obracają i są takie które nie. I te które się obracają mają strzałkę w którą stronę się obracają. Na planetach obracających się mamy współczynnik prędkości poruszania się w przeciwną stronę równy 0.5, a w dobrą stronę 1.5. Stojące nie mają strzałki i w obie strony współczynnik poruszania się jest równy 1.0. @critical
-    ☐ Dodać zapisanie pozycji gracza na planecie @high
+    ✔ Dodać zapisanie pozycji gracza na planecie @high @MAIPA01 @done(25-05-30 12:19)
     ☐ Gracz zawsze porusza sie na planecie w kierunku obrotu planety. Jeśli jednak planeta się nie obraca to kierunek jest skierowany w prawo. @critical
-    ☐ Zmiana koloru oraz niszczenie pickupa jest wykonywane dopiero po odpowiednim wylądowaniu na planecie. Jeśli gracz zebrał pickup i nadal leci to pickup jest wyszarzany na czas lotu. @critical
+    ✔ Zmiana koloru oraz niszczenie pickupa jest wykonywane dopiero po odpowiednim wylądowaniu na planecie. @critical @MAIPA01 @done(25-05-30 12:20)
+    ✔ Historia skoków @critical @MAIPA01 @done(25-05-30 12:20)
+    ☐ Wyszarzanie zebranych pickapów przed ukończeniem skoku
