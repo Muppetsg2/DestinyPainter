@@ -12,6 +12,13 @@ public class LevelManager : MonoBehaviour
 
     public string menuName;
 
+    public CameraPlanetSnap cameraSnap;
+
+    [Header("Canvases")]
+    public GameObject gameCanvas;
+    public GameObject pauseCanvas;
+    public GameObject endCanvas;
+
     private void Awake()
     {
         if (Instance != null)
@@ -38,9 +45,31 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void RestartLevel()
+    {
+        data.LoadLevel();
+    }
+
+    public void UnpauseLevel()
+    {
+        pauseCanvas.SetActive(false);
+        gameCanvas.SetActive(true);
+    }
+
+    public void PauseLevel()
+    {
+        gameCanvas.SetActive(false);
+        pauseCanvas.SetActive(true);
+    }
+
     public void FinishLevel()
     {
         data.SaveLevelStars(currentStars);
+        gameCanvas.SetActive(false);
+        cameraSnap.PlayEndAnim(() =>
+        {
+            endCanvas.SetActive(true);
+        });
     }
 
     public bool HasNextLevel()

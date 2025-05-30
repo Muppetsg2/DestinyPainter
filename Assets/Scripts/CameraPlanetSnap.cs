@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -8,35 +10,49 @@ public class CameraPlanetSnap : MonoBehaviour
     public PlayerController player;
     public float planetFocusHeightOffset;
 
-    public bool end = false;
+    public float endAnimTime = 2f;
 
-    private Vector3 CalculateCameraPos()
+    private bool end = false;
+
+    private void SetCameraViewSize()
     {
-        Vector3 camPos;
-        if (!end)
-        {
-            Vector3 minBoundries = boundries.bounds.min;
-            Vector3 maxBoundries = boundries.bounds.max;
+        mainCamera.transform.position = GetCameraPos();
 
-            camPos = new(mainCamera.transform.position.x, player.currentPlanet.transform.position.y - planetFocusHeightOffset, mainCamera.transform.position.z);
-            if (camPos.y + mainCamera.orthographicSize > maxBoundries.y)
-            {
-                camPos.y -= camPos.y + mainCamera.orthographicSize - maxBoundries.y;
-            }
-            if (camPos.y - mainCamera.orthographicSize < minBoundries.y)
-            {
-                camPos.y += minBoundries.y - (camPos.y - mainCamera.orthographicSize);
-            }
+        if (mainCamera.orthographic)
+        {
+            mainCamera.orthographicSize = boundries.bounds.size.x * 0.5f / mainCamera.aspect;
         }
         else
         {
-            float z = mainCamera.transform.position.z;
-            if (!mainCamera.orthographic)
-            {
-                z = -boundries.bounds.size.y * 0.5f / Mathf.Tan(mainCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
-            }
-            camPos = new(mainCamera.transform.position.x, boundries.bounds.center.y, z);
-            mainCamera.transform.position += (camPos - mainCamera.transform.position) * Time.deltaTime;
+            float z = -boundries.bounds.size.x * 0.5f / (Mathf.Tan(mainCamera.fieldOfView * 0.5f * Mathf.Deg2Rad) * mainCamera.aspect);
+            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, z);
+        }
+    }
+
+    private Vector3 GetCameraPos()
+    {
+        Vector3 minBoundries = boundries.bounds.min;
+        Vector3 maxBoundries = boundries.bounds.max;
+
+        Vector3 camPos = new(mainCamera.transform.position.x, player.currentPlanet.transform.position.y - planetFocusHeightOffset, mainCamera.transform.position.z);
+
+        float halfHeight;
+        if (mainCamera.orthographic)
+        {
+            halfHeight = mainCamera.orthographicSize;
+        }
+        else
+        {
+            halfHeight = mainCamera.rect.height * 0.5f;
+        }
+
+        if (camPos.y + halfHeight > maxBoundries.y)
+        {
+            camPos.y -= camPos.y + halfHeight - maxBoundries.y;
+        }
+        if (camPos.y - halfHeight < minBoundries.y)
+        {
+            camPos.y += minBoundries.y - (camPos.y - halfHeight);
         }
 
         return camPos;
@@ -47,37 +63,37 @@ public class CameraPlanetSnap : MonoBehaviour
         player = FindFirstObjectByType<PlayerController>();
         mainCamera = Camera.main;
 
-        if (mainCamera.orthographic)
-        {
-            mainCamera.orthographicSize = boundries.bounds.size.x * 0.5f / mainCamera.aspect;
-        }
-
-        mainCamera.transform.position = CalculateCameraPos();
-        if (!mainCamera.orthographic)
-        {
-            float z = -boundries.bounds.size.x * 0.5f / (Mathf.Tan(mainCamera.fieldOfView * 0.5f * Mathf.Deg2Rad) * mainCamera.aspect);
-            mainCamera.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, z);
-        }
+        SetCameraViewSize();
     }
 
     void Update()
     {
-        Vector3 camPos = CalculateCameraPos();
+        if (end) return;
+
+        Vector3 camPos = GetCameraPos();
         mainCamera.transform.position += (camPos - mainCamera.transform.position) * Time.deltaTime;
         if (Vector3.Distance(mainCamera.transform.position, camPos) < 0.01f)
         {
             mainCamera.transform.position = camPos;
         }
+    }
 
-        if (end && mainCamera.orthographic)
+    public void PlayEndAnim(Action onComplete = null)
+    {
+        end = true;
+
+        float z = mainCamera.transform.position.z;
+        if (!mainCamera.orthographic)
+        {
+            z = -boundries.bounds.size.y * 0.5f / Mathf.Tan(mainCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+        }
+        Vector3 desiredPos = new(mainCamera.transform.position.x, boundries.bounds.center.y, z);
+        mainCamera.transform.DOMove(desiredPos, endAnimTime).OnComplete(() => onComplete?.Invoke());
+
+        if (mainCamera.orthographic)
         {
             float endCameraSize = boundries.bounds.size.y * 0.5f;
-
-            mainCamera.orthographicSize += (endCameraSize - mainCamera.orthographicSize) * Time.deltaTime;
-            if (endCameraSize - mainCamera.orthographicSize < 0.01f)
-            {
-                mainCamera.orthographicSize = endCameraSize;
-            }
+            mainCamera.DOOrthoSize(endCameraSize, endAnimTime);
         }
     }
 }
