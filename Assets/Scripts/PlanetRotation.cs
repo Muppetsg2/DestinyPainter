@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlanetRotation : MonoBehaviour
 {
     public float rotationSpeed = 20f;
-    public bool rotateClockwise = true;
     [Tooltip("-1 is clockwise; 1 is counter clockwise; 0 static")][Range(-1, 1)] 
     public int rotationMode = -1;
     public Transform arrow1;

@@ -27,9 +27,6 @@ public class PlayerController : MonoBehaviour
     public CameraPlanetSnap planetSnap;
     public Transform currentPlanet;
 
-    private bool rotateClockwise;
-    public int rotationMode = -1;
-
     [Header("Jump")]
     public AnimationCurve launchSpeedCurve;
     public float launchForce = 5f;
@@ -37,7 +34,8 @@ public class PlayerController : MonoBehaviour
     public float returnDelay = 2f;
     public TrailRenderer trail;
 
-    [Header("RotationMultipliers")]
+    [Header("Rotation")]
+    public int rotationMode = -1;
     public float rotationMultiplier = 1.0f;
     public float withTheFlowMultiplier = 1.5f;
     public float againsTheFlowMultiplier = 0.5f;
