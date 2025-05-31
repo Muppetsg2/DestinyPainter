@@ -4,6 +4,7 @@ using SaintsField;
 using SaintsField.Playa;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlanetRotation;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public TrailRenderer trail;
 
     [Header("Rotation")]
-    public int rotationMode = -1;
+    public RotationMode rotationMode = RotationMode.Clockwise;
     public float rotationMultiplier = 1.0f;
     public float withTheFlowMultiplier = 1.5f;
     public float againsTheFlowMultiplier = 0.5f;
@@ -121,7 +122,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * curr.playerRadius;
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
-                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * rotationMultiplier * rotationMode);
+                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * rotationMultiplier * (int)rotationMode);
 
             ValidatePlanetColor(curr);
         }
@@ -190,7 +191,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAttached) return;
 
-        rotationMode = -1;
+        rotationMode = RotationMode.Clockwise;
         UpdateRotationMultiplier(currentPlanet.GetComponent<PlanetRotation>().rotationMode);
     }
 
@@ -198,7 +199,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAttached) return;
 
-        rotationMode = 1;
+        rotationMode = RotationMode.CounterClockwise;
         UpdateRotationMultiplier(currentPlanet.GetComponent<PlanetRotation>().rotationMode);
     }
 
@@ -321,14 +322,14 @@ public class PlayerController : MonoBehaviour
         isLaunched = false;
         trail.gameObject.SetActive(false);
 
-        int planetRotationMode = planet.GetComponent<PlanetRotation>().rotationMode;
-        if (planetRotationMode == 1)
+        RotationMode planetRotationMode = planet.GetComponent<PlanetRotation>().rotationMode;
+        if (planetRotationMode == RotationMode.CounterClockwise)
         {
-            rotationMode = 1;
+            rotationMode = RotationMode.CounterClockwise;
         }
         else
         {
-            rotationMode = -1;
+            rotationMode = RotationMode.Clockwise;
         }
         UpdateRotationMultiplier(planetRotationMode);
 
@@ -397,13 +398,13 @@ public class PlayerController : MonoBehaviour
         //sr.material.SetColor("_Color", ColorsManager.Instance.GetColor(color, ColorCategory.Secondary) * 0.5f);
     }
 
-    public void UpdateRotationMultiplier(int planetRotationMode)
+    public void UpdateRotationMultiplier(RotationMode planetRotationMode)
     {
-        if (planetRotationMode == 0)
+        if (planetRotationMode == RotationMode.None)
         {
             rotationMultiplier = noFlowMultiplier;
         }
-        else if (planetRotationMode == rotationMode)
+        else if (rotationMode == planetRotationMode)
         {
             rotationMultiplier = withTheFlowMultiplier;
         }
