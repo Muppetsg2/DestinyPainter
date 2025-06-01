@@ -2,12 +2,39 @@ using UnityEngine;
 
 public class PlanetRotation : MonoBehaviour
 {
+    public enum RotationMode
+    {
+        Clockwise = -1,
+        CounterClockwise = 1,
+        None = 0
+    }
+
     public float rotationSpeed = 20f;
-    public bool rotateClockwise = true;
+    public RotationMode rotationMode = RotationMode.CounterClockwise;
+    public Transform arrow1;
+    public Transform arrow2;
+    public bool hideArrows = false;
+
+    void Start()
+    {
+        if (rotationMode != RotationMode.None && !hideArrows)
+        {
+            arrow1.gameObject.SetActive(true);
+            arrow2.gameObject.SetActive(true);
+
+            if (rotationMode == RotationMode.CounterClockwise)
+            {
+                arrow1.localScale = new Vector3(arrow1.localScale.x, -1 * arrow1.localScale.y, arrow1.localScale.z);
+                arrow1.localPosition = new Vector3(arrow1.localPosition.x, -1 * arrow1.localPosition.y, arrow1.localPosition.z);
+
+                arrow2.localScale = new Vector3(arrow2.localScale.x, -1 * arrow2.localScale.y, arrow2.localScale.z);
+                arrow2.localPosition = new Vector3(arrow2.localPosition.x, -1 * arrow2.localPosition.y, arrow2.localPosition.z);
+            }
+        }
+    }
 
     void Update()
     {
-        float direction = rotateClockwise ? -1 : 1;
-        transform.Rotate(0f, 0f, direction * rotationSpeed * Time.deltaTime);
+        transform.Rotate(0f, 0f, (int)rotationMode * rotationSpeed * Time.deltaTime);
     }
 }
