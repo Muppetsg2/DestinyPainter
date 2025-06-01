@@ -14,7 +14,18 @@ public class SplashLineAnimation : MonoBehaviour
     private float currentLineLength;
     private readonly List<float> positionPercent = new();
 
-    void Start()
+    private Sequence sq = null;
+
+    void Awake()
+    {
+        Setup();
+    }
+
+#if UNITY_EDITOR
+    public void Setup()
+#else
+    private void Setup()
+#endif
     {
         float minLength = lineRenderer.GetPosition(0).y;
         float maxLength = lineRenderer.GetPosition(lineRenderer.positionCount - 1).y;
@@ -24,25 +35,32 @@ public class SplashLineAnimation : MonoBehaviour
             positionPercent.Add((lineRenderer.GetPosition(i).y - minLength) * maxmindiv);
         }
 
-        lineRenderer.widthMultiplier = 0f;
+        //lineRenderer.widthMultiplier = 0f;
         SetLineLength(0f);
 
-        PlayAnim();
+        //PlayAnim();
     }
 
     public void SetColor(Color col)
     {
-        GradientColorKey[] keys = lineRenderer.colorGradient.colorKeys;
+        GradientColorKey[] colorKeys = lineRenderer.colorGradient.colorKeys;
         for (int i = 0; i < lineRenderer.colorGradient.colorKeys.Length; ++i)
         {
-            GradientColorKey key = keys[i];
+            GradientColorKey key = colorKeys[i];
             key.color.r = col.r;
             key.color.g = col.g;
             key.color.b = col.b;
-            keys[i] = key;
+            colorKeys[i] = key;
+        }
+        GradientAlphaKey[] alphaKeys = lineRenderer.colorGradient.alphaKeys;
+        for (int i = 0; i < lineRenderer.colorGradient.colorKeys.Length; ++i)
+        {
+            GradientAlphaKey key = alphaKeys[i];
+            key.alpha = col.a;
+            alphaKeys[i] = key;
         }
         Gradient gradient = new Gradient();
-        gradient.SetKeys(keys, lineRenderer.colorGradient.alphaKeys);
+        gradient.SetKeys(colorKeys, alphaKeys);
         lineRenderer.colorGradient = gradient;
     }
 
@@ -50,12 +68,27 @@ public class SplashLineAnimation : MonoBehaviour
     {
         lineRenderer.widthMultiplier = Random.Range(lineWidth.Min, lineWidth.Max);
 
-        DOTween.To(
+        sq = DOTween.Sequence().Pause();
+        sq.Append(DOTween.To(
             () => currentLineLength,
             SetLineLength,
             Random.Range(lineLength.Min, lineLength.Max),
             Random.Range(animationTime.Min, animationTime.Max)
-        );
+        ));
+
+        sq.Play();
+    }
+
+    public void Complete()
+    {
+        if (sq != null)
+        {
+            sq.Kill(true);
+            return;
+        }
+
+        lineRenderer.widthMultiplier = Random.Range(lineWidth.Min, lineWidth.Max);
+        SetLineLength(Random.Range(lineLength.Min, lineLength.Max));
     }
 
     void SetLineLength(float length)

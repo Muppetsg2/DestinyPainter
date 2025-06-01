@@ -45,45 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetSplashPrefab: {fileID: 8956329137880412379, guid: f254caf4d42e3174585ab42b65db9f16, type: 3}
-  sortingLayerName: Default
-  sortingOrder: -2
-  useNewSplash: 1
-  spriteOld: {fileID: 21300000, guid: 5c0df5467983c3244b21df12328f8d59, type: 3}
-  spriteNew: {fileID: 7482667652216324306, guid: 66c50fa0fb45c5848a0e397353d4d5f7, type: 3}
-  splashesCount: 8
-  spawnRadius: 0.7
-  splashTestCenter: {x: 0, y: 0, z: 0}
-  colorFrom: {r: 0.49803925, g: 0.13725491, b: 0.22352943, a: 0.7058824}
-  colorTo: {r: 1, g: 0, b: 0.18441486, a: 0.7058824}
-  baseMaterialOld: {fileID: 2100000, guid: 46308b7eb14108d40af007f7aec29210, type: 2}
-  baseMaterialNew: {fileID: 2100000, guid: b160be6ad550abf42ba82e9a0dcde64c, type: 2}
-  scaleCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  scaleDuration: 0.4
-  startScale: {x: 1, y: 1, z: 1}
-  targetScale: {x: 0.7, y: 0.7, z: 1}
   planetSplashCurve:
     serializedVersion: 2
     m_Curve:
@@ -117,7 +78,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  planetSplashAlpha: 0.4
+  planetSplashAlpha: 0.59
   colorLinePrefab: {fileID: 102782829976519939, guid: c5998e68aa42acd4798c0e49c28776af, type: 3}
   linesCount: 20
   excludeBackwardAngle: 45

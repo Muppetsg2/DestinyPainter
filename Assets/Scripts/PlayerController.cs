@@ -319,8 +319,7 @@ public class PlayerController : MonoBehaviour
         // Ustawienie rotacji przy przyczepieniu
         Vector3 directionToPlanet = (transform.position - currentPlanet.position).normalized;
         float angle = Mathf.Atan2(directionToPlanet.y, directionToPlanet.x) * Mathf.Rad2Deg - 90f;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius;
+        transform.SetPositionAndRotation(currentPlanet.position + (transform.position - currentPlanet.position).normalized * currentPlanet.GetComponent<Planet>().playerRadius, Quaternion.Euler(0f, 0f, angle));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -398,6 +398,6 @@ MonoBehaviour:
   endScaleMul: 4
   planetSplashTime: 0.5
   colorBurstOffset: 0.01
-  colorBurstAlpha: 0.4
+  colorBurstAlpha: 0.59
   planetJumpsCounter: 0
-  previousPlanet: {fileID: 0}
+  jumpsHistory: []

@@ -18,6 +18,7 @@ public class MuralImageGeneratorEditor : EditorWindow
     // Bindings
     [SerializeField]
     private Texture2D m_previewTexture;
+    // B_text
     [SerializeField]
     private string m_text;
     [SerializeField]
@@ -26,18 +27,18 @@ public class MuralImageGeneratorEditor : EditorWindow
     private int m_textSize;
     [SerializeField]
     private Color m_textColor;
+    // B_background
     [SerializeField]
-    private Sprite m_backgroundSprite;
+    private float m_backgroundRadius;
     [SerializeField]
     private Color m_backgroundColor;
     [SerializeField]
     private float m_backgroundBorder;
+    // B_splash
     [SerializeField]
     private int m_numberOfSplashes;
     [SerializeField]
-    private Sprite m_splashSprite;
-    [SerializeField]
-    private Material m_splashMaterial;
+    private GameObject m_splashPrefab;
     [SerializeField]
     private float m_splashAlpha;
     [SerializeField]
@@ -46,6 +47,12 @@ public class MuralImageGeneratorEditor : EditorWindow
     private float m_splashScale;
     [SerializeField]
     private float m_splashFillScale;
+    // B_random_scalers
+    [SerializeField]
+    private float m_circleAngleRandomScaler;
+    [SerializeField]
+    private float m_circleDistanceRandomScaler;
+    // B_splash_colors
     [SerializeField]
     private List<Color> m_colors;
 
@@ -220,7 +227,7 @@ public class MuralImageGeneratorEditor : EditorWindow
         UpdateCamera();
     }
 
-    private void UpdateCamera()
+    private void UpdateCamera(bool toPNG = false)
     {
         m_sceneCamera.Render();
 
@@ -229,24 +236,51 @@ public class MuralImageGeneratorEditor : EditorWindow
             m_previewTexture = new Texture2D(m_previewSize, m_previewSize, TextureFormat.RGBAFloat, false, true);
         }
 
+        RenderTexture last = RenderTexture.active;
         RenderTexture.active = m_sceneCamera.targetTexture;
 
         m_previewTexture.ReadPixels(new Rect(0, 0, m_previewSize, m_previewSize), 0, 0);
+
+        ApplyCircularMask(m_previewTexture, m_backgroundRadius, toPNG ? new Color(0, 0, 0, 0) : bgColor);
+
         m_previewTexture.Apply();
 
-        RenderTexture.active = null;
+        RenderTexture.active = last;
+    }
+
+    private void ApplyCircularMask(Texture2D texture, float radius, Color outsideColor)
+    {
+        int width = texture.width;
+        int height = texture.height;
+        Vector2 center = new Vector2(width / 2f, height / 2f);
+        float radiusSqr = radius * radius;
+
+        for (int y = 0; y < height; ++y)
+        {
+            float dy = y - center.y;
+            float dySqr = dy * dy;
+            for (int x = 0; x < width; ++x)
+            {
+                float dx = x - center.x;
+                float distanceSqr = dx * dx + dySqr;
+
+                if (distanceSqr > radiusSqr)
+                {
+                    texture.SetPixel(x, y, outsideColor);
+                }
+            }
+        }
     }
 
     private void Export()
     {
         m_sceneCamera.depthTextureMode = DepthTextureMode.Depth;
-        m_sceneCamera.backgroundColor = new Color(0, 0, 0, 0);
+        //m_sceneCamera.backgroundColor = new Color(0, 0, 0, 0);
 
-        UpdateCamera();
-        string name = $"MuralGenerated_{m_text}_{m_font.name}_{m_numberOfSplashes}";
-        SaveTextureAsPNG(m_previewTexture, name);
+        UpdateCamera(true);
+        SaveTextureAsPNG(m_previewTexture, "GeneratedImage");
 
-        m_sceneCamera.backgroundColor = bgColor;
+        //m_sceneCamera.backgroundColor = bgColor;
 
         UpdateCamera();
     }
@@ -292,51 +326,40 @@ public class MuralImageGeneratorEditor : EditorWindow
         m_generatedRoot.transform.localScale = Vector3.one;
 
         // Background
-        GameObject circle = new GameObject("Circle");
-        circle.transform.SetParent(m_generatedRoot.transform);
-        circle.transform.localScale = Vector3.one * 2f;
-
-        SpriteRenderer sr = circle.AddComponent<SpriteRenderer>();
-        sr.sprite = m_backgroundSprite;
-        sr.color = m_backgroundColor;
-
-        // Mask
-        GameObject mask = new GameObject("Mask");
-        mask.transform.SetParent(circle.transform);
-        mask.transform.localScale = Vector3.one * (1f - (m_backgroundBorder * 0.01f));
-
-        SpriteMask spriteMask = mask.AddComponent<SpriteMask>();
-        spriteMask.sprite = m_backgroundSprite;
-        spriteMask.alphaCutoff = 0.5f;
+        m_sceneCamera.backgroundColor = m_backgroundColor;
 
         // Splashes
-        float radius = (Mathf.Min(circle.transform.lossyScale.x, circle.transform.lossyScale.y) * (1f - (m_backgroundBorder * 0.01f)) - m_splashScale) * 0.5f;
+        float radius = ((m_backgroundRadius - m_splashScale * 256f * 0.5f) * (1f - (m_backgroundBorder * 0.01f))).Remap(0f, m_backgroundRadius, 0f, 1f);
         int baseIndex = rng.Next(m_colors.Count);
         for (int i = 0; i < m_numberOfSplashes; ++i)
         {
-            int indexOffset = rng.Next(-1, 2); // -1, 0, 1
-            int colorIndex = (baseIndex + i + indexOffset + m_colors.Count) % m_colors.Count;
+            Color c = Color.white;
+            if (m_colors.Count > 0)
+            {
+                int indexOffset = rng.Next(-1, 2); // -1, 0, 1
+                int colorIndex = (baseIndex + i + indexOffset + m_colors.Count) % m_colors.Count;
 
-            Color c = m_colors.Count > 0 ? m_colors[colorIndex] : Color.white;
-            c.a = m_splashAlpha;
+                c = m_colors[colorIndex];
+                c.a = m_splashAlpha;
+            }
 
             Vector3 pos = GetRandomPointOnCircle(Vector3.zero, radius);
             GameObject splash = CreateSplash(
                 m_generatedRoot.transform,
                 pos,
                 Vector3.one * m_splashScale,
-                CreateMaterial(c),
+                c,
                 $"Splash_{i}"
             );
         }
 
-        // Text
+        // Canvas
         GameObject canvasObj = new GameObject("Canvas");
         canvasObj.transform.SetParent(m_generatedRoot.transform);
         canvasObj.transform.position = Vector3.zero;
         canvasObj.transform.localScale = Vector3.one * 0.01f;
         canvasObj.AddComponent<RectTransform>();
-        Vector2 size = new Vector2(circle.transform.localScale.x * 100f, circle.transform.localScale.y * 100f);
+        Vector2 size = new Vector2(m_backgroundRadius * radius, m_backgroundRadius * radius);
         canvasObj.GetComponent<RectTransform>().sizeDelta = size;
 
         canvasObj.AddComponent<CanvasScaler>();
@@ -344,8 +367,9 @@ public class MuralImageGeneratorEditor : EditorWindow
 
         Canvas canvas = canvasObj.GetComponent<Canvas>();
         canvas.renderMode = RenderMode.WorldSpace;
-        canvas.sortingOrder = 2;
+        canvas.sortingOrder = 0;
 
+        // Text
         GameObject textObj = new GameObject("Text");
         textObj.transform.SetParent(canvasObj.transform);
         textObj.transform.position = Vector3.zero;
@@ -391,37 +415,39 @@ public class MuralImageGeneratorEditor : EditorWindow
         return Mathf.Pow(r, bias);
     }
 
-    private Material CreateMaterial(Color color)
+    private Material SetMaterial(Material mat, Color color)
     {
-        Material mat = new Material(m_splashMaterial);
-        mat.SetColor("_Color", color);
-        mat.SetVector("_NoiseOffset", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 12.0f, (MonteCarloRandom(1.0f) - 0.5f) * 12.0f));
-        mat.SetFloat("_NoiseStrength", 0.355f);
-        mat.SetFloat("_EdgeSharpness", m_splashEdgeSharpness);
-        mat.SetFloat("_Size", m_splashFillScale);
-        return mat;
+        Material copy = new Material(mat);
+        copy.SetColor("_Color", color);
+        copy.SetVector("_NoiseOffset", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 12.0f, (MonteCarloRandom(1.0f) - 0.5f) * 12.0f));
+        copy.SetFloat("_NoiseStrength", 0.355f);
+        copy.SetFloat("_EdgeSharpness", m_splashEdgeSharpness);
+        copy.SetFloat("_Size", m_splashFillScale);
+        return copy;
     }
 
     Vector3 GetRandomPointOnCircle(Vector3 center, float radius)
     {
         float minRadius = 0.05f;
-        float angle = MonteCarloRandom(1.0f) * 2.0f * Mathf.PI;
-        float distance = MonteCarloRandom(0.8f) * (radius - minRadius) + minRadius;
+        float angle = MonteCarloRandom(1.0f + m_circleAngleRandomScaler) * 2.0f * Mathf.PI;
+        float distance = MonteCarloRandom(1.0f + m_circleDistanceRandomScaler) * (radius - minRadius) + minRadius;
         return center + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * distance;
     }
 
-    private GameObject CreateSplash(Transform parent, Vector3 position, Vector3 scale, Material mat, string name = "Splash")
+    private GameObject CreateSplash(Transform parent, Vector3 position, Vector3 scale, Color color, string name = "Splash")
     {
-        GameObject splash = new GameObject(name);
-        splash.transform.parent = parent;
-        splash.transform.localPosition = position;
+        GameObject splash = Instantiate(m_splashPrefab, position, Quaternion.Euler(0.0f, 0.0f, 0.0f), parent);
+        splash.name = name;
         splash.transform.localScale = scale;
 
-        SpriteRenderer sr = splash.AddComponent<SpriteRenderer>();
-        sr.sprite = m_splashSprite;
-        sr.material = mat;
-        sr.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-        sr.sortingOrder = 1;
+        SpriteRenderer sr = splash.GetComponent<SpriteRenderer>();
+        //sr.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+
+        sr.material = SetMaterial(sr.sharedMaterial, color);
+
+        SplashLinesGenerator sl = splash.GetComponent<SplashLinesGenerator>();
+        sl.SetColor(color);
+        sl.GenerateLines(color.a * 0.9f, false);
 
         return splash;
     }
@@ -443,16 +469,17 @@ public class MuralImageGeneratorEditor : EditorWindow
                 m_font = loadedData.font;
                 m_textSize = loadedData.textSize;
                 m_textColor = loadedData.textColor;
-                m_backgroundSprite = loadedData.backgroundSprite;
+                m_backgroundRadius = loadedData.backgroundRadius;
                 m_backgroundColor = loadedData.backgroundColor;
                 m_backgroundBorder = loadedData.backgroundBorder;
                 m_numberOfSplashes = loadedData.numberOfSplashes;
-                m_splashSprite = loadedData.splashSprite;
-                m_splashMaterial = loadedData.splashMaterial;
+                m_splashPrefab = loadedData.splashPrefab;
                 m_splashAlpha = loadedData.splashAlpha;
                 m_splashEdgeSharpness = loadedData.splashEdgeSharpness;
                 m_splashScale = loadedData.splashScale;
                 m_splashFillScale = loadedData.splashFillScale;
+                m_circleAngleRandomScaler = loadedData.circleAngleRandomScaler;
+                m_circleDistanceRandomScaler = loadedData.circleDistanceRandomScaler;
 
                 m_colors.Clear();
                 m_colors.AddRange(loadedData.colorList);
@@ -481,16 +508,17 @@ public class MuralImageGeneratorEditor : EditorWindow
             asset.font = m_font;
             asset.textSize = m_textSize;
             asset.textColor = m_textColor;
-            asset.backgroundSprite = m_backgroundSprite;
+            asset.backgroundRadius = m_backgroundRadius;
             asset.backgroundColor = m_backgroundColor;
             asset.backgroundBorder = m_backgroundBorder;
             asset.numberOfSplashes = m_numberOfSplashes;
-            asset.splashSprite = m_splashSprite;
-            asset.splashMaterial = m_splashMaterial;
+            asset.splashPrefab = m_splashPrefab;
             asset.splashAlpha = m_splashAlpha;
             asset.splashEdgeSharpness = m_splashEdgeSharpness;
             asset.splashScale = m_splashScale;
             asset.splashFillScale = m_splashFillScale;
+            asset.circleAngleRandomScaler = m_circleAngleRandomScaler;
+            asset.circleDistanceRandomScaler = m_circleDistanceRandomScaler;
 
             asset.colorList = new List<Color>();
             asset.colorList.AddRange(m_colors);
