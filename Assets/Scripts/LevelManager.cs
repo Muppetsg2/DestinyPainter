@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -15,9 +16,11 @@ public class LevelManager : MonoBehaviour
     public CameraPlanetSnap cameraSnap;
 
     [Header("Canvases")]
-    public GameObject gameCanvas;
-    public GameObject pauseCanvas;
-    public GameObject endCanvas;
+    public GameCanvasScript gameCanvas;
+    public PauseCanvasScript pauseCanvas;
+    public EndCanvasScript endCanvas;
+
+    public UnityEvent<int> OnStarsChanged;
 
     private void Awake()
     {
@@ -29,19 +32,31 @@ public class LevelManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (player.planetJumpsCounter <= data.thirdStarMaxJumps)
+        player.OnJump.AddListener(UpdateStars);
+        UpdateStars(player.planetJumpsCounter);
+    }
+
+    private void UpdateStars(uint playerJumps)
+    {
+        int oldStars = currentStars;
+        if (playerJumps <= data.thirdStarMaxJumps)
         {
             currentStars = 3;
         }
-        else if (player.planetJumpsCounter <= data.secondStarMaxJumps)
+        else if (playerJumps <= data.secondStarMaxJumps)
         {
             currentStars = 2;
         }
         else
         {
             currentStars = 1;
+        }
+
+        if (currentStars != oldStars)
+        {
+            OnStarsChanged.Invoke(currentStars);
         }
     }
 
@@ -52,23 +67,27 @@ public class LevelManager : MonoBehaviour
 
     public void UnpauseLevel()
     {
-        pauseCanvas.SetActive(false);
-        gameCanvas.SetActive(true);
+        pauseCanvas.Close(() =>
+        {
+            pauseCanvas.gameObject.SetActive(false);
+            gameCanvas.gameObject.SetActive(true);
+        });
     }
 
     public void PauseLevel()
     {
-        gameCanvas.SetActive(false);
-        pauseCanvas.SetActive(true);
+        gameCanvas.gameObject.SetActive(false);
+        pauseCanvas.gameObject.SetActive(true);
+        pauseCanvas.Open();
     }
 
     public void FinishLevel()
     {
         data.SaveLevelStars(currentStars);
-        gameCanvas.SetActive(false);
+        gameCanvas.gameObject.SetActive(false);
         cameraSnap.PlayEndAnim(() =>
         {
-            endCanvas.SetActive(true);
+            endCanvas.gameObject.SetActive(true);
         });
     }
 

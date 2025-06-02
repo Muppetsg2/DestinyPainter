@@ -3,6 +3,7 @@ using System.Linq;
 using SaintsField;
 using SaintsField.Playa;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using static PlanetRotation;
 
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public float colorBurstOffset = 0.5f;
     [Range(0, 1)] public float colorBurstAlpha = 1.0f;
 
+    public UnityEvent<uint> OnJump;
+
     [LayoutStart("Info", ELayout.FoldoutBox)]
     [ReadOnly] public uint planetJumpsCounter = 0;
     //[ReadOnly] public Transform previousPlanet;
@@ -74,8 +77,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private JumpData? currentJump = null;
-    [SerializeField]
-    private List<JumpData> jumpsHistory = new();
+    private readonly List<JumpData> jumpsHistory = new();
 
     void OnEnable()
     {
@@ -184,6 +186,7 @@ public class PlayerController : MonoBehaviour
         trail.gameObject.SetActive(true);
 
         ++planetJumpsCounter;
+        OnJump.Invoke(planetJumpsCounter);
     }
 
     public void RotateClockwise()

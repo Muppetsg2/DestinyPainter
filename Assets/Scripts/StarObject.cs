@@ -24,6 +24,8 @@ public class StarObject : MonoBehaviour
 
     public void SetStarActive(bool value)
     {
+        if (value == active) return;
+
         active = value;
         SetStarColor();
     }
