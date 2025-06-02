@@ -4,6 +4,7 @@ using SaintsField;
 using SaintsField.Playa;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlanetRotation;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
@@ -26,14 +27,19 @@ public class PlayerController : MonoBehaviour
     [Header("Planets")]
     public Transform currentPlanet;
 
-    private bool rotateClockwise;
-
     [Header("Jump")]
     public AnimationCurve launchSpeedCurve;
     public float launchForce = 5f;
     public float snapDistance = 0.5f;
     public float returnDelay = 2f;
     public TrailRenderer trail;
+
+    [Header("Rotation")]
+    public RotationMode rotationMode = RotationMode.Clockwise;
+    public float rotationMultiplier = 1.0f;
+    public float withTheFlowMultiplier = 1.5f;
+    public float againsTheFlowMultiplier = 0.5f;
+    public float noFlowMultiplier = 1.0f;
 
     [Header("Planet Splash Animation")]
     public float startScaleMul = 2f;
@@ -115,7 +121,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * curr.playerRadius;
             transform.RotateAround(currentPlanet.position, Vector3.forward, 
-                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * (rotateClockwise ? -1 : 1));
+                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * rotationMultiplier * (int)rotationMode);
 
             ValidatePlanetColor(curr);
         }
@@ -184,14 +190,16 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAttached) return;
 
-        rotateClockwise = true;
+        rotationMode = RotationMode.Clockwise;
+        UpdateRotationMultiplier(currentPlanet.GetComponent<PlanetRotation>().rotationMode);
     }
 
     public void RotateCounterClockwise()
     {
         if (!isAttached) return;
 
-        rotateClockwise = false;
+        rotationMode = RotationMode.CounterClockwise;
+        UpdateRotationMultiplier(currentPlanet.GetComponent<PlanetRotation>().rotationMode);
     }
 
     private void RevertJumpData(JumpData data)
@@ -313,7 +321,16 @@ public class PlayerController : MonoBehaviour
         isLaunched = false;
         trail.gameObject.SetActive(false);
 
-        rotateClockwise = planet.GetComponent<PlanetRotation>().rotateClockwise;
+        RotationMode planetRotationMode = planet.GetComponent<PlanetRotation>().rotationMode;
+        if (planetRotationMode == RotationMode.CounterClockwise)
+        {
+            rotationMode = RotationMode.CounterClockwise;
+        }
+        else
+        {
+            rotationMode = RotationMode.Clockwise;
+        }
+        UpdateRotationMultiplier(planetRotationMode);
 
         // Ustawienie rotacji przy przyczepieniu
         Vector3 directionToPlanet = (transform.position - currentPlanet.position).normalized;
@@ -379,5 +396,21 @@ public class PlayerController : MonoBehaviour
         trail.startColor = ColorsManager.Instance.GetColor(color, ColorCategory.Secondary);
         trail.endColor = ColorsManager.Instance.GetColor(color, ColorCategory.Primary);
         //sr.material.SetColor("_Color", ColorsManager.Instance.GetColor(color, ColorCategory.Secondary) * 0.5f);
+    }
+
+    public void UpdateRotationMultiplier(RotationMode planetRotationMode)
+    {
+        if (planetRotationMode == RotationMode.None)
+        {
+            rotationMultiplier = noFlowMultiplier;
+        }
+        else if (rotationMode == planetRotationMode)
+        {
+            rotationMultiplier = withTheFlowMultiplier;
+        }
+        else
+        {
+            rotationMultiplier = noFlowMultiplier;
+        }
     }
 }

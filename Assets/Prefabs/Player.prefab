@@ -394,10 +394,16 @@ MonoBehaviour:
   snapDistance: 2
   returnDelay: 1.75
   trail: {fileID: 5867831896094622628}
+  rotationMode: -1
+  rotationMode2: -1
+  rotationMultiplier: 1
+  withTheFlowMultiplier: 1
+  againsTheFlowMultiplier: 0.33
+  noFlowMultiplier: 0.66
   startScaleMul: 2
   endScaleMul: 4
   planetSplashTime: 0.5
   colorBurstOffset: 0.01
   colorBurstAlpha: 0.4
   planetJumpsCounter: 0
-  previousPlanet: {fileID: 0}
+  jumpsHistory: []
