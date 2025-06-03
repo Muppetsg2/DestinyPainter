@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Planet))]
 public class PlanetRotation : MonoBehaviour
 {
     public enum RotationMode
@@ -17,6 +18,8 @@ public class PlanetRotation : MonoBehaviour
 
     void Start()
     {
+        if (GetComponent<Planet>().isEnd) return;
+
         if (rotationMode != RotationMode.None && !hideArrows)
         {
             arrow1.gameObject.SetActive(true);
