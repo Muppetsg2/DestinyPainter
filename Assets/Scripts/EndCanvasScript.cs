@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,9 @@ public class EndCanvasScript : MonoBehaviour
     [Header("Visual")]
     public TextMeshProUGUI title;
     public Image backgroung;
+    public Transform buttons;
+    public GameObject photo;
+    public GridLayoutGroup starsLayout;
 
     [Header("Buttons")]
     public Button menuBtn;
@@ -31,6 +35,16 @@ public class EndCanvasScript : MonoBehaviour
     public TextMeshProUGUI jumpsText;
     public Image levelOverview;
     [TextArea] public string jumpsTemplate;
+
+    [Header("Show Animation")]
+    public float showItemsFromBottomTime;
+    public AnimationCurve showItemsFromBottomCurve;
+    public float showFromPlayerViewTime;
+    public AnimationCurve showFromPlayerViewCurve;
+    public float showFromPlayerViewScale;
+    public float showFromPlayerViewStartYOffset;
+    public float showFromPlayerViewStarsDelay;
+    public float photoImageColorTransitionTime;
 
     private void Awake()
     {
@@ -77,7 +91,113 @@ public class EndCanvasScript : MonoBehaviour
 
     public void Open()
     {
-        levelOverview.sprite = CreateSprite();
+        float bottomY = -GetComponent<RectTransform>().rect.height;
+
+        Vector3 lastPos = title.transform.localPosition;
+        float titleLocalY = lastPos.y;
+        lastPos.y = bottomY;
+        title.transform.localPosition = lastPos;
+
+        lastPos = buttons.transform.localPosition;
+        float buttonsLocalY = lastPos.y;
+        lastPos.y = bottomY;
+        buttons.transform.localPosition = lastPos;
+
+        menuBtn.enabled = false;
+        shareBtn.enabled = false;
+        nextLevelBtn.enabled = false;
+
+        endSprite = CreateSprite();
+        levelOverview.sprite = endSprite;
+        levelOverview.color = Color.black;
+
+        Vector3 scale = Vector3.one * showFromPlayerViewScale;
+
+        photo.transform.localScale = scale;
+        lastPos = photo.transform.localPosition;
+        float photoLocalY = lastPos.y;
+        lastPos.y += showFromPlayerViewStartYOffset;
+        photo.transform.localPosition = lastPos;
+        photo.SetActive(false);
+
+        starsLayout.enabled = false;
+
+        star1.transform.localScale = scale;
+        star1.SetActiveTextHolder(false);
+        lastPos = star1.transform.localPosition;
+        float star1LocalY = lastPos.y;
+        lastPos.y += showFromPlayerViewStartYOffset;
+        star1.transform.localPosition = lastPos;
+        star1.gameObject.SetActive(false);
+
+        star2.transform.localScale = scale;
+        star2.SetActiveTextHolder(false);
+        lastPos = star2.transform.localPosition;
+        float star2LocalY = lastPos.y;
+        lastPos.y += showFromPlayerViewStartYOffset;
+        star2.transform.localPosition = lastPos;
+        star2.gameObject.SetActive(false);
+
+        star3.transform.localScale = scale;
+        star3.SetActiveTextHolder(false);
+        lastPos = star3.transform.localPosition;
+        float star3LocalY = lastPos.y;
+        lastPos.y += showFromPlayerViewStartYOffset;
+        star3.transform.localPosition = lastPos;
+        star3.gameObject.SetActive(false);
+
+        jumpsText.transform.localScale = scale;
+        lastPos = jumpsText.transform.localPosition;
+        float jumpsTextLocalY = lastPos.y;
+        lastPos.y += showFromPlayerViewStartYOffset;
+        jumpsText.transform.localPosition = lastPos;
+        jumpsText.gameObject.SetActive(false);
+
+        title.transform.DOLocalMoveY(titleLocalY, showItemsFromBottomTime).SetEase(showItemsFromBottomCurve).OnComplete(() =>
+        {
+            photo.SetActive(true);
+            photo.transform.DOLocalMoveY(photoLocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
+            photo.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+            {
+                levelOverview.DOColor(Color.white, photoImageColorTransitionTime);
+
+                star1.gameObject.SetActive(true);
+                star1.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
+                star1.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+                {
+                    star1.SetActiveTextHolder(true);
+                });
+
+                star2.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay)
+                .OnStart(() => star2.gameObject.SetActive(true));
+                star2.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay).OnComplete(() =>
+                {
+                    star2.SetActiveTextHolder(true);
+                });
+
+                star3.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(2 * showFromPlayerViewStarsDelay)
+                .OnStart(() => star3.gameObject.SetActive(true));
+                star3.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(2 * showFromPlayerViewStarsDelay).OnComplete(() =>
+                {
+                    star3.SetActiveTextHolder(true);
+
+                    starsLayout.enabled = true;
+
+                    jumpsText.gameObject.SetActive(true);
+
+                    jumpsText.transform.DOLocalMoveY(jumpsTextLocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
+                    jumpsText.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+                    {
+                        buttons.transform.DOLocalMoveY(buttonsLocalY, showItemsFromBottomTime).SetEase(showItemsFromBottomCurve).OnComplete(() =>
+                        {
+                            menuBtn.enabled = true;
+                            shareBtn.enabled = true;
+                            nextLevelBtn.enabled = true;
+                        });
+                    });
+                });
+            });
+        });
     }
 
     Sprite CreateSprite()
@@ -91,12 +211,14 @@ public class EndCanvasScript : MonoBehaviour
         RenderTexture renderTexture = new(width, height, 0, RenderTextureFormat.ARGB32);
         Texture2D texture = new(width, height, TextureFormat.RGBA32, false);
 
+        float lastAspect = mainCamera.aspect;
+        mainCamera.aspect = imageAspect;
+
         RenderTexture lastRenderTex = mainCamera.targetTexture;
         mainCamera.targetTexture = renderTexture;
         LayerMask lastCullingMask = mainCamera.cullingMask;
         mainCamera.cullingMask = renderCullingMask;
-        float lastAspect = mainCamera.aspect;
-        mainCamera.aspect = imageAspect;
+
         mainCamera.Render();
 
         mainCamera.targetTexture = lastRenderTex;

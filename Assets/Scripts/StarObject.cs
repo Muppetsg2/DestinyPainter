@@ -35,4 +35,9 @@ public class StarObject : MonoBehaviour
         text = value;
         textHolder.text = text;
     }
+
+    public void SetActiveTextHolder(bool value)
+    {
+        textHolder.gameObject.SetActive(value);
+    }
 }

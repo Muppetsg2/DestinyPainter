@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 228794590390855459}
   - component: {fileID: 8706859397108784162}
-  - component: {fileID: 4936560938577557896}
   - component: {fileID: 2063761991085144802}
   m_Layer: 0
   m_Name: SplashRenderCamera
@@ -85,14 +84,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4936560938577557896
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3237339475040095233}
-  m_Enabled: 1
 --- !u!114 &2063761991085144802
 MonoBehaviour:
   m_ObjectHideFlags: 0

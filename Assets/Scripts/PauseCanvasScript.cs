@@ -36,22 +36,6 @@ public class PauseCanvasScript : MonoBehaviour
     public float hideItemsDelays = 0.1f;
     public AnimationCurve closeAnimCurve;
 
-    private float bottomY;
-    private float backgroundOpenAlpha;
-    private float titleLocalY;
-    private float starsLocalY;
-    private float buttonsLocalY;
-
-    private void Awake()
-    {
-        bottomY = -GetComponent<RectTransform>().rect.height;
-
-        backgroundOpenAlpha = background.color.a;
-        titleLocalY = title.transform.localPosition.y;
-        starsLocalY = stars.transform.localPosition.y;
-        buttonsLocalY = buttons.transform.localPosition.y;
-    }
-
     void Start()
     {
         LevelManager.Instance.OnStarsChanged.AddListener(UpdateStars);
@@ -68,19 +52,25 @@ public class PauseCanvasScript : MonoBehaviour
 
     public void Open()
     {
+        float bottomY = -GetComponent<RectTransform>().rect.height;
+
         Color bg = background.color;
+        float backgroundOpenAlpha = bg.a;
         bg.a = 0f;
         background.color = bg;
 
         Vector3 local = title.transform.localPosition;
+        float titleLocalY = local.y;
         local.y = bottomY;
         title.transform.localPosition = local;
 
         local = stars.transform.localPosition;
+        float starsLocalY = local.y;
         local.y = bottomY;
         stars.transform.localPosition = local;
 
         local = buttons.transform.localPosition;
+        float buttonsLocalY = local.y;
         local.y = bottomY;
         buttons.transform.localPosition = local;
 
@@ -103,21 +93,7 @@ public class PauseCanvasScript : MonoBehaviour
 
     public void Close(Action onComplete = null)
     {
-        Color bg = background.color;
-        bg.a = backgroundOpenAlpha;
-        background.color = bg;
-
-        Vector3 local = title.transform.localPosition;
-        local.y = titleLocalY;
-        title.transform.localPosition = local;
-
-        local = stars.transform.localPosition;
-        local.y = starsLocalY;
-        stars.transform.localPosition = local;
-
-        local = buttons.transform.localPosition;
-        local.y = buttonsLocalY;
-        buttons.transform.localPosition = local;
+        float bottomY = -GetComponent<RectTransform>().rect.height;
 
         menuBtn.enabled = false;
         restartBtn.enabled = false;
