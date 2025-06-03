@@ -60,6 +60,7 @@ Miodzik:
     ✔ Smugi lecące za graczem (im wolniej leci tym smugi są krótsze) @high @Muppetsg2 @done(25-05-29 01:21)
     ✔ Wytracanie prędkości podczas lotu gracza (może dodać curve) @high @Muppetsg2 @done(25-05-29 01:21)
     ☐ Dodać zachowanie przycisków podczas klikania @high @Muppetsg2
+    ☐ Zaprojektować wygląd strzałek kierunku obrotu planet @high @Muppetsg2
 
 Mechanika:
     ✔ Dodać mechanikę że są planety które się obracają i są takie które nie. I te które się obracają mają strzałkę w którą stronę się obracają. Na planetach obracających się mamy współczynnik prędkości poruszania się w przeciwną stronę równy 0.5, a w dobrą stronę 1.5. Stojące nie mają strzałki i w obie strony współczynnik poruszania się jest równy 1.0. @critical @Magnar303 @done(25-05-31 18:03)
