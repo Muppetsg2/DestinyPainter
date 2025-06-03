@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="46"
+   height="46"
+   viewBox="0 0 46 46"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="ArrowRotate.svg"
+   inkscape:export-filename="ArrowRotate.png"
+   inkscape:export-xdpi="1068.5217"
+   inkscape:export-ydpi="1068.5217"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="17.021739"
+     inkscape:cx="23.029374"
+     inkscape:cy="23"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M16.8548 12.9959C21.0484 11.7208 25.5159 11.726 29.6923 13.0107C33.8688 14.2955 37.5671 16.802 40.3188 20.2136C42.3232 22.6988 43.7592 25.5835 44.546 28.663C45.0351 30.5773 43.5641 32.3337 41.5977 32.5265C39.6119 32.7211 37.8874 31.2351 37.2397 29.3478C36.6761 27.705 35.8304 26.1655 34.7324 24.804C32.875 22.5012 30.3788 20.809 27.5597 19.9418C24.7407 19.0747 21.7252 19.0714 18.8946 19.932C17.4206 20.3802 16.0307 21.0523 14.7708 21.9181L18.2149 24.3537C19.5314 25.2847 19.2616 27.3105 17.7476 27.8646L4.83889 32.587C3.52528 33.0673 2.13722 32.0858 2.15253 30.6871L2.30243 16.9433C2.32007 15.331 4.14059 14.4015 5.4571 15.3322L8.63727 17.581C11.0128 15.4893 13.8125 13.921 16.8548 12.9959Z"
+     fill="white"
+     id="path1" />
+</svg>
