@@ -1,51 +1,15 @@
 using UnityEngine;
 using DG.Tweening;
-using SaintsField;
-using SaintsField.Playa;
 
 public class SplashSpawner : MonoBehaviour
 {
     private static SplashSpawner instance;
     public static SplashSpawner Instance { get { return instance; } }
 
+    [Header("Planet Splash Settings")]
     public GameObject planetSplashPrefab;
-
-    [Header("Sprite Renderer Settings")]
-    public string sortingLayerName = "Default";
-    public int sortingOrder = 0;
-
-    [Header("Splash Settings")]
-    public bool useNewSplash = false;
-
-    [HideIf(nameof(useNewSplash))]
-    public Sprite spriteOld;
-
-    [ShowIf(nameof(useNewSplash))]
-    public Sprite spriteNew;
-
-    public int splashesCount = 8;
-    public float spawnRadius = 0.5f;
-
-    [Header("Splash Test Settings")]
-    public Vector3 splashTestCenter = Vector3.zero;
-
-    [Header("Splash Colors")]
-    public Color colorFrom = Color.white;
-    public Color colorTo = Color.red;
-    [HideIf(nameof(useNewSplash))]
-    public Material baseMaterialOld;
-    [ShowIf(nameof(useNewSplash))]
-    public Material baseMaterialNew;
-
-    [Header("Splash Scale Animation")]
-    public AnimationCurve scaleCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
-    public float scaleDuration = 0.5f;
-    public Vector3 startScale = Vector3.one * 0.5f;
-    public Vector3 targetScale = Vector3.one;
-
-    [Header("Planet Splash Animation")]
     public AnimationCurve planetSplashCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
-    public float planetSplashAlpha = 0.4f;
+    [Range(0.0f, 1.0f)] public float planetSplashAlpha = 0.4f;
 
     [Header("Color Burst Settings")]
     public GameObject colorLinePrefab;
@@ -64,8 +28,6 @@ public class SplashSpawner : MonoBehaviour
     };
     public float duration = 0.5f;
 
-    private Transform spawnContainer;
-    private float goldenAngle = 137.508f;
     private readonly System.Random rng = new();
 
     private void Awake()
@@ -83,82 +45,6 @@ public class SplashSpawner : MonoBehaviour
     {
         float r = (float)rng.NextDouble();
         return Mathf.Pow(r, bias);
-    }
-
-    private Material CreateMaterial(Color from, Color to)
-    {
-        Material mat = new Material(useNewSplash ? baseMaterialNew : baseMaterialOld);
-        mat.SetColor("_Color", Color.Lerp(from, to, MonteCarloRandom(1.5f)));
-        if(useNewSplash)
-        {
-            mat.SetVector("_NoiseOffset", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 6.0f, (MonteCarloRandom(1.0f) - 0.5f) * 6.0f));
-        }
-        else
-        {
-            mat.SetVector("_Magnitude", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 0.25f, (MonteCarloRandom(1.0f) - 0.5f) * 0.25f));
-        }
-        return mat;
-    }
-
-    [Button]
-    [ContextMenu("Delete Splashes")]
-    public void DeleteSplashes()
-    {
-        if (spawnContainer == null)
-        {
-            GameObject containerObj = new GameObject("SpawnedSplashes");
-            containerObj.transform.SetParent(transform);
-            spawnContainer = containerObj.transform;
-        }
-
-        for (int i = spawnContainer.childCount - 1; i >= 0; --i)
-        {
-            DestroyImmediate(spawnContainer.GetChild(i).gameObject);
-        }
-
-        DestroyImmediate(spawnContainer);
-    }
-
-    [Button]
-    [ContextMenu("Spawn Splashes")]
-    public void SpawnSplashes()
-    {
-        DeleteSplashes();
-
-        for (int i = 0; i < splashesCount; ++i)
-        {
-            GameObject obj = new GameObject("Splash_" + i);
-            obj.transform.SetParent(spawnContainer);
-            obj.transform.position = splashTestCenter;
-
-            // Dodaj sprite i kolor
-            SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-            sr.sprite = useNewSplash ? spriteNew : spriteOld;
-            //sr.color = Color.Lerp(colorFrom, colorTo, (float)rng.NextDouble());
-            sr.color = Color.white;
-            sr.sortingLayerName = sortingLayerName;
-            sr.sortingOrder = sortingOrder;
-            sr.material = CreateMaterial(colorFrom, colorTo);
-
-            // Losowa rotacja Z
-            float randomRotation = (float)rng.NextDouble() * 180f;
-            obj.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
-
-            // Losowe przesuniêcie od œrodka
-            float angle = i * goldenAngle * Mathf.Deg2Rad;
-            //float radius = Mathf.Lerp(0.1f, spawnRadius, Mathf.Sqrt((float)i / count));
-            float radius = Mathf.Lerp(0.1f, spawnRadius, MonteCarloRandom(2.0f));
-            Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-            Vector3 targetPos = splashTestCenter + new Vector3(offset.x, offset.y, 0f);
-            obj.transform.DOMove(targetPos, 0.4f).SetEase(Ease.OutQuad);
-
-            // Skalowanie z AnimationCurve
-            obj.transform.localScale = startScale;
-            DOTween.To(() => 0f, t => {
-                float curveVal = scaleCurve.Evaluate(t);
-                obj.transform.localScale = Vector3.Lerp(startScale, targetScale, curveVal);
-            }, 1f, scaleDuration);
-        }
     }
 
     public void ColorHitBurst(Color primary, Color secondary, Vector3 impactPoint, Vector3 impactNormal, Vector3 impactDirection, float includeAngle = 0f, bool withoutExclusion = false)
@@ -214,64 +100,17 @@ public class SplashSpawner : MonoBehaviour
         }
     }
 
-    public void PlayerDeathSplashes(Vector3 c, Color primary, Color secondary, float alpha = 1.0f)
-    {
-        for (int i = 0; i < splashesCount; ++i)
-        {
-            GameObject obj = new GameObject("SplashPlayerDeath_" + i);
-            obj.transform.SetParent(spawnContainer);
-            obj.transform.position = c;
-
-            // Dodaj sprite i kolor
-            SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
-            sr.sprite = useNewSplash ? spriteNew : spriteOld;
-            sr.color = Color.white;
-            sr.sortingLayerName = sortingLayerName;
-            sr.sortingOrder = sortingOrder;
-
-            Material mat = new Material(baseMaterialOld);
-            primary.a = 0.7058824f;
-            secondary.a = 0.7058824f;
-            sr.material = CreateMaterial(primary, secondary);
-
-            // Losowa rotacja Z
-            float randomRotation = (float)rng.NextDouble() * 180f;
-            obj.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
-
-            // Losowe przesuniêcie od œrodka
-            float angle = i * goldenAngle * Mathf.Deg2Rad;
-            //float radius = Mathf.Lerp(0.1f, spawnRadius, Mathf.Sqrt((float)i / count));
-            float radius = Mathf.Lerp(0.1f, spawnRadius, MonteCarloRandom(2.0f));
-            Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
-            Vector3 targetPos = c + new Vector3(offset.x, offset.y, 0f);
-            obj.transform.DOMove(targetPos, 0.4f).SetEase(Ease.OutQuad);
-
-            // Skalowanie z AnimationCurve
-            obj.transform.localScale = startScale;
-            DOTween.To(() => 0f, t => {
-                float curveVal = scaleCurve.Evaluate(t);
-                obj.transform.localScale = Vector3.Lerp(startScale, targetScale, curveVal);
-            }, 1f, scaleDuration);
-        }
-    }
-
     public void PlanetSplash(Vector3 c, Color secondary, Vector3 scaleStart, Vector3 scaleEnd, float scaleDur)
     {
         GameObject obj = Instantiate(planetSplashPrefab, c, Quaternion.identity);
         obj.name = "PlanetSplash";
 
-        // Dodaj sprite i kolor
+        // Dodaj kolor
         SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
-        sr.sprite = useNewSplash ? spriteNew : spriteOld;
-        Color col = Color.white;
+        Color col = secondary;
         col.a = planetSplashAlpha;
-        sr.color = col;
-        sr.sortingLayerName = sortingLayerName;
-        sr.sortingOrder = sortingOrder;
-        col = Color.Lerp(secondary, secondary, MonteCarloRandom(1.5f));
         sr.material.SetColor("_Color", col);
         sr.material.SetVector("_NoiseOffset", new Vector2((MonteCarloRandom(1.0f) - 0.5f) * 6.0f, (MonteCarloRandom(1.0f) - 0.5f) * 6.0f));
-        //sr.material = CreateMaterial(secondary, secondary);
 
         // Losowa rotacja Z
         // TODO: na razie linie nie uwzglêdniaj¹ obrotów
@@ -287,7 +126,7 @@ public class SplashSpawner : MonoBehaviour
         {
             SplashLinesGenerator slg = obj.GetComponent<SplashLinesGenerator>();
             slg.SetColor(col);
-            obj.GetComponent<SplashLinesGenerator>().GenerateLines(col.a);
+            obj.GetComponent<SplashLinesGenerator>().GenerateLines(col.a * 0.9f);
         });
     }
 }

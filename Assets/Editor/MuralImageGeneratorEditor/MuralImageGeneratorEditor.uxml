@@ -36,11 +36,11 @@
             <engine:VisualElement name="TextSectionEnd" style="flex-grow: 1; height: 20px; max-height: 20px; min-height: 20px; border-bottom-width: 2px; border-right-width: 2px; border-left-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-bottom-color: rgb(152, 152, 152); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; width: 99%; align-self: center;" />
             <engine:VisualElement name="Separator" style="flex-grow: 1; height: 5px;" />
             <engine:Label text="Background" name="BackgroundLabel" style="-unity-font-style: bold; font-size: 18px; -unity-text-align: middle-center; justify-content: flex-start; align-self: center; align-content: flex-start; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-top-color: rgb(152, 152, 152); border-right-width: 2px; border-top-right-radius: 10px; border-top-left-radius: 10px; border-left-width: 2px; border-top-width: 2px; width: 99%;" />
-            <editor:ObjectField label="Background Sprite" name="BackgroundSprite" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="UnityEngine.Sprite, UnityEngine.CoreModule" value="project://database/Assets/Editor/MuralImageGeneratorEditor/Images/Circle.png?fileID=-2413806693520163455&amp;guid=c37326a929ce5214a9de47973f03791f&amp;type=3#Circle" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
+            <engine:Slider label="Background Radius" value="20" high-value="370" name="Radius" show-input-field="true" direction="Horizontal" inverted="false" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
                 <Bindings>
-                    <engine:DataBinding property="value" data-source-path="m_backgroundSprite" binding-mode="TwoWay" />
+                    <engine:DataBinding property="value" data-source-path="m_backgroundRadius" binding-mode="TwoWay" />
                 </Bindings>
-            </editor:ObjectField>
+            </engine:Slider>
             <editor:ColorField label="Background Color" value="#000000FF" name="BackgroundColor" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
                 <Bindings>
                     <engine:DataBinding property="value" data-source-path="m_backgroundColor" binding-mode="TwoWay" />
@@ -59,14 +59,9 @@
                     <engine:DataBinding property="value" data-source-path="m_numberOfSplashes" binding-mode="TwoWay" />
                 </Bindings>
             </engine:IntegerField>
-            <editor:ObjectField label="Splash Sprite" name="SplashSprite" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="UnityEngine.Sprite, UnityEngine.CoreModule" value="project://database/Assets/Editor/MuralImageGeneratorEditor/Images/Square.png?fileID=7482667652216324306&amp;guid=32de112c22913ad47979e347413b76a1&amp;type=3#Square" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
+            <editor:ObjectField label="Splash Prefab" name="SplashPrefab" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="UnityEngine.GameObject, UnityEngine.CoreModule" value="project://database/Assets/Prefabs/Splash.prefab?fileID=8956329137880412379&amp;guid=f254caf4d42e3174585ab42b65db9f16&amp;type=3#Splash" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
                 <Bindings>
-                    <engine:DataBinding property="value" data-source-path="m_splashSprite" binding-mode="TwoWay" />
-                </Bindings>
-            </editor:ObjectField>
-            <editor:ObjectField label="Material" name="Material" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" value="project://database/Resources/unity_builtin_extra?fileID=10754&amp;guid=0000000000000000f000000000000000&amp;type=0#Sprites-Default" type="UnityEngine.Material, UnityEngine.CoreModule" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
-                <Bindings>
-                    <engine:DataBinding property="value" data-source-path="m_splashMaterial" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" binding-mode="TwoWay" />
+                    <engine:DataBinding property="value" data-source-path="m_splashPrefab" binding-mode="TwoWay" />
                 </Bindings>
             </editor:ObjectField>
             <engine:Slider label="Splash Alpha" value="1" high-value="1" name="Alpha" show-input-field="true" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
@@ -79,17 +74,30 @@
                     <engine:DataBinding property="value" data-source-path="m_splashEdgeSharpness" binding-mode="TwoWay" />
                 </Bindings>
             </engine:Slider>
-            <engine:Slider label="Splash Scale" value="0.35" high-value="1" show-input-field="true" fill="false" name="SplashScale" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
+            <engine:FloatField label="Splash Scale" value="0.35" name="SplashScale" style="border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 2px; border-right-width: 2px;">
                 <Bindings>
                     <engine:DataBinding property="value" data-source-path="m_splashScale" binding-mode="TwoWay" />
                 </Bindings>
-            </engine:Slider>
+            </engine:FloatField>
             <engine:Slider label="Splash Fill Size" value="0.25" high-value="1" name="SplashFillSize" show-input-field="true" style="border-left-width: 2px; border-right-width: 2px; border-right-color: rgb(152, 152, 152); border-left-color: rgb(152, 152, 152); height: 39px;">
                 <Bindings>
                     <engine:DataBinding property="value" data-source-path="m_splashFillScale" binding-mode="TwoWay" />
                 </Bindings>
             </engine:Slider>
             <engine:VisualElement name="SplashSectionEnd" style="flex-grow: 1; height: 20px; max-height: 20px; min-height: 20px; border-bottom-width: 2px; border-right-width: 2px; border-left-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-bottom-color: rgb(152, 152, 152); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; width: 99%; align-self: center;" />
+            <engine:VisualElement name="Separator" style="flex-grow: 1; height: 5px;" />
+            <engine:Label text="Random Scalers" name="RandomScalersLabel" style="-unity-font-style: bold; font-size: 18px; -unity-text-align: middle-center; justify-content: flex-start; align-self: center; align-content: flex-start; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-top-color: rgb(152, 152, 152); border-right-width: 2px; border-top-right-radius: 10px; border-top-left-radius: 10px; border-left-width: 2px; border-top-width: 2px; width: 99%;" />
+            <engine:Slider label="Circle Angle Random Scaler" value="0" high-value="1" name="CircleAngleRandom" show-input-field="true" low-value="-1" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
+                <Bindings>
+                    <engine:DataBinding property="value" data-source-path="m_circleAngleRandomScaler" binding-mode="TwoWay" />
+                </Bindings>
+            </engine:Slider>
+            <engine:Slider label="Circle Distance Random Scaler" value="0" high-value="1" name="CircleDistanceRandom" show-input-field="true" low-value="-1" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
+                <Bindings>
+                    <engine:DataBinding property="value" data-source-path="m_circleDistanceRandomScaler" binding-mode="TwoWay" />
+                </Bindings>
+            </engine:Slider>
+            <engine:VisualElement name="RandomScalersSectionEnd" style="flex-grow: 1; height: 20px; max-height: 20px; min-height: 20px; border-bottom-width: 2px; border-right-width: 2px; border-left-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-bottom-color: rgb(152, 152, 152); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; width: 99%; align-self: center;" />
             <engine:VisualElement name="Separator" style="flex-grow: 1; height: 5px;" />
             <engine:Label text="Splash Colors" name="SplashColorsLabel" style="-unity-font-style: bold; font-size: 18px; -unity-text-align: middle-center; justify-content: flex-start; align-self: center; align-content: flex-start; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-top-color: rgb(152, 152, 152); border-right-width: 2px; border-top-right-radius: 10px; border-top-left-radius: 10px; border-left-width: 2px; border-top-width: 2px; width: 99%;" />
             <engine:ListView virtualization-method="DynamicHeight" show-foldout-header="true" name="ColorList" header-title="Colors" show-add-remove-footer="true" reorder-mode="Animated" show-bound-collection-size="true" show-border="true" reorderable="true" enabled="true" style="border-left-width: 2px; border-right-width: 2px; border-right-color: rgb(152, 152, 152); border-left-color: rgb(152, 152, 152); width: 99%; align-self: center;" />

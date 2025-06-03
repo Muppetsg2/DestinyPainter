@@ -2,16 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using SaintsField;
 using UnityEngine;
-using UnityEngine.Rendering;
-
-// TODO: Create Mask based on sprite wchich will affect lines (only visible outside mask)
 
 public class SplashLinesGenerator : MonoBehaviour
 {
-    [Layer]
-    public string renderLayer;
-    [Layer]
-    public string normalLayer;
+    [Layer] public string renderLayer;
+    [Layer] public string normalLayer;
 
     public Camera renderCamera;
     public SpriteRenderer spriteRenderer;
@@ -32,18 +27,21 @@ public class SplashLinesGenerator : MonoBehaviour
         if (linePointCheckBoxSize > linesPointsSpacingBoxSize) linePointCheckBoxSize = linesPointsSpacingBoxSize;
     }
 
-    void Start()
+    public void SetColor(Color color)
     {
-        //GenerateLines();
-    }
-
-    public void SetColor(Color col)
-    {
-        this.col = col;
+        col = color;
     }
 
     [ContextMenu("Generate Lines")]
-    public void GenerateLines(float alpha)
+    public void ContextMenuGenerateLines()
+    {
+        col = Color.white;
+        GenerateLines(0.5f, false);
+        col = Color.black;
+        col.a = 0.0f;
+    }
+
+    public void GenerateLines(float alpha, bool anim = true)
     {
         ClearLines();
 
@@ -62,6 +60,7 @@ public class SplashLinesGenerator : MonoBehaviour
         // Render Camera view
         renderCamera.gameObject.SetActive(true);
         renderCamera.orthographicSize = transform.TransformVector(0.5f * Vector3.one).x;
+        renderCamera.transform.localPosition = new Vector3(0, 0, renderCamera.orthographicSize != 0.0f ? - (1.0f / renderCamera.orthographicSize) : -1.0f);
         renderCamera.targetTexture = renderTexture;
         renderCamera.Render();
 
@@ -77,7 +76,7 @@ public class SplashLinesGenerator : MonoBehaviour
 
         // Copy to texure
         RenderTexture last = RenderTexture.active;
-        RenderTexture.active = renderTexture;
+        RenderTexture.active = renderCamera.targetTexture;
         texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
         texture.Apply();
         RenderTexture.active = last;
@@ -144,7 +143,12 @@ public class SplashLinesGenerator : MonoBehaviour
             lines.Add(line);
             line.transform.position += new Vector3(posX, posY, 0f);
             var splashLineAnim = line.GetComponent<SplashLineAnimation>();
+#if UNITY_EDITOR
+            splashLineAnim.Setup();
+#endif
             splashLineAnim.SetColor(col);
+            if (anim) splashLineAnim.PlayAnim();
+            else splashLineAnim.Complete();
         }
 
         //for (int i = 0; i < avilablePositions.Count;)
