@@ -44,6 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c7530890502bc4bac9877b898a8186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   data: {fileID: 11400000, guid: 06c16c49b24789749b11ae30a6f0123c, type: 2}
   currentStars: 0
+  nextLevel: {fileID: 11400000, guid: f36734f2b041d13419ace94fea15a9ff, type: 2}
   menuName: Menu
+  cameraSnap: {fileID: 0}
+  gameCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 0}
+  endCanvas: {fileID: 0}
+  OnStarsChanged:
+    m_PersistentCalls:
+      m_Calls: []

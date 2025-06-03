@@ -1,6 +1,8 @@
+using Sych.ShareAssets.Runtime;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 public class PaintBallSpawner : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class PaintBallSpawner : MonoBehaviour
 
     public ColorType currentColor = ColorType.Red;
     public Camera mainCamera;
+    public LayerMask cameraRenderMask;
     public LayerMask wallLayer;
 
     public PlayerInput playerInput;
@@ -68,10 +71,32 @@ public class PaintBallSpawner : MonoBehaviour
         return false;
     }
 
+    public void ShareImage()
+    {
+        Texture2D texture = new(Screen.width, Screen.height, TextureFormat.RGBA32, false);
+
+        LayerMask lastCullingMask = mainCamera.cullingMask;
+        mainCamera.cullingMask = cameraRenderMask;
+
+        mainCamera.Render();
+
+        mainCamera.cullingMask = lastCullingMask;
+
+        texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
+        texture.Apply();
+
+        string filePath = Path.Combine(Application.persistentDataPath, "share_image.png");
+        File.WriteAllBytes(filePath, texture.EncodeToPNG());
+
+        Destroy(texture);
+
+        Share.Item(filePath, (success) => { Debug.Log("Image: '" + filePath + "' shared"); });
+    }
+
     public void SpawnPlayerBall(InputAction.CallbackContext ctx)
     {
         if (randomBalls) return;
-        if (ctx.ReadValue<float>() != 1) return;
+        if (ctx.ReadValue<float>() != 0) return;
 
         Vector3 position = positionAction.ReadValue<Vector2>();
         position.z = mainCamera.nearClipPlane;

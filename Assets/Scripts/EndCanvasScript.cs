@@ -1,4 +1,6 @@
 using DG.Tweening;
+using Sych.ShareAssets.Runtime;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,9 +67,17 @@ public class EndCanvasScript : MonoBehaviour
         UpdateJumps(player.planetJumpsCounter);
 
         menuBtn.onClick.AddListener(LevelManager.Instance.GoToMenu);
-        //shareBtn.onClick.AddListener();
+        shareBtn.onClick.AddListener(ShareImage);
         if (LevelManager.Instance.HasNextLevel()) nextLevelBtn.onClick.AddListener(LevelManager.Instance.GoToNextLevel);
         else nextLevelBtn.gameObject.SetActive(false);
+    }
+
+    void ShareImage()
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, "share_image.png");
+        File.WriteAllBytes(filePath, endSprite.texture.EncodeToPNG());
+
+        Share.Item(filePath, (success) => { Debug.Log("Image: '" + filePath + "' shared"); });
     }
 
     string ProcessTemplate<T>(string template, T value)

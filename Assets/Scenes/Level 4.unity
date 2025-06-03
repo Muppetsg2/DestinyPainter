@@ -347,11 +347,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93f68a793fe06254898f3c39b1d45328, type: 3}
---- !u!1 &300758463 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3541147161837328310, guid: 93f68a793fe06254898f3c39b1d45328, type: 3}
+--- !u!114 &300758463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5629119772989009049, guid: 93f68a793fe06254898f3c39b1d45328, type: 3}
   m_PrefabInstance: {fileID: 300758462}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1146bb10676e74897c9301810334a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &409804323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -670,7 +676,7 @@ MonoBehaviour:
   boundries: {fileID: 552277080}
   player: {fileID: 1549350860}
   planetFocusHeightOffset: 0
-  end: 0
+  endAnimTime: 2
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,11 +1032,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2394c99e5f54baa4e8a4aab93b9302ba, type: 3}
---- !u!1 &916010095 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4821599809462870143, guid: 2394c99e5f54baa4e8a4aab93b9302ba, type: 3}
+--- !u!114 &916010095 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9180861953323021710, guid: 2394c99e5f54baa4e8a4aab93b9302ba, type: 3}
   m_PrefabInstance: {fileID: 916010094}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442ce8be7f4a63047944d91f11108055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &926851980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,11 +1454,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ce9bc3e6023b241a31455e07812794, type: 3}
---- !u!1 &1084738262 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 685447481710780506, guid: b2ce9bc3e6023b241a31455e07812794, type: 3}
+--- !u!114 &1084738262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3767846818041679589, guid: b2ce9bc3e6023b241a31455e07812794, type: 3}
   m_PrefabInstance: {fileID: 1084738261}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b476d7fd685ce04da6a3f6584a229c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1160714770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2684,10 +2702,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: cdb52c3390d0a0341aa8da4f407acca1, type: 2}
     - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1549350860}
@@ -2708,45 +2722,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 916010095}
     - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introPanel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
       propertyPath: pauseCanvas
       value: 
       objectReference: {fileID: 1084738262}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introAnimTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introCircleMask
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introSizeOffset
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introAnimCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introAnimCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introAnimCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introAnimCurve.m_Curve.Array.data[1].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7977518311043369947, guid: 265176b138828c0448d0639bf6432036, type: 3}
-      propertyPath: introAnimCurve.m_Curve.Array.data[1].outSlope
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3022,3 +3000,4 @@ SceneRoots:
   - {fileID: 7352433670572700754}
   - {fileID: 890210308826765312}
   - {fileID: 36338748}
+  - {fileID: 519420032}
