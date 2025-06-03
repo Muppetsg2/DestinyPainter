@@ -24,11 +24,8 @@ public class PlanetRotation : MonoBehaviour
 
             if (rotationMode == RotationMode.CounterClockwise)
             {
-                arrow1.localScale = new Vector3(arrow1.localScale.x, -1 * arrow1.localScale.y, arrow1.localScale.z);
-                arrow1.localPosition = new Vector3(arrow1.localPosition.x, -1 * arrow1.localPosition.y, arrow1.localPosition.z);
-
-                arrow2.localScale = new Vector3(arrow2.localScale.x, -1 * arrow2.localScale.y, arrow2.localScale.z);
-                arrow2.localPosition = new Vector3(arrow2.localPosition.x, -1 * arrow2.localPosition.y, arrow2.localPosition.z);
+                arrow1.localScale = new Vector3(-arrow1.localScale.x, arrow1.localScale.y, arrow1.localScale.z);
+                arrow2.localScale = new Vector3(-arrow2.localScale.x, arrow2.localScale.y, arrow2.localScale.z);
             }
         }
     }
