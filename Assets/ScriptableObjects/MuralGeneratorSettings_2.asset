@@ -21,7 +21,7 @@ MonoBehaviour:
   backgroundRadius: 256
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   backgroundBorder: 0
-  numberOfSplashes: 150
+  numberOfSplashes: 300
   splashPrefab: {fileID: 8956329137880412379, guid: f254caf4d42e3174585ab42b65db9f16, type: 3}
   splashAlpha: 0.546
   splashEdgeSharpness: 1

@@ -329,7 +329,8 @@ public class MuralImageGeneratorEditor : EditorWindow
         m_sceneCamera.backgroundColor = m_backgroundColor;
 
         // Splashes
-        float radius = ((m_backgroundRadius - m_splashScale * 256f * 0.5f) * (1f - (m_backgroundBorder * 0.01f))).Remap(0f, m_backgroundRadius, 0f, 1f);
+        float bgRadius = m_backgroundRadius - m_splashScale * 256f * 0.5f;
+        float radius = (bgRadius * (1f - (m_backgroundBorder * 0.01f))).Remap(0f, bgRadius, 0f, 1f);
         int baseIndex = rng.Next(m_colors.Count);
         for (int i = 0; i < m_numberOfSplashes; ++i)
         {
