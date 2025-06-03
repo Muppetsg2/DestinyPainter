@@ -1,5 +1,3 @@
-using System.Data;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +5,11 @@ using UnityEngine.UI;
 public class EndCanvasScript : MonoBehaviour
 {
     public PlayerController player;
+    public Camera mainCamera;
+
+    [Header("Camera")]
+    public LayerMask renderCullingMask;
+    private Sprite endSprite;
 
     [Header("Visual")]
     public TextMeshProUGUI title;
@@ -32,6 +35,7 @@ public class EndCanvasScript : MonoBehaviour
     private void Awake()
     {
         player = FindFirstObjectByType<PlayerController>();
+        mainCamera = Camera.main;
     }
 
     void Start()
@@ -69,5 +73,44 @@ public class EndCanvasScript : MonoBehaviour
         star3.SetStarActive(stars == 3);
         star2.SetStarActive(stars >= 2);
         star1.SetStarActive(stars >= 1);
+    }
+
+    public void Open()
+    {
+        levelOverview.sprite = CreateSprite();
+    }
+
+    Sprite CreateSprite()
+    {
+        RectTransform canvasRect = GetComponent<RectTransform>();
+        RectTransform photoImageRect = levelOverview.GetComponent<RectTransform>();
+        float imageAspect = photoImageRect.rect.width / photoImageRect.rect.height;
+        int height = (int)canvasRect.rect.height;
+        int width = (int)(height * imageAspect);
+
+        RenderTexture renderTexture = new(width, height, 0, RenderTextureFormat.ARGB32);
+        Texture2D texture = new(width, height, TextureFormat.RGBA32, false);
+
+        RenderTexture lastRenderTex = mainCamera.targetTexture;
+        mainCamera.targetTexture = renderTexture;
+        LayerMask lastCullingMask = mainCamera.cullingMask;
+        mainCamera.cullingMask = renderCullingMask;
+        float lastAspect = mainCamera.aspect;
+        mainCamera.aspect = imageAspect;
+        mainCamera.Render();
+
+        mainCamera.targetTexture = lastRenderTex;
+        mainCamera.cullingMask = lastCullingMask;
+        mainCamera.aspect = lastAspect;
+
+        lastRenderTex = RenderTexture.active;
+        RenderTexture.active = renderTexture;
+
+        texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
+        texture.Apply();
+
+        RenderTexture.active = lastRenderTex;
+
+        return Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), 0.5f * Vector2.one);
     }
 }

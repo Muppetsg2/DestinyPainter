@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 6268714468576907764}
   - component: {fileID: 1883987443274092039}
   - component: {fileID: 1853110944885406911}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderLayer: SplashRender
-  normalLayer: 
+  normalLayer: Default
   renderCamera: {fileID: 8706859397108784162}
   spriteRenderer: {fileID: 6268714468576907764}
   mask: {fileID: 7527181924408075570}

@@ -88,6 +88,7 @@ public class LevelManager : MonoBehaviour
         cameraSnap.PlayEndAnim(() =>
         {
             endCanvas.gameObject.SetActive(true);
+            endCanvas.Open();
         });
     }
 
