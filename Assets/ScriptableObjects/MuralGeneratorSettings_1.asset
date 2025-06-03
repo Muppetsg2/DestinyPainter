@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f63943e42095f34099cae6457fa1a88, type: 3}
+  m_Name: MuralGeneratorSettings_1
+  m_EditorClassIdentifier: 
+  text: 'Destiny
+
+    Painter'
+  font: {fileID: 11400000, guid: 57581ebf6c70ebf45836fa288c54b81e, type: 2}
+  textSize: 30
+  textColor: {r: 0.06999821, g: 0.10119423, b: 0.122641504, a: 1}
+  backgroundRadius: 256
+  backgroundColor: {r: 0.07058824, g: 0.101960786, b: 0.12156863, a: 1}
+  backgroundBorder: 0
+  numberOfSplashes: 200
+  splashPrefab: {fileID: 8956329137880412379, guid: f254caf4d42e3174585ab42b65db9f16, type: 3}
+  splashAlpha: 0.619
+  splashEdgeSharpness: 1
+  splashScale: 0.35
+  splashFillScale: 0.34
+  circleAngleRandomScaler: -0.2
+  circleDistanceRandomScaler: 0
+  colorList:
+  - {r: 0.64705884, g: 0.8666667, b: 0.9647059, a: 1}
+  - {r: 0.3764706, g: 0.6784314, b: 0.8745098, a: 1}
+  - {r: 0.8039216, g: 0.4627451, b: 0.60784316, a: 1}
+  - {r: 0.5803922, g: 0.17254902, b: 0.2784314, a: 1}
+  - {r: 0.43137255, g: 0.2901961, b: 0.42745098, a: 1}

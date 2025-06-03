@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("NIE MA GDZIE WRÓCIÆ");
+            Debug.Log("NIE MA GDZIE WRï¿½CIï¿½");
             isAttached = true;
         }
     }
