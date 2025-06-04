@@ -9,6 +9,8 @@ public class MuralImageGeneratorSettings : ScriptableObject
     [Header("Text")]
     [TextArea] public string text;
     public TMP_FontAsset font;
+    [MaterialPresetDropdown("font")]
+    public Material presetMaterial;
     public int textSize;
     public Color textColor;
 

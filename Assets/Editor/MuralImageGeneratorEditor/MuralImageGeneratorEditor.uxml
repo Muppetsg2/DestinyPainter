@@ -23,6 +23,7 @@
                     <engine:DataBinding property="value" data-source-path="m_font" binding-mode="TwoWay" />
                 </Bindings>
             </editor:ObjectField>
+            <engine:DropdownField label="Material Preset" name="MaterialsDropdown" style="border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152); border-left-width: 2px; border-right-width: 2px;" />
             <engine:IntegerField label="Text Size" value="32" name="TextSize" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" style="border-left-width: 2px; border-right-width: 2px; border-right-color: rgb(152, 152, 152); border-left-color: rgb(152, 152, 152);">
                 <Bindings>
                     <engine:DataBinding property="value" data-source-path="m_textSize" binding-mode="TwoWay" />
