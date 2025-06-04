@@ -57,10 +57,8 @@ public class ColorsManager : MonoBehaviour
         return mat;
     }
 
-    public Material GetPickupMaterial(ColorType type, bool grayOut)
+    public Material GetPickupMaterial(ColorType type)
     {
-        if (grayOut) return new Material(pickupMaterialGrayOut);
-
         Material mat = new Material(pickupMaterial);
         mat.SetColor("_Center", GetColor(type, ColorCategory.PrimaryHDR));
         mat.SetColor("_Outer", GetColor(type, ColorCategory.SecondaryHDR));
@@ -69,9 +67,6 @@ public class ColorsManager : MonoBehaviour
 
     public Material GetTakenPickupMaterial()
     {
-        Material mat = new Material(pickupMaterial);
-        //mat.SetColor("_Center", GetColor());
-        //mat.SetColor("_Outer", GetColor());
-        return mat;
+        return new Material(pickupMaterialGrayOut);
     }
 }
