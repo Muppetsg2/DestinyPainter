@@ -6,19 +6,19 @@ Podstawowe:
 
 Menu:
     ✔ Zamienić napisy w menu na ikony @low @Muppetsg2 @done(25-05-28 22:30)
-    ☐ Zrobić creditsy tak że są połączone planety w różnych kolorach i z różnymi informacjami (informacja o twórcach, muzyce, grafice, muralu, itd.) @high @MAIPA01
+    ✔ Zrobić creditsy tak że są połączone planety w różnych kolorach i z różnymi informacjami (informacja o twórcach, muzyce, grafice, muralu, itd.) @high @MAIPA01 @done(25-06-05 01:03)
     ✔ Przyśpieszyc animację w menu @high @MAIPA01 @done(25-05-26 22:13)
 
 Poziomy:
-    ☐ Zaprojektować na chwilę obecną 8 poziomów. Każdy poziom wprowadza nową mechanikę. @critical
+    ✔ Zaprojektować na chwilę obecną 8 poziomów. Każdy poziom wprowadza nową mechanikę. @critical @MAIPA01 @done(25-06-05 01:03)
         ✔ Pierwszy poziom to przeskakiwanie między planetami i poruszanie się po nich. Każda planeta jest tego samego koloru co gracz. @critical @MAIPA01 @done(25-05-30 12:16)
         ✔ Drugi poziom to przeszkody @critical @MAIPA01 @done(25-05-30 12:16)
         ✔ Trzeci poziom to planety o wielu kolorach @critical @MAIPA01 @done(25-05-30 12:16)
         ✔ Czwarty poziom to planety o zmieniających się kolorach @critical @MAIPA01 @done(25-05-30 12:16)
-        ☐ Piąty poziom to obracające sie planety @critical
-        ☐ Szósty poziom to połączenie dotychczasowych mechanik ale by poziom znowu nie był zbyt trudny @critical
-        ☐ Siódmy poziom to poziom dość prosty gdzie uczymy gracza o pickupie zmiany koloru @critical
-        ☐ Ósmy poziom to poziom gdzie mamy wszystkie dotychczasowe mechaniki. @critical
+        ✔ Piąty poziom to obracające sie planety @critical @MAIPA01 @done(25-06-05 01:02)
+        ✔ Szósty poziom to połączenie dotychczasowych mechanik ale by poziom znowu nie był zbyt trudny @critical @MAIPA01 @done(25-06-05 01:03)
+        ✔ Siódmy poziom to poziom dość prosty gdzie uczymy gracza o pickupie zmiany koloru @critical @MAIPA01 @done(25-06-05 01:03)
+        ✔ Ósmy poziom to poziom gdzie mamy wszystkie dotychczasowe mechaniki. @critical @MAIPA01 @done(25-06-05 01:03)
 
 GameUI:
     ✔ Zmienić UI tak by był bardziej minimalistyczny i nie przeszkadzał w grze @high @Muppetsg2 @done(25-05-28 11:18)
@@ -49,7 +49,8 @@ EndScreen:
     ✔ Dodać skrypt definiujący zachowanie przycisków @critical @MAIPA01 @done(25-06-04 01:05)
     ✔ Dodać animacje end screen @critical @MAIPA01 @done(25-06-04 01:05)
     ✔ Dodać generowanie zdjęcia poziomu końcowego @critical @MAIPA01 @done(25-06-04 01:05)
-    ☐ Dodać sharowanie wyniku @critical
+    ✔ Dodać sharowanie wyniku @critical @MAIPA01 @done(25-06-05 01:03)
+    ☐ Polepszyć wygląd sharowanego wyniku @high @MAIPA01
 
 Miodzik:
     ✔ Dodać skapywanie plam na branch `main` i do planet w poziomach @high @MaiPa01 @done(25-05-28 22:28)
@@ -70,7 +71,7 @@ Mechanika:
     ✔ Gracz zawsze porusza sie na planecie w kierunku obrotu planety. Jeśli jednak planeta się nie obraca to kierunek jest skierowany w prawo. @critical @Magnar303 @done(25-05-31 18:04)
     ✔ Zmiana koloru oraz niszczenie pickupa jest wykonywane dopiero po odpowiednim wylądowaniu na planecie. @critical @MAIPA01 @done(25-05-30 12:20)
     ✔ Historia skoków @critical @MAIPA01 @done(25-05-30 12:20)
-    ☐ Wyszarzanie zebranych pickapów przed ukończeniem skoku
+    ✔ Wyszarzanie zebranych pickapów przed ukończeniem skoku @MAIPA01 @done(25-06-05 01:04)
 
 Archive:
     ☐ Zrobić UI bardziej przezroczystym (porada Szrajbera) @low
