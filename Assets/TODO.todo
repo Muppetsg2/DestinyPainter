@@ -1,8 +1,12 @@
+Podstawowe:
+    ☐ Dodać dźwięki do gry (skoki, śmierć, pickupy, wygrana) @critical
+    ☐ Dodać muzykę do gry @critical
+    ☐ Dodać ustawienia dźwięku i muzyki @critical
+    ☐ Można zrobić przy wprowadzaniu mechaniki pojawiał się popup z informacją jak mechanika działa i krótkim filmikiem jak to wygląda @low
+
 Menu:
     ✔ Zamienić napisy w menu na ikony @low @Muppetsg2 @done(25-05-28 22:30)
-    ☐ Splash jak w poziomach do planet w menu po naciśnięciu @low
     ☐ Zrobić creditsy tak że są połączone planety w różnych kolorach i z różnymi informacjami (informacja o twórcach, muzyce, grafice, muralu, itd.) @high @MAIPA01
-    ☐ Dodac informację gdzieś w menu o poruszaniu się @low
     ✔ Przyśpieszyc animację w menu @high @MAIPA01 @done(25-05-26 22:13)
 
 Poziomy:
@@ -15,7 +19,6 @@ Poziomy:
         ☐ Szósty poziom to połączenie dotychczasowych mechanik ale by poziom znowu nie był zbyt trudny @critical
         ☐ Siódmy poziom to poziom dość prosty gdzie uczymy gracza o pickupie zmiany koloru @critical
         ☐ Ósmy poziom to poziom gdzie mamy wszystkie dotychczasowe mechaniki. @critical
-    ☐ Zaprojektować bonusowe 4 poziomy za odpowiednią liczbę zdobytych gwiazdek (Mogą być trudniejsze niż poziomy zwykłe). @low
 
 GameUI:
     ✔ Zmienić UI tak by był bardziej minimalistyczny i nie przeszkadzał w grze @high @Muppetsg2 @done(25-05-28 11:18)
@@ -24,10 +27,7 @@ GameUI:
     ✔ Usunąć strzałki i napis Jump lub zamienić to na coś mniej przeszkadzającego @critical @Muppetsg2 @done(25-05-28 11:18)
     ✔ Zrobić licznik skoków czytelniej @critical @Muppetsg2 @done(25-05-28 11:18)
     ✔ Dodać UI do gry @critical @Muppetsg2 @done(25-05-28 22:27)
-    ☐ Zrobić UI bardziej przezroczystym (porada Szrajbera) @low
-    ☐ Dodać do przycisków UI z tyłu blur emmisive @low
     ✔ Oddalić widok kamery @critical @done(25-05-28 22:27)
-    ☐ Dodać efekt rozróżniający która strzałka do obrotu jest teraz kliknięta (np. powiększenie obiektu czy zmiana koloru/alphy) @low
 
 PauseMenu:
     ✔ Dodać pause menu złożone z 3 przycisków w kształcie kółek z ikonami w środku @critical @Muppetsg2 @done(25-05-29 21:45)
@@ -61,6 +61,8 @@ Miodzik:
     ✔ Wytracanie prędkości podczas lotu gracza (może dodać curve) @high @Muppetsg2 @done(25-05-29 01:21)
     ✔ Dodać zachowanie przycisków podczas klikania @high @Muppetsg2 @done(25-06-04 16:55)
     ✔ Zaprojektować wygląd strzałek kierunku obrotu planet @high @Muppetsg2 @done(25-06-04 15:37)
+    ☐ Dodać do przycisków UI animację kliknięcia (zmiana skali i koloru) @high
+    ☐ Dodać efekt rozróżniający która strzałka do obrotu jest teraz kliknięta (np. powiększenie obiektu czy zmiana koloru/alphy) @low
 
 Mechanika:
     ✔ Dodać mechanikę że są planety które się obracają i są takie które nie. I te które się obracają mają strzałkę w którą stronę się obracają. Na planetach obracających się mamy współczynnik prędkości poruszania się w przeciwną stronę równy 0.5, a w dobrą stronę 1.5. Stojące nie mają strzałki i w obie strony współczynnik poruszania się jest równy 1.0. @critical @Magnar303 @done(25-05-31 18:03)
@@ -69,3 +71,9 @@ Mechanika:
     ✔ Zmiana koloru oraz niszczenie pickupa jest wykonywane dopiero po odpowiednim wylądowaniu na planecie. @critical @MAIPA01 @done(25-05-30 12:20)
     ✔ Historia skoków @critical @MAIPA01 @done(25-05-30 12:20)
     ☐ Wyszarzanie zebranych pickapów przed ukończeniem skoku
+
+Archive:
+    ☐ Zrobić UI bardziej przezroczystym (porada Szrajbera) @low
+    ☐ Dodać do przycisków UI z tyłu blur emmisive @low
+    ☐ Zaprojektować bonusowe 4 poziomy za odpowiednią liczbę zdobytych gwiazdek (Mogą być trudniejsze niż poziomy zwykłe) @low
+    ☐ Dodac informację gdzieś w menu o poruszaniu się @low
