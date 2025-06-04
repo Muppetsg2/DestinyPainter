@@ -211,8 +211,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (var pickup in data.pickups)
         {
-            pickup.gameObject.SetActive(true);
-            pickup.StartAnimation();
+            pickup.Return();
         }
 
         float angle = (data.planetAngle + data.planet.rotation.eulerAngles.z) * Mathf.Deg2Rad;
@@ -239,7 +238,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("NIE MA GDZIE WR�CI�");
+            Debug.Log("PLAYER HAS NOWHERE TO RETURN");
             isAttached = true;
         }
     }
@@ -314,7 +313,14 @@ public class PlayerController : MonoBehaviour
 
         if (currentJump != null)
         {
-            jumpsHistory.Add(currentJump ?? new JumpData());
+            JumpData data = currentJump ?? new JumpData();
+
+            foreach (var pickup in data.pickups)
+            {
+                pickup.FinalizePickup();
+            }
+
+            jumpsHistory.Add(data);
             currentJump = null;
         }
 
@@ -374,9 +380,7 @@ public class PlayerController : MonoBehaviour
             if (pickup.color != color)
             {
                 ChangePlayerColor(pickup.color);
-                //pickup.Pickup();
-                pickup.StopAnimation();
-                pickup.gameObject.SetActive(false);
+                pickup.Pickup();
                 currentJump?.pickups.Add(pickup);
             }
         }

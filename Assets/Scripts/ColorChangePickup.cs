@@ -15,8 +15,22 @@ public class ColorChangePickup : MonoBehaviour
 
     public void Pickup()
     {
+        Destroy(GetComponent<SpriteRenderer>().material);
+        GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetTakenPickupMaterial();
         StopAnimation();
-        Destroy(gameObject);
+    }
+
+    public void FinalizePickup()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Return()
+    {
+        Destroy(GetComponent<SpriteRenderer>().material);
+        GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetPickupMaterial(color);
+        gameObject.SetActive(true);
+        StartAnimation();
     }
 
     public void StartAnimation()

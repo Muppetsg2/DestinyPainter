@@ -63,4 +63,12 @@ public class ColorsManager : MonoBehaviour
         mat.SetColor("_Outer", GetColor(type, ColorCategory.SecondaryHDR));
         return mat;
     }
+
+    public Material GetTakenPickupMaterial()
+    {
+        Material mat = new Material(pickupMaterial);
+        //mat.SetColor("_Center", GetColor());
+        //mat.SetColor("_Outer", GetColor());
+        return mat;
+    }
 }
