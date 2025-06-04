@@ -629,7 +629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3017422946486619759
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1563,12 +1563,18 @@ PrefabInstance:
       value: StarObjEnd 3
       objectReference: {fileID: 0}
     - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
+      propertyPath: m_text
+      value: 'Up to
+
+        10 Jumps'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_fontSizeBase
-      value: 36
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1229941230316733042, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: text
@@ -1691,11 +1697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_fontSizeBase
-      value: 36
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1506456785712945196, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_Pivot.x
@@ -1811,12 +1817,18 @@ PrefabInstance:
       value: StarObjEnd 2
       objectReference: {fileID: 0}
     - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
+      propertyPath: m_text
+      value: 'Up to
+
+        10 JUMPS'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1217858371562435654, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_fontSizeBase
-      value: 36
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1229941230316733042, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: text
