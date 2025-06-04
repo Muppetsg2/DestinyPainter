@@ -13,17 +13,24 @@ public class MenuManager : MonoBehaviour
     public List<ButtonAnimation> menuButtons;
     public Transform continueBtnTransform;
     public GameObject menuLines;
+    public Transform menuMainImageParent;
     public Vector3 mainImageMenuPos;
 
     [Header("Level Select")]
     public List<ButtonAnimation> levelSelectButtons;
     public GameObject levelSelectLines;
     public GameObject levelSelectBackButton;
+    public Transform levelsMainImageParent;
     public Vector3 mainImageLevelSelectPos;
     public ScrollRect levelSelectScroll;
     public Image levelSelectViewport;
     public float levelSelectScrollAnimationTime = 1f;
     public float levelSelectScrollOffset = 20f;
+
+    [Header("Credits")]
+    public List<RectTransform> creditsPlanetsRectTransforms;
+    public Transform creditsMainImageParent;
+    public Vector3 mainImageCreditsPos;
 
     public enum CurrentView
     {
@@ -56,7 +63,7 @@ public class MenuManager : MonoBehaviour
         OpenMenu();
     }
 
-    private void ShowAnimation(List<ButtonAnimation> buttons, GameObject lines, CurrentView endViewType, Vector3 mainImagePos, Action onComplete = null)
+    private void ShowAnimation(List<ButtonAnimation> buttons, GameObject lines, CurrentView endViewType, Transform mainImageParent, Vector3 mainImagePos, Action onComplete = null)
     {
         void AnimateButtons()
         {
@@ -89,6 +96,7 @@ public class MenuManager : MonoBehaviour
         {
             mainImage.DOAnchorPos3D(mainImagePos, moveMainImageTime).OnComplete(() =>
             {
+                mainImage.SetParent(mainImageParent);
                 AnimateButtons();
             });
         }
@@ -125,7 +133,7 @@ public class MenuManager : MonoBehaviour
     private void ShowMenu(Action onComplete = null)
     {
         if (ViewType != CurrentView.None) return;
-        ShowAnimation(menuButtons, menuLines, CurrentView.Menu, mainImageMenuPos, onComplete);
+        ShowAnimation(menuButtons, menuLines, CurrentView.Menu, menuMainImageParent, mainImageMenuPos, onComplete);
     }
 
     private void HideMenu(Action onComplete = null)
@@ -137,7 +145,7 @@ public class MenuManager : MonoBehaviour
     private void ShowLevelSelect(Action onComplete = null)
     {
         if (ViewType != CurrentView.None) return;
-        ShowAnimation(levelSelectButtons, levelSelectLines, CurrentView.LevelSelect, mainImageLevelSelectPos, () => 
+        ShowAnimation(levelSelectButtons, levelSelectLines, CurrentView.LevelSelect, levelsMainImageParent, mainImageLevelSelectPos, () => 
         {
             levelSelectScroll.enabled = true;
 
@@ -179,6 +187,16 @@ public class MenuManager : MonoBehaviour
         });
     }
 
+    private void ShowCredits(Action onComplete = null)
+    {
+
+    }
+
+    private void HideCredits(Action onComplete = null)
+    {
+
+    }
+
     private void HideCurrent(Action onComplete = null)
     {
         switch (ViewType)
@@ -188,6 +206,9 @@ public class MenuManager : MonoBehaviour
                 break;
             case CurrentView.Menu:
                 HideMenu(onComplete);
+                break;
+            case CurrentView.Credits:
+                HideCredits(onComplete);
                 break;
             default:
                 onComplete?.Invoke();
@@ -203,6 +224,11 @@ public class MenuManager : MonoBehaviour
     public void OpenLevelSelect()
     {
         HideCurrent(() => ShowLevelSelect());
+    }
+
+    public void OpenCredits()
+    {
+        HideCurrent(() => ShowCredits());
     }
 
     public void Continue()
