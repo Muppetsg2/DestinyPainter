@@ -7543,7 +7543,7 @@ MonoBehaviour:
   levelSelectScroll: {fileID: 1741324240}
   levelSelectViewport: {fileID: 319951196}
   levelSelectScrollAnimationTime: 1
-  levelSelectScrollOffset: -1000
+  levelSelectScrollOffset: 0
   creditsPlanets:
   - {fileID: 8134419607325459609}
   - {fileID: 1848885574}
