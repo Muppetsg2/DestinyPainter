@@ -73,8 +73,8 @@ public class PaintBallSpawner : MonoBehaviour
 
     public void ShareImage()
     {
-        RenderTexture renderTex = new RenderTexture(Screen.width, Screen.height, 0, RenderTextureFormat.ARGB32);
-        Texture2D texture = new(Screen.width, Screen.height, TextureFormat.RGBA32, false);
+        RenderTexture renderTex = new(Screen.width, Screen.height, 0, RenderTextureFormat.DefaultHDR);
+        Texture2D texture = new(Screen.width, Screen.height, TextureFormat.RGBAFloat, false);
 
         LayerMask lastCullingMask = mainCamera.cullingMask;
         mainCamera.cullingMask = cameraRenderMask;
@@ -85,10 +85,11 @@ public class PaintBallSpawner : MonoBehaviour
         mainCamera.cullingMask = lastCullingMask;
         mainCamera.targetTexture = null;
 
+        RenderTexture lastTex = RenderTexture.active;
         RenderTexture.active = renderTex;
         texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
         texture.Apply();
-        RenderTexture.active = null;
+        RenderTexture.active = lastTex;
 
         string filePath = Path.Combine(Application.persistentDataPath, "share_image.png");
         File.WriteAllBytes(filePath, texture.EncodeToPNG());

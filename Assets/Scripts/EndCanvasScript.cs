@@ -218,8 +218,8 @@ public class EndCanvasScript : MonoBehaviour
         int height = (int)canvasRect.rect.height;
         int width = (int)(height * imageAspect);
 
-        RenderTexture renderTexture = new(width, height, 0, RenderTextureFormat.ARGB32);
-        Texture2D texture = new(width, height, TextureFormat.RGBA32, false);
+        RenderTexture renderTexture = new(width, height, 0, RenderTextureFormat.DefaultHDR);
+        Texture2D texture = new(width, height, TextureFormat.RGBAFloat, false);
 
         float lastAspect = mainCamera.aspect;
         mainCamera.aspect = imageAspect;
