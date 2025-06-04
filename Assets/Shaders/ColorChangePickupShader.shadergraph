@@ -402,7 +402,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "001a97f4e3ed4d66aa6f7a1ce7476e41",
     "m_Id": 0,
-    "m_DisplayName": "mult",
+    "m_DisplayName": "Multiply",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -419,6 +419,9 @@
     "m_Name": "",
     "m_ChildObjectList": [
         {
+            "m_Id": "210d649dda2a484d80ef9866d5ae7679"
+        },
+        {
             "m_Id": "66b05758912241099b8a861bb2f8f2b0"
         },
         {
@@ -426,9 +429,6 @@
         },
         {
             "m_Id": "81ca1d27b83f444aa44aaea6c15de386"
-        },
-        {
-            "m_Id": "210d649dda2a484d80ef9866d5ae7679"
         },
         {
             "m_Id": "d04a8105a4734d10844172561282a86b"
@@ -780,9 +780,9 @@
     "m_Guid": {
         "m_GuidSerialized": "05d96fe9-e92d-4ab3-8e9a-9cac60be7fc6"
     },
-    "m_Name": "_MainTex",
+    "m_Name": "MainTex",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "_MainTex",
+    "m_RefNameGeneratedByDisplayName": "MainTex",
     "m_DefaultReferenceName": "_MainTex",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -1694,10 +1694,10 @@
     "m_Guid": {
         "m_GuidSerialized": "6ce2ce44-1ee3-4edd-baa0-46e063683070"
     },
-    "m_Name": "mult",
+    "m_Name": "Multiply",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "mult",
-    "m_DefaultReferenceName": "_mult",
+    "m_RefNameGeneratedByDisplayName": "Multiply",
+    "m_DefaultReferenceName": "_Multiply",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2772,7 +2772,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "ed04f1febd31442d8b99408aa823ccf9",
     "m_Id": 0,
-    "m_DisplayName": "_MainTex",
+    "m_DisplayName": "MainTex",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
