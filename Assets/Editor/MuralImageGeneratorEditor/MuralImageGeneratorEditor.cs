@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -23,6 +25,8 @@ public class MuralImageGeneratorEditor : EditorWindow
     private string m_text;
     [SerializeField]
     private TMP_FontAsset m_font;
+    [SerializeField]
+    private Material m_presetMaterial;
     [SerializeField]
     private int m_textSize;
     [SerializeField]
@@ -69,6 +73,10 @@ public class MuralImageGeneratorEditor : EditorWindow
     private UnityEngine.UIElements.Button m_loadSetButton;
     private UnityEngine.UIElements.Button m_saveSetButton;
 
+    // Dropdown
+    private List<Material> m_materials;
+    private DropdownField m_materialsDropdown;
+
     // List
     private ListView m_colorsList;
 
@@ -112,8 +120,30 @@ public class MuralImageGeneratorEditor : EditorWindow
         m_saveSetButton = rootVisualElement.Q<UnityEngine.UIElements.Button>("SaveSettings");
         m_saveSetButton.clicked += SaveData;
 
-        m_colors = new List<Color>();
+        m_materialsDropdown = rootVisualElement.Q<DropdownField>("MaterialsDropdown");
+        RefreshDropdown(m_font, m_presetMaterial);
 
+        m_materialsDropdown.RegisterValueChangedCallback(evt =>
+        {
+            int newIndex = Array.IndexOf(m_materialsDropdown.choices.ToArray(), evt.newValue);
+            if (newIndex >= 0 && newIndex < m_materials.Count)
+            {
+                m_presetMaterial = m_materials[newIndex];
+            }
+            else
+            {
+                m_presetMaterial = null;
+            }
+        });
+
+        ObjectField fontField = rootVisualElement.Q<ObjectField>("Font");
+        fontField.RegisterValueChangedCallback((evt) =>
+        {
+            TMP_FontAsset font = evt.newValue as TMP_FontAsset;
+            RefreshDropdown(font, m_presetMaterial);
+        });
+
+        m_colors = new List<Color>();
         m_colorsList = rootVisualElement.Q<ListView>("ColorList");
         m_colorsList.itemsSource = m_colors;
         m_colorsList.makeItem = () =>
@@ -164,6 +194,11 @@ public class MuralImageGeneratorEditor : EditorWindow
             m_generatedRoot = null;
         }
 
+        if (m_materials.Count > 0) 
+        {
+            m_materials.Clear();
+        }
+
         if (m_colors.Count > 0)
         {
             m_colors.Clear();
@@ -185,6 +220,63 @@ public class MuralImageGeneratorEditor : EditorWindow
         {
             EditorSceneManager.CloseScene(m_previewScene, true);
         }
+    }
+
+    private void RefreshDropdown(TMP_FontAsset font, Material presetMaterial = null)
+    {
+        if (m_materials == null) m_materials = new List<Material>();
+        else m_materials.Clear();
+
+        m_materials = GetFontMaterials(font);
+        List<string> options = m_materials.Count > 0 ?
+            m_materials.Select(m => m.name).ToList() :
+            new List<string> { "None" };
+        m_materialsDropdown.choices = options;
+
+        if (presetMaterial != null)
+        {
+            int newIndex = Array.IndexOf(m_materialsDropdown.choices.ToArray(), presetMaterial.name);
+            if (newIndex >= 0 && newIndex < m_materials.Count)
+            {
+                m_materialsDropdown.index = newIndex;
+                m_materialsDropdown.value = options[newIndex];
+                m_presetMaterial = m_materials[newIndex];
+                return;
+            }
+        }
+
+        m_materialsDropdown.index = 0;
+        m_materialsDropdown.value = options[0];
+        m_presetMaterial = m_materials.Count > 0 ? m_materials[0] : null;
+    }
+
+    private List<Material> GetFontMaterials(TMP_FontAsset font)
+    {
+        List<Material> materials = new List<Material>();
+
+        if (font != null)
+        {
+            string fontPath = AssetDatabase.GetAssetPath(font);
+            string folderPath = Path.GetDirectoryName(fontPath).Replace("\\", "/") + "/";
+            var assetGuids = AssetDatabase.FindAssets("", new[] { folderPath });
+            var assetPaths = assetGuids.Select(guid => AssetDatabase.GUIDToAssetPath(guid));
+
+            string[] materialsPaths = assetPaths.Where(a =>
+            {
+                Material mat = AssetDatabase.LoadAssetAtPath<Material>(a);
+                if (mat == null || !mat.mainTexture.Equals(font.atlasTexture)) return false;
+
+                int dashIndex = font.name.IndexOf('-');
+                string fontName = font.name;
+                if (dashIndex != -1) fontName = fontName[..dashIndex].TrimEnd();
+
+                return mat.name.StartsWith(fontName);
+            }).ToArray();
+
+            materials = materialsPaths.Select(mp => AssetDatabase.LoadAssetAtPath<Material>(mp)).ToList();
+        }
+
+        return materials;
     }
 
     private void InitScene()
@@ -380,6 +472,7 @@ public class MuralImageGeneratorEditor : EditorWindow
         TextMeshProUGUI text = textObj.AddComponent<TextMeshProUGUI>();
         text.text = m_text;
         text.font = m_font;
+        text.fontSharedMaterial = m_presetMaterial;
         text.fontSize = m_textSize;
         text.enableAutoSizing = false;
         text.color = m_textColor;
@@ -482,6 +575,9 @@ public class MuralImageGeneratorEditor : EditorWindow
                 m_circleAngleRandomScaler = loadedData.circleAngleRandomScaler;
                 m_circleDistanceRandomScaler = loadedData.circleDistanceRandomScaler;
 
+                m_materials.Clear();
+                RefreshDropdown(m_font, loadedData.presetMaterial);
+
                 m_colors.Clear();
                 m_colors.AddRange(loadedData.colorList);
                 m_colorsList.RefreshItems();
@@ -507,6 +603,7 @@ public class MuralImageGeneratorEditor : EditorWindow
 
             asset.text = m_text;
             asset.font = m_font;
+            asset.presetMaterial = m_presetMaterial;
             asset.textSize = m_textSize;
             asset.textColor = m_textColor;
             asset.backgroundRadius = m_backgroundRadius;

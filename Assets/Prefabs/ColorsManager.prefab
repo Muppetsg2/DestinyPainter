@@ -47,3 +47,4 @@ MonoBehaviour:
   palette: {fileID: 11400000, guid: 26a1ec4be898cca47a376e4a3c66049b, type: 2}
   baseMaterial: {fileID: 2100000, guid: 9997863985a1459479a04b8ab9a6e135, type: 2}
   pickupMaterial: {fileID: 2100000, guid: fa7dd2eebf4aa7f4ea0dcfe0071a21c2, type: 2}
+  pickupMaterialGrayOut: {fileID: 2100000, guid: bcadfdc39f574b145b3a93ff5d09251d, type: 2}

@@ -12,6 +12,7 @@ public class ColorsManager : MonoBehaviour
     [Header("Material")]
     [SerializeField] private Material baseMaterial;
     [SerializeField] private Material pickupMaterial;
+    [SerializeField] private Material pickupMaterialGrayOut;
 
     private void Awake()
     {
@@ -56,8 +57,10 @@ public class ColorsManager : MonoBehaviour
         return mat;
     }
 
-    public Material GetPickupMaterial(ColorType type)
+    public Material GetPickupMaterial(ColorType type, bool grayOut)
     {
+        if (grayOut) return new Material(pickupMaterialGrayOut);
+
         Material mat = new Material(pickupMaterial);
         mat.SetColor("_Center", GetColor(type, ColorCategory.PrimaryHDR));
         mat.SetColor("_Outer", GetColor(type, ColorCategory.SecondaryHDR));

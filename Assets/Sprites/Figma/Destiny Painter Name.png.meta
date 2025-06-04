@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 154262726e0ef1649889e00f402096a1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3618073742786298248
+    second: Destiny Painter Name_0
+  - first:
+      213: 2907097357689028546
+    second: Destiny Painter Name_1
+  - first:
+      213: 39256255249985637
+    second: Destiny Painter Name_2
+  - first:
+      213: -461859884126529083
+    second: Destiny Painter Name_3
+  - first:
+      213: 3152693242849791801
+    second: Destiny Painter Name_4
+  - first:
+      213: 4169719175194295000
+    second: Destiny Painter Name_5
+  - first:
+      213: 1275153149284126552
+    second: Destiny Painter Name_6
+  - first:
+      213: 8356353922522777166
+    second: Destiny Painter Name_7
+  - first:
+      213: -4999516034950124959
+    second: Destiny Painter Name_8
+  - first:
+      213: 3264715111948971942
+    second: Destiny Painter Name_9
+  - first:
+      213: 3395537571483837280
+    second: Destiny Painter Name_10
+  - first:
+      213: -4391202786617223206
+    second: Destiny Painter Name_11
+  - first:
+      213: 5832957948175918993
+    second: Destiny Painter Name_12
+  - first:
+      213: 5495023144501340129
+    second: Destiny Painter Name_13
+  - first:
+      213: 3206564062545604870
+    second: Destiny Painter Name_14
+  - first:
+      213: -5418180645908487156
+    second: Destiny Painter Name_15
+  - first:
+      213: -9134695595390389159
+    second: Destiny Painter Name_16
+  - first:
+      213: 6274920708044812333
+    second: Destiny Painter Name_17
+  - first:
+      213: -909471427324141802
+    second: Destiny Painter Name_18
+  - first:
+      213: -111743249848164059
+    second: Destiny Painter Name_19
+  - first:
+      213: 527114033828014085
+    second: Destiny Painter Name_20
+  - first:
+      213: -2318211852745395353
+    second: Destiny Painter Name_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Destiny Painter Name_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 275
+        width: 33
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88102f156eaf53230800000000000000
+      internalID: 3618073742786298248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 275
+        width: 109
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cff784f4a5185820800000000000000
+      internalID: 2907097357689028546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_2
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 275
+        width: 76
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 560336d2b577b8000800000000000000
+      internalID: 39256255249985637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 272
+        width: 98
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c992a6e1e42799f0800000000000000
+      internalID: -461859884126529083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_4
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 275
+        width: 97
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93f06d9fccd90cb20800000000000000
+      internalID: 3152693242849791801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_5
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 275
+        width: 29
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da379a6f71ddd930800000000000000
+      internalID: 4169719175194295000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_6
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 275
+        width: 28
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85f0d41880142b110800000000000000
+      internalID: 1275153149284126552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_7
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 317
+        width: 73
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4689616e9bb7f370800000000000000
+      internalID: 8356353922522777166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_8
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 275
+        width: 29
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16aadef97a62e9ab0800000000000000
+      internalID: -4999516034950124959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_9
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 275
+        width: 73
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af619cd8199e4d20800000000000000
+      internalID: 3264715111948971942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_10
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 275
+        width: 72
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06369c15e6f5f1f20800000000000000
+      internalID: 3395537571483837280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_11
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1
+        width: 26
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad799f6c4505f03c0800000000000000
+      internalID: -4391202786617223206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_12
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 82
+        width: 83
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19721da7954d2f050800000000000000
+      internalID: 5832957948175918993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_13
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 1
+        width: 129
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e76d80af6e324c40800000000000000
+      internalID: 5495023144501340129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_14
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 1
+        width: 28
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60170999601008c20800000000000000
+      internalID: 3206564062545604870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_15
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 1
+        width: 28
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c046ab7c861cec4b0800000000000000
+      internalID: -5418180645908487156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_16
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 43
+        width: 73
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9543e61f0ca0b3180800000000000000
+      internalID: -9134695595390389159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_17
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 1
+        width: 30
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d20f0c4532ff41750800000000000000
+      internalID: 6274920708044812333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_18
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 1
+        width: 96
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61f1af03e88e063f0800000000000000
+      internalID: -909471427324141802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_19
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 1
+        width: 76
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 521a0c63b12037ef0800000000000000
+      internalID: -111743249848164059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_20
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1
+        width: 26
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5082176cb6fa05700800000000000000
+      internalID: 527114033828014085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Destiny Painter Name_21
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 1
+        width: 83
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 763b2033a9e04dfd0800000000000000
+      internalID: -2318211852745395353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Destiny Painter Name_0: 3618073742786298248
+      Destiny Painter Name_1: 2907097357689028546
+      Destiny Painter Name_10: 3395537571483837280
+      Destiny Painter Name_11: -4391202786617223206
+      Destiny Painter Name_12: 5832957948175918993
+      Destiny Painter Name_13: 5495023144501340129
+      Destiny Painter Name_14: 3206564062545604870
+      Destiny Painter Name_15: -5418180645908487156
+      Destiny Painter Name_16: -9134695595390389159
+      Destiny Painter Name_17: 6274920708044812333
+      Destiny Painter Name_18: -909471427324141802
+      Destiny Painter Name_19: -111743249848164059
+      Destiny Painter Name_2: 39256255249985637
+      Destiny Painter Name_20: 527114033828014085
+      Destiny Painter Name_21: -2318211852745395353
+      Destiny Painter Name_3: -461859884126529083
+      Destiny Painter Name_4: 3152693242849791801
+      Destiny Painter Name_5: 4169719175194295000
+      Destiny Painter Name_6: 1275153149284126552
+      Destiny Painter Name_7: 8356353922522777166
+      Destiny Painter Name_8: -4999516034950124959
+      Destiny Painter Name_9: 3264715111948971942
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

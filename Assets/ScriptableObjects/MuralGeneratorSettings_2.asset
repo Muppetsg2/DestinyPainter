@@ -16,11 +16,12 @@ MonoBehaviour:
 
     Painter'
   font: {fileID: 11400000, guid: 57581ebf6c70ebf45836fa288c54b81e, type: 2}
+  presetMaterial: {fileID: 2100000, guid: a53abc2ba6caf9349aae410f4ab34957, type: 2}
   textSize: 32
-  textColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   backgroundRadius: 256
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  backgroundBorder: 0
+  backgroundBorder: 20
   numberOfSplashes: 300
   splashPrefab: {fileID: 8956329137880412379, guid: f254caf4d42e3174585ab42b65db9f16, type: 3}
   splashAlpha: 0.546
