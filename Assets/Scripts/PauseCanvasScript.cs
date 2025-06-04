@@ -95,6 +95,11 @@ public class PauseCanvasScript : MonoBehaviour
     {
         float bottomY = -GetComponent<RectTransform>().rect.height;
 
+        float backgroundOpenAlpha = background.color.a;
+        float titleLocalY = title.transform.localPosition.y;
+        float starsLocalY = stars.transform.localPosition.y;
+        float buttonsLocalY = buttons.transform.localPosition.y;
+
         menuBtn.enabled = false;
         restartBtn.enabled = false;
         playBtn.enabled = false;
@@ -103,7 +108,26 @@ public class PauseCanvasScript : MonoBehaviour
         stars.DOLocalMoveY(bottomY, hideItemsTime).SetDelay(hideItemsDelays).SetEase(closeAnimCurve);
         title.transform.DOLocalMoveY(bottomY, hideItemsTime).SetDelay(hideItemsDelays * 2).SetEase(closeAnimCurve).OnComplete(() =>
         {
-            background.DOFade(0f, backgroundCloseTime).OnComplete(() => onComplete?.Invoke());
+            background.DOFade(0f, backgroundCloseTime).OnComplete(() => 
+            {
+                Color bgColor = background.color;
+                bgColor.a = backgroundOpenAlpha;
+                background.color = bgColor;
+
+                Vector3 local = title.transform.localPosition;
+                local.y = titleLocalY;
+                title.transform.localPosition = local;
+
+                local = stars.transform.localPosition;
+                local.y = starsLocalY;
+                stars.transform.localPosition = local;
+
+                local = buttons.transform.localPosition;
+                local.y = buttonsLocalY;
+                buttons.transform.localPosition = local;
+
+                onComplete?.Invoke(); 
+            });
         });
     }
 
