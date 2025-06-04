@@ -1,15 +1,20 @@
 using DG.Tweening;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class ColorChangePickup : MonoBehaviour
 {
     public ColorType color;
     public float animationEndValue = 0.7f;
     public float animationDuration = 0.7f;
+    [SerializeField] private bool grayOut = false;
+
+    private SpriteRenderer sr;
 
     void Start()
     {
-        GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetPickupMaterial(color);
+        sr = GetComponent<SpriteRenderer>();
+        sr.material = ColorsManager.Instance.GetPickupMaterial(color, grayOut);
         StartAnimation();
     }
 
@@ -27,5 +32,11 @@ public class ColorChangePickup : MonoBehaviour
     public void StopAnimation()
     {
         DOTween.Kill(transform);
+    }
+
+    public void SetGrayOut(bool value)
+    {
+        grayOut = value;
+        sr.material = ColorsManager.Instance.GetPickupMaterial(color, grayOut);
     }
 }
