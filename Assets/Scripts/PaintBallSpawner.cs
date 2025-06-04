@@ -73,22 +73,28 @@ public class PaintBallSpawner : MonoBehaviour
 
     public void ShareImage()
     {
+        RenderTexture renderTex = new RenderTexture(Screen.width, Screen.height, 0, RenderTextureFormat.ARGB32);
         Texture2D texture = new(Screen.width, Screen.height, TextureFormat.RGBA32, false);
 
         LayerMask lastCullingMask = mainCamera.cullingMask;
         mainCamera.cullingMask = cameraRenderMask;
+        mainCamera.targetTexture = renderTex;
 
         mainCamera.Render();
 
         mainCamera.cullingMask = lastCullingMask;
+        mainCamera.targetTexture = null;
 
+        RenderTexture.active = renderTex;
         texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
         texture.Apply();
+        RenderTexture.active = null;
 
         string filePath = Path.Combine(Application.persistentDataPath, "share_image.png");
         File.WriteAllBytes(filePath, texture.EncodeToPNG());
 
         Destroy(texture);
+        Destroy(renderTex);
 
         Share.Item(filePath, (success) => { Debug.Log("Image: '" + filePath + "' shared"); });
     }

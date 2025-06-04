@@ -41,7 +41,7 @@ public class ButtonAnimation : MonoBehaviour
         CalculateLine();
     }
 
-    private void PlayIdle()
+    public void PlayIdle()
     {
         if (AnimType != AnimationType.None) return;
         AnimType = AnimationType.Idle;
@@ -83,7 +83,7 @@ public class ButtonAnimation : MonoBehaviour
         currentTween.Kill();
     }
 
-    public void PlayShow(Action onComplete = null)
+    public void PlayShow(bool playIdle = true, Action onComplete = null)
     {
         if (AnimType != AnimationType.None) return;
         AnimType = AnimationType.Show;
@@ -92,7 +92,7 @@ public class ButtonAnimation : MonoBehaviour
         currentTween = selfRect.DOAnchorPos3D(position, showTime).SetEase(showCurve).OnUpdate(CalculateLine).OnComplete(() =>
         {
             AnimType = AnimationType.None;
-            PlayIdle();
+            if (playIdle) PlayIdle();
             onComplete?.Invoke();
         });
     }

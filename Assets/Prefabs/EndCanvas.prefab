@@ -733,7 +733,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   renderCullingMask:
     serializedVersion: 2
-    m_Bits: 87
+    m_Bits: 215
   title: {fileID: 5804755882442571783}
   backgroung: {fileID: 3657094330555507922}
   buttons: {fileID: 225515775751321701}

@@ -1409,7 +1409,7 @@ MonoBehaviour:
   mainCamera: {fileID: 248892694}
   cameraRenderMask:
     serializedVersion: 2
-    m_Bits: 95
+    m_Bits: 215
   wallLayer:
     serializedVersion: 2
     m_Bits: 64

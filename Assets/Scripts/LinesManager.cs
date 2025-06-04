@@ -37,7 +37,7 @@ public class LinesManager : MonoBehaviour
         line.transform.parent = transform;
 
         // Scale
-        Vector3 desiredScale = new (Vector3.Distance(planetA.position, planetB.position), line.transform.localScale.y, 1f);
+        float desiredScaleX = Vector3.Distance(planetA.position, planetB.position);
         line.transform.localScale = new Vector3(0f, line.transform.localScale.y, 1f);
 
         // Position
@@ -52,7 +52,7 @@ public class LinesManager : MonoBehaviour
         
         line.transform.eulerAngles = new (0f, 0f, lineAngleSign * lineAngle);
 
-        line.transform.DOScale(desiredScale, lineAnimationTime).SetEase(lineAnimationCurve); 
+        line.transform.DOScaleX(desiredScaleX, lineAnimationTime).SetEase(lineAnimationCurve);
         line.transform.DOMove(desiredPosition, lineAnimationTime).SetEase(lineAnimationCurve);
 
         lines.Add(new LineData { planetA = planetA, planetB = planetB, line = line });
