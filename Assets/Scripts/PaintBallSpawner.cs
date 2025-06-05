@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PaintBallSpawner : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class PaintBallSpawner : MonoBehaviour
 
         positionAction = playerInput.actions["Point"];
 
+        playerInput.actions["Click"].performed += SpawnPlayerBall;
+
         ChangeToRed();
     }
 
@@ -55,6 +58,12 @@ public class PaintBallSpawner : MonoBehaviour
             SpawnRandomBall();
             currentTime = timeBetweenBalls;
         }
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == SceneManager.GetSceneByName("Paint Balls").buildIndex) return;
+        playerInput.actions["Click"].performed -= SpawnPlayerBall;
     }
 
     bool IsInCanvasButton(Vector2 screenPos)

@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "Game/Create Level Data")]
 public class LevelData : ScriptableObject
 {
+    [Header("Hierarchy")]
+    public LevelData previousLevel;
+    public LevelData nextLevel;
+
     [Header("Menu:")]
     public string sceneName;
 

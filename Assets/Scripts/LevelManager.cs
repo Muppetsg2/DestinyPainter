@@ -9,8 +9,6 @@ public class LevelManager : MonoBehaviour
     public LevelData data;
     public int currentStars;
 
-    public LevelData nextLevel;
-
     public string menuName;
 
     public CameraPlanetSnap cameraSnap;
@@ -94,12 +92,12 @@ public class LevelManager : MonoBehaviour
 
     public bool HasNextLevel()
     {
-        return nextLevel != null;
+        return data.nextLevel != null;
     }
 
     public void GoToNextLevel()
     {
-        nextLevel.LoadLevel();
+        data.nextLevel.LoadLevel();
     }
 
     public void GoToMenu()

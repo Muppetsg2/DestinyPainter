@@ -8,7 +8,6 @@ public class LevelButton : MonoBehaviour
     public LevelData data;
 
     [Header("Lock")]
-    public LevelData previousLevel;
     public GameObject lockImage;
     public GameObject levelNameText;
     public GameObject starsHandler;
@@ -73,7 +72,7 @@ public class LevelButton : MonoBehaviour
 
     public bool IsUnlocked()
     {
-        return previousLevel == null || previousLevel.GetLevelFinished();
+        return data.previousLevel == null || data.previousLevel.GetLevelFinished();
     }
 
     public void OpenLevel()
