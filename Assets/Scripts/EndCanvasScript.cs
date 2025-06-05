@@ -12,7 +12,16 @@ public class EndCanvasScript : MonoBehaviour
 
     [Header("Camera")]
     public LayerMask renderCullingMask;
+    public Camera shareImageCamera;
+    public GameObject shareImageCanvas;
     private Sprite endSprite;
+
+    [Header("Share Image Canvas")]
+    public Image sharePhoto;
+    public TextMeshProUGUI shareJumps;
+    public StarObject shareStar1;
+    public StarObject shareStar2;
+    public StarObject shareStar3;
 
     [Header("Visual")]
     public TextMeshProUGUI title;
@@ -74,10 +83,46 @@ public class EndCanvasScript : MonoBehaviour
 
     void ShareImage()
     {
+        shareImageCamera.gameObject.SetActive(true);
+        shareImageCanvas.SetActive(true);
+
+        shareStar1.SetStarText(star1.GetStarText());
+        shareStar1.SetStarActive(star1.IsStarActive());
+        shareStar2.SetStarText(star2.GetStarText());
+        shareStar2.SetStarActive(star2.IsStarActive());
+        shareStar3.SetStarText(star3.GetStarText());
+        shareStar3.SetStarActive(star3.IsStarActive());
+
+        shareJumps.text = jumpsText.text;
+
+        sharePhoto.sprite = endSprite;
+
+        shareImageCamera.aspect = (float)endSprite.texture.width / endSprite.texture.height;
+
+        RenderTexture rendTex = new(endSprite.texture.width, endSprite.texture.height, 0, RenderTextureFormat.DefaultHDR);
+        Texture2D tex = new(rendTex.width, rendTex.height, TextureFormat.RGBAFloat, false);
+
+        shareImageCamera.targetTexture = rendTex;
+        shareImageCamera.Render();
+        shareImageCamera.targetTexture = null;
+
+        RenderTexture lastTex = RenderTexture.active;
+        RenderTexture.active = rendTex;
+        tex.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
+        tex.Apply();
+        RenderTexture.active = lastTex;
+
+        Destroy(rendTex);
+
         string filePath = Path.Combine(Application.persistentDataPath, "share_image.png");
-        File.WriteAllBytes(filePath, endSprite.texture.EncodeToPNG());
+        File.WriteAllBytes(filePath, tex.EncodeToPNG());
 
         Share.Item(filePath, (success) => { Debug.Log("Image: '" + filePath + "' shared"); });
+
+        Destroy(tex);
+
+        shareImageCamera.gameObject.SetActive(false);
+        shareImageCanvas.SetActive(false);
     }
 
     string ProcessTemplate<T>(string template, T value)
@@ -101,7 +146,7 @@ public class EndCanvasScript : MonoBehaviour
 
     public void Open()
     {
-        float bottomY = -GetComponent<RectTransform>().rect.height;
+        float bottomY = -Screen.height;
 
         Vector3 lastPos = title.transform.localPosition;
         float titleLocalY = lastPos.y;
@@ -212,10 +257,9 @@ public class EndCanvasScript : MonoBehaviour
 
     Sprite CreateSprite()
     {
-        RectTransform canvasRect = GetComponent<RectTransform>();
         RectTransform photoImageRect = levelOverview.GetComponent<RectTransform>();
         float imageAspect = photoImageRect.rect.width / photoImageRect.rect.height;
-        int height = (int)canvasRect.rect.height;
+        int height = Screen.height;
         int width = (int)(height * imageAspect);
 
         RenderTexture renderTexture = new(width, height, 0, RenderTextureFormat.DefaultHDR);

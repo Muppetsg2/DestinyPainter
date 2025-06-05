@@ -30,10 +30,20 @@ public class StarObject : MonoBehaviour
         SetStarColor();
     }
 
+    public bool IsStarActive()
+    {
+        return active;
+    }
+
     public void SetStarText(string value)
     {
         text = value;
         textHolder.text = text;
+    }
+
+    public string GetStarText()
+    {
+        return text;
     }
 
     public void SetActiveTextHolder(bool value)
