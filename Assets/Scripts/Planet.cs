@@ -13,11 +13,13 @@ public class Planet : MonoBehaviour
 
     public bool changeMaterial = true;
 
+    private bool radiusIsDirty = false;
+
     [ReadOnly] public float playerRadius;
 
     public void OnValidate()
     {
-        playerRadius = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y) * 0.5f + 0.11f;
+        ForceUpdateRadius();
     }
 
     void Start()
@@ -28,6 +30,14 @@ public class Planet : MonoBehaviour
         if (multicolorPlanet == null && colorChangingPlanet == null && changeMaterial)
         {
             GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetMaterial(color);
+        }
+    }
+
+    private void Update()
+    {
+        if (radiusIsDirty)
+        {
+            ForceUpdateRadius();
         }
     }
 
@@ -47,6 +57,21 @@ public class Planet : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetRadiusDirty()
+    {
+        radiusIsDirty = true;
+    }
+
+    public void SetRadiusClean()
+    {
+        radiusIsDirty = false;
+    }
+
+    public void ForceUpdateRadius()
+    {
+        playerRadius = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y) * 0.5f + 0.11f;
     }
 
     public bool IsMulticolor()

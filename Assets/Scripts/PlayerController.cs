@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
         Time = 2
     }
 
-
     [Header("General Settings")]
     public bool useAction = true;
     public InputAction launchAction;
@@ -300,6 +299,20 @@ public class PlayerController : MonoBehaviour
            //0.55f,
            //0.4f
         );
+
+        ScaleAnimator sa = planet.GetComponent<ScaleAnimator>();
+        sa?.OnAnimationStart.AddListener(() =>
+        {
+            planet.GetComponent<Planet>().SetRadiusDirty();
+        });
+        sa?.OnAnimationComplete.AddListener(() =>
+        {
+            sa?.OnAnimationStart.RemoveAllListeners();
+            sa?.OnAnimationComplete.RemoveAllListeners();
+            planet.GetComponent<Planet>().SetRadiusClean();
+            planet.GetComponent <Planet>().ForceUpdateRadius();
+        });
+        sa?.PlayAnimation();
         AttachToPlanet(planet);
     }
 
