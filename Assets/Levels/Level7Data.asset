@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc6ace10c92ee045b52af5c472ee915, type: 3}
   m_Name: Level7Data
   m_EditorClassIdentifier: 
+  previousLevel: {fileID: 11400000, guid: 70587e3266795c64db4ae513914e644a, type: 2}
+  nextLevel: {fileID: 11400000, guid: 6b7e0da1b62e3bd4da087382902cc381, type: 2}
   sceneName: Level 7
   secondStarMaxJumps: 10
   thirdStarMaxJumps: 6

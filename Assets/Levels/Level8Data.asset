@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc6ace10c92ee045b52af5c472ee915, type: 3}
   m_Name: Level8Data
   m_EditorClassIdentifier: 
+  previousLevel: {fileID: 11400000, guid: 597443ed7b15ad847a4cb7361f182e7f, type: 2}
+  nextLevel: {fileID: 0}
   sceneName: Level 8
   secondStarMaxJumps: 14
   thirdStarMaxJumps: 9
