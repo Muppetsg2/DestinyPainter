@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c93ea6152c76a44c888850593d17bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectTransform: {fileID: 4830065917922989702, guid: 387d26609cac61047b726bedadfeca39, type: 3}
+  effectTransform: {fileID: 184469430944567926}
   curve:
     serializedVersion: 2
     m_Curve:

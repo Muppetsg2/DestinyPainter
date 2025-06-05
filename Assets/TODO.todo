@@ -74,6 +74,18 @@ Mechanika:
     ✔ Historia skoków @critical @MAIPA01 @done(25-05-30 12:20)
     ✔ Wyszarzanie zebranych pickapów przed ukończeniem skoku @MAIPA01 @done(25-06-05 01:04)
 
+Polishing:
+    ☐ Szybsza animacja końca (głównie gwiazdek) @low
+    ☐ Puknięcie w ekran na end screenie kończy animacje @low
+    ☐ Opcja resetu canvasu w scenie do malowania @high
+    ☐ Powiększająca się grubość linii przy skoku między tymi samymi planetami @low
+    ☐ W każdym poziomie dać inny początkowy kolor gracza (w pierwszym dać kolor niebieski) @high
+    ✔ Zmienić rozdzielczość okienka przechodzenia między ekranami @low @Muppetsg2 @done(25-06-06 00:50)
+    ☐ Przyciski tak by zakrywały środek ekranu (pomyśleć czy to jako opcja czy zwiększyć hitboxy) @low
+    ☐ Zrobić testy na większym triggerze dołączenia (zmienić 0.61 radius na np 0.65) @low
+    ☐ Random literki na planetach death @low
+    ☐ Dać wave do literek na planetach death @low
+
 Archive:
     ☐ Zrobić UI bardziej przezroczystym (porada Szrajbera) @low
     ☐ Dodać do przycisków UI z tyłu blur emmisive @low
