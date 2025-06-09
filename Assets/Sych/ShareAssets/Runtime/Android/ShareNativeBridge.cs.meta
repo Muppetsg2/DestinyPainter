@@ -4,7 +4,7 @@ timeCreated: 1742383006
 AssetOrigin:
   serializedVersion: 1
   productId: 309744
-  packageName: Share for iOS and Android
-  packageVersion: 1.2.0
+  packageName: "Share for iOS and Android\u2122"
+  packageVersion: 1.2.1
   assetPath: Assets/Sych/ShareAssets/Runtime/Android/ShareNativeBridge.cs
-  uploadId: 756498
+  uploadId: 762573

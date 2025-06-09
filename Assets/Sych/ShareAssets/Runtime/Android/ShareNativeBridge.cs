@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Sych.ShareAssets.Runtime.Tools;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace Sych.ShareAssets.Runtime.Android
 {
+    [Preserve]
     public sealed class ShareNativeBridge : IShareBridge
     {
         private const string JavaClass = "com.sych.share.ShareUtils";
 
+        [Preserve]
         private class ShareCallback : AndroidJavaProxy
         {
             private readonly Action<bool> _callback;
