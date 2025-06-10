@@ -20,6 +20,7 @@ public class MenuManager : MonoBehaviour
     public List<ButtonAnimation> levelSelectButtons;
     public GameObject levelSelectLines;
     public GameObject levelSelectBackButton;
+    public float levelSelectBackButtonTime = 0.2f;
     public Transform levelsMainImageParent;
     public Vector3 mainImageLevelSelectPos;
     public ScrollRect levelSelectScroll;
@@ -31,6 +32,7 @@ public class MenuManager : MonoBehaviour
     public List<ButtonAnimation> creditsPlanets;
     public List<LineData> creditsLines;
     public GameObject creditsBackButton;
+    public float creditsBackButtonTime = 0.2f;
     public Transform creditsMainImageParent;
     public Vector3 mainImageCreditsPos;
     public Image creditsViewport;
@@ -73,9 +75,14 @@ public class MenuManager : MonoBehaviour
             button.gameObject.SetActive(false);
         }
         levelSelectLines.SetActive(false);
+        levelSelectBackButton.GetComponent<Button>().enabled = false;
         levelSelectBackButton.SetActive(false);
         levelSelectScroll.enabled = false;
         levelSelectViewport.raycastTarget = false;
+
+        // credits
+        creditsBackButton.GetComponent<Button>().enabled = false;
+        creditsBackButton.SetActive(false);
 
         OpenMenu();
     }
@@ -186,6 +193,7 @@ public class MenuManager : MonoBehaviour
             {
                 levelSelectViewport.raycastTarget = true;
                 levelSelectBackButton.SetActive(true);
+                levelSelectBackButton.GetComponent<Button>().enabled = true;
                 onComplete?.Invoke();
             });
         });
@@ -194,7 +202,16 @@ public class MenuManager : MonoBehaviour
     private void HideLevelSelect(Action onComplete = null)
     {
         if (ViewType != CurrentView.LevelSelect) return;
-        levelSelectBackButton.SetActive(false);
+        float t = 0f;
+        DOTween.To(() => t, x =>
+        {
+            t = x;
+            if (t >= 1f)
+            {
+                levelSelectBackButton.GetComponent <Button>().enabled = false;
+                levelSelectBackButton.SetActive(false);
+            }
+        }, 1f, levelSelectBackButtonTime);
         levelSelectViewport.raycastTarget = false;
 
         float time = levelSelectScrollAnimationTime * (1f - levelSelectScroll.verticalNormalizedPosition);
@@ -335,8 +352,16 @@ public class MenuManager : MonoBehaviour
         }
 
         mainImage.GetComponent<Button>().enabled = true;
-        creditsBackButton.GetComponent<Button>().enabled = true;
-        creditsBackButton.SetActive(false);
+        float t = 0f;
+        DOTween.To(() => t, x =>
+        {
+            t = x;
+            if (t >= 1f)
+            {
+                creditsBackButton.GetComponent<Button>().enabled = false;
+                creditsBackButton.SetActive(false);
+            }
+        }, 1f, creditsBackButtonTime);
         creditsViewport.raycastTarget = false;
         AnimateLine(creditsLines.Count - 1);
     }

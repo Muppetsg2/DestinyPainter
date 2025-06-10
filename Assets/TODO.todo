@@ -61,7 +61,7 @@ Miodzik:
     ✔ Wytracanie prędkości podczas lotu gracza (może dodać curve) @high @Muppetsg2 @done(25-05-29 01:21)
     ✔ Dodać zachowanie przycisków podczas klikania @high @Muppetsg2 @done(25-06-04 16:55)
     ✔ Zaprojektować wygląd strzałek kierunku obrotu planet @high @Muppetsg2 @done(25-06-04 15:37)
-    ☐ Dodać do przycisków UI animację kliknięcia (zmiana skali i koloru) @high
+    ✔ Dodać do przycisków UI animację kliknięcia (zmiana skali i koloru) @high @Muppetsg2 @done(25-06-11 01:15)
     ✔ Dodać leciutki bounce jak się wleci w planetę @low @Muppetsg2 @done(25-06-05 14:36)
 
 Mechanika:
@@ -79,7 +79,7 @@ Polishing:
     ☐ Powiększająca się grubość linii przy skoku między tymi samymi planetami @low
     ✔ W każdym poziomie dać inny początkowy kolor gracza (w pierwszym dać kolor niebieski) @high @Muppetsg2 @done(25-06-10 19:03)
     ✔ Zmienić rozdzielczość okienka przechodzenia między ekranami @low @Muppetsg2 @done(25-06-06 00:50)
-    ☐ Przyciski tak by zakrywały środek ekranu (pomyśleć czy to jako opcja czy zwiększyć hitboxy) @low
+    ✔ Przyciski tak by zakrywały środek ekranu (pomyśleć czy to jako opcja czy zwiększyć hitboxy) @low @Muppetsg2 @done(25-06-11 01:29)
     ✔ Zrobić testy na większym triggerze dołączenia (zmienić 0.61 radius na np 0.65) @low @Muppetsg2 @done(25-06-10 16:44)
     ✔ Random literki na planetach death @low @Muppetsg2 @done(25-06-10 14:22)
     ✔ Dać wave do literek na planetach death @low @Muppetsg2 @done(25-06-10 13:22)

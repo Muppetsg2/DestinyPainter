@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 3783959109584241310}
   - component: {fileID: 8935109926330776547}
   - component: {fileID: 7690016116466419857}
+  - component: {fileID: 5439744373289954568}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -266,6 +267,54 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5439744373289954568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740414840162362792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff60e820aa9aaf4da1304939f5f8196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTransform: {fileID: 6545208715390635179}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pressedScaleFactor: 0.7
+  time: 0.2
 --- !u!1 &787174270078276437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1493,7 @@ GameObject:
   - component: {fileID: 8609358267290530579}
   - component: {fileID: 1789504871098596795}
   - component: {fileID: 6259213972065313810}
+  - component: {fileID: 8875241941696562117}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1553,6 +1603,54 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8875241941696562117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3626974542271015006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff60e820aa9aaf4da1304939f5f8196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTransform: {fileID: 8716190262002490917}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pressedScaleFactor: 0.7
+  time: 0.2
 --- !u!1 &4414144576791712360
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,6 +2168,7 @@ GameObject:
   - component: {fileID: 2182459155753092727}
   - component: {fileID: 5430866120688553763}
   - component: {fileID: 3024974804973678648}
+  - component: {fileID: 1339841665938497630}
   m_Layer: 5
   m_Name: Publish
   m_TagString: Untagged
@@ -2179,6 +2278,54 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1339841665938497630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880699999695032351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff60e820aa9aaf4da1304939f5f8196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTransform: {fileID: 7830500128967573120}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pressedScaleFactor: 0.7
+  time: 0.2
 --- !u!1 &7211906920989056820
 GameObject:
   m_ObjectHideFlags: 0

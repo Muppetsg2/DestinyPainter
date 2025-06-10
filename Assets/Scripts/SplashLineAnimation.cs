@@ -66,6 +66,12 @@ public class SplashLineAnimation : MonoBehaviour
 
     public void PlayAnim()
     {
+        if (sq != null)
+        {
+            sq.Restart();
+            return;
+        }
+
         lineRenderer.widthMultiplier = Random.Range(lineWidth.Min, lineWidth.Max);
 
         sq = DOTween.Sequence().Pause();
@@ -84,6 +90,7 @@ public class SplashLineAnimation : MonoBehaviour
         if (sq != null)
         {
             sq.Kill(true);
+            sq = null;
             return;
         }
 
@@ -93,10 +100,8 @@ public class SplashLineAnimation : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (sq != null)
-        {
-            sq.Kill(true);
-        }
+        sq?.Kill(true);
+        sq = null;
     }
 
     void SetLineLength(float length)

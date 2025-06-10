@@ -34,7 +34,8 @@ public class PaintBallSpawner : MonoBehaviour
 
     private List<GameObject> splashes = new();
 
-    private int colorTransformsRecalculate = 2;
+    private int attemptsCounter = 2;
+    private int initAttempts = 2;
     private bool startInit = false;
 
     void Start()
@@ -43,20 +44,21 @@ public class PaintBallSpawner : MonoBehaviour
         pos.y = wallCollider.transform.position.y - wallCollider.size.y * 0.5f;
         transform.position = pos;
 
-        mainCamera = mainCamera == null ? Camera.main : mainCamera;
+        if (mainCamera == null) mainCamera = Camera.main;
 
         positionAction = playerInput.actions["Point"];
 
         playerInput.actions["Click"].performed += SpawnPlayerBall;
 
         startInit = true;
+        attemptsCounter = initAttempts;
     }
 
     void Update()
     {
         if (startInit)
         {
-            --colorTransformsRecalculate;
+            --attemptsCounter;
 
             switch (currentColor)
             {
@@ -77,9 +79,10 @@ public class PaintBallSpawner : MonoBehaviour
                 }
             }
 
-            if (colorTransformsRecalculate == 0)
+            if (attemptsCounter == 0)
             {
-                startInit = false;
+                startInit = true;
+                attemptsCounter = initAttempts;
             }
         }
 
