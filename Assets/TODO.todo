@@ -73,8 +73,8 @@ Mechanika:
     ✔ Wyszarzanie zebranych pickapów przed ukończeniem skoku @MAIPA01 @done(25-06-05 01:04)
 
 Polishing:
-    ☐ Szybsza animacja końca (głównie gwiazdek) @low
-    ☐ Puknięcie w ekran na end screenie kończy animacje @low
+    ✔ Szybsza animacja końca (głównie gwiazdek) @low @MAIPA01 @done(25-06-10 23:19)
+    ✔ Puknięcie w ekran na end screenie kończy animacje @low @MAIPA01 @done(25-06-10 23:08)
     ✔ Opcja resetu canvasu w scenie do malowania @high @Muppetsg2 @done(25-06-10 21:04)
     ☐ Powiększająca się grubość linii przy skoku między tymi samymi planetami @low
     ✔ W każdym poziomie dać inny początkowy kolor gracza (w pierwszym dać kolor niebieski) @high @Muppetsg2 @done(25-06-10 19:03)

@@ -34,6 +34,7 @@ public class EndCanvasScript : MonoBehaviour
     public Button menuBtn;
     public Button shareBtn;
     public Button nextLevelBtn;
+    public Button finishAnimBtn;
 
     [Header("Stars")]
     public StarObject star1;
@@ -48,14 +49,19 @@ public class EndCanvasScript : MonoBehaviour
     [TextArea] public string jumpsTemplate;
 
     [Header("Show Animation")]
-    public float showItemsFromBottomTime;
+    public float showYouWonTextTime;
+    public float showButtonsTime;
     public AnimationCurve showItemsFromBottomCurve;
-    public float showFromPlayerViewTime;
+    public float showPhotoTime;
+    public float showStarsTime;
+    public float showJumpsTextTime;
     public AnimationCurve showFromPlayerViewCurve;
     public float showFromPlayerViewScale;
     public float showFromPlayerViewStartYOffset;
     public float showFromPlayerViewStarsDelay;
     public float photoImageColorTransitionTime;
+
+    private Sequence openAnimationSequence = null;
 
     private void Awake()
     {
@@ -79,6 +85,16 @@ public class EndCanvasScript : MonoBehaviour
         shareBtn.onClick.AddListener(ShareImage);
         if (LevelManager.Instance.HasNextLevel()) nextLevelBtn.onClick.AddListener(LevelManager.Instance.GoToNextLevel);
         else nextLevelBtn.gameObject.SetActive(false);
+
+        finishAnimBtn.onClick.AddListener(FinishAnimation);
+    }
+
+    void FinishAnimation()
+    {
+        if (openAnimationSequence == null)
+            return;
+
+        openAnimationSequence.Complete(true);
     }
 
     void ShareImage()
@@ -208,51 +224,105 @@ public class EndCanvasScript : MonoBehaviour
         jumpsText.transform.localPosition = lastPos;
         jumpsText.gameObject.SetActive(false);
 
-        title.transform.DOLocalMoveY(titleLocalY, showItemsFromBottomTime).SetEase(showItemsFromBottomCurve).OnComplete(() =>
-        {
-            photo.SetActive(true);
-            photo.transform.DOLocalMoveY(photoLocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
-            photo.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+        finishAnimBtn.gameObject.SetActive(true);
+
+        openAnimationSequence = DOTween.Sequence();
+        openAnimationSequence
+            .Append(title.transform.DOLocalMoveY(titleLocalY, showYouWonTextTime).SetEase(showItemsFromBottomCurve))
+            .AppendCallback(() =>
             {
-                levelOverview.DOColor(Color.white, photoImageColorTransitionTime);
-
+                photo.SetActive(true);
+            })
+            .Append(photo.transform.DOLocalMoveY(photoLocalY, showPhotoTime).SetEase(showFromPlayerViewCurve))
+            .Join(photo.transform.DOScale(1f, showPhotoTime).SetEase(showFromPlayerViewCurve))
+            .Append(levelOverview.DOColor(Color.white, photoImageColorTransitionTime))
+            .JoinCallback(() =>
+            {
                 star1.gameObject.SetActive(true);
-                star1.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
-                star1.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
-                {
-                    star1.SetActiveTextHolder(true);
-                });
+            })
+            .Join(star1.transform.DOLocalMoveY(star1LocalY, showStarsTime).SetEase(showFromPlayerViewCurve))
+            .Join(star1.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+            {
+                star1.SetActiveTextHolder(true);
+            }))
+            .Join(star2.transform.DOLocalMoveY(star1LocalY, showStarsTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay))
+            .JoinCallback(() =>
+            {
+                star2.gameObject.SetActive(true);
+            })
+            .Join(star2.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+            {
+                star2.SetActiveTextHolder(true);
+            }))
+            .Join(star3.transform.DOLocalMoveY(star1LocalY, showStarsTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay))
+            .JoinCallback(() =>
+            {
+                star3.gameObject.SetActive(true);
+            })
+            .Join(star3.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+            {
+                star3.SetActiveTextHolder(true);
 
-                star2.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay)
-                .OnStart(() => star2.gameObject.SetActive(true));
-                star2.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay).OnComplete(() =>
-                {
-                    star2.SetActiveTextHolder(true);
-                });
+                starsLayout.enabled = true;
 
-                star3.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(2 * showFromPlayerViewStarsDelay)
-                .OnStart(() => star3.gameObject.SetActive(true));
-                star3.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(2 * showFromPlayerViewStarsDelay).OnComplete(() =>
-                {
-                    star3.SetActiveTextHolder(true);
-
-                    starsLayout.enabled = true;
-
-                    jumpsText.gameObject.SetActive(true);
-
-                    jumpsText.transform.DOLocalMoveY(jumpsTextLocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
-                    jumpsText.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
-                    {
-                        buttons.transform.DOLocalMoveY(buttonsLocalY, showItemsFromBottomTime).SetEase(showItemsFromBottomCurve).OnComplete(() =>
-                        {
-                            menuBtn.enabled = true;
-                            shareBtn.enabled = true;
-                            nextLevelBtn.enabled = true;
-                        });
-                    });
-                });
+                jumpsText.gameObject.SetActive(true);
+            }))
+            .Append(jumpsText.transform.DOLocalMoveY(jumpsTextLocalY, showJumpsTextTime).SetEase(showFromPlayerViewCurve))
+            .Join(jumpsText.transform.DOScale(1f, showJumpsTextTime).SetEase(showFromPlayerViewCurve))
+            .Append(buttons.transform.DOLocalMoveY(buttonsLocalY, showButtonsTime).SetEase(showItemsFromBottomCurve))
+            .AppendCallback(() =>
+            {
+                menuBtn.enabled = true;
+                shareBtn.enabled = true;
+                nextLevelBtn.enabled = true;
+                finishAnimBtn.gameObject.SetActive(false);
             });
-        });
+
+        //title.transform.DOLocalMoveY(titleLocalY, showItemsFromBottomTime).SetEase(showItemsFromBottomCurve).OnComplete(() =>
+        //{
+        //    photo.SetActive(true);
+        //    photo.transform.DOLocalMoveY(photoLocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
+        //    photo.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+        //    {
+        //        levelOverview.DOColor(Color.white, photoImageColorTransitionTime);
+
+        //        star1.gameObject.SetActive(true);
+        //        star1.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
+        //        star1.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+        //        {
+        //            star1.SetActiveTextHolder(true);
+        //        });
+
+        //        star2.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay)
+        //        .OnStart(() => star2.gameObject.SetActive(true));
+        //        star2.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay).OnComplete(() =>
+        //        {
+        //            star2.SetActiveTextHolder(true);
+        //        });
+
+        //        star3.transform.DOLocalMoveY(star1LocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(2 * showFromPlayerViewStarsDelay)
+        //        .OnStart(() => star3.gameObject.SetActive(true));
+        //        star3.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).SetDelay(2 * showFromPlayerViewStarsDelay).OnComplete(() =>
+        //        {
+        //            star3.SetActiveTextHolder(true);
+
+        //            starsLayout.enabled = true;
+
+        //            jumpsText.gameObject.SetActive(true);
+
+        //            jumpsText.transform.DOLocalMoveY(jumpsTextLocalY, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve);
+        //            jumpsText.transform.DOScale(1f, showFromPlayerViewTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+        //            {
+        //                buttons.transform.DOLocalMoveY(buttonsLocalY, showItemsFromBottomTime).SetEase(showItemsFromBottomCurve).OnComplete(() =>
+        //                {
+        //                    menuBtn.enabled = true;
+        //                    shareBtn.enabled = true;
+        //                    nextLevelBtn.enabled = true;
+        //                });
+        //            });
+        //        });
+        //    });
+        //});
     }
 
     Sprite CreateSprite()
