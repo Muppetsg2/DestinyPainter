@@ -355,7 +355,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   color: 1
-  planetSnap: {fileID: 0}
   currentPlanet: {fileID: 0}
   launchSpeedCurve:
     serializedVersion: 2
@@ -390,12 +389,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  launchForce: 5
-  snapDistance: 2
-  returnDelay: 1.75
+  launchForce: 10
+  returnDelay: 0.875
   trail: {fileID: 5867831896094622628}
   rotationMode: -1
-  rotationMode2: -1
   rotationMultiplier: 1
   withTheFlowMultiplier: 1
   againsTheFlowMultiplier: 0.33
@@ -405,5 +402,7 @@ MonoBehaviour:
   planetSplashTime: 0.5
   colorBurstOffset: 0.01
   colorBurstAlpha: 0.59
+  OnJump:
+    m_PersistentCalls:
+      m_Calls: []
   planetJumpsCounter: 0
-  jumpsHistory: []

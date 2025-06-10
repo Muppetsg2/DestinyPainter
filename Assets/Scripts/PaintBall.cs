@@ -7,6 +7,8 @@ public class PaintBall : MonoBehaviour
 
     public ColorType colorType;
 
+    public PaintBallSpawner spawner;
+
     public void SetColor(ColorType color)
     {
         colorType = color;
@@ -30,6 +32,9 @@ public class PaintBall : MonoBehaviour
             var lineGenerator = splash.GetComponent<SplashLinesGenerator>();
             lineGenerator.SetColor(color);
             lineGenerator.GenerateLines(150f / 255f);
+
+            if (spawner != null) spawner.AddSplash(splash);
+
             Destroy(gameObject);
         }
     }

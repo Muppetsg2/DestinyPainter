@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.qiaozhilei.easy-text-effects": {
+      "version": "https://github.com/LeiQiaoZhi/Easy-Text-Effects-for-Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "hash": "a680e21539eaa9cbf3763db8d2acd10cafe1cfb1"
+    },
     "com.unity.2d.animation": {
       "version": "10.1.3",
       "depth": 1,

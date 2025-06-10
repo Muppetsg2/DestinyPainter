@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     [Header("Jump")]
     public AnimationCurve launchSpeedCurve;
     public float launchForce = 5f;
-    public float snapDistance = 0.5f;
     public float returnDelay = 2f;
     public TrailRenderer trail;
 
@@ -117,15 +116,31 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Planet curr = currentPlanet.GetComponent<Planet>();
-        if (isAttached && !curr.isEnd)
+        if (isAttached && currentPlanet != null)
         {
-            transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * curr.playerRadius;
-            transform.RotateAround(currentPlanet.position, Vector3.forward, 
-                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * rotationMultiplier * (int)rotationMode);
+            Planet curr = currentPlanet.GetComponent<Planet>();
 
-            ValidatePlanetColor(curr);
+            UpdatePlayerRadius();
+
+            transform.RotateAround(
+                currentPlanet.position,
+                Vector3.forward,
+                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * rotationMultiplier * (int)rotationMode
+            );
+
+            if (!curr.isEnd)
+            {
+                ValidatePlanetColor(curr);
+            }
         }
+    }
+
+    private void UpdatePlayerRadius()
+    {
+        if (currentPlanet == null) return;
+
+        Planet curr = currentPlanet.GetComponent<Planet>();
+        transform.position = currentPlanet.position + (transform.position - currentPlanet.position).normalized * curr.playerRadius;
     }
 
     private float CalculatePlayerPlanetAngle(Transform planet)
@@ -301,15 +316,15 @@ public class PlayerController : MonoBehaviour
         );
 
         ScaleAnimator sa = planet.GetComponent<ScaleAnimator>();
-        sa?.OnAnimationStart.AddListener(() =>
+        sa?.OnAnimationFrame.AddListener((Vector3 previous, Vector3 actual) =>
         {
-            planet.GetComponent<Planet>().SetRadiusDirty();
+            planet.GetComponent<Planet>().ForceUpdateRadius();
+            UpdatePlayerRadius();
         });
         sa?.OnAnimationComplete.AddListener(() =>
         {
-            sa?.OnAnimationStart.RemoveAllListeners();
+            sa?.OnAnimationFrame.RemoveAllListeners();
             sa?.OnAnimationComplete.RemoveAllListeners();
-            planet.GetComponent<Planet>().SetRadiusClean();
             planet.GetComponent <Planet>().ForceUpdateRadius();
         });
         sa?.PlayAnimation();

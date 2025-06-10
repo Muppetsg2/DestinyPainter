@@ -14,6 +14,7 @@ public class ScaleAnimator : MonoBehaviour
     [SerializeField] private float time = 1f;
 
     public UnityEvent OnAnimationStart;
+    public UnityEvent<Vector3, Vector3> OnAnimationFrame;
     public UnityEvent OnAnimationComplete;
 
     public void PlayAnimation()
@@ -34,7 +35,9 @@ public class ScaleAnimator : MonoBehaviour
             t = x;
             float curveValue = curve.Evaluate(t / time);
             float remappedScaleFactor = Mathf.Lerp(scaleFactor.Min, scaleFactor.Max, curveValue.Remap(-1f, 1f, 0f, 1f));
+            Vector3 oldScale = effectTransform.localScale;
             effectTransform.localScale = originalScale * remappedScaleFactor;
+            OnAnimationFrame?.Invoke(oldScale, effectTransform.localScale);
 
         }, time, time)
         .SetEase(Ease.Linear)

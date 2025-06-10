@@ -32,6 +32,11 @@ public class PaintBallSpawner : MonoBehaviour
 
     public RectTransform currentBallArrowTransform;
 
+    private List<GameObject> splashes = new();
+
+    private int colorTransformsRecalculate = 2;
+    private bool startInit = false;
+
     void Start()
     {
         Vector3 pos = transform.position;
@@ -44,11 +49,40 @@ public class PaintBallSpawner : MonoBehaviour
 
         playerInput.actions["Click"].performed += SpawnPlayerBall;
 
-        ChangeToRed();
+        startInit = true;
     }
 
     void Update()
     {
+        if (startInit)
+        {
+            --colorTransformsRecalculate;
+
+            switch (currentColor)
+            {
+                case ColorType.Red:
+                {
+                    ChangeToRed();
+                    break;
+                }
+                case ColorType.Violet:
+                {
+                    ChangeToViolet();
+                    break;
+                }
+                case ColorType.Blue:
+                {
+                    ChangeToBlue();
+                    break;
+                }
+            }
+
+            if (colorTransformsRecalculate == 0)
+            {
+                startInit = false;
+            }
+        }
+
         if (!randomBalls) return;
 
         currentTime -= Time.deltaTime;
@@ -66,7 +100,7 @@ public class PaintBallSpawner : MonoBehaviour
         playerInput.actions["Click"].performed -= SpawnPlayerBall;
     }
 
-    bool IsInCanvasButton(Vector2 screenPos)
+    private bool IsInCanvasButton(Vector2 screenPos)
     {
         foreach (var canvasBtn in canvasButtons)
         {
@@ -129,10 +163,10 @@ public class PaintBallSpawner : MonoBehaviour
         }
     }
 
-    void MoveArrowTo(RectTransform ball)
+    private void MoveArrowTo(RectTransform ball)
     {
         currentBallArrowTransform.position = ball.position;
-        Vector3 pos = currentBallArrowTransform.anchoredPosition;
+        Vector2 pos = currentBallArrowTransform.anchoredPosition;
         pos.y += ball.rect.height * 0.5f + 16f;
         currentBallArrowTransform.anchoredPosition = pos;
     }
@@ -160,7 +194,29 @@ public class PaintBallSpawner : MonoBehaviour
         LevelLoader.Instance.LoadLevel("Menu");
     }
 
-    void SpawnRandomBall()
+    public void ResetCanvas()
+    {
+        while(splashes.Count > 0)
+        {
+            DestroyImmediate(splashes[0]);
+            splashes.RemoveAt(0);
+        }
+    }
+
+    public void AddSplash(GameObject splash)
+    {
+        splashes.Add(splash);
+    }
+
+    public void RemoveSplash(GameObject splash)
+    {
+        if (splashes.Remove(splash))
+        {
+            DestroyImmediate(splash);
+        }
+    }
+
+    private void SpawnRandomBall()
     {
         Vector3 wallPos = wallCollider.transform.position;
         wallPos.x = Random.Range(wallCollider.transform.position.x - wallCollider.size.x * 0.5f, wallCollider.transform.position.x + wallCollider.size.x * 0.5f);
@@ -169,7 +225,7 @@ public class PaintBallSpawner : MonoBehaviour
         SpawnBall(wallPos, (ColorType)(Random.Range((int)ColorType.None, (int)ColorType.Blue) + 1));
     }
 
-    void SpawnBall(Vector3 wallPos, ColorType color)
+    private void SpawnBall(Vector3 wallPos, ColorType color)
     {
         Vector3 pos = transform.position;
         pos.x = Random.Range(transform.position.x - wallCollider.size.x * 0.5f, transform.position.x + wallCollider.size.x * 0.5f);
@@ -179,5 +235,6 @@ public class PaintBallSpawner : MonoBehaviour
         GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
         ball.GetComponent<Rigidbody>().linearVelocity = velocity;
         ball.GetComponent<PaintBall>().SetColor(color);
+        ball.GetComponent<PaintBall>().spawner = this;
     }
 }

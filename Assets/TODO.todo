@@ -75,18 +75,20 @@ Mechanika:
 Polishing:
     ☐ Szybsza animacja końca (głównie gwiazdek) @low
     ☐ Puknięcie w ekran na end screenie kończy animacje @low
-    ☐ Opcja resetu canvasu w scenie do malowania @high
+    ✔ Opcja resetu canvasu w scenie do malowania @high @Muppetsg2 @done(25-06-10 21:04)
     ☐ Powiększająca się grubość linii przy skoku między tymi samymi planetami @low
-    ☐ W każdym poziomie dać inny początkowy kolor gracza (w pierwszym dać kolor niebieski) @high
+    ✔ W każdym poziomie dać inny początkowy kolor gracza (w pierwszym dać kolor niebieski) @high @Muppetsg2 @done(25-06-10 19:03)
     ✔ Zmienić rozdzielczość okienka przechodzenia między ekranami @low @Muppetsg2 @done(25-06-06 00:50)
     ☐ Przyciski tak by zakrywały środek ekranu (pomyśleć czy to jako opcja czy zwiększyć hitboxy) @low
-    ☐ Zrobić testy na większym triggerze dołączenia (zmienić 0.61 radius na np 0.65) @low
-    ☐ Random literki na planetach death @low
-    ☐ Dać wave do literek na planetach death @low
-    ☐ Szybszy lot gracza @low
-    ☐ Szybszy lot piłeczek z farbą @low
+    ✔ Zrobić testy na większym triggerze dołączenia (zmienić 0.61 radius na np 0.65) @low @Muppetsg2 @done(25-06-10 16:44)
+    ✔ Random literki na planetach death @low @Muppetsg2 @done(25-06-10 14:22)
+    ✔ Dać wave do literek na planetach death @low @Muppetsg2 @done(25-06-10 13:22)
+    ✔ Szybszy lot gracza @low @Muppetsg2 @done(25-06-10 16:25)
+    ✔ Szybszy lot piłeczek z farbą (Z 1.5 na 0.5 w obu wartościach) @low @Muppetsg2 @done(25-06-10 16:28)
     ☐ Zmienić tło (Może gradient) @low
     ☐ Dodać efekt rozróżniający która strzałka do obrotu jest teraz kliknięta (np. powiększenie obiektu czy zmiana koloru/alphy) @low
+    ✔ Dodać particle do planety czarnej @low @Muppetsg2 @done(25-06-10 15:55)
+    ✔ Zrobić bardziej smooth zmianę promienia poprzez przeniesienie zmiany promienia planety jak i zmiany położenia gracza do eventu w środku animacji @low @Muppetsg2 @done(25-06-10 17:46)
 
 Archive:
     ☐ Zrobić UI bardziej przezroczystym (porada Szrajbera) @low
@@ -100,3 +102,4 @@ Archive:
     ☐ Skiny do gracza @low
     ☐ Skiny dla planet @low
     ☐ Inna paleta kolorów np dla graczy którzy są daltonistami @low
+    ☐ Camera shake jak sie wleci na planetę (https://youtube.com/shorts/hnnZ5XXUVfE?si=5xcbuU01rA9hk6VH) @low

@@ -91,6 +91,14 @@ public class SplashLineAnimation : MonoBehaviour
         SetLineLength(Random.Range(lineLength.Min, lineLength.Max));
     }
 
+    private void OnDestroy()
+    {
+        if (sq != null)
+        {
+            sq.Kill(true);
+        }
+    }
+
     void SetLineLength(float length)
     {
         currentLineLength = length;

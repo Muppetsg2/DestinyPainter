@@ -1,4 +1,5 @@
 using SaintsField;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
@@ -7,6 +8,7 @@ public class Planet : MonoBehaviour
 {
     public bool isEnd;
     public bool isDeadly;
+    [ShowIf("isDeadly"), SerializeField] private TextMeshProUGUI text;
     public MulticolorPlanet multicolorPlanet;
     public ColorChangingPlanet colorChangingPlanet;
     public ColorType color;
@@ -16,6 +18,8 @@ public class Planet : MonoBehaviour
     private bool radiusIsDirty = false;
 
     [ReadOnly] public float playerRadius;
+
+    private string baseText = "Loremipsumdolorzsf";
 
     public void OnValidate()
     {
@@ -30,6 +34,11 @@ public class Planet : MonoBehaviour
         if (multicolorPlanet == null && colorChangingPlanet == null && changeMaterial)
         {
             GetComponent<SpriteRenderer>().material = ColorsManager.Instance.GetMaterial(color);
+        }
+
+        if (isDeadly && text != null)
+        {
+            text.SetText(ShuffleText(baseText));
         }
     }
 
@@ -57,6 +66,25 @@ public class Planet : MonoBehaviour
         }
 
         return false;
+    }
+
+    public string ShuffleText(string textToShuffle)
+    {
+        if (string.IsNullOrEmpty(textToShuffle))
+        {
+            return textToShuffle;
+        }
+
+        char[] characters = textToShuffle.ToCharArray();
+        int n = characters.Length;
+        for (int i = n - 1; i > 0; --i)
+        {
+            int j = Random.Range(0, i + 1);
+            char temp = characters[i];
+            characters[i] = characters[j];
+            characters[j] = temp;
+        }
+        return new string(characters);
     }
 
     public void SetRadiusDirty()
