@@ -202,13 +202,13 @@ public class MenuManager : MonoBehaviour
     private void HideLevelSelect(Action onComplete = null)
     {
         if (ViewType != CurrentView.LevelSelect) return;
+        levelSelectBackButton.GetComponent<Button>().enabled = false;
         float t = 0f;
         DOTween.To(() => t, x =>
         {
             t = x;
             if (t >= 1f)
             {
-                levelSelectBackButton.GetComponent <Button>().enabled = false;
                 levelSelectBackButton.SetActive(false);
             }
         }, 1f, levelSelectBackButtonTime);
@@ -352,13 +352,13 @@ public class MenuManager : MonoBehaviour
         }
 
         mainImage.GetComponent<Button>().enabled = true;
+        creditsBackButton.GetComponent<Button>().enabled = false;
         float t = 0f;
         DOTween.To(() => t, x =>
         {
             t = x;
             if (t >= 1f)
             {
-                creditsBackButton.GetComponent<Button>().enabled = false;
                 creditsBackButton.SetActive(false);
             }
         }, 1f, creditsBackButtonTime);
