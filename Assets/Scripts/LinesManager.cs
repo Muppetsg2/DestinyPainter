@@ -1,6 +1,6 @@
-using UnityEngine;
-using System.Collections.Generic;
 using DG.Tweening;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class LinesManager : MonoBehaviour
 {
@@ -12,6 +12,22 @@ public class LinesManager : MonoBehaviour
         public Transform planetA;
         public Transform planetB;
         public GameObject line;
+        public int jumpCount;
+
+        public bool HasPlanets(Transform a, Transform b)
+        {
+            return (planetA == a && planetB == b) || (planetA == b && planetB == a);
+        }
+
+        public void AddJumpCount()
+        {
+            float yScaleOriginal = line.transform.localScale.y / jumpCount;
+            ++jumpCount;
+            if (jumpCount <= 5)
+            {
+                line.transform.DOScaleY(yScaleOriginal * jumpCount, 0.2f);
+            }
+        }
     }
 
     public GameObject linePrefab;
@@ -29,8 +45,14 @@ public class LinesManager : MonoBehaviour
 
     public void AddLine(Transform planetA, Transform planetB)
     {
-        if (lines.Exists((lineData) => (lineData.planetA == planetA && lineData.planetB == planetB) || (lineData.planetA == planetB && lineData.planetB == planetA))) 
+        int index = lines.FindIndex(lineData => lineData.HasPlanets(planetA, planetB));
+        if (index >= 0)
+        {
+            LineData data = lines[index];
+            data.AddJumpCount();
+            lines[index] = data;
             return;
+        }
 
         GameObject line = Instantiate(linePrefab, null, true);
         line.name = planetA.name + " -> " + planetB.name;
@@ -55,6 +77,6 @@ public class LinesManager : MonoBehaviour
         line.transform.DOScaleX(desiredScaleX, lineAnimationTime).SetEase(lineAnimationCurve);
         line.transform.DOMove(desiredPosition, lineAnimationTime).SetEase(lineAnimationCurve);
 
-        lines.Add(new LineData { planetA = planetA, planetB = planetB, line = line });
+        lines.Add(new LineData { planetA = planetA, planetB = planetB, line = line, jumpCount = 1 });
     }
 }

@@ -2264,6 +2264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   painBallPrefab: {fileID: 8173331407427200889, guid: 6b1a5358ec3101b408fb9ea9ffc1d345, type: 3}
+  curveShooting: 0
   timeBetweenBalls: 0.5
   timeToWall: 0.5
   wallCollider: {fileID: 1216382754}

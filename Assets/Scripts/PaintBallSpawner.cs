@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class PaintBallSpawner : MonoBehaviour
 {
     public GameObject painBallPrefab;
+    public bool curveShooting = true;
     public float timeBetweenBalls = 2f;
     public float timeToWall = 2f;
 
@@ -37,6 +38,12 @@ public class PaintBallSpawner : MonoBehaviour
     private int attemptsCounter = 2;
     private int initAttempts = 2;
     private bool startInit = false;
+
+#if UNITY_EDITOR
+    // Gizmos
+    private Vector3? gizmoStart;
+    private Vector3? gizmoDir;
+#endif
 
     void Start()
     {
@@ -158,7 +165,21 @@ public class PaintBallSpawner : MonoBehaviour
 
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(position);
 
-        Vector3 dir = (worldPos - mainCamera.transform.position).normalized;
+        Vector3 dir;
+        
+        if (mainCamera.orthographic)
+        {
+            dir = mainCamera.transform.forward;
+        }
+        else
+        {
+            dir = (worldPos - mainCamera.transform.position).normalized;
+        }
+
+#if UNITY_EDITOR
+        gizmoStart = worldPos;
+        gizmoDir = dir;
+#endif
 
         if (Physics.Raycast(worldPos, dir, out RaycastHit hit, float.MaxValue, wallLayer.value))
         {
@@ -230,14 +251,52 @@ public class PaintBallSpawner : MonoBehaviour
 
     private void SpawnBall(Vector3 wallPos, ColorType color)
     {
-        Vector3 pos = transform.position;
-        pos.x = Random.Range(transform.position.x - wallCollider.size.x * 0.5f, transform.position.x + wallCollider.size.x * 0.5f);
+        if (curveShooting)
+        {
+            Vector3 pos = transform.position;
+            pos.x = Random.Range(transform.position.x - wallCollider.size.x * 0.5f, transform.position.x + wallCollider.size.x * 0.5f);
 
-        Vector3 velocity = (wallPos - pos) / timeToWall - 0.5f * timeToWall * Physics.gravity;
+            Vector3 velocity = (wallPos - pos) / timeToWall - 0.5f * timeToWall * Physics.gravity;
 
-        GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
-        ball.GetComponent<Rigidbody>().linearVelocity = velocity;
-        ball.GetComponent<PaintBall>().SetColor(color);
-        ball.GetComponent<PaintBall>().spawner = this;
+            GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
+            ball.GetComponent<Rigidbody>().linearVelocity = velocity;
+            ball.GetComponent<Rigidbody>().useGravity = true;
+            ball.GetComponent<PaintBall>().SetColor(color);
+            ball.GetComponent<PaintBall>().spawner = this;
+        }
+        else
+        {
+            Vector3 pos;
+            if (mainCamera.orthographic)
+            {
+                pos = new Vector3(wallPos.x, wallPos.y, mainCamera.transform.position.z - mainCamera.nearClipPlane);
+            }
+            else
+            {
+                pos = mainCamera.transform.position + mainCamera.transform.forward * mainCamera.nearClipPlane * 3f;
+            }
+            Vector3 velocity = (wallPos - pos) / timeToWall;
+
+            GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
+            ball.GetComponent<Rigidbody>().linearVelocity = velocity;
+            ball.GetComponent<Rigidbody>().useGravity = false;
+            ball.GetComponent<PaintBall>().SetColor(color);
+            ball.GetComponent<PaintBall>().spawner = this;
+        }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (gizmoStart.HasValue && gizmoDir.HasValue)
+        {
+            Gizmos.color = Color.red;
+            Vector3 gizmosEnd = gizmoStart.Value + gizmoDir.Value * 10f;
+            Gizmos.DrawLine(gizmoStart.Value, gizmosEnd);
+
+            Gizmos.DrawSphere(gizmoStart.Value, 0.1f);
+            Gizmos.DrawSphere(gizmosEnd, 0.1f);
+        }
+    }
+#endif
 }

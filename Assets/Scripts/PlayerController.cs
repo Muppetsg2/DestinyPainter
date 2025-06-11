@@ -98,11 +98,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isAttached && launchAction.triggered && useAction)
-        {
-            Launch();
-        }
-
         if (isLaunched)
         {
             float time = Time.time - launchTime;
@@ -111,12 +106,15 @@ public class PlayerController : MonoBehaviour
             if (time >= returnDelay) {
                 ReturnToPlanet(transform.position, Vector3.right, transform, BurstAnimType.Time);
             }
+            return;
         }
-    }
 
-    void FixedUpdate()
-    {
-        if (isAttached && currentPlanet != null)
+        if (!isAttached) return;
+        if (useAction && launchAction.triggered)
+        {
+            Launch();
+        }
+        else if (currentPlanet != null)
         {
             Planet curr = currentPlanet.GetComponent<Planet>();
 
@@ -125,7 +123,7 @@ public class PlayerController : MonoBehaviour
             transform.RotateAround(
                 currentPlanet.position,
                 Vector3.forward,
-                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.fixedDeltaTime * rotationMultiplier * (int)rotationMode
+                currentPlanet.GetComponent<PlanetRotation>().rotationSpeed * Time.deltaTime * rotationMultiplier * (int)rotationMode
             );
 
             if (!curr.isEnd)

@@ -51,6 +51,11 @@ EndScreen:
     ✔ Dodać sharowanie wyniku @critical @MAIPA01 @done(25-06-05 01:03)
     ✔ Polepszyć wygląd sharowanego wyniku @high @MAIPA01 @done(25-06-05 02:06)
 
+Settings:
+    ☐ Zaprojektować wygląd ustawień @critical
+    ☐ Wrzucić wygląd ustawień do gry @critical
+    ☐ Dodać ustawienia sfx i muzyki @critical
+
 Miodzik:
     ✔ Dodać skapywanie plam na branch `main` i do planet w poziomach @high @MaiPa01 @done(25-05-28 22:28)
     ✔ Dodać skapywanie plam do generatora @high @Muppetsg2 @done(25-06-02 00:19)
@@ -76,7 +81,7 @@ Polishing:
     ✔ Szybsza animacja końca (głównie gwiazdek) @low @MAIPA01 @done(25-06-10 23:19)
     ✔ Puknięcie w ekran na end screenie kończy animacje @low @MAIPA01 @done(25-06-10 23:08)
     ✔ Opcja resetu canvasu w scenie do malowania @high @Muppetsg2 @done(25-06-10 21:04)
-    ☐ Powiększająca się grubość linii przy skoku między tymi samymi planetami @low
+    ✔ Powiększająca się grubość linii przy skoku między tymi samymi planetami @low @Muppetsg2 @done(25-06-11 14:24)
     ✔ W każdym poziomie dać inny początkowy kolor gracza (w pierwszym dać kolor niebieski) @high @Muppetsg2 @done(25-06-10 19:03)
     ✔ Zmienić rozdzielczość okienka przechodzenia między ekranami @low @Muppetsg2 @done(25-06-06 00:50)
     ✔ Przyciski tak by zakrywały środek ekranu (pomyśleć czy to jako opcja czy zwiększyć hitboxy) @low @Muppetsg2 @done(25-06-11 01:29)
@@ -89,6 +94,9 @@ Polishing:
     ☐ Dodać efekt rozróżniający która strzałka do obrotu jest teraz kliknięta (np. powiększenie obiektu czy zmiana koloru/alphy) @low
     ✔ Dodać particle do planety czarnej @low @Muppetsg2 @done(25-06-10 15:55)
     ✔ Zrobić bardziej smooth zmianę promienia poprzez przeniesienie zmiany promienia planety jak i zmiany położenia gracza do eventu w środku animacji @low @Muppetsg2 @done(25-06-10 17:46)
+    ☐ Continue pulsować @low
+    ✔ Poprawić responsywność skoku @high @Muppetsg2 @done(25-06-11 13:56)
+    ✔ Strzelanie kulkami z miejsca gdzie gracz wskazał a nie z dołu @low @Muppetsg2 @done(25-06-11 16:30)
 
 Archive:
     ☐ Zrobić UI bardziej przezroczystym (porada Szrajbera) @low
