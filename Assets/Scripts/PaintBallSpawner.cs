@@ -1,3 +1,5 @@
+using SaintsField;
+using SaintsField.Playa;
 using Sych.ShareAssets.Runtime;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +10,10 @@ using UnityEngine.SceneManagement;
 public class PaintBallSpawner : MonoBehaviour
 {
     public GameObject painBallPrefab;
+    public Vector3 paintBallScale = new Vector3(0.5f, 0.5f, 0.5f);
+    public Vector3 splashScale = new Vector3(2f, 2f, 2f);
     public bool curveShooting = true;
+    [HideIf(nameof(curveShooting))] public bool fromCameraCenter = true;
     public float timeBetweenBalls = 2f;
     public float timeToWall = 2f;
 
@@ -23,6 +28,14 @@ public class PaintBallSpawner : MonoBehaviour
     private InputAction positionAction;
 
     public bool randomBalls = false;
+    [LayoutShowIf(nameof(randomBalls))]
+    [LayoutStart("Random Balls Settings", ELayout.FoldoutBox)]
+    [ShowIf(nameof(randomBalls))] public float randomBallsDelay = 2f;
+    [ShowIf(nameof(randomBalls))] public bool randomBallsInfinite = false;
+    [ShowIf(nameof(randomBalls), "!" + nameof(randomBallsInfinite))] public float randomBallsAnimationTime = 5f;
+    [LayoutEnd(".")]
+    private float delayCounter = 0f;
+    private float animationCounter = 1f;
     private float currentTime = 0f;
 
     public List<RectTransform> canvasButtons = new();
@@ -59,6 +72,8 @@ public class PaintBallSpawner : MonoBehaviour
 
         startInit = true;
         attemptsCounter = initAttempts;
+        delayCounter = randomBallsDelay;
+        if (!randomBallsInfinite) animationCounter = randomBallsAnimationTime;
     }
 
     void Update()
@@ -95,12 +110,22 @@ public class PaintBallSpawner : MonoBehaviour
 
         if (!randomBalls) return;
 
-        currentTime -= Time.deltaTime;
+        delayCounter -= Time.deltaTime;
 
-        if (currentTime <= 0f)
+        if (delayCounter <= 0f)
         {
-            SpawnRandomBall();
-            currentTime = timeBetweenBalls;
+            currentTime -= Time.deltaTime;
+
+            if (!randomBallsInfinite) animationCounter -= Time.deltaTime;
+
+            if (animationCounter > 0f)
+            {
+                if (currentTime <= 0f)
+                {
+                    SpawnRandomBall();
+                    currentTime = timeBetweenBalls;
+                }
+            }
         }
     }
 
@@ -267,20 +292,22 @@ public class PaintBallSpawner : MonoBehaviour
         else
         {
             Vector3 pos;
-            if (mainCamera.orthographic)
+            if (fromCameraCenter)
             {
-                pos = new Vector3(wallPos.x, wallPos.y, mainCamera.transform.position.z - mainCamera.nearClipPlane);
+                pos = mainCamera.transform.position + mainCamera.transform.forward * mainCamera.nearClipPlane * 3f;
             }
             else
             {
-                pos = mainCamera.transform.position + mainCamera.transform.forward * mainCamera.nearClipPlane * 3f;
+                pos = new Vector3(wallPos.x, wallPos.y, mainCamera.transform.position.z - mainCamera.nearClipPlane);
             }
             Vector3 velocity = (wallPos - pos) / timeToWall;
 
             GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
+            ball.transform.localScale = paintBallScale;
             ball.GetComponent<Rigidbody>().linearVelocity = velocity;
-            ball.GetComponent<Rigidbody>().useGravity = false;
+            ball.GetComponent<Rigidbody>().useGravity = curveShooting;
             ball.GetComponent<PaintBall>().SetColor(color);
+            ball.GetComponent<PaintBall>().SetScale(splashScale);
             ball.GetComponent<PaintBall>().spawner = this;
         }
     }

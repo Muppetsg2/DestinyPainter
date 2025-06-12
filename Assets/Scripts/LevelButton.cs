@@ -77,6 +77,9 @@ public class LevelButton : MonoBehaviour
 
     public void OpenLevel()
     {
-        data.LoadLevel();
+        if (IsUnlocked())
+        {
+            data.LoadLevel();
+        }
     }
 }

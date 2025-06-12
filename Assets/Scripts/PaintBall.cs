@@ -6,6 +6,7 @@ public class PaintBall : MonoBehaviour
     public GameObject splashPrefab;
 
     public ColorType colorType;
+    public Vector3 scale;
 
     public PaintBallSpawner spawner;
 
@@ -16,12 +17,17 @@ public class PaintBall : MonoBehaviour
         meshRenderer.material.SetColor("_Outer", ColorsManager.Instance.GetColor(color, ColorCategory.Secondary));
     }
 
+    public void SetScale(Vector3 value)
+    {
+        scale = value;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Wall"))
         {
             GameObject splash = Instantiate(splashPrefab, transform.position, Quaternion.identity);
-
+            splash.transform.localScale = scale;
             var spriteRenderer = splash.GetComponent<SpriteRenderer>();
             Color color = ColorsManager.Instance.GetColor(colorType, ColorCategory.Secondary);
             color.a = 150f / 255f;

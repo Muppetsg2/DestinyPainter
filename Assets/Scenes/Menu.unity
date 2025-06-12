@@ -6504,7 +6504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1532908717
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6859,17 +6859,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8016525800185038434, guid: 305e6871301d9a84d86c9ea7cf6f5f1a, type: 3}
   m_PrefabInstance: {fileID: 1579307379}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1579307381 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4803084164543255599, guid: 305e6871301d9a84d86c9ea7cf6f5f1a, type: 3}
-  m_PrefabInstance: {fileID: 1579307379}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28ec880b9452cd4497f16a682c1f823, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1618341837
 GameObject:
   m_ObjectHideFlags: 0
@@ -8185,7 +8174,6 @@ MonoBehaviour:
   menuMainImageParent: {fileID: 577482356}
   mainImageMenuPos: {x: 0, y: -1139.918, z: 0}
   levelSelectButtons:
-  - {fileID: 1579307381}
   - {fileID: 141090325}
   - {fileID: 1769636920}
   - {fileID: 1121386668}

@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.ugui": "1.0.0"
       },
-      "hash": "a680e21539eaa9cbf3763db8d2acd10cafe1cfb1"
+      "hash": "8e92bebf129bae32ab9d718346da37ba7c58f594"
     },
     "com.unity.2d.animation": {
       "version": "10.1.3",
@@ -382,7 +382,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.7",
+      "version": "1.9.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -396,7 +396,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "d3205370c0a9740967a1d5de398d086185c56c8f"
+      "hash": "b0d5b393e6e03897320f1aff917d8eb1d60bdacf"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

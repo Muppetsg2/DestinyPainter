@@ -3,6 +3,16 @@ Podstawowe:
     ☐ Dodać muzykę do gry @critical
     ☐ Dodać ustawienia dźwięku i muzyki @critical
 
+Bugs:
+    ✔ Można klikać na zablokowane poziomy @critical @Muppetsg2 @done(25-06-12 13:43)
+
+Settings:
+    ✔ Zaprojektować wygląd ustawień @critical @Muppetsg2 @done(25-06-12 00:06)
+    ☐ Wrzucić wygląd ustawień do gry @critical
+    ☐ Dodać ustawienia sfx i muzyki @critical
+    ☐ Dodać do ustawień przycisk do resetu poziomów @critical
+    ☐ Dodać do ustawień przycisk do odblokowania wszystkich poziomów @critical
+
 Menu:
     ✔ Zamienić napisy w menu na ikony @low @Muppetsg2 @done(25-05-28 22:30)
     ✔ Zrobić creditsy tak że są połączone planety w różnych kolorach i z różnymi informacjami (informacja o twórcach, muzyce, grafice, muralu, itd.) @high @MAIPA01 @done(25-06-05 01:03)
@@ -50,13 +60,6 @@ EndScreen:
     ✔ Dodać generowanie zdjęcia poziomu końcowego @critical @MAIPA01 @done(25-06-04 01:05)
     ✔ Dodać sharowanie wyniku @critical @MAIPA01 @done(25-06-05 01:03)
     ✔ Polepszyć wygląd sharowanego wyniku @high @MAIPA01 @done(25-06-05 02:06)
-
-Settings:
-    ✔ Zaprojektować wygląd ustawień @critical @Muppetsg2 @done(25-06-12 00:06)
-    ☐ Wrzucić wygląd ustawień do gry @critical
-    ☐ Dodać ustawienia sfx i muzyki @critical
-    ☐ Dodać do ustawień przycisk do resetu poziomów @critical
-    ☐ Dodać do ustawień przycisk do odblokowania wszystkich poziomów @critical
 
 Miodzik:
     ✔ Dodać skapywanie plam na branch `main` i do planet w poziomach @high @MaiPa01 @done(25-05-28 22:28)

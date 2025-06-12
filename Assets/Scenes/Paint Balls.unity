@@ -309,15 +309,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2542712851378536568, guid: 910d170faf0167643879beaff7526ee0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.132721
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542712851378536568, guid: 910d170faf0167643879beaff7526ee0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.1353736
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542712851378536568, guid: 910d170faf0167643879beaff7526ee0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5511293
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2542712851378536568, guid: 910d170faf0167643879beaff7526ee0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -475,7 +475,7 @@ Camera:
   far clip plane: 1000
   field of view: 45
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2522,7 +2522,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   painBallPrefab: {fileID: 8173331407427200889, guid: 6b1a5358ec3101b408fb9ea9ffc1d345, type: 3}
+  paintBallScale: {x: 0.5, y: 0.5, z: 0.5}
+  splashScale: {x: 2, y: 2, z: 2}
   curveShooting: 0
+  fromCameraCenter: 1
   timeBetweenBalls: 0.5
   timeToWall: 0.5
   wallCollider: {fileID: 1216382754}
@@ -2536,6 +2539,9 @@ MonoBehaviour:
     m_Bits: 64
   playerInput: {fileID: 1857836884}
   randomBalls: 0
+  randomBallsDelay: 2
+  randomBallsInfinite: 0
+  randomBallsAnimationTime: 2.5
   canvasButtons:
   - {fileID: 939475430}
   - {fileID: 1039002467}
