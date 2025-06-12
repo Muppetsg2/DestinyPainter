@@ -8,7 +8,7 @@ public class Planet : MonoBehaviour
 {
     public bool isEnd;
     public bool isDeadly;
-    [ShowIf("isDeadly"), SerializeField] private TextMeshProUGUI text;
+    [ShowIf(nameof(isDeadly)), SerializeField] private TextMeshProUGUI text;
     public MulticolorPlanet multicolorPlanet;
     public ColorChangingPlanet colorChangingPlanet;
     public ColorType color;

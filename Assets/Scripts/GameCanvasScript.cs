@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static PlanetRotation;
 
 public class GameCanvasScript : MonoBehaviour
 {
@@ -33,22 +34,24 @@ public class GameCanvasScript : MonoBehaviour
         leftBtn.onClick.AddListener(player.RotateCounterClockwise);
     }
 
-    void Start()
+    private void Start()
     {
         pauseBtn.onClick.AddListener(LevelManager.Instance.PauseLevel);
         player.OnJump.AddListener(UpdateJumps);
+        player.OnRotationChanged.AddListener(UpdateRotation);
         LevelManager.Instance.OnStarsChanged.AddListener(UpdateStars);
 
+        UpdateRotation(RotationMode.None, player.rotationMode);
         UpdateJumps(player.planetJumpsCounter);
         UpdateStars(LevelManager.Instance.currentStars);
     }
 
-    void UpdateJumps(uint jumps)
+    private void UpdateJumps(uint jumps)
     {
         jumpsText.text = jumps.ToString();
     }
 
-    void UpdateStars(int stars)
+    private void UpdateStars(int stars)
     {
         star3Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, stars == 3);
         star3Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, stars == 3);
@@ -58,5 +61,30 @@ public class GameCanvasScript : MonoBehaviour
 
         star1Image.color = ColorsManager.Instance.GetStarColor(ColorCategory.Primary, stars >= 1);
         star1Shadow.effectColor = ColorsManager.Instance.GetStarColor(ColorCategory.Secondary, stars >= 1);
+    }
+
+    private void UpdateRotation(RotationMode previous, RotationMode actual)
+    {
+        switch (actual)
+        {
+            case RotationMode.None:
+            {
+                rightBtn.interactable = true;
+                leftBtn.interactable = true;
+                break;
+            }
+            case RotationMode.CounterClockwise:
+            {
+                rightBtn.interactable = true;
+                leftBtn.interactable = false;
+                break;
+            }
+            case RotationMode.Clockwise:
+            {
+                rightBtn.interactable = false;
+                leftBtn.interactable = true;
+                break;
+            }
+        }
     }
 }

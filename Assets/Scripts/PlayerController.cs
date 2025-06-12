@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1)] public float colorBurstAlpha = 1.0f;
 
     public UnityEvent<uint> OnJump;
+    public UnityEvent<RotationMode, RotationMode> OnRotationChanged;
 
     [LayoutStart("Info", ELayout.FoldoutBox)]
     [ReadOnly] public uint planetJumpsCounter = 0;
@@ -205,16 +206,22 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAttached) return;
 
+        RotationMode old = rotationMode;
         rotationMode = RotationMode.Clockwise;
         UpdateRotationMultiplier(currentPlanet.GetComponent<PlanetRotation>().rotationMode);
+
+        OnRotationChanged?.Invoke(old, rotationMode);
     }
 
     public void RotateCounterClockwise()
     {
         if (!isAttached) return;
 
+        RotationMode old = rotationMode;
         rotationMode = RotationMode.CounterClockwise;
         UpdateRotationMultiplier(currentPlanet.GetComponent<PlanetRotation>().rotationMode);
+
+        OnRotationChanged?.Invoke(old, rotationMode);
     }
 
     private void RevertJumpData(JumpData data)
@@ -356,16 +363,14 @@ public class PlayerController : MonoBehaviour
         isLaunched = false;
         trail.gameObject.SetActive(false);
 
-        RotationMode planetRotationMode = planet.GetComponent<PlanetRotation>().rotationMode;
-        if (planetRotationMode == RotationMode.CounterClockwise)
+        if (currentPlanet.GetComponent<PlanetRotation>().rotationMode == RotationMode.CounterClockwise)
         {
-            rotationMode = RotationMode.CounterClockwise;
+            RotateCounterClockwise();
         }
         else
         {
-            rotationMode = RotationMode.Clockwise;
+            RotateClockwise();
         }
-        UpdateRotationMultiplier(planetRotationMode);
 
         // Ustawienie rotacji przy przyczepieniu
         Vector3 directionToPlanet = (transform.position - currentPlanet.position).normalized;

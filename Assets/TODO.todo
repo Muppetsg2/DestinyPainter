@@ -52,9 +52,11 @@ EndScreen:
     ✔ Polepszyć wygląd sharowanego wyniku @high @MAIPA01 @done(25-06-05 02:06)
 
 Settings:
-    ☐ Zaprojektować wygląd ustawień @critical
+    ✔ Zaprojektować wygląd ustawień @critical @Muppetsg2 @done(25-06-12 00:06)
     ☐ Wrzucić wygląd ustawień do gry @critical
     ☐ Dodać ustawienia sfx i muzyki @critical
+    ☐ Dodać do ustawień przycisk do resetu poziomów @critical
+    ☐ Dodać do ustawień przycisk do odblokowania wszystkich poziomów @critical
 
 Miodzik:
     ✔ Dodać skapywanie plam na branch `main` i do planet w poziomach @high @MaiPa01 @done(25-05-28 22:28)
@@ -90,24 +92,22 @@ Polishing:
     ✔ Dać wave do literek na planetach death @low @Muppetsg2 @done(25-06-10 13:22)
     ✔ Szybszy lot gracza @low @Muppetsg2 @done(25-06-10 16:25)
     ✔ Szybszy lot piłeczek z farbą (Z 1.5 na 0.5 w obu wartościach) @low @Muppetsg2 @done(25-06-10 16:28)
-    ☐ Zmienić tło (Może gradient) @low
-    ☐ Dodać efekt rozróżniający która strzałka do obrotu jest teraz kliknięta (np. powiększenie obiektu czy zmiana koloru/alphy) @low
+    ✔ Zmienić tło (Może gradient) @low @Muppetsg2 @done(25-06-12 12:40)
+    ✔ Dodać efekt rozróżniający która strzałka do obrotu jest teraz kliknięta (np. powiększenie obiektu czy zmiana koloru/alphy) @low @Muppetsg2 @done(25-06-12 00:02)
     ✔ Dodać particle do planety czarnej @low @Muppetsg2 @done(25-06-10 15:55)
     ✔ Zrobić bardziej smooth zmianę promienia poprzez przeniesienie zmiany promienia planety jak i zmiany położenia gracza do eventu w środku animacji @low @Muppetsg2 @done(25-06-10 17:46)
-    ☐ Continue pulsować @low
+    ✔ Continue pulsować @low @Muppetsg2 @done(25-06-12 12:29)
     ✔ Poprawić responsywność skoku @high @Muppetsg2 @done(25-06-11 13:56)
     ✔ Strzelanie kulkami z miejsca gdzie gracz wskazał a nie z dołu @low @Muppetsg2 @done(25-06-11 16:30)
+    ✔ Zmienić wygląd przycisków prawo i lewo @high @Muppetsg2 @done(25-06-11 22:25)
 
 Archive:
-    ☐ Zrobić UI bardziej przezroczystym (porada Szrajbera) @low
-    ☐ Dodać do przycisków UI z tyłu blur emmisive @low
     ☐ Zaprojektować bonusowe 4 poziomy za odpowiednią liczbę zdobytych gwiazdek (Mogą być trudniejsze niż poziomy zwykłe) @low
-    ☐ Dodac informację gdzieś w menu o poruszaniu się @low
+    ☐ Dodać informację gdzieś w menu o poruszaniu się @low
     ☐ Można zrobić przy wprowadzaniu mechaniki pojawiał się popup z informacją jak mechanika działa i krótkim filmikiem jak to wygląda @low
     ☐ Dodać portale do gry @low
     ☐ Ściany od których możemy się odbijać @low
     ☐ Kreator poziomów @low
     ☐ Skiny do gracza @low
-    ☐ Skiny dla planet @low
     ☐ Inna paleta kolorów np dla graczy którzy są daltonistami @low
     ☐ Camera shake jak sie wleci na planetę (https://youtube.com/shorts/hnnZ5XXUVfE?si=5xcbuU01rA9hk6VH) @low

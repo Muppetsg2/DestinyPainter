@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14645d2ac7835fe48bc44fb827cfee31, type: 3}
-  m_Name: ColorPalette
+  m_Name: ColorPaletteOld
   m_EditorClassIdentifier: 
   colors:
   - colorType: 0
@@ -41,4 +41,4 @@ MonoBehaviour:
   secondaryStarInactiveColor: {r: 0.72156864, g: 0.72156864, b: 0.72156864, a: 1}
   primaryStarInactiveHDRColor: {r: 0.87136734, g: 0.87136734, b: 0.87136734, a: 1}
   secondaryStarInactiveHDRColor: {r: 0.47932023, g: 0.47932023, b: 0.47932023, a: 1}
-  backgroundColor: {r: 0.3137255, g: 0.33333334, b: 0.40784314, a: 1}
+  backgroundColor: {r: 0.25882354, g: 0.27450982, b: 0.32941177, a: 1}

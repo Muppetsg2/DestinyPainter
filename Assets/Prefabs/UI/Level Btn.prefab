@@ -438,6 +438,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   pressedScaleFactor: 0.7
   time: 0.2
+  idleAnimation: 0
+  image: {fileID: 0}
+  idlePulseScale: 1.1
+  idlePulseDuration: 1
+  idleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2610148981364300046
 GameObject:
   m_ObjectHideFlags: 0
