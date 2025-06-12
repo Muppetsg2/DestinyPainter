@@ -396,7 +396,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "b0d5b393e6e03897320f1aff917d8eb1d60bdacf"
+      "hash": "e7deb3a587963bf044397765bea4d1be9faa177d"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

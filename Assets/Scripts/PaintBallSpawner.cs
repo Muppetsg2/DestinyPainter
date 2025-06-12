@@ -294,7 +294,7 @@ public class PaintBallSpawner : MonoBehaviour
             Vector3 pos;
             if (fromCameraCenter)
             {
-                pos = mainCamera.transform.position + mainCamera.transform.forward * mainCamera.nearClipPlane * 3f;
+                pos = mainCamera.transform.position + mainCamera.transform.forward * (mainCamera.nearClipPlane * 3f + 2.5f * (mainCamera.orthographic ? 0f : 1f));
             }
             else
             {
