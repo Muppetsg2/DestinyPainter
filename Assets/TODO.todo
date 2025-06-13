@@ -104,6 +104,8 @@ Polishing:
     ✔ Poprawić responsywność skoku @high @Muppetsg2 @done(25-06-11 13:56)
     ✔ Strzelanie kulkami z miejsca gdzie gracz wskazał a nie z dołu @low @Muppetsg2 @done(25-06-11 16:30)
     ✔ Zmienić wygląd przycisków prawo i lewo @high @Muppetsg2 @done(25-06-11 22:25)
+    ☐ Większy 4 jumps się wbija na ekran @high @Muppetsg2
+    ☐ Poprawić wygląd end screen dodając restart button @high @Muppetsg2
 
 Archive:
     ☐ Zaprojektować bonusowe 4 poziomy za odpowiednią liczbę zdobytych gwiazdek (Mogą być trudniejsze niż poziomy zwykłe) @low
@@ -115,4 +117,3 @@ Archive:
     ☐ Skiny do gracza @low
     ☐ Inna paleta kolorów np dla graczy którzy są daltonistami @low
     ☐ Camera shake jak sie wleci na planetę (https://youtube.com/shorts/hnnZ5XXUVfE?si=5xcbuU01rA9hk6VH) @low
-    ☐ Przycisk restartu poziomu w end menu @low

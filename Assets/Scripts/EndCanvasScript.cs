@@ -33,6 +33,7 @@ public class EndCanvasScript : MonoBehaviour
     [Header("Buttons")]
     public Button menuBtn;
     public Button shareBtn;
+    public Button restartBtn;
     public Button nextLevelBtn;
     public Button finishAnimBtn;
 
@@ -83,6 +84,7 @@ public class EndCanvasScript : MonoBehaviour
 
         menuBtn.onClick.AddListener(LevelManager.Instance.GoToMenu);
         shareBtn.onClick.AddListener(ShareImage);
+        restartBtn.onClick.AddListener(LevelManager.Instance.RestartLevel);
         if (LevelManager.Instance.HasNextLevel()) nextLevelBtn.onClick.AddListener(LevelManager.Instance.GoToNextLevel);
         else nextLevelBtn.gameObject.SetActive(false);
 
