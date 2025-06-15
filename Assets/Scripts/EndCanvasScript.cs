@@ -179,6 +179,9 @@ public class EndCanvasScript : MonoBehaviour
         menuBtn.enabled = false;
         shareBtn.enabled = false;
         nextLevelBtn.enabled = false;
+        restartBtn.enabled = false;
+
+        shareBtn.gameObject.SetActive(false);
 
         endSprite = CreateSprite();
         levelOverview.sprite = endSprite;
@@ -267,6 +270,8 @@ public class EndCanvasScript : MonoBehaviour
 
                 starsLayout.enabled = true;
 
+                shareBtn.gameObject.SetActive(true);
+                
                 jumpsText.gameObject.SetActive(true);
             }))
             .Append(jumpsText.transform.DOLocalMoveY(jumpsTextLocalY, showJumpsTextTime).SetEase(showFromPlayerViewCurve))
@@ -277,6 +282,7 @@ public class EndCanvasScript : MonoBehaviour
                 menuBtn.enabled = true;
                 shareBtn.enabled = true;
                 nextLevelBtn.enabled = true;
+                restartBtn.enabled = true;
                 finishAnimBtn.gameObject.SetActive(false);
             });
 

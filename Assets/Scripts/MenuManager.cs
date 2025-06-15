@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +44,22 @@ public class MenuManager : MonoBehaviour
     public float creditsPlanetsHideTime;
     public AnimationCurve creditsPlanetsHideCurve;
 
+    [Header("Settings")]
+    public RectTransform menuHandler;
+    public RectTransform settingsButton;
+    public Image settingIcon;
+    public GameObject settingsBackButton;
+    public List<GameObject> settingsObjects;
+    public List<Button> settingsButtons;
+    public List<TextMeshProUGUI> settingsTexts;
+    public Vector2 desiredButtonSize;
+    public float settingsAnimTime;
+    public AnimationCurve settingsAnimCurve;
+    public float settingsUITime;
+    public AnimationCurve settingsUICurve;
+
+    private Vector3 menuHandlerScale;
+
     [System.Serializable]
     public struct LineData
     {
@@ -83,6 +100,20 @@ public class MenuManager : MonoBehaviour
         // credits
         creditsBackButton.GetComponent<Button>().enabled = false;
         creditsBackButton.SetActive(false);
+
+        // settings
+        foreach (var obj in settingsObjects)
+        {
+            obj.SetActive(false);
+        }
+        foreach (var button in settingsButtons)
+        {
+            button.enabled = false;
+        }
+        settingsBackButton.GetComponent<Button>().enabled = false;
+        settingsBackButton.SetActive(false);
+
+        menuHandlerScale = menuHandler.localScale;
 
         OpenMenu();
     }
@@ -170,7 +201,7 @@ public class MenuManager : MonoBehaviour
     private void ShowLevelSelect(Action onComplete = null)
     {
         if (ViewType != CurrentView.None) return;
-        ShowAnimation(levelSelectButtons, levelSelectLines, CurrentView.LevelSelect, levelsMainImageParent, mainImageLevelSelectPos, () => 
+        ShowAnimation(levelSelectButtons, levelSelectLines, CurrentView.LevelSelect, levelsMainImageParent, mainImageLevelSelectPos, () =>
         {
             levelSelectScroll.enabled = true;
 
@@ -189,7 +220,7 @@ public class MenuManager : MonoBehaviour
 
             float percentage = Mathf.Clamp01(1f + (buttonTransformY + levelSelectScrollOffset) / levelSelectScroll.content.sizeDelta.y);
             float time = levelSelectScrollAnimationTime * Mathf.Abs(percentage - levelSelectScroll.verticalNormalizedPosition);
-            levelSelectScroll.DOVerticalNormalizedPos(percentage, time).OnComplete(() => 
+            levelSelectScroll.DOVerticalNormalizedPos(percentage, time).OnComplete(() =>
             {
                 levelSelectViewport.raycastTarget = true;
                 levelSelectBackButton.SetActive(true);
@@ -250,7 +281,7 @@ public class MenuManager : MonoBehaviour
 
             Vector2 desiredSizeDelta = new(line.sizeDelta.x, sizeY / line.lossyScale.y);
             Vector3 desiredPos = 0.5f * (planetA.position + planetB.position);
-            
+
             line.position = planetA.position;
             line.sizeDelta = new Vector2(line.sizeDelta.x, 0f);
 
@@ -366,6 +397,136 @@ public class MenuManager : MonoBehaviour
         AnimateLine(creditsLines.Count - 1);
     }
 
+    private void ShowSettings(Action onComplete = null)
+    {
+        if (ViewType != CurrentView.Menu) return;
+
+        foreach (var menuButton in menuButtons)
+        {
+            menuButton.StopIdle();
+        }
+
+        Vector3 desiredScale = Vector3.one;
+        desiredScale.x = menuHandler.localScale.x * (desiredButtonSize.x / settingsButton.rect.size.x);
+        desiredScale.y = menuHandler.localScale.y * (desiredButtonSize.y / settingsButton.rect.size.y);
+        desiredScale.z = menuHandler.localScale.z;
+
+        Vector3 menuLocPos = Vector3.zero;
+        menuLocPos.x = menuHandler.localPosition.x - settingsButton.localPosition.x * (desiredScale.x / menuHandler.localScale.x);
+        menuLocPos.y = menuHandler.localPosition.y - 0.3f * desiredButtonSize.y - settingsButton.localPosition.y * (desiredScale.y / menuHandler.localScale.y);
+        menuLocPos.z = menuHandler.localPosition.z;
+
+        Color desiredIconColor = settingIcon.color;
+        desiredIconColor.a = 0f;
+
+        Sequence showSequence = DOTween.Sequence();
+        showSequence.Append(menuHandler.DOScale(desiredScale, settingsAnimTime).SetEase(settingsAnimCurve));
+        showSequence.Join(menuHandler.DOLocalMove(menuLocPos, settingsAnimTime).SetEase(settingsAnimCurve));
+        showSequence.Join(settingIcon.DOColor(desiredIconColor, settingsAnimTime).SetEase(settingsAnimCurve));
+        showSequence.AppendCallback(() =>
+        {
+            foreach (var obj in settingsObjects)
+            {
+                obj.SetActive(true);
+            }
+        });
+
+        foreach (var btn in settingsButtons)
+        {
+            Color desiredColor = btn.image.color;
+            desiredColor.a = 1f;
+            Color startColor = desiredColor;
+            startColor.a = 0f;
+            btn.image.color = startColor;
+
+            showSequence.Join(btn.image.DOColor(desiredColor, settingsUITime).SetEase(settingsUICurve));
+        }
+
+        foreach (var text in settingsTexts)
+        {
+            Color desiredColor = text.color;
+            desiredColor.a = 1f;
+            Color startColor = desiredColor;
+            startColor.a = 0f;
+            text.color = startColor;
+
+            showSequence.Join(text.DOColor(desiredColor, settingsUITime).SetEase(settingsUICurve));
+        }
+
+        showSequence.OnComplete(() =>
+        {
+            ViewType = CurrentView.Settings;
+
+            settingsBackButton.SetActive(true);
+            settingsBackButton.GetComponent<Button>().enabled = true;
+
+            foreach (var button in settingsButtons)
+            {
+                button.enabled = true;
+            }
+
+            onComplete?.Invoke();
+        });
+    }
+
+    private void HideSettings(Action onComplete = null)
+    {
+        if (ViewType != CurrentView.Settings) return;
+
+        settingsBackButton.SetActive(false);
+        settingsBackButton.GetComponent<Button>().enabled = false;
+
+        foreach (var button in settingsButtons)
+        {
+            button.enabled = false;
+        }
+
+        Sequence hideSequence = DOTween.Sequence();
+
+        foreach (var btn in settingsButtons)
+        {
+            Color desiredColor = btn.image.color;
+            desiredColor.a = 0f;
+
+            hideSequence.Join(btn.image.DOColor(desiredColor, settingsUITime).SetEase(settingsUICurve));
+        }
+
+        foreach (var text in settingsTexts)
+        {
+            Color desiredColor = text.color;
+            desiredColor.a = 0f;
+
+            hideSequence.Join(text.DOColor(desiredColor, settingsUITime).SetEase(settingsUICurve));
+        }
+
+        hideSequence.AppendCallback(() =>
+        {
+            foreach (var obj in settingsObjects)
+            {
+                obj.SetActive(false);
+            }
+        });
+
+        Color desiredIconColor = settingIcon.color;
+        desiredIconColor.a = 1f;
+
+        hideSequence.Append(menuHandler.DOScale(menuHandlerScale, settingsAnimTime).SetEase(settingsAnimCurve));
+        hideSequence.Join(menuHandler.DOLocalMove(Vector3.zero, settingsAnimTime).SetEase(settingsAnimCurve));
+        hideSequence.Join(settingIcon.DOColor(desiredIconColor, settingsAnimTime).SetEase(settingsAnimCurve));
+
+        hideSequence.OnComplete(() =>
+        {
+            ViewType = CurrentView.Menu;
+
+            foreach (var menuButton in menuButtons)
+            {
+                menuButton.PlayIdle();
+            }
+
+            onComplete?.Invoke();
+        });
+    }
+
     private void HideCurrent(Action onComplete = null)
     {
         switch (ViewType)
@@ -378,6 +539,9 @@ public class MenuManager : MonoBehaviour
                 break;
             case CurrentView.Credits:
                 HideCredits(onComplete);
+                break;
+            case CurrentView.Settings:
+                HideSettings(onComplete);
                 break;
             default:
                 onComplete?.Invoke();
@@ -398,6 +562,16 @@ public class MenuManager : MonoBehaviour
     public void OpenCredits()
     {
         HideCurrent(() => ShowCredits());
+    }
+
+    public void OpenSettings()
+    {
+        ShowSettings();
+    }
+
+    public void CloseSettings()
+    {
+        HideSettings();
     }
 
     public void Continue()

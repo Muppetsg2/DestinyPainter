@@ -747,7 +747,6 @@ RectTransform:
   - {fileID: 577482356}
   - {fileID: 1741324239}
   - {fileID: 1430041429}
-  - {fileID: 290782728}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1064,7 +1063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1139.9993}
+  m_AnchoredPosition: {x: 0, y: -1134.8002}
   m_SizeDelta: {x: 0, y: 2269.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &214357822
@@ -1244,7 +1243,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1920771647}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: OpenMenu
+        m_MethodName: CloseSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2067,17 +2066,17 @@ RectTransform:
   m_GameObject: {fileID: 290782727}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.91766286, y: 0.91766286, z: 0.91766286}
+  m_LocalScale: {x: 0.160949, y: 0.16486537, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 893734765}
   - {fileID: 214357823}
-  m_Father: {fileID: 124135606}
+  m_Father: {fileID: 1841868234}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 2280}
+  m_AnchoredPosition: {x: -4.129064, y: 3.37831}
+  m_SizeDelta: {x: 1099.1646, y: 2208.8171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &290782729
 CanvasRenderer:
@@ -3227,7 +3226,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 2280}
+  m_SizeDelta: {x: 1094.1179, y: 2249.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &598679462
 GameObject:
@@ -7186,7 +7185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2651.0474}
+  m_AnchoredPosition: {x: 0, y: -2651.0469}
   m_SizeDelta: {x: 0, y: 5302.0933}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1396240974
@@ -7485,8 +7484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 2280}
+  m_AnchoredPosition: {x: 0.011168003, y: -0.000014305}
+  m_SizeDelta: {x: 1094.5, y: 2249.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1430041430
 MonoBehaviour:
@@ -9180,8 +9179,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 2280}
+  m_AnchoredPosition: {x: 0.075927734, y: -0.12792969}
+  m_SizeDelta: {x: 1094.283, y: 2249.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741324240
 MonoBehaviour:
@@ -9605,6 +9604,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1817244860}
+  - {fileID: 290782728}
   m_Father: {fileID: 577482356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9693,7 +9693,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1817244862}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1920771647}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: OpenSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1841868239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10268,6 +10280,73 @@ MonoBehaviour:
     m_RotationOrder: 4
   creditsPlanetsHideTime: 0.5
   creditsPlanetsHideCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  menuHandler: {fileID: 577482356}
+  settingsButton: {fileID: 1841868234}
+  settingIcon: {fileID: 1817244862}
+  settingsBackButton: {fileID: 214357822}
+  settingsObjects:
+  - {fileID: 1163986934}
+  - {fileID: 1769341593}
+  - {fileID: 598679462}
+  settingsButtons:
+  - {fileID: 488545958}
+  - {fileID: 847214945}
+  - {fileID: 62234762}
+  settingsTexts:
+  - {fileID: 525481847}
+  - {fileID: 1325869738}
+  - {fileID: 686327184}
+  desiredButtonSize: {x: 1544.428, y: 1544.428}
+  settingsAnimTime: 0.5
+  settingsAnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  settingsUITime: 0.5
+  settingsUICurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
