@@ -1709,7 +1709,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   showPhotoTime: 0.5
   showStarsTime: 0.25
-  showJumpsTextTime: 0.5
+  showJumpsTextTime: 0.25
   showFromPlayerViewCurve:
     serializedVersion: 2
     m_Curve:
@@ -1725,8 +1725,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -1734,7 +1734,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  showFromPlayerViewScale: 3
+  showFromPlayerViewScale: 5
   showFromPlayerViewStartYOffset: 20
   showFromPlayerViewStarsDelay: 0.5
   photoImageColorTransitionTime: 1.5

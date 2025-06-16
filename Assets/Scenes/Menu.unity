@@ -10320,6 +10320,7 @@ MonoBehaviour:
   - {fileID: 1325869738}
   - {fileID: 686327184}
   desiredButtonSize: {x: 1544.428, y: 1544.428}
+  settingIconHideDelay: 0.1
   settingsAnimTime: 0.5
   settingsAnimCurve:
     serializedVersion: 2

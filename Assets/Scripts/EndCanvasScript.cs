@@ -269,13 +269,15 @@ public class EndCanvasScript : MonoBehaviour
                 star3.SetActiveTextHolder(true);
 
                 starsLayout.enabled = true;
-
-                shareBtn.gameObject.SetActive(true);
                 
                 jumpsText.gameObject.SetActive(true);
             }))
             .Append(jumpsText.transform.DOLocalMoveY(jumpsTextLocalY, showJumpsTextTime).SetEase(showFromPlayerViewCurve))
             .Join(jumpsText.transform.DOScale(1f, showJumpsTextTime).SetEase(showFromPlayerViewCurve))
+            .AppendCallback(() =>
+            {
+                shareBtn.gameObject.SetActive(true);
+            })
             .Append(buttons.transform.DOLocalMoveY(buttonsLocalY, showButtonsTime).SetEase(showItemsFromBottomCurve))
             .AppendCallback(() =>
             {

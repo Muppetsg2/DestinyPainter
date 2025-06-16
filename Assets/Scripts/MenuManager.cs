@@ -53,6 +53,7 @@ public class MenuManager : MonoBehaviour
     public List<Button> settingsButtons;
     public List<TextMeshProUGUI> settingsTexts;
     public Vector2 desiredButtonSize;
+    public float settingIconHideDelay;
     public float settingsAnimTime;
     public AnimationCurve settingsAnimCurve;
     public float settingsUITime;
@@ -422,7 +423,7 @@ public class MenuManager : MonoBehaviour
         Sequence showSequence = DOTween.Sequence();
         showSequence.Append(menuHandler.DOScale(desiredScale, settingsAnimTime).SetEase(settingsAnimCurve));
         showSequence.Join(menuHandler.DOLocalMove(menuLocPos, settingsAnimTime).SetEase(settingsAnimCurve));
-        showSequence.Join(settingIcon.DOColor(desiredIconColor, settingsAnimTime).SetEase(settingsAnimCurve));
+        showSequence.Join(settingIcon.DOColor(desiredIconColor, settingsAnimTime - settingIconHideDelay).SetEase(settingsAnimCurve));
         showSequence.AppendCallback(() =>
         {
             foreach (var obj in settingsObjects)
@@ -512,7 +513,7 @@ public class MenuManager : MonoBehaviour
 
         hideSequence.Append(menuHandler.DOScale(menuHandlerScale, settingsAnimTime).SetEase(settingsAnimCurve));
         hideSequence.Join(menuHandler.DOLocalMove(Vector3.zero, settingsAnimTime).SetEase(settingsAnimCurve));
-        hideSequence.Join(settingIcon.DOColor(desiredIconColor, settingsAnimTime).SetEase(settingsAnimCurve));
+        hideSequence.Join(settingIcon.DOColor(desiredIconColor, settingsAnimTime).SetEase(settingsAnimCurve).SetDelay(settingIconHideDelay));
 
         hideSequence.OnComplete(() =>
         {
