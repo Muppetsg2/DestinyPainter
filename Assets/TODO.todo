@@ -1,7 +1,6 @@
 Podstawowe:
     ☐ Dodać dźwięki do gry (skoki, śmierć, pickupy, wygrana, splash) @critical
     ☐ Dodać muzykę do gry @critical
-    ☐ Dodać ustawienia dźwięku i muzyki @critical
     ☐ Dodać do credits info o muzyce (wraz z nazwami autorów) @critical
 
 Bugs:
@@ -9,8 +8,8 @@ Bugs:
 
 Settings:
     ✔ Zaprojektować wygląd ustawień @critical @Muppetsg2 @done(25-06-12 00:06)
-    ☐ Wrzucić wygląd ustawień do gry @critical
-    ☐ Dodać ustawienia sfx i muzyki @critical
+    ✔ Wrzucić wygląd ustawień do gry @critical @Muppetsg2 @done(25-06-16 10:25)
+    ☐ Dodać ustawienia sfx, muzyki i ui @critical
     ☐ Dodać do ustawień przycisk do resetu poziomów @critical
     ☐ Dodać do ustawień przycisk do odblokowania wszystkich poziomów @critical
 
@@ -104,8 +103,8 @@ Polishing:
     ✔ Poprawić responsywność skoku @high @Muppetsg2 @done(25-06-11 13:56)
     ✔ Strzelanie kulkami z miejsca gdzie gracz wskazał a nie z dołu @low @Muppetsg2 @done(25-06-11 16:30)
     ✔ Zmienić wygląd przycisków prawo i lewo @high @Muppetsg2 @done(25-06-11 22:25)
-    ☐ Większy 4 jumps się wbija na ekran @high @Muppetsg2
-    ☐ Poprawić wygląd end screen dodając restart button @high @Muppetsg2
+    ☐ Większy 4 jumps się wbija na ekran @high
+    ✔ Poprawić wygląd end screen dodając restart button @high @Muppetsg2 @done(25-06-16 10:26)
 
 Archive:
     ☐ Zaprojektować bonusowe 4 poziomy za odpowiednią liczbę zdobytych gwiazdek (Mogą być trudniejsze niż poziomy zwykłe) @low
