@@ -6,10 +6,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class ButtonClickAnimation : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
+[RequireComponent(typeof(AudioSource))]
+public class ButtonClickBehaviour : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
 {
     [System.Serializable]
     public enum IdleColorMode { Single, Gradient, List }
+
+    [Header("Audio Settings")]
+    [SerializeField] private bool useAudio = true;
+    [ShowIf(nameof(useAudio)), SerializeField] private bool forceMode = false;
 
     [Header("Animation Settings")]
     [SerializeField] private Transform effectTransform;
@@ -40,6 +45,9 @@ public class ButtonClickAnimation : MonoBehaviour, IPointerDownHandler, IPointer
     [ShowIf(nameof(idleAnimation), nameof(idleColorAnimation), nameof(colorMode), IdleColorMode.List), SerializeField] private SaintsList<Color> idleColorsList;
     [LayoutEnd(".")]
 
+    // Audio
+    private AudioSource audioSource;
+
     // Animation
     private Button button;
     private Vector3 originalScale;
@@ -55,6 +63,7 @@ public class ButtonClickAnimation : MonoBehaviour, IPointerDownHandler, IPointer
     private void Awake()
     {
         button = GetComponent<Button>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -71,6 +80,25 @@ public class ButtonClickAnimation : MonoBehaviour, IPointerDownHandler, IPointer
         button.onClick.AddListener(() => 
         {
             StopIdleAnimation();
+            if (useAudio)
+            {
+                if (!forceMode)
+                {
+                    audioSource.Play();
+                    return;
+                }
+
+                GameObject aus = new GameObject("AudioSourceForce (" + gameObject.name + ")");
+                AudioSource s = aus.AddComponent<AudioSource>();
+                s.playOnAwake = audioSource.playOnAwake;
+                s.mute = audioSource.mute;
+                s.volume = audioSource.volume;
+                s.loop = audioSource.loop;
+                s.clip = audioSource.clip;
+
+                s.Play();
+                Destroy(audioSource, 0.5f);
+            }
         });
     }
 

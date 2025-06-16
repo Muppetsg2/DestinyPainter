@@ -3,6 +3,7 @@ using SaintsField.Playa;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class SettingsButton : MonoBehaviour
 {
     [System.Serializable]
@@ -12,7 +13,7 @@ public class SettingsButton : MonoBehaviour
     }
 
     [SerializeField] private SettingsBtnType type;
-    [SerializeField] private string optionName;
+    [SerializeField] private string settingName;
 
     [LayoutShowIf(nameof(type), SettingsBtnType.Audio)]
     [LayoutStart("Audio Button Settings", ELayout.FoldoutBox)]
@@ -21,8 +22,31 @@ public class SettingsButton : MonoBehaviour
     [SerializeField, ShowIf(nameof(type), SettingsBtnType.Audio)] private Sprite off;
     [LayoutEnd(".")]
 
+    private Button button;
+    private bool bvalue = true;
+
     void Start()
     {
-        
+        button = GetComponent<Button>();
+
+        switch (type)
+        {
+            case SettingsBtnType.Audio:
+            {
+                button.onClick.AddListener(() =>
+                {
+                    SettingsManager.Instance.SetBool(settingName, !bvalue);
+                    AudioUpdateValue();
+                });
+                AudioUpdateValue();
+                break;
+            }
+        }
+    }
+
+    private void AudioUpdateValue()
+    {
+        bvalue = SettingsManager.Instance.GetBool(settingName, true);
+        image.sprite = bvalue ? on : off;
     }
 }

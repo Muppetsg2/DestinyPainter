@@ -18,7 +18,7 @@
                     <engine:DataBinding property="value" data-source-path="m_text" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" binding-mode="TwoWay" />
                 </Bindings>
             </engine:TextField>
-            <editor:ObjectField label="Font Asset" name="Font" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="TMPro.TMP_FontAsset, Unity.TextMeshPro" value="project://database/Assets/Fonts/Destiny%20Font/DESTINY-Regular%20SDF.asset?fileID=11400000&amp;guid=57581ebf6c70ebf45836fa288c54b81e&amp;type=2#DESTINY-Regular SDF" style="border-left-width: 2px; border-right-width: 2px; border-right-color: rgb(152, 152, 152); border-left-color: rgb(152, 152, 152);">
+            <editor:ObjectField label="Font Asset" name="Font" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="TMPro.TMP_FontAsset, Unity.TextMeshPro" style="border-left-width: 2px; border-right-width: 2px; border-right-color: rgb(152, 152, 152); border-left-color: rgb(152, 152, 152);">
                 <Bindings>
                     <engine:DataBinding property="value" data-source-path="m_font" binding-mode="TwoWay" />
                 </Bindings>
@@ -60,7 +60,7 @@
                     <engine:DataBinding property="value" data-source-path="m_numberOfSplashes" binding-mode="TwoWay" />
                 </Bindings>
             </engine:IntegerField>
-            <editor:ObjectField label="Splash Prefab" name="SplashPrefab" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="UnityEngine.GameObject, UnityEngine.CoreModule" value="project://database/Assets/Prefabs/Splash.prefab?fileID=8956329137880412379&amp;guid=f254caf4d42e3174585ab42b65db9f16&amp;type=3#Splash" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
+            <editor:ObjectField label="Splash Prefab" name="SplashPrefab" data-source-type="MuralImageGeneratorEditor, Assembly-CSharp-Editor" type="UnityEngine.GameObject, UnityEngine.CoreModule" style="border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(152, 152, 152); border-right-color: rgb(152, 152, 152);">
                 <Bindings>
                     <engine:DataBinding property="value" data-source-path="m_splashPrefab" binding-mode="TwoWay" />
                 </Bindings>

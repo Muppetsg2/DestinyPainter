@@ -43,6 +43,8 @@ public class MenuManager : MonoBehaviour
     public AnimationCurve creditsLineHideCurve;
     public float creditsPlanetsHideTime;
     public AnimationCurve creditsPlanetsHideCurve;
+    public ScrollRect creditsScroll;
+    public float creditsScrollAnimationTime = 1f;
 
     [Header("Settings")]
     public RectTransform menuHandler;
@@ -257,6 +259,7 @@ public class MenuManager : MonoBehaviour
     private void ShowCredits(Action onComplete = null)
     {
         if (ViewType != CurrentView.None) return;
+
         void AnimateLine(int idx)
         {
             if (idx == creditsLines.Count)
@@ -326,6 +329,7 @@ public class MenuManager : MonoBehaviour
             }
         }
 
+        creditsScroll.enabled = true;
         if (Vector3.Distance(mainImageCreditsPos, mainImage.anchoredPosition) > 1f)
         {
             mainImage.DOAnchorPos3D(mainImageCreditsPos, moveMainImageTime).OnComplete(() =>
@@ -395,7 +399,13 @@ public class MenuManager : MonoBehaviour
             }
         }, 1f, creditsBackButtonTime);
         creditsViewport.raycastTarget = false;
-        AnimateLine(creditsLines.Count - 1);
+
+        float time = creditsScrollAnimationTime * (1f - creditsScroll.verticalNormalizedPosition);
+        creditsScroll.DOVerticalNormalizedPos(1f, time).OnComplete(() =>
+        {
+            creditsScroll.enabled = false;
+            AnimateLine(creditsLines.Count - 1);
+        });
     }
 
     private void ShowSettings(Action onComplete = null)
@@ -405,6 +415,8 @@ public class MenuManager : MonoBehaviour
         foreach (var menuButton in menuButtons)
         {
             menuButton.StopIdle();
+            menuButton.gameObject.GetComponent<ButtonClickBehaviour>().enabled = false;
+            menuButton.gameObject.GetComponent<Button>().enabled = false;
         }
 
         Vector3 desiredScale = Vector3.one;
@@ -522,6 +534,8 @@ public class MenuManager : MonoBehaviour
             foreach (var menuButton in menuButtons)
             {
                 menuButton.PlayIdle();
+                menuButton.gameObject.GetComponent<ButtonClickBehaviour>().enabled = true;
+                menuButton.gameObject.GetComponent<Button>().enabled = true;
             }
 
             onComplete?.Invoke();
