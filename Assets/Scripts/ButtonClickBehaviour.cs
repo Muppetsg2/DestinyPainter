@@ -97,7 +97,7 @@ public class ButtonClickBehaviour : MonoBehaviour, IPointerDownHandler, IPointer
                 s.clip = audioSource.clip;
 
                 s.Play();
-                Destroy(audioSource, 0.5f);
+                Destroy(aus, 1f);
             }
         });
     }

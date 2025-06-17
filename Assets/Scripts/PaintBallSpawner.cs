@@ -27,6 +27,8 @@ public class PaintBallSpawner : MonoBehaviour
     public PlayerInput playerInput;
     private InputAction positionAction;
 
+    public bool playAudio = true;
+
     public bool randomBalls = false;
     [LayoutShowIf(nameof(randomBalls))]
     [LayoutStart("Random Balls Settings", ELayout.FoldoutBox)]
@@ -276,22 +278,17 @@ public class PaintBallSpawner : MonoBehaviour
 
     private void SpawnBall(Vector3 wallPos, ColorType color)
     {
+        Vector3 pos = Vector3.zero;
+        Vector3 velocity = Vector3.zero;
         if (curveShooting)
         {
-            Vector3 pos = transform.position;
+            pos = transform.position;
             pos.x = Random.Range(transform.position.x - wallCollider.size.x * 0.5f, transform.position.x + wallCollider.size.x * 0.5f);
 
-            Vector3 velocity = (wallPos - pos) / timeToWall - 0.5f * timeToWall * Physics.gravity;
-
-            GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
-            ball.GetComponent<Rigidbody>().linearVelocity = velocity;
-            ball.GetComponent<Rigidbody>().useGravity = true;
-            ball.GetComponent<PaintBall>().SetColor(color);
-            ball.GetComponent<PaintBall>().spawner = this;
+            velocity = (wallPos - pos) / timeToWall - 0.5f * timeToWall * Physics.gravity;
         }
         else
         {
-            Vector3 pos;
             if (fromCameraCenter)
             {
                 pos = mainCamera.transform.position + mainCamera.transform.forward * (mainCamera.nearClipPlane * 3f + 2.5f * (mainCamera.orthographic ? 0f : 1f));
@@ -300,16 +297,17 @@ public class PaintBallSpawner : MonoBehaviour
             {
                 pos = new Vector3(wallPos.x, wallPos.y, mainCamera.transform.position.z - mainCamera.nearClipPlane);
             }
-            Vector3 velocity = (wallPos - pos) / timeToWall;
-
-            GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
-            ball.transform.localScale = paintBallScale;
-            ball.GetComponent<Rigidbody>().linearVelocity = velocity;
-            ball.GetComponent<Rigidbody>().useGravity = curveShooting;
-            ball.GetComponent<PaintBall>().SetColor(color);
-            ball.GetComponent<PaintBall>().SetScale(splashScale);
-            ball.GetComponent<PaintBall>().spawner = this;
+            velocity = (wallPos - pos) / timeToWall;
         }
+
+        GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
+        ball.transform.localScale = paintBallScale;
+        ball.GetComponent<Rigidbody>().linearVelocity = velocity;
+        ball.GetComponent<Rigidbody>().useGravity = curveShooting;
+        ball.GetComponent<PaintBall>().SetColor(color);
+        ball.GetComponent<PaintBall>().SetScale(splashScale);
+        ball.GetComponent<PaintBall>().spawner = this;
+        ball.GetComponent<PaintBall>().SetPlayAudio(playAudio);
     }
 
 #if UNITY_EDITOR

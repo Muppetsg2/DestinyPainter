@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class EndCanvasScript : MonoBehaviour
 {
     public PlayerController player;
@@ -63,11 +64,13 @@ public class EndCanvasScript : MonoBehaviour
     public float photoImageColorTransitionTime;
 
     private Sequence openAnimationSequence = null;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         player = FindFirstObjectByType<PlayerController>();
         mainCamera = Camera.main;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -164,6 +167,8 @@ public class EndCanvasScript : MonoBehaviour
 
     public void Open()
     {
+        audioSource.Play();
+
         float bottomY = -Screen.height;
 
         Vector3 lastPos = title.transform.localPosition;

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PaintBall : MonoBehaviour
 {
     public MeshRenderer meshRenderer;
@@ -7,8 +8,16 @@ public class PaintBall : MonoBehaviour
 
     public ColorType colorType;
     public Vector3 scale;
+    public bool playAudio;
 
     public PaintBallSpawner spawner;
+
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void SetColor(ColorType color)
     {
@@ -20,6 +29,11 @@ public class PaintBall : MonoBehaviour
     public void SetScale(Vector3 value)
     {
         scale = value;
+    }
+
+    public void SetPlayAudio(bool value)
+    {
+        playAudio = value;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +55,23 @@ public class PaintBall : MonoBehaviour
 
             if (spawner != null) spawner.AddSplash(splash);
 
+            if (playAudio) PlayAudio();
+
             Destroy(gameObject);
         }
+    }
+
+    private void PlayAudio()
+    {
+        GameObject aus = new GameObject("AudioSource (" + gameObject.name + ")");
+        AudioSource s = aus.AddComponent<AudioSource>();
+        s.playOnAwake = audioSource.playOnAwake;
+        s.mute = audioSource.mute;
+        s.volume = audioSource.volume;
+        s.loop = audioSource.loop;
+        s.clip = audioSource.clip;
+
+        s.Play();
+        Destroy(aus, 1f);
     }
 }

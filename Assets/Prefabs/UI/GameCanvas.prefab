@@ -312,7 +312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.000061035156, y: -33.540024}
+  m_AnchoredPosition: {x: 0, y: -33.540024}
   m_SizeDelta: {x: 210.5464, y: 1236.7}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6479424307620446486
@@ -2141,8 +2141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff60e820aa9aaf4da1304939f5f8196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useAudio: 0
-  forceMode: 0
+  useAudio: 1
+  forceMode: 1
   effectTransform: {fileID: 1467613573035835121}
   curve:
     serializedVersion: 2
@@ -2232,8 +2232,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4c1620073aceffa40a8e8aedc1ba66b9, type: 3}
-  m_Resource: {fileID: 8300000, guid: 4c1620073aceffa40a8e8aedc1ba66b9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8c28cf21cfc2eae409a85a51738b37c2, type: 3}
+  m_Resource: {fileID: 8300000, guid: 8c28cf21cfc2eae409a85a51738b37c2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -2331,7 +2331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8973b787c975174dacc632e1659f051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingName: uiAudio
+  settingName: sfxAudio
 --- !u!1 &8560041265402162080
 GameObject:
   m_ObjectHideFlags: 0

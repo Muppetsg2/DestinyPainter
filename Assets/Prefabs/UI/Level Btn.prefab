@@ -405,6 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useAudio: 1
+  forceMode: 0
   effectTransform: {fileID: 8016525800185038434}
   curve:
     serializedVersion: 2

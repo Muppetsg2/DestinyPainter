@@ -1,7 +1,12 @@
 Podstawowe:
-    ☐ Dodać dźwięki do gry (skoki, śmierć, pickupy, wygrana, splash) @critical
-    ☐ Dodać muzykę do gry @critical
-    ☐ Dodać do credits info o muzyce (wraz z nazwami autorów) @critical
+    ✔ Dodać dźwięki do gry @critical @Muppetsg2 @done(25-06-17 19:48)
+        ✔ skoki, @critical @Muppetsg2 @done(25-06-17 17:49)
+        ✔ śmierć, @critical @Muppetsg2 @done(25-06-17 19:20)
+        ✔ wygrana, @critical @Muppetsg2 @done(25-06-17 19:31)
+        ✔ splash @critical @Muppetsg2 @done(25-06-17 19:20)
+        ✔ splashe w rzucaniu kulkami @critical @Muppetsg2 @done(25-06-17 19:46)
+    ✔ Dodać muzykę do gry @critical @Muppetsg2 @done(25-06-17 16:32)
+    ✔ Dodać do credits info o muzyce (wraz z nazwami autorów) @critical @Muppetsg2 @done(25-06-17 20:01)
 
 Bugs:
     ✔ Można klikać na zablokowane poziomy @critical @Muppetsg2 @done(25-06-12 13:43)
@@ -9,9 +14,9 @@ Bugs:
 Settings:
     ✔ Zaprojektować wygląd ustawień @critical @Muppetsg2 @done(25-06-12 00:06)
     ✔ Wrzucić wygląd ustawień do gry @critical @Muppetsg2 @done(25-06-16 10:25)
-    ☐ Dodać ustawienia sfx, muzyki i ui @critical
-    ☐ Dodać do ustawień przycisk do resetu poziomów @critical
-    ☐ Dodać do ustawień przycisk do odblokowania wszystkich poziomów @critical
+    ✔ Dodać ustawienia sfx, muzyki i ui @critical @Muppetsg2 @done(25-06-17 16:31)
+    ✔ Dodać do ustawień przycisk do resetu poziomów @critical @Muppetsg2 @done(25-06-17 17:49)
+    ✔ Dodać do ustawień przycisk do odblokowania wszystkich poziomów @critical @Muppetsg2 @done(25-06-17 17:49)
 
 Menu:
     ✔ Zamienić napisy w menu na ikony @low @Muppetsg2 @done(25-05-28 22:30)
@@ -103,7 +108,7 @@ Polishing:
     ✔ Poprawić responsywność skoku @high @Muppetsg2 @done(25-06-11 13:56)
     ✔ Strzelanie kulkami z miejsca gdzie gracz wskazał a nie z dołu @low @Muppetsg2 @done(25-06-11 16:30)
     ✔ Zmienić wygląd przycisków prawo i lewo @high @Muppetsg2 @done(25-06-11 22:25)
-    ☐ Większy 4 jumps się wbija na ekran @high
+    ✔ Większy 4 jumps się wbija na ekran @high @MAIPA01 @done(25-06-17 16:32)
     ✔ Poprawić wygląd end screen dodając restart button @high @Muppetsg2 @done(25-06-16 10:26)
 
 Archive:
@@ -116,3 +121,4 @@ Archive:
     ☐ Skiny do gracza @low
     ☐ Inna paleta kolorów np dla graczy którzy są daltonistami @low
     ☐ Camera shake jak sie wleci na planetę (https://youtube.com/shorts/hnnZ5XXUVfE?si=5xcbuU01rA9hk6VH) @low
+    ☐ Dźwięk przy pickupach @low

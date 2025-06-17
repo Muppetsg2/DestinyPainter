@@ -10,6 +10,7 @@ using static PlanetRotation;
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Collider2D))]
 [RequireComponent (typeof(SpriteRenderer))]
+[RequireComponent (typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     private enum BurstAnimType
@@ -23,6 +24,11 @@ public class PlayerController : MonoBehaviour
     public bool useAction = true;
     public InputAction launchAction;
     public ColorType color = ColorType.Red;
+
+    [Header("Audio")]
+    public AudioClip deathClip;
+    public AudioClip planetAttachClip;
+    public bool forceAudio = false;
 
     [Header("Planets")]
     public Transform currentPlanet;
@@ -63,6 +69,8 @@ public class PlayerController : MonoBehaviour
     private float launchTime;
     private Vector2 launchVel;
 
+    private AudioSource audioSource;
+
     [System.Serializable]
     public struct JumpData
     {
@@ -95,6 +103,8 @@ public class PlayerController : MonoBehaviour
         AttachToPlanet(currentPlanet);
         ChangePlayerColor(color);
         trail.gameObject.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -305,6 +315,26 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
+
+        if (!forceAudio)
+        {
+            audioSource.clip = deathClip;
+            audioSource.Play();
+        }
+        else
+        {
+            GameObject aus = new GameObject("AudioSourceForce (" + gameObject.name + ")");
+            AudioSource s = aus.AddComponent<AudioSource>();
+            s.playOnAwake = audioSource.playOnAwake;
+            s.mute = audioSource.mute;
+            s.volume = audioSource.volume;
+            s.loop = audioSource.loop;
+            s.clip = deathClip;
+
+            s.Play();
+            Destroy(aus, 1f);
+        }
+
         RevertJump();
     }
 
@@ -355,6 +385,25 @@ public class PlayerController : MonoBehaviour
 
             jumpsHistory.Add(data);
             currentJump = null;
+
+            if (!forceAudio)
+            {
+                audioSource.clip = planetAttachClip;
+                audioSource.Play();
+            }
+            else
+            {
+                GameObject aus = new GameObject("AudioSourceForce (" + gameObject.name + ")");
+                AudioSource s = aus.AddComponent<AudioSource>();
+                s.playOnAwake = audioSource.playOnAwake;
+                s.mute = audioSource.mute;
+                s.volume = audioSource.volume;
+                s.loop = audioSource.loop;
+                s.clip = planetAttachClip;
+
+                s.Play();
+                Destroy(aus, 1f);
+            }
         }
 
         rb.linearVelocity = Vector2.zero;

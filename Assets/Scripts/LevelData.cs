@@ -41,4 +41,9 @@ public class LevelData : ScriptableObject
     {
         return PlayerPrefs.HasKey(sceneName + "_stars");
     }
+
+    public void ResetLevel()
+    {
+        PlayerPrefs.DeleteKey(sceneName + "_stars");
+    }
 }
