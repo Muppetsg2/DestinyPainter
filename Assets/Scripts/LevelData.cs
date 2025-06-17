@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "LevelData", menuName = "Game/Create Level Data")]
 public class LevelData : ScriptableObject
@@ -13,6 +14,8 @@ public class LevelData : ScriptableObject
     [Header("Game:")]
     public int secondStarMaxJumps = 1;
     public int thirdStarMaxJumps = 0;
+
+    public UnityEvent OnLevelDataChanged;
 
     public void LoadLevel()
     {
@@ -30,6 +33,8 @@ public class LevelData : ScriptableObject
             if (stars <= PlayerPrefs.GetInt(key)) return;
         }
         PlayerPrefs.SetInt(key, stars);
+
+        OnLevelDataChanged?.Invoke();
     }
 
     public int GetLevelStars()
@@ -45,5 +50,6 @@ public class LevelData : ScriptableObject
     public void ResetLevel()
     {
         PlayerPrefs.DeleteKey(sceneName + "_stars");
+        OnLevelDataChanged?.Invoke();
     }
 }

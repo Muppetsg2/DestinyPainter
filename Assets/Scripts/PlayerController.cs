@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip deathClip;
+    [Range(0f, 1f)] public float deathClipVolume = 0.5f;
     public AudioClip planetAttachClip;
+    [Range(0f, 1f)] public float planetAttachClipVolume = 0.5f;
     public bool forceAudio = false;
 
     [Header("Planets")]
@@ -319,6 +321,7 @@ public class PlayerController : MonoBehaviour
         if (!forceAudio)
         {
             audioSource.clip = deathClip;
+            audioSource.volume = deathClipVolume;
             audioSource.Play();
         }
         else
@@ -327,7 +330,7 @@ public class PlayerController : MonoBehaviour
             AudioSource s = aus.AddComponent<AudioSource>();
             s.playOnAwake = audioSource.playOnAwake;
             s.mute = audioSource.mute;
-            s.volume = audioSource.volume;
+            s.volume = deathClipVolume;
             s.loop = audioSource.loop;
             s.clip = deathClip;
 
@@ -389,6 +392,7 @@ public class PlayerController : MonoBehaviour
             if (!forceAudio)
             {
                 audioSource.clip = planetAttachClip;
+                audioSource.volume = planetAttachClipVolume;
                 audioSource.Play();
             }
             else
@@ -397,7 +401,7 @@ public class PlayerController : MonoBehaviour
                 AudioSource s = aus.AddComponent<AudioSource>();
                 s.playOnAwake = audioSource.playOnAwake;
                 s.mute = audioSource.mute;
-                s.volume = audioSource.volume;
+                s.volume = planetAttachClipVolume;
                 s.loop = audioSource.loop;
                 s.clip = planetAttachClip;
 

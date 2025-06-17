@@ -22,6 +22,12 @@ public class LevelButton : MonoBehaviour
 
     private void Start()
     {
+        OnLevelDataChanged();
+        data.OnLevelDataChanged.AddListener(OnLevelDataChanged);
+    }
+
+    private void OnLevelDataChanged()
+    {
         if (!IsUnlocked())
         {
             GetComponent<Button>().enabled = false;

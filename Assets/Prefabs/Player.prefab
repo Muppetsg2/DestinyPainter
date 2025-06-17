@@ -358,7 +358,9 @@ MonoBehaviour:
     m_Flags: 0
   color: 1
   deathClip: {fileID: 8300000, guid: 9990e9598e3c8614084cfa068f724419, type: 3}
+  deathClipVolume: 0.35
   planetAttachClip: {fileID: 8300000, guid: 56e2ca785887e73429143b63bf894e4f, type: 3}
+  planetAttachClipVolume: 0.3
   forceAudio: 0
   currentPlanet: {fileID: 0}
   launchSpeedCurve:
