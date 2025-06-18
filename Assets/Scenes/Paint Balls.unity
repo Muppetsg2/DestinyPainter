@@ -3116,6 +3116,7 @@ MonoBehaviour:
   painBallPrefab: {fileID: 8173331407427200889, guid: 6b1a5358ec3101b408fb9ea9ffc1d345, type: 3}
   paintBallScale: {x: 0.5, y: 0.5, z: 0.5}
   splashScale: {x: 2, y: 2, z: 2}
+  splashWithAlpha: 1
   curveShooting: 0
   fromCameraCenter: 1
   timeBetweenBalls: 0.5
@@ -3131,6 +3132,12 @@ MonoBehaviour:
     m_Bits: 64
   playerInput: {fileID: 1857836884}
   playAudio: 1
+  spawnOneBallAtStart: 0
+  startBallDelay: 2
+  startBallColor: 2
+  startBallSplashWithAlpha: 0
+  startBallScale: {x: 2, y: 2, z: 2}
+  startBallSplashScale: {x: 6, y: 6, z: 6}
   randomBalls: 0
   randomBallsDelay: 2
   randomBallsInfinite: 0

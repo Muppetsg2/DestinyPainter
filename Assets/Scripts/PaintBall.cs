@@ -7,6 +7,7 @@ public class PaintBall : MonoBehaviour
     public GameObject splashPrefab;
 
     public ColorType colorType;
+    public bool spawnWithAlpha = true;
     public Vector3 scale;
     public bool playAudio;
 
@@ -36,6 +37,11 @@ public class PaintBall : MonoBehaviour
         playAudio = value;
     }
 
+    public void SetSpawnWithAlpha(bool value)
+    {
+        spawnWithAlpha = value;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Wall"))
@@ -44,14 +50,14 @@ public class PaintBall : MonoBehaviour
             splash.transform.localScale = scale;
             var spriteRenderer = splash.GetComponent<SpriteRenderer>();
             Color color = ColorsManager.Instance.GetColor(colorType, ColorCategory.Secondary);
-            color.a = 150f / 255f;
+            color.a = spawnWithAlpha ? 150f / 255f : 1f;
             spriteRenderer.material.SetColor("_Color", color);
             Vector2 noiseOffset = new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
             spriteRenderer.material.SetVector("_NoiseOffset", noiseOffset);
 
             var lineGenerator = splash.GetComponent<SplashLinesGenerator>();
             lineGenerator.SetColor(color);
-            lineGenerator.GenerateLines(150f / 255f);
+            lineGenerator.GenerateLines(spawnWithAlpha ? 150f / 255f : 1f);
 
             if (spawner != null) spawner.AddSplash(splash);
 

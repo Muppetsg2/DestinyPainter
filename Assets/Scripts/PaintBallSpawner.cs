@@ -12,6 +12,7 @@ public class PaintBallSpawner : MonoBehaviour
     public GameObject painBallPrefab;
     public Vector3 paintBallScale = new Vector3(0.5f, 0.5f, 0.5f);
     public Vector3 splashScale = new Vector3(2f, 2f, 2f);
+    public bool splashWithAlpha = true;
     public bool curveShooting = true;
     [HideIf(nameof(curveShooting))] public bool fromCameraCenter = true;
     public float timeBetweenBalls = 2f;
@@ -29,6 +30,18 @@ public class PaintBallSpawner : MonoBehaviour
 
     public bool playAudio = true;
 
+    public bool spawnOneBallAtStart = false;
+    [LayoutShowIf(nameof(spawnOneBallAtStart))]
+    [LayoutStart("Start Ball Settings", ELayout.FoldoutBox)]
+    [ShowIf(nameof(spawnOneBallAtStart))] public float startBallDelay = 2f;
+    [ShowIf(nameof(spawnOneBallAtStart))] public ColorType startBallColor = ColorType.Red;
+    [ShowIf(nameof(spawnOneBallAtStart))] public bool startBallSplashWithAlpha = true;
+    [ShowIf(nameof(spawnOneBallAtStart))] public Vector3 startBallScale = new Vector3(0.5f, 0.5f, 0.5f);
+    [ShowIf(nameof(spawnOneBallAtStart))] public Vector3 startBallSplashScale = new Vector3(2f, 2f, 2f);
+    [LayoutEnd(".")]
+    private bool startBallShooted = false;
+    private float startBallDelayCounter = 0f;
+
     public bool randomBalls = false;
     [LayoutShowIf(nameof(randomBalls))]
     [LayoutStart("Random Balls Settings", ELayout.FoldoutBox)]
@@ -36,7 +49,7 @@ public class PaintBallSpawner : MonoBehaviour
     [ShowIf(nameof(randomBalls))] public bool randomBallsInfinite = false;
     [ShowIf(nameof(randomBalls), "!" + nameof(randomBallsInfinite))] public float randomBallsAnimationTime = 5f;
     [LayoutEnd(".")]
-    private float delayCounter = 0f;
+    private float randomBallsDelayCounter = 0f;
     private float animationCounter = 1f;
     private float currentTime = 0f;
 
@@ -74,7 +87,8 @@ public class PaintBallSpawner : MonoBehaviour
 
         startInit = true;
         attemptsCounter = initAttempts;
-        delayCounter = randomBallsDelay;
+        startBallDelayCounter = startBallDelay;
+        randomBallsDelayCounter = randomBallsDelay;
         if (!randomBallsInfinite) animationCounter = randomBallsAnimationTime;
     }
 
@@ -110,11 +124,23 @@ public class PaintBallSpawner : MonoBehaviour
             }
         }
 
+        if (spawnOneBallAtStart && !startBallShooted)
+        {
+            startBallDelayCounter -= Time.deltaTime;
+
+            if (startBallDelayCounter <= 0f)
+            {
+                SpawnBall(wallCollider.transform.position, startBallColor);
+                startBallShooted = true;
+            }
+            return;
+        }
+
         if (!randomBalls) return;
 
-        delayCounter -= Time.deltaTime;
+        randomBallsDelayCounter -= Time.deltaTime;
 
-        if (delayCounter <= 0f)
+        if (randomBallsDelayCounter <= 0f)
         {
             currentTime -= Time.deltaTime;
 
@@ -182,6 +208,7 @@ public class PaintBallSpawner : MonoBehaviour
 
     public void SpawnPlayerBall(InputAction.CallbackContext ctx)
     {
+        if (spawnOneBallAtStart && !startBallShooted) return;
         if (randomBalls) return;
         if (ctx.ReadValue<float>() != 0) return;
 
@@ -301,13 +328,16 @@ public class PaintBallSpawner : MonoBehaviour
         }
 
         GameObject ball = Instantiate(painBallPrefab, pos, Quaternion.identity);
-        ball.transform.localScale = paintBallScale;
-        ball.GetComponent<Rigidbody>().linearVelocity = velocity;
-        ball.GetComponent<Rigidbody>().useGravity = curveShooting;
-        ball.GetComponent<PaintBall>().SetColor(color);
-        ball.GetComponent<PaintBall>().SetScale(splashScale);
-        ball.GetComponent<PaintBall>().spawner = this;
-        ball.GetComponent<PaintBall>().SetPlayAudio(playAudio);
+        ball.transform.localScale = spawnOneBallAtStart && !startBallShooted ? startBallScale : paintBallScale;
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        rb.linearVelocity = velocity;
+        rb.useGravity = curveShooting;
+        PaintBall pb = ball.GetComponent<PaintBall>();
+        pb.SetColor(color);
+        pb.SetScale(spawnOneBallAtStart && !startBallShooted ? startBallSplashScale : splashScale);
+        pb.spawner = this;
+        pb.SetPlayAudio(playAudio);
+        pb.SetSpawnWithAlpha(spawnOneBallAtStart && !startBallShooted ? startBallSplashWithAlpha : splashWithAlpha);
     }
 
 #if UNITY_EDITOR
