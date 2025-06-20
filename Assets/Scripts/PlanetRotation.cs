@@ -35,6 +35,8 @@ public class PlanetRotation : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.Instance.isPaused) return;
+
         transform.Rotate(0f, 0f, (int)rotationMode * rotationSpeed * Time.deltaTime);
     }
 }

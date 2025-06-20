@@ -17,3 +17,7 @@ MonoBehaviour:
   sceneName: Level 1
   secondStarMaxJumps: 6
   thirdStarMaxJumps: 4
+  levelNum: 1
+  OnLevelDataChanged:
+    m_PersistentCalls:
+      m_Calls: []

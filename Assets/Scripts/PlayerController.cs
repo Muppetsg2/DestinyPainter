@@ -111,9 +111,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.Instance.isPaused)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (isLaunched)
         {
-            float time = Time.time - launchTime;
+            launchTime += Time.deltaTime;
+            float time = launchTime;
             rb.linearVelocity = Vector2.Lerp(launchVel, Vector2.zero, launchSpeedCurve.Evaluate(time.Remap(0.0f, returnDelay, 0.0f, 1.0f)));
 
             if (time >= returnDelay) {
@@ -194,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
         isAttached = false;
         isLaunched = true;
-        launchTime = Time.time;
+        launchTime = 0f;
 
         Vector2 direction = (transform.position - currentPlanet.position).normalized;
         launchVel = direction * launchForce;
@@ -209,7 +216,6 @@ public class PlayerController : MonoBehaviour
         };
 
         trail.gameObject.SetActive(true);
-
         ++planetJumpsCounter;
         OnJump.Invoke(planetJumpsCounter);
     }

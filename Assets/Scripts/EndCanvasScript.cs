@@ -20,6 +20,7 @@ public class EndCanvasScript : MonoBehaviour
     [Header("Share Image Canvas")]
     public Image sharePhoto;
     public TextMeshProUGUI shareJumps;
+    public TextMeshProUGUI shareLevel;
     public StarObject shareStar1;
     public StarObject shareStar2;
     public StarObject shareStar3;
@@ -115,6 +116,7 @@ public class EndCanvasScript : MonoBehaviour
         shareStar3.SetStarActive(star3.IsStarActive());
 
         shareJumps.text = jumpsText.text;
+        shareLevel.text = LevelManager.Instance.data.levelNum.ToString();
 
         sharePhoto.sprite = endSprite;
 

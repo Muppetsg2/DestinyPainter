@@ -15,6 +15,9 @@ public class LevelData : ScriptableObject
     public int secondStarMaxJumps = 1;
     public int thirdStarMaxJumps = 0;
 
+    [Header("ShareImage:")]
+    public int levelNum;
+
     public UnityEvent OnLevelDataChanged;
 
     public void LoadLevel()

@@ -9,9 +9,12 @@ public class AudioSettings : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.mute = !SettingsManager.Instance.GetBool(settingName);
-        SettingsManager.Instance.OnSettingsChanged.AddListener(AudioSettingChanged);
+        if (SettingsManager.Instance != null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.mute = !SettingsManager.Instance.GetBool(settingName);
+            SettingsManager.Instance.OnSettingsChanged.AddListener(AudioSettingChanged);
+        }
     }
 
     private void AudioSettingChanged(SettingsValueType type, string name)

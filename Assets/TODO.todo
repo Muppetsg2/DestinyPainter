@@ -10,6 +10,7 @@ Podstawowe:
 
 Bugs:
     ✔ Można klikać na zablokowane poziomy @critical @Muppetsg2 @done(25-06-12 13:43)
+    ✔ Pause nie zatrzymuje gry @critical @Muppetsg2 @done(25-06-20 12:40)
 
 Settings:
     ✔ Zaprojektować wygląd ustawień @critical @Muppetsg2 @done(25-06-12 00:06)
@@ -110,6 +111,8 @@ Polishing:
     ✔ Zmienić wygląd przycisków prawo i lewo @high @Muppetsg2 @done(25-06-11 22:25)
     ✔ Większy 4 jumps się wbija na ekran @high @MAIPA01 @done(25-06-17 16:32)
     ✔ Poprawić wygląd end screen dodając restart button @high @Muppetsg2 @done(25-06-16 10:26)
+    ✔ Dodać do obrazka zdjecia poziomu numer poziomu @low @Muppetsg2 @done(25-06-20 12:41)
+    ✔ Dodać logo do ekranu z Unity @low @Muppetsg2 @done(25-06-20 13:05)
 
 Archive:
     ☐ Zaprojektować bonusowe 4 poziomy za odpowiednią liczbę zdobytych gwiazdek (Mogą być trudniejsze niż poziomy zwykłe) @low
@@ -121,4 +124,3 @@ Archive:
     ☐ Skiny do gracza @low
     ☐ Inna paleta kolorów np dla graczy którzy są daltonistami @low
     ☐ Camera shake jak sie wleci na planetę (https://youtube.com/shorts/hnnZ5XXUVfE?si=5xcbuU01rA9hk6VH) @low
-    ☐ Dźwięk przy pickupach @low

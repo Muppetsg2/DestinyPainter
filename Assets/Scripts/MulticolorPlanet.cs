@@ -20,8 +20,10 @@ public class MulticolorPlanet : MonoBehaviour
         InitializeMaterial();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        if (LevelManager.Instance.isPaused) return;
+
         UpdateSegments();
     }
 

@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,9 @@ public class LevelManager : MonoBehaviour
     public EndCanvasScript endCanvas;
 
     public UnityEvent<int> OnStarsChanged;
+    public UnityEvent<bool, bool> OnPauseChanged;
+
+    public bool isPaused = false;
 
     private void Awake()
     {
@@ -69,11 +73,17 @@ public class LevelManager : MonoBehaviour
         {
             pauseCanvas.gameObject.SetActive(false);
             gameCanvas.gameObject.SetActive(true);
+            bool old = isPaused;
+            isPaused = false;
+            OnPauseChanged?.Invoke(old, isPaused);
         });
     }
 
     public void PauseLevel()
     {
+        bool old = isPaused;
+        isPaused = true;
+        OnPauseChanged?.Invoke(old, isPaused);
         gameCanvas.gameObject.SetActive(false);
         pauseCanvas.gameObject.SetActive(true);
         pauseCanvas.Open();

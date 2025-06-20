@@ -248,6 +248,7 @@ MonoBehaviour:
   isEnd: 0
   isDeadly: 1
   text: {fileID: 4799310292612103612}
+  particles: {fileID: 4675387304402623700}
   multicolorPlanet: {fileID: 0}
   colorChangingPlanet: {fileID: 0}
   color: 0

@@ -24,8 +24,10 @@ public class ColorChangingPlanet : MonoBehaviour
         InitializeMaterial();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        if (LevelManager.Instance.isPaused) return;
+
         UpdateTransition();
     }
 

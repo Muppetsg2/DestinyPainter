@@ -1,3 +1,4 @@
+using EasyTextEffects;
 using SaintsField;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Planet : MonoBehaviour
     public bool isEnd;
     public bool isDeadly;
     [ShowIf(nameof(isDeadly)), SerializeField] private TextMeshProUGUI text;
+    [ShowIf(nameof(isDeadly)), SerializeField] private ParticleSystem particles;
     public MulticolorPlanet multicolorPlanet;
     public ColorChangingPlanet colorChangingPlanet;
     public ColorType color;
@@ -39,6 +41,12 @@ public class Planet : MonoBehaviour
         if (isDeadly && text != null)
         {
             text.SetText(ShuffleText(baseText));
+            LevelManager.Instance.OnPauseChanged.AddListener(TextEffectPauseChanged);
+        }
+
+        if (isDeadly && particles != null)
+        {
+            LevelManager.Instance.OnPauseChanged.AddListener(ParticlesPauseChanged);
         }
     }
 
@@ -48,6 +56,21 @@ public class Planet : MonoBehaviour
         {
             ForceUpdateRadius();
         }
+    }
+
+    private void TextEffectPauseChanged(bool old, bool actual)
+    {
+        // Not Something I want!
+        //TextEffect textEffect = text.gameObject.GetComponent<TextEffect>();
+
+        //if (!old && actual) textEffect.StopOnStartEffects();
+        //else if (old && !actual) textEffect.StartOnStartEffects();
+    }
+
+    private void ParticlesPauseChanged(bool old, bool actual)
+    {
+        if (!old && actual) particles.Pause();
+        else if (old && !actual) particles.Play();
     }
 
     public bool CheckIsCorrectColor(float playerAngle, ColorType playerColor)
