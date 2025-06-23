@@ -63,6 +63,10 @@ public class EndCanvasScript : MonoBehaviour
     public float showFromPlayerViewStartYOffset;
     public float showFromPlayerViewStarsDelay;
     public float photoImageColorTransitionTime;
+    public float showStartStarRotation;
+    public float showEndStarRotation;
+    public AudioClip photoAudioClip;
+    public AudioClip starAudioClip;
 
     private Sequence openAnimationSequence = null;
     private AudioSource audioSource;
@@ -169,7 +173,7 @@ public class EndCanvasScript : MonoBehaviour
 
     public void Open()
     {
-        audioSource.Play();
+        //audioSource.Play();
 
         float bottomY = -Screen.height;
 
@@ -206,6 +210,10 @@ public class EndCanvasScript : MonoBehaviour
         starsLayout.enabled = false;
 
         star1.transform.localScale = scale;
+        Image star1Image = star1.GetStarImage();
+        Vector3 star1Rotation = star1Image.transform.localEulerAngles;
+        star1Image.transform.eulerAngles = new Vector3(star1Rotation.x, star1Rotation.y, showStartStarRotation);
+        star1Rotation.z = showEndStarRotation;
         star1.SetActiveTextHolder(false);
         lastPos = star1.transform.localPosition;
         float star1LocalY = lastPos.y;
@@ -214,6 +222,10 @@ public class EndCanvasScript : MonoBehaviour
         star1.gameObject.SetActive(false);
 
         star2.transform.localScale = scale;
+        Image star2Image = star2.GetStarImage();
+        Vector3 star2Rotation = star2Image.transform.localEulerAngles;
+        star2Image.transform.eulerAngles = new Vector3(star2Rotation.x, star2Rotation.y, showStartStarRotation);
+        star2Rotation.z = showEndStarRotation;
         star2.SetActiveTextHolder(false);
         lastPos = star2.transform.localPosition;
         float star2LocalY = lastPos.y;
@@ -222,6 +234,10 @@ public class EndCanvasScript : MonoBehaviour
         star2.gameObject.SetActive(false);
 
         star3.transform.localScale = scale;
+        Image star3Image = star3.GetStarImage();
+        Vector3 star3Rotation = star3Image.transform.localEulerAngles;
+        star3Image.transform.eulerAngles = new Vector3(star3Rotation.x, star3Rotation.y, showStartStarRotation);
+        star3Rotation.z = showEndStarRotation;
         star3.SetActiveTextHolder(false);
         lastPos = star3.transform.localPosition;
         float star3LocalY = lastPos.y;
@@ -244,6 +260,8 @@ public class EndCanvasScript : MonoBehaviour
             .AppendCallback(() =>
             {
                 photo.SetActive(true);
+                audioSource.clip = photoAudioClip;
+                audioSource.Play();
             })
             .Append(photo.transform.DOLocalMoveY(photoLocalY, showPhotoTime).SetEase(showFromPlayerViewCurve))
             .Join(photo.transform.DOScale(1f, showPhotoTime).SetEase(showFromPlayerViewCurve))
@@ -251,27 +269,45 @@ public class EndCanvasScript : MonoBehaviour
             .JoinCallback(() =>
             {
                 star1.gameObject.SetActive(true);
+                if (star1.IsStarActive())
+                {
+                    audioSource.clip = starAudioClip;
+                    audioSource.Play();
+                }
             })
             .Join(star1.transform.DOLocalMoveY(star1LocalY, showStarsTime).SetEase(showFromPlayerViewCurve))
-            .Join(star1.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+            .Join(star1.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve))
+            .Join(star1Image.transform.DOLocalRotate(star1Rotation, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
             {
                 star1.SetActiveTextHolder(true);
             }))
-            .Join(star2.transform.DOLocalMoveY(star1LocalY, showStarsTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay))
+            .Join(star2.transform.DOLocalMoveY(star2LocalY, showStarsTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay))
             .JoinCallback(() =>
             {
                 star2.gameObject.SetActive(true);
+                if (star2.IsStarActive())
+                {
+                    audioSource.clip = starAudioClip;
+                    audioSource.Play();
+                }
             })
-            .Join(star2.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+            .Join(star2.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve))
+            .Join(star2Image.transform.DOLocalRotate(star2Rotation, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
             {
                 star2.SetActiveTextHolder(true);
             }))
-            .Join(star3.transform.DOLocalMoveY(star1LocalY, showStarsTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay))
+            .Join(star3.transform.DOLocalMoveY(star3LocalY, showStarsTime).SetEase(showFromPlayerViewCurve).SetDelay(showFromPlayerViewStarsDelay))
             .JoinCallback(() =>
             {
                 star3.gameObject.SetActive(true);
+                if (star3.IsStarActive())
+                {
+                    audioSource.clip = starAudioClip;
+                    audioSource.Play();
+                }
             })
-            .Join(star3.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
+            .Join(star3.transform.DOScale(1f, showStarsTime).SetEase(showFromPlayerViewCurve))
+            .Join(star3Image.transform.DOLocalRotate(star3Rotation, showStarsTime).SetEase(showFromPlayerViewCurve).OnComplete(() =>
             {
                 star3.SetActiveTextHolder(true);
 

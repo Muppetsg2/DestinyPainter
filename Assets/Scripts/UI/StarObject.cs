@@ -50,4 +50,9 @@ public class StarObject : MonoBehaviour
     {
         textHolder.gameObject.SetActive(value);
     }
+
+    public Image GetStarImage()
+    {
+        return image;
+    }
 }

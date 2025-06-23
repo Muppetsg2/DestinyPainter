@@ -1969,6 +1969,10 @@ MonoBehaviour:
   showFromPlayerViewStartYOffset: 20
   showFromPlayerViewStarsDelay: 0.5
   photoImageColorTransitionTime: 1.5
+  showStartStarRotation: 180
+  showEndStarRotation: 0
+  photoAudioClip: {fileID: 8300000, guid: 78929eb9f43ce344780bdde6ba9f25c2, type: 3}
+  starAudioClip: {fileID: 8300000, guid: 0dfbeae8c3303894d91e75e1908433f9, type: 3}
 --- !u!82 &3897245866424280097
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2518,10 +2522,10 @@ RectTransform:
   - {fileID: 6554758018865466154}
   m_Father: {fileID: 1523688095197683309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -21}
-  m_AnchorMin: {x: 0, y: 0.23}
-  m_AnchorMax: {x: 1, y: 0.67200005}
-  m_AnchoredPosition: {x: 0, y: -1.005127}
-  m_SizeDelta: {x: -470.1067, y: -158.35858}
+  m_AnchorMin: {x: 0.5, y: 0.22143386}
+  m_AnchorMax: {x: 0.5, y: 0.67200005}
+  m_AnchoredPosition: {x: -0.5, y: 7.994873}
+  m_SizeDelta: {x: 522.8933, y: -176.35858}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7343177255107082296
 CanvasRenderer:
@@ -3729,7 +3733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1506456785712945196, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 421.8546
+      value: 422.81665
       objectReference: {fileID: 0}
     - target: {fileID: 1506456785712945196, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3983,7 +3987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1506456785712945196, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 97.114624
+      value: 98.07666
       objectReference: {fileID: 0}
     - target: {fileID: 1506456785712945196, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4116,7 +4120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1506456785712945196, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 259.48462
+      value: 260.44666
       objectReference: {fileID: 0}
     - target: {fileID: 1506456785712945196, guid: b9a35fade12511d44a11e3b5708ab96f, type: 3}
       propertyPath: m_AnchoredPosition.y

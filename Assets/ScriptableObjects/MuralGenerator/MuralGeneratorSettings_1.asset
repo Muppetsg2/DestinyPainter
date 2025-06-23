@@ -16,7 +16,7 @@ MonoBehaviour:
 
     Painter'
   font: {fileID: 11400000, guid: 57581ebf6c70ebf45836fa288c54b81e, type: 2}
-  presetMaterial: {fileID: 423417065187171327, guid: 57581ebf6c70ebf45836fa288c54b81e, type: 2}
+  presetMaterial: {fileID: 2100000, guid: a53abc2ba6caf9349aae410f4ab34957, type: 2}
   textSize: 30
   textColor: {r: 0.06999821, g: 0.10119423, b: 0.122641504, a: 1}
   backgroundRadius: 256
