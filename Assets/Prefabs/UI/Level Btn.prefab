@@ -595,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &2610148981364300046
 GameObject:
   m_ObjectHideFlags: 0

@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useAudio: 1
+  forceMode: 0
   effectTransform: {fileID: 311772794245809249}
   curve:
     serializedVersion: 2
@@ -326,6 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &685447481710780506
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useAudio: 1
+  forceMode: 0
   effectTransform: {fileID: 129125237964035820}
   curve:
     serializedVersion: 2
@@ -1078,6 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &4416127921483384213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useAudio: 1
+  forceMode: 0
   effectTransform: {fileID: 5389924358581034691}
   curve:
     serializedVersion: 2
@@ -1467,6 +1472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &7491596006646708095
 GameObject:
   m_ObjectHideFlags: 0

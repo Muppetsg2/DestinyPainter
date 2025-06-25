@@ -472,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &753113816121414306
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &787174270078276437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,6 +2085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: sfxAudio
+  defaultValue: 1
 --- !u!1 &3626974542271015006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,6 +2413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &4414144576791712360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3470,6 +3474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &7211906920989056820
 GameObject:
   m_ObjectHideFlags: 0

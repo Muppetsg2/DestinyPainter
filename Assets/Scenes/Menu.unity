@@ -531,6 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &62234768
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1736,6 +1737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1001 &225510003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3097,6 +3099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &488545964
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3669,6 +3672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &541651685
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4216,6 +4220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &793391716
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4976,6 +4981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &847214951
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6506,6 +6512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &1106056065
 GameObject:
   m_ObjectHideFlags: 0
@@ -6708,6 +6715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1106056072
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7530,6 +7538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &1163986934
 GameObject:
   m_ObjectHideFlags: 0
@@ -7906,6 +7915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1 &1214446597
 GameObject:
   m_ObjectHideFlags: 0
@@ -8247,6 +8257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1253597654
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9451,6 +9462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1397352312
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9754,6 +9766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1414618334
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10724,6 +10737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1459899947
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11157,6 +11171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1475059707
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11759,6 +11774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1602661942
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13076,6 +13092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1791926719
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14093,6 +14110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1841868242
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14392,6 +14410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &1848885576
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16583,6 +16602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!82 &2145768235
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17398,6 +17418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: uiAudio
+  defaultValue: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

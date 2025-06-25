@@ -526,3 +526,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingName: sfxAudio
+  defaultValue: 1
