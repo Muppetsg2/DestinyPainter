@@ -4,6 +4,7 @@ using UnityEngine;
 public class AudioSettings : MonoBehaviour
 {
     [SerializeField] private string settingName;
+    [SerializeField] private bool defaultValue = true;
 
     private AudioSource audioSource;
 
@@ -12,7 +13,7 @@ public class AudioSettings : MonoBehaviour
         if (SettingsManager.Instance != null)
         {
             audioSource = GetComponent<AudioSource>();
-            audioSource.mute = !SettingsManager.Instance.GetBool(settingName);
+            audioSource.mute = !SettingsManager.Instance.GetBool(settingName, defaultValue);
             SettingsManager.Instance.OnSettingsChanged.AddListener(AudioSettingChanged);
         }
     }
@@ -21,6 +22,6 @@ public class AudioSettings : MonoBehaviour
     {
         if (name != settingName || type != SettingsValueType.BOOL) return;
 
-        audioSource.mute = !SettingsManager.Instance.GetBool(settingName);
+        audioSource.mute = !SettingsManager.Instance.GetBool(settingName, defaultValue);
     }
 }

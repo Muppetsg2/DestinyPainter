@@ -20,8 +20,8 @@ public class SettingsManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogError("More than one SettingsManager found in scene");
-            DestroyImmediate(this);
+            Debug.LogWarning("More than one SettingsManager found in scene");
+            DestroyImmediate(gameObject);
             return;
         }
 
