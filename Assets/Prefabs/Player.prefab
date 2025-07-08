@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 7225343437142502904}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -356,7 +356,7 @@ MonoBehaviour:
       m_Action: Launch
       m_Flags: 0
     m_Flags: 0
-  color: 1
+  color: 2
   deathClip: {fileID: 8300000, guid: 9990e9598e3c8614084cfa068f724419, type: 3}
   deathClipVolume: 0.35
   planetAttachClip: {fileID: 8300000, guid: 56e2ca785887e73429143b63bf894e4f, type: 3}
