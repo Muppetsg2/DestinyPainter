@@ -28,7 +28,7 @@ Link: https://muppetsg2.itch.io/destiny-painter
 
 ## Tech Stack
 
-- Engine: Unity 6000.0.24f1
+- Engine: Unity 6000.3.10f1
 
 ## Screenshots
 
