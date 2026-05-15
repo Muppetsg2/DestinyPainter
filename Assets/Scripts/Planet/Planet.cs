@@ -1,5 +1,5 @@
-using EasyTextEffects;
 using SaintsField;
+using SaintsField.Playa;
 using TMPro;
 using UnityEngine;
 

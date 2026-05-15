@@ -74,6 +74,7 @@ Shader "Custom/ColorChangingPlanetShader"
                     return float4(color * texColor.rgb * texColor.a, texColor.a);
                 }
 
+                /* Smooth
                 float t;
                 if (_BlendPoint > 0.5)
                 {
@@ -83,6 +84,10 @@ Shader "Custom/ColorChangingPlanetShader"
                 {
                     t = smoothstep(0.0, _BlendPoint * 2, r);
                 }
+                */
+
+                // With visible change line
+                float t = step(_BlendPoint, r);
                 float3 color = lerp(_InnerColor, _OuterColor, t);
                 return float4(color * texColor.rgb * texColor.a, texColor.a);
             }

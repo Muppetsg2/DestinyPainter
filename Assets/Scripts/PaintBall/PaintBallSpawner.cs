@@ -90,6 +90,8 @@ public class PaintBallSpawner : MonoBehaviour
         startBallDelayCounter = startBallDelay;
         randomBallsDelayCounter = randomBallsDelay;
         if (!randomBallsInfinite) animationCounter = randomBallsAnimationTime;
+
+        SceneManager.sceneLoaded += OnSceneWasChanged;
     }
 
     void Update()
@@ -157,9 +159,9 @@ public class PaintBallSpawner : MonoBehaviour
         }
     }
 
-    private void OnLevelWasLoaded(int level)
+    private void OnSceneWasChanged(Scene scene, LoadSceneMode mode)
     {
-        if (level == SceneManager.GetSceneByName("Paint Balls").buildIndex) return;
+        if (scene.name == "Paint Balls") return;
         playerInput.actions["Click"].performed -= SpawnPlayerBall;
     }
 
